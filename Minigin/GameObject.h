@@ -1,27 +1,64 @@
 #pragma once
-#include <string>
 #include <memory>
+#include <vector>
+#include <type_traits>
 #include "Transform.h"
+#include "Component.h"
 
 namespace dae
 {
-	class Texture2D;
+
 	class GameObject final
 	{
-		Transform m_transform{};
-		std::shared_ptr<Texture2D> m_texture{};
 	public:
-		virtual void Update();
-		virtual void Render() const;
-
-		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
+		void Update();
+		void Render() const;
 
 		GameObject() = default;
-		virtual ~GameObject();
+		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
+
+		// Components
+		template <class T, typename... Args>
+		T* AddComponent(Args&&... args)
+		{
+			static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");
+
+			auto component = std::make_unique<T>(this, std::forward<Args>(args)...);
+			T* componentPtr = component.get();
+			m_components.emplace_back(std::move(component));
+			return componentPtr;
+		}
+
+		template <class T>
+		T* GetComponent() const
+		{
+			for (const auto& component : m_components)
+			{
+				if (T* castedComponent = dynamic_cast<T*>(component.get()))
+					return castedComponent;
+			}
+			return nullptr;
+		}
+
+		template <class T>
+		void RemoveComponent()
+		{
+			std::erase_if(m_components, [](const std::unique_ptr<Component>& c) {
+				return dynamic_cast<T*>(c.get()) != nullptr;
+				});
+		}
+
+		Transform& GetTransform() { return m_transform; }
+		const Transform& GetTransform() const { return m_transform; }
+
+		void SetPosition(float x, float y) { m_transform.SetPosition(x, y); }
+
+	private:
+		Transform m_transform{};
+		std::vector<std::unique_ptr<Component>> m_components{};
 	};
 }
