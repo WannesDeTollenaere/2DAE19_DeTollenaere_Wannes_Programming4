@@ -109,6 +109,18 @@ void dae::Minigin::RunOneFrame()
 	GameTime::GetInstance().Tick();
 
 	m_quit = !InputManager::GetInstance().ProcessInput();
+
+	// fixed update
+	while (GameTime::GetInstance().ShouldDoFixedUpdate())
+	{
+		SceneManager::GetInstance().FixedUpdate();
+	}
+
+	// normal update
 	SceneManager::GetInstance().Update();
+
 	Renderer::GetInstance().Render();
+
+	// sleep if we finished the frame to fast (see slide 14/33 of game loop...)
+	GameTime::GetInstance().Sleep();
 }

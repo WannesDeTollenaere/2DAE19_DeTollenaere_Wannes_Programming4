@@ -11,6 +11,8 @@
 #include "Components/TextComponent.h"
 #include "Scene.h"
 #include "Components/TextureComponent.h"
+#include "Components/DynamicTextComponent.h"
+#include "GameTime.h"
 
 #include <filesystem>
 namespace fs = std::filesystem;
@@ -44,13 +46,21 @@ static void load()
 	scene.Add(std::move(textObj));
 
 	// FPS CLOCK
-	auto fpsTextObj = std::make_unique<dae::GameObject>();
-	fpsTextObj->SetPosition(20, 20);
+	auto fpsObj = std::make_unique<dae::GameObject>();
+	auto fpsText = fpsObj->AddComponent<dae::TextComponent>("60.0 fps", font);
+	fpsText->SetColor({ 255, 255, 255, 255 });
 
-	auto fpsTextComp = fpsTextObj->AddComponent<dae::TextComponent>("60.0 fps", font);
-	fpsTextComp->SetColor({ 255, 255, 255, 255 });
 
-	scene.Add(std::move(fpsTextObj));
+	auto dynamicFPS = fpsObj->AddComponent<dae::DynamicTextComponent>([]()
+		{
+			float dt = dae::GameTime::GetInstance().GetDeltaTime();
+			if (dt <= 0.0f) return std::string("0");
+			return std::format("{:.1f}", 1.0f/ dt);
+		});
+	dynamicFPS->SetPostfix(" FPS");
+
+	fpsObj->SetPosition(10.f, 10.f);
+	scene.Add(std::move(fpsObj));
 }
 
 int main(int, char*[]) {

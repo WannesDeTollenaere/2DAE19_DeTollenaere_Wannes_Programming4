@@ -13,6 +13,7 @@ namespace dae
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
 
+		virtual void FixedUpdate() {}
 		virtual void Update() {}
 		virtual void Render() const {}
 

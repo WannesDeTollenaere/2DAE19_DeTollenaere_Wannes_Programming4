@@ -6,6 +6,14 @@
 
 dae::GameObject::~GameObject() = default;
 
+void dae::GameObject::FixedUpdate()
+{
+	for (auto& component : m_components)
+	{
+		component->FixedUpdate();
+	}
+}
+
 void dae::GameObject::Update()
 {
 	for (auto& component : m_components)

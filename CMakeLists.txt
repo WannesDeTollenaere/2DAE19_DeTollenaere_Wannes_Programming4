@@ -27,8 +27,8 @@ add_executable(${TARGET_NAME} ${TARGET_PARAM}
   
   Minigin/Texture2D.cpp
   Minigin/Transform.cpp
- "Minigin/GameTime.cpp" 
- "Minigin/Components/TextureComponent.cpp" "Minigin/Components/TextComponent.cpp")
+  
+ "Minigin/Components/TextureComponent.cpp" "Minigin/Components/TextComponent.cpp" "Minigin/Components/DynamicTextComponent.cpp")
 
 # enable c++20 features
 target_compile_features(${TARGET_NAME} PUBLIC cxx_std_20)
