@@ -6,7 +6,7 @@
 namespace dae
 {
 	class Texture2D;
-	class GameObject 
+	class GameObject final
 	{
 		Transform m_transform{};
 		std::shared_ptr<Texture2D> m_texture{};
