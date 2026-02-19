@@ -13,6 +13,7 @@
 #include "Components/TextureComponent.h"
 #include "Components/DynamicTextComponent.h"
 #include "GameTime.h"
+#include "Components/RotatorComponent.h"
 
 #include <filesystem>
 namespace fs = std::filesystem;
@@ -64,6 +65,28 @@ static void load()
 
 	fpsObj->SetPosition(10.f, 10.f);
 	scene.Add(std::move(fpsObj));
+
+
+
+	// CHARCTERS
+	auto centerAnchor = std::make_unique<dae::GameObject>();
+	centerAnchor->SetPosition(200.f, 300.f); 
+
+	auto char1 = std::make_unique<dae::GameObject>();
+	auto tex1 = char1->AddComponent<dae::TextureComponent>();
+	tex1->SetTexture("pacman.png"); 
+	char1->AddComponent<dae::RotatorComponent>(10.f, 10.f); 
+	char1->SetParent(centerAnchor.get(), false);
+
+	auto char2 = std::make_unique<dae::GameObject>();
+	auto tex2 = char2->AddComponent<dae::TextureComponent>();
+	tex2->SetTexture("pacman.png");
+	char2->AddComponent<dae::RotatorComponent>(60.f, 4.0f); 
+	char2->SetParent(char1.get(), false);
+
+	scene.Add(std::move(centerAnchor));
+	scene.Add(std::move(char1));
+	scene.Add(std::move(char2));
 }
 
 int main(int, char*[]) {
