@@ -4,6 +4,7 @@
 #include <type_traits>
 #include "Transform.h"
 #include "Component.h"
+#include <vector>
 
 namespace dae
 {
@@ -15,7 +16,7 @@ namespace dae
 		void Update();
 		void Render() const;
 
-		GameObject() = default;
+		GameObject() : m_transform(this) {};
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
@@ -56,7 +57,7 @@ namespace dae
 		Transform& GetTransform() { return m_transform; }
 		const Transform& GetTransform() const { return m_transform; }
 
-		void SetPosition(float x, float y) { m_transform.SetPosition(x, y); }
+		void SetPosition(float x, float y) { m_transform.SetLocalPosition(x, y); }
 
 		// deletion
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; }
@@ -66,11 +67,27 @@ namespace dae
 		void SetActive(bool active) { m_IsActive = active; }
 		bool IsActive() const { return m_IsActive; }
 
+		// Scene graph
+		GameObject* GetParent() const { return m_parent; }
+		void SetParent(GameObject* parent, bool keepWorldTransform = false);
+		int GetChildCount() const { return static_cast<int>(m_children.size()); }
+		GameObject* GetChildAt(int index) const;
+
+
 	private:
-		Transform m_transform{};
+		Transform m_transform;
 		bool m_markedForDeletion{ false };
 		bool m_IsActive{ true };
 		std::vector<std::unique_ptr<Component>> m_components{};
+
+		// SCENE GRAPH
+		GameObject* m_parent{ nullptr };
+		std::vector<GameObject*> m_children{};
+
+		void AddChild(GameObject* child, bool keepWorldTransform);
+		void RemoveChild(GameObject* child);
+		bool IsChild(const GameObject* child) const;
+		bool IsParent(const GameObject* potentialParent) const;
 
 		void DestroyComponentsMarkedForDeletion();
 	};
