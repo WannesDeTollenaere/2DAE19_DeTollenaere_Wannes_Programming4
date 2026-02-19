@@ -69,7 +69,7 @@ namespace dae
 
         float m_lag;
         const float m_fixedTimeStep{ 0.02f }; // 50 updates per frame
-        const int m_msPerFrame{ 16 };         // 60 fps
+        const int m_msPerFrame{ 6 };         // 144 fps
 
         std::chrono::time_point<std::chrono::high_resolution_clock> m_startTime;
         std::chrono::time_point<std::chrono::high_resolution_clock> m_lastFrameTime;

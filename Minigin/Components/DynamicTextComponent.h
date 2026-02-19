@@ -27,7 +27,7 @@ namespace dae
 		std::string m_postfix{ "" };
 		std::string m_lastValue{ "" };
 
-		float m_updateDelay{ 0.1f };
+		float m_updateDelay{ 1.f };
 		float m_timer{ 0.0f };
 	};
 }

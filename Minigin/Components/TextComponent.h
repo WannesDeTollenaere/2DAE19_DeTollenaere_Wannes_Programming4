@@ -7,7 +7,7 @@
 namespace dae
 {
 	class Font;
-	class Texture2D;
+	class TextureComponent;
 
 	class TextComponent final : public Component
 	{
@@ -26,6 +26,6 @@ namespace dae
 		std::string m_text;
 		SDL_Color m_color;
 		std::shared_ptr<Font> m_font;
-		std::shared_ptr<Texture2D> m_textTexture;
+		TextureComponent* m_textureComponent{ nullptr };
 	};
 }

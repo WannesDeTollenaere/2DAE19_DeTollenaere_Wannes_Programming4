@@ -42,6 +42,7 @@ static void load()
 
 	auto textComp = textObj->AddComponent<dae::TextComponent>("Programming 4 Assignment", font);
 	textComp->SetColor({ 255, 255, 255, 255 });
+	textObj->AddComponent<dae::TextureComponent>();
 
 	scene.Add(std::move(textObj));
 
@@ -49,6 +50,8 @@ static void load()
 	auto fpsObj = std::make_unique<dae::GameObject>();
 	auto fpsText = fpsObj->AddComponent<dae::TextComponent>("60.0 fps", font);
 	fpsText->SetColor({ 255, 255, 255, 255 });
+	fpsObj->AddComponent<dae::TextureComponent>();
+
 
 
 	auto dynamicFPS = fpsObj->AddComponent<dae::DynamicTextComponent>([]()
