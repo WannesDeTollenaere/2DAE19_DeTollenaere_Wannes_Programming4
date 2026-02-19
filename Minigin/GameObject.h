@@ -66,5 +66,7 @@ namespace dae
 		Transform m_transform{};
 		bool m_markedForDeletion{ false };
 		std::vector<std::unique_ptr<Component>> m_components{};
+
+		void DestroyComponentsMarkedForDeletion();
 	};
 }

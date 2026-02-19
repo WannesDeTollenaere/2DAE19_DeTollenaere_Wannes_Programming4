@@ -20,6 +20,7 @@ void dae::GameObject::Update()
 	{
 		component->Update();
 	}
+	DestroyComponentsMarkedForDeletion();
 }
 
 void dae::GameObject::Render() const
@@ -28,4 +29,14 @@ void dae::GameObject::Render() const
 	{
 		component->Render();
 	}
+}
+
+
+void dae::GameObject::DestroyComponentsMarkedForDeletion()
+{
+	m_components.erase(std::remove_if(m_components.begin(), m_components.end(),
+		[](const std::unique_ptr<Component>& component) {
+			return component->IsMarkedForDeletion();
+		}),
+		m_components.end());
 }

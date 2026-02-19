@@ -27,6 +27,8 @@ namespace dae
 		friend class SceneManager;
 		explicit Scene() = default;
 
+		void DestroyGameObjectsMarkedForDeletion();
+
 		std::vector < std::unique_ptr<GameObject>> m_objects{};
 	};
 

@@ -40,6 +40,7 @@ void Scene::Update()
 	{
 		object->Update();
 	}
+	DestroyGameObjectsMarkedForDeletion();
 }
 
 void Scene::Render() const
@@ -48,5 +49,15 @@ void Scene::Render() const
 	{
 		object->Render();
 	}
+}
+
+void dae::Scene::DestroyGameObjectsMarkedForDeletion()
+{
+	// DELETE gameobjects marked for deletion
+	m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(),
+		[](const std::unique_ptr<GameObject>& object) {
+			return object->IsMarkedForDeletion();
+		}),
+		m_objects.end());
 }
 

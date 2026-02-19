@@ -16,7 +16,8 @@ namespace dae
 		virtual void FixedUpdate() {}
 		virtual void Update() {}
 		virtual void Render() const {}
-
+		void Destroy() { m_markedForDeletion = true; }
+		bool IsMarkedForDeletion() const { return m_markedForDeletion; }
 	protected:
 		explicit Component(GameObject* owner) : m_owner(owner) {}
 
@@ -24,5 +25,6 @@ namespace dae
 
 	private:
 		GameObject* m_owner;
+		bool m_markedForDeletion{ false };
 	};
 }
