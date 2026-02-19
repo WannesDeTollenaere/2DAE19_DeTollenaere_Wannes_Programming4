@@ -62,9 +62,14 @@ namespace dae
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; }
 		void Destroy() { m_markedForDeletion = true; }
 
+		// Activation
+		void SetActive(bool active) { m_IsActive = active; }
+		bool IsActive() const { return m_IsActive; }
+
 	private:
 		Transform m_transform{};
 		bool m_markedForDeletion{ false };
+		bool m_IsActive{ true };
 		std::vector<std::unique_ptr<Component>> m_components{};
 
 		void DestroyComponentsMarkedForDeletion();

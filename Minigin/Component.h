@@ -18,13 +18,16 @@ namespace dae
 		virtual void Render() const {}
 		void Destroy() { m_markedForDeletion = true; }
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; }
+		void SetActive(bool active) { m_IsActive = active; }
+		bool IsActive() const { return m_IsActive; }
 	protected:
-		explicit Component(GameObject* owner) : m_owner(owner) {}
+		explicit Component(GameObject* owner) : m_owner(owner), m_IsActive(true) {}
 
 		GameObject* GetOwner() const { return m_owner; }
 
 	private:
 		GameObject* m_owner;
 		bool m_markedForDeletion{ false };
+		bool m_IsActive{ true };
 	};
 }

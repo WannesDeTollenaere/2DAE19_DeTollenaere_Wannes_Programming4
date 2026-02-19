@@ -8,26 +8,32 @@ dae::GameObject::~GameObject() = default;
 
 void dae::GameObject::FixedUpdate()
 {
+	if (!m_IsActive) return;
+
 	for (auto& component : m_components)
 	{
-		component->FixedUpdate();
+		if(component->IsActive()) component->FixedUpdate();
 	}
 }
 
 void dae::GameObject::Update()
 {
+	if (!m_IsActive) return;
+
 	for (auto& component : m_components)
 	{
-		component->Update();
+		if (component->IsActive()) component->Update();
 	}
 	DestroyComponentsMarkedForDeletion();
 }
 
 void dae::GameObject::Render() const
 {
+	if (!m_IsActive) return;
+
 	for (const auto& component : m_components)
 	{
-		component->Render();
+		if (component->IsActive()) component->Render();
 	}
 }
 
