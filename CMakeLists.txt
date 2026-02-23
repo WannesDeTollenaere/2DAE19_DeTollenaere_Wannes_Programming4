@@ -82,7 +82,7 @@ endif()
 
 
 if(EMSCRIPTEN)
-  set(TARGET_NAME BurgerTime_web)
+  set(TARGET_NAME minigin_web)
   set(TARGET_PARAM )
 else()
   set(TARGET_NAME BurgerTime)
