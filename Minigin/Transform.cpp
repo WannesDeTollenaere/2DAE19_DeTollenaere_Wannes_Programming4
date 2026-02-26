@@ -17,16 +17,12 @@ void dae::Transform::SetLocalPosition(const glm::vec3& position)
 
 void dae::Transform::SetPositionDirty()
 {
-	if (m_positionIsDirty) return;
-
 	m_positionIsDirty = true;
 
-	if (m_owner)
+
+	for (int i = 0; i < m_owner->GetChildCount(); ++i)
 	{
-		for (int i = 0; i < m_owner->GetChildCount(); ++i)
-		{
-			m_owner->GetChildAt(i)->GetTransform().SetPositionDirty();
-		}
+		m_owner->GetChildAt(i)->GetTransform().SetPositionDirty();
 	}
 }
 

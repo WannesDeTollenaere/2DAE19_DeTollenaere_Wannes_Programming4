@@ -6,7 +6,6 @@
 #include <algorithm>
 #include "Transform.h"
 
-dae::GameObject::~GameObject() = default;
 
 void dae::GameObject::FixedUpdate()
 {
@@ -37,6 +36,13 @@ void dae::GameObject::Render() const
 	{
 		if (component->IsActive()) component->Render();
 	}
+}
+void dae::GameObject::Destroy()
+{
+	m_markedForDeletion = true;
+
+	for (auto& child : m_children)
+		child->Destroy();
 }
 
 void dae::GameObject::DestroyComponentsMarkedForDeletion()
@@ -86,7 +92,7 @@ void dae::GameObject::SetParent(GameObject* parent, bool keepWorldTransform)
 
 	if (m_parent) m_parent->RemoveChild(this);
 	m_parent = parent;
-	if (m_parent) m_parent->AddChild(this, keepWorldTransform);
+	if (m_parent) m_parent->AddChild(this);
 }
 
 bool dae::GameObject::IsParent(const GameObject* potentialParent) const
@@ -101,42 +107,13 @@ bool dae::GameObject::IsParent(const GameObject* potentialParent) const
 	return false;
 }
 
-void dae::GameObject::AddChild(GameObject* child, bool keepWorldPosition)
+void dae::GameObject::AddChild(GameObject* child)
 {
-	if (child == nullptr || child == this || IsParent(child))
-		return;
-
-	if (keepWorldPosition)
-	{
-		child->GetTransform().SetLocalPosition(
-			child->GetTransform().GetWorldPosition() - this->GetTransform().GetWorldPosition()
-		);
-	}
-	else
-	{
-		child->GetTransform().SetPositionDirty();
-	}
-
-	if (child->GetParent() != nullptr)
-	{
-		child->GetParent()->RemoveChild(child);
-	}
-
-	child->m_parent = this;
-
 	m_children.emplace_back(child);
 }
 
 void dae::GameObject::RemoveChild(GameObject* child)
 {
-	if (child == nullptr || child->m_parent != this)
-		return;
-
-
-	child->GetTransform().SetLocalPosition(child->GetTransform().GetWorldPosition());
-
 	std::erase(m_children, child);
-
-	child->m_parent = nullptr;
 }
 

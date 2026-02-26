@@ -17,7 +17,7 @@ namespace dae
 		void Render() const;
 
 		GameObject() : m_transform(this) {};
-		~GameObject();
+		~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
@@ -61,7 +61,7 @@ namespace dae
 
 		// deletion
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; }
-		void Destroy() { m_markedForDeletion = true; }
+		void Destroy();
 
 		// Activation
 		void SetActive(bool active) { m_IsActive = active; }
@@ -84,7 +84,7 @@ namespace dae
 		GameObject* m_parent{ nullptr };
 		std::vector<GameObject*> m_children{};
 
-		void AddChild(GameObject* child, bool keepWorldTransform);
+		void AddChild(GameObject* child);
 		void RemoveChild(GameObject* child);
 		bool IsChild(const GameObject* child) const;
 		bool IsParent(const GameObject* potentialParent) const;
