@@ -37,6 +37,15 @@ void dae::GameObject::Render() const
 		if (component->IsActive()) component->Render();
 	}
 }
+void dae::GameObject::RenderGUI()
+{
+	if (!m_IsActive) return;
+
+	for (const auto& component : m_components)
+	{
+		if (component->IsActive()) component->RenderGUI();
+	}
+}
 void dae::GameObject::Destroy()
 {
 	m_markedForDeletion = true;

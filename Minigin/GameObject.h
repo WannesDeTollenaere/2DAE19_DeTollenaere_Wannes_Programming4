@@ -15,6 +15,7 @@ namespace dae
 		void FixedUpdate();
 		void Update();
 		void Render() const;
+		void RenderGUI();
 
 		GameObject() : m_transform(this) {};
 		~GameObject() = default;

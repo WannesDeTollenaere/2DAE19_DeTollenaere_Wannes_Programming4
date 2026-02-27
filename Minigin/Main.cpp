@@ -14,6 +14,7 @@
 #include "Components/DynamicTextComponent.h"
 #include "GameTime.h"
 #include "Components/RotatorComponent.h"
+#include "Components/CacheProfilerComponent.h"
 
 #include <filesystem>
 namespace fs = std::filesystem;
@@ -87,6 +88,11 @@ static void load()
 	scene.Add(std::move(centerAnchor));
 	scene.Add(std::move(char1));
 	scene.Add(std::move(char2));
+
+	auto profiler = std::make_unique<dae::GameObject>();
+	profiler->AddComponent<dae::CacheProfilerComponent>();
+
+	scene.Add(std::move(profiler));
 }
 
 int main(int, char*[]) {

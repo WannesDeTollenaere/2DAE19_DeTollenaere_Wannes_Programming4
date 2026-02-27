@@ -16,6 +16,7 @@ namespace dae
 		virtual void FixedUpdate() {}
 		virtual void Update() {}
 		virtual void Render() const {}
+		virtual void RenderGUI() {}
 		void Destroy() { m_markedForDeletion = true; }
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; }
 		void SetActive(bool active) { m_IsActive = active; }

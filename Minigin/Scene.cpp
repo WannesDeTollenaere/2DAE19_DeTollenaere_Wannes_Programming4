@@ -50,6 +50,13 @@ void Scene::Render() const
 		object->Render();
 	}
 }
+void Scene::RenderGUI()
+{
+	for (const auto& object : m_objects)
+	{
+		object->RenderGUI();
+	}
+}
 
 void dae::Scene::DestroyGameObjectsMarkedForDeletion()
 {
