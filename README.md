@@ -1,91 +1,48 @@
-# Web
-View the game in a web browser [here](https://wannesdetollenaere.github.io/2DAE19_DeTollenaere_Wannes_Programming4/)
- 
- # Minigin
+# Engine & Burger Time
 
-Minigin is a very small project using [SDL3](https://www.libsdl.org/) and [glm](https://github.com/g-truc/glm) for 2D c++ game projects. It is in no way a game engine, only a barebone start project where everything sdl related has been set up. It contains glm for vector math, to aleviate the need to write custom vector and matrix classes.
+This repository contains a custom 2D component-based game engine written in C++, and a recreation of the classic 1982 arcade game **Burger Time** built on top of it. 
 
-[![Build Status](https://github.com/avadae/minigin/actions/workflows/cmake.yml/badge.svg)](https://github.com/WannesDeTollenaere/cmake/actions)
-[![Build Status](https://github.com/avadae/minigin/actions/workflows/emscripten.yml/badge.svg)](https://github.com/WannesDeTollenaere/emscripten/actions)
-[![GitHub Release](https://img.shields.io/github/v/release/avadae/minigin?logo=github&sort=semver)](https://github.com/WannesDeTollenaere/minigin/releases/latest)
+This project was developed as part of the Programming 4 assignment at Howest Digital Arts and Entertainment (DAE) by Wannes De Tollenaere.
 
-# Goal
+## 🌍 Web
+Play the game in a your web browser [here](https://wannesdetollenaere.github.io/2DAE19_DeTollenaere_Wannes_Programming4/)
 
-Minigin can/may be used as a start project for the exam assignment in the course [Programming 4](https://youtu.be/j96Oh6vzhmg) at DAE. In that assignment students need to recreate a popular 80's arcade game with a game engine they need to program themselves. During the course we discuss several game programming patterns, using the book '[Game Programming Patterns](https://gameprogrammingpatterns.com/)' by [Robert Nystrom](https://github.com/munificent) as reading material. 
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/da00eef0-9061-4bdc-ad27-23670a8f3068" />
 
-# Disclaimer
 
-Minigin is, despite perhaps the suggestion in its name, **not** a game engine. It is just a very simple SDL3 ready project with some of the scaffolding in place to get started. None of the patterns discussed in the course are used yet (except singleton which use we challenge during the course). It is up to the students to implement their own vision for their engine, apply patterns as they see fit, create their game as efficient as possible.
+## 🛠️ Engine Features
 
-# Use
+The engine is a lightweight but robust 2D game engine built with modern C++ and SDL3. It is designed around flexibility and data-driven architecture.
 
-Get the source from this project, or since students need to have their work on github too, they can use this repository as a template. Hit the "Use this template" button on the top right corner of the github page of this project.
+* **Component-Based Architecture:** Game objects are purely structural containers. Behavior and rendering are defined by attaching specific modular components (`TextureComponent`, `AnimatorComponent`, `RotatorComponent`, `TextComponent`, etc.).
+* **Data-Driven Scene Loading:** Levels and scenes are completely constructed via JSON files using the `nlohmann/json` library, allowing for rapid level design and tweaking without needing to recompile C++ code. Supports hierarchical parent-child relationships natively.
+* **Cross-Platform:** Uses CMake for cross-platform builds. Includes toolchains for standard desktop builds and WebAssembly (via Emscripten).
+* **MORE TO BE ADDED**
 
-## Windows version
+## 🍔 The Game: Burger Time
 
-Either
-- Open the root folder in Visual Studio 2026; this will be recognized as a cmake project.
-  
-Or
-- Install CMake 
-- Install CMake and CMake Tools extensions in Visual Code
-- Open the root folder in Visual Code,  this will be recognized as a cmake project.
+The engine powers a functional clone of Data East's **Burger Time**.
 
-Or
-- Use whatever editor you like :)
+## 💻 Technologies & Libraries
 
-## Emscripten (web) version
+* **Language:** C++20
+* **Graphics/Windowing:** [SDL3](https://github.com/libsdl-org/SDL) & [SDL3_ttf](https://github.com/libsdl-org/SDL_ttf)
+* **Math:** [GLM](https://github.com/g-truc/glm)
+* **UI/Debugging:** [Dear ImGui](https://github.com/ocornut/imgui)
+* **Data Parsing:** [nlohmann/json](https://github.com/nlohmann/json)
+* **Build System:** CMake
 
-### On windows
+## How to Build
 
-For installing all of the needed tools on Windows I recommend using [Chocolatey](https://chocolatey.org/). You can then run the following in a terminal to install what is needed:
+This project uses CMake. You can build it using the command line or an IDE that supports CMake (like Visual Studio 2022, CLion, or VS Code).
 
-    choco install -y cmake
-    choco install -y emscripten
-    choco install -y ninja
-    choco install -y python
+### Prerequisites
+* CMake (3.20 or higher)
+* A C++20 compatible compiler (MSVC, GCC, Clang)
+* Git 
 
-In a terminal, navigate to the root folder. Run this: 
+### Build Instructions
 
-    mkdir build_web
-    cd build_web
-    emcmake cmake ..
-    emmake ninja
-
-To be able to see the webpage you can start a python webserver in the build_web folder
-
-    python -m http.server
-
-Then browse to http://localhost:8000 and you're good to go.
-
-### On OSX
-
-On Mac you can use homebrew
-
-    brew install cmake
-    brew install emscripten
-    brew install python
-
-In a terminal on OSX, navigate to the root folder. Run this: 
-
-    mkdir build_web
-    cd build_web
-    emcmake cmake .. -DCMAKE_OSX_ARCHITECTURES=""
-    emmake make
-
-To be able to see the webpage you can start a python webserver in the build_web folder
-
-    python3 -m http.server
-
-Then browse to http://localhost:8000 and you're good to go.
-
-## Github Actions
-
-This project is build with github actions.
-- The CMake workflow builds the project in Debug and Release for Windows and serves as a check that the project builds on that platform.
-- The Emscripten workflow generates a web version of the project and publishes it as a [github page](https://wannesdetollenaere.github.io/2DAE19_DeTollenaere_Wannes_Programming4/). 
-  - The url of that page will be `https://wannesdetollenaere.github.io/2DAE19_DeTollenaere_Wannes_Programming4/`
-- You can embed this page with 
-
-```<iframe style="position: absolute; top: 0px; left: 0px; width: 1024px; height: 576px;" src="https://wannesdetollenaere.github.io/2DAE19_DeTollenaere_Wannes_Programming4/" loading="lazy"></iframe>```
-
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/wannesdetollenaere/2dae19_detollenaere_wannes_programming4.git
