@@ -15,6 +15,8 @@
 #include "GameTime.h"
 #include "Components/RotatorComponent.h"
 #include "Components/CacheProfilerComponent.h"
+#include "Components/AnimatorComponent.h"
+#include "Prefab/PlayerPrefab.h"
 
 #include <filesystem>
 namespace fs = std::filesystem;
@@ -93,6 +95,10 @@ static void load()
 	profiler->AddComponent<dae::CacheProfilerComponent>();
 
 	scene.Add(std::move(profiler));
+
+
+	// ANIMATION 
+	scene.Add(dae::PlayerPrefab::Create(100.f, 100.f));
 }
 
 int main(int, char*[]) {

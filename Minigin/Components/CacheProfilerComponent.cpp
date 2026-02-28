@@ -47,7 +47,7 @@ namespace dae
         ImGui::Begin("Exercise 1");
         ImGui::InputInt("# samples##1", &m_samplesEx1);
 
-        // EXERCISE 1 BENCHMARK TRIGGER
+
         if (ImGui::Button("Thrash the cache##1"))
         {
             MeasureCacheThrashing<int>(
