@@ -1,0 +1,107 @@
+{
+  "name": "Programming 4 Assignment",
+  "objects": [
+    {
+      "name": "Background",
+      "transform": { "x": 0.0, "y": 0.0 },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "background.png"
+        }
+      ]
+    },
+    {
+      "name": "Logo",
+      "transform": { "x": 358.0, "y": 180.0 },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "logo.png"
+        }
+      ]
+    },
+    {
+      "name": "Title Text",
+      "transform": { "x": 292.0, "y": 20.0 },
+      "components": [
+        {
+          "type": "TextComponent",
+          "text": "Programming 4 Assignment",
+          "font": "Lingua.otf",
+          "fontSize": 36,
+          "color": { "r": 255, "g": 255, "b": 255, "a": 255 }
+        },
+        {
+          "type": "TextureComponent"
+        }
+      ]
+    },
+    {
+      "name": "FPS Clock",
+      "transform": { "x": 10.0, "y": 10.0 },
+      "components": [
+        {
+          "type": "TextComponent",
+          "text": "60.0 fps",
+          "font": "Lingua.otf",
+          "fontSize": 36,
+          "color": { "r": 255, "g": 255, "b": 255, "a": 255 }
+        },
+        {
+          "type": "TextureComponent"
+        },
+        {
+          "type": "FPSDynamicTextComponent",
+          "postfix": " FPS"
+        }
+      ]
+    },
+    {
+      "name": "centerAnchor",
+      "transform": { "x": 200.0, "y": 300.0 },
+      "children": [
+        {
+          "name": "char1",
+          "keepWorldPosition": false,
+          "components": [
+            {
+              "type": "TextureComponent",
+              "texture": "pacman.png"
+            },
+            {
+              "type": "RotatorComponent",
+              "radius": 10.0,
+              "speed": 10.0
+            }
+          ],
+          "children": [
+            {
+              "name": "char2",
+              "keepWorldPosition": false,
+              "components": [
+                {
+                  "type": "TextureComponent",
+                  "texture": "pacman.png"
+                },
+                {
+                  "type": "RotatorComponent",
+                  "radius": 60.0,
+                  "speed": 4.0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Profiler",
+      "components": [
+        {
+          "type": "CacheProfilerComponent"
+        }
+      ]
+    }
+  ]
+}

@@ -28,7 +28,7 @@ add_executable(${TARGET_NAME} ${TARGET_PARAM}
   Minigin/Texture2D.cpp
   Minigin/Transform.cpp
   
- "Minigin/Components/TextureComponent.cpp" "Minigin/Components/TextComponent.cpp" "Minigin/Components/DynamicTextComponent.cpp" "Minigin/Components/RotatorComponent.cpp" "Minigin/Components/CacheProfilerComponent.h" "Minigin/Components/CacheProfilerComponent.cpp" "Minigin/Components/AnimatorComponent.h" "Minigin/Components/AnimatorComponent.cpp" "Minigin/Components/PlayerComponent.h" "Minigin/Components/PlayerComponent.cpp" "Minigin/Prefab/PlayerPrefab.h")
+ "Minigin/Components/TextureComponent.cpp" "Minigin/Components/TextComponent.cpp" "Minigin/Components/DynamicTextComponent.cpp" "Minigin/Components/RotatorComponent.cpp" "Minigin/Components/CacheProfilerComponent.h" "Minigin/Components/CacheProfilerComponent.cpp" "Minigin/Components/AnimatorComponent.h" "Minigin/Components/AnimatorComponent.cpp" "Minigin/Components/PlayerComponent.h" "Minigin/Components/PlayerComponent.cpp" "Minigin/Prefab/PlayerPrefab.h" "Minigin/SceneLoader.h" "Minigin/SceneLoader.cpp" "Minigin/Components/Components.h")
 
 # enable c++20 features
 target_compile_features(${TARGET_NAME} PUBLIC cxx_std_20)
@@ -45,6 +45,12 @@ if(NOT glm_FOUND)
   )
   FetchContent_MakeAvailable(glm)
 endif()
+
+# Nolan json lib
+FetchContent_Declare(json 
+    URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
+)
+FetchContent_MakeAvailable(json)
 
 # Dear ImGui
 FetchContent_Declare(
@@ -152,6 +158,7 @@ target_link_libraries("${TARGET_NAME}" PUBLIC
   SDL3::SDL3 
   SDL3_ttf::SDL3_ttf
   imgui
+  nlohmann_json::nlohmann_json
   ${VLD_LIBRARIES}
 )
 

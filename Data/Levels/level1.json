@@ -1,0 +1,33 @@
+{
+  "name": "Level 1",
+  "objects": [
+    {
+      "name": "Background",
+      "transform": { "x": 0.0, "y": 0.0 },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "background.png"
+        }
+      ]
+    },
+    {
+      "name": "Player",
+      "transform": { "x": 100.0, "y": 100.0 },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "burger_time_spritesheet.png"
+        },
+        {
+          "type": "AnimatorComponent",
+          "frameWidth": 16,
+          "frameHeight": 16
+        },
+        {
+          "type": "PlayerComponent"
+        }
+      ]
+    }
+  ]
+}
