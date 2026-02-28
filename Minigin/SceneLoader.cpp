@@ -3,8 +3,13 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 
-
-#include "Components/components.h"
+#include "Components/AnimatorComponent.h"
+#include "Components/CacheProfilerComponent.h"
+#include "Components/PlayerComponent.h"
+#include "Components/DynamicTextComponent.h"
+#include "Components/RotatorComponent.h"
+#include "Components/TextComponent.h"
+#include "Components/TextureComponent.h"
 #include "GameTime.h"
 
 #include <fstream>
