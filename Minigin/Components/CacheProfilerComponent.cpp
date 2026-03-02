@@ -11,15 +11,16 @@ namespace dae
 
     void CacheProfilerComponent::RenderGUI()
     {
-        auto DrawPlot = [](const char* label, const std::vector<float>& data, ImVec4 color, int highlightIndex = -1)
+        auto DrawPlot = [](const char* label, const std::vector<float>& data, ImVec4 color, int highlightIndex = -1, ImVec2 plotSize = ImVec2(250, 100), float maxVal = -1)
             {
                 if (data.empty()) return;
 
-                float maxVal = *std::max_element(data.begin(), data.end());
+                if(maxVal == -1)
+                     maxVal = *std::max_element(data.begin(), data.end());
                 if (maxVal == 0.0f) maxVal = 1.0f; 
 
                 ImGui::PushStyleColor(ImGuiCol_PlotLines, color);
-                ImGui::PlotLines(label, data.data(), static_cast<int>(data.size()), 0, nullptr, 0.0f, maxVal, ImVec2(250, 100));
+                ImGui::PlotLines(label, data.data(), static_cast<int>(data.size()), 0, nullptr, 0.0f, maxVal, plotSize);
                 ImGui::PopStyleColor();
 
                 ImVec2 p0 = ImGui::GetItemRectMin(); 
@@ -88,6 +89,7 @@ namespace dae
 
         DrawPlot("##PlotEx2_2", m_plotEx2_2, ImVec4(0.0f, 0.8f, 1.0f, 1.0f));
 
+
         if (!m_plotEx2_1.empty() && !m_plotEx2_2.empty())
         {
             ImGui::Text("Combined:");
@@ -98,17 +100,12 @@ namespace dae
             if (combinedMax == 0.0f) combinedMax = 1.0f;
 
             ImVec2 plotSize(250, 100);
-
-            ImGui::PushStyleColor(ImGuiCol_PlotLines, ImVec4(0.0f, 1.0f, 0.0f, 1.0f));
-            ImGui::PlotLines("##Combined1", m_plotEx2_1.data(), static_cast<int>(m_plotEx2_1.size()), 0, nullptr, 0.0f, combinedMax, plotSize);
+            DrawPlot("##Combined21", m_plotEx2_1, ImVec4(0.0f, 1.0f, 0.0f, 1.0f), -1, plotSize, combinedMax);
+            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - plotSize.y - ImGui::GetStyle().ItemSpacing.y);
+            ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0, 0, 0, 0));
+            DrawPlot("##Combined22", m_plotEx2_2, ImVec4(0.0f, 0.8f, 1.0f, 1.0f), -1, plotSize, combinedMax);
             ImGui::PopStyleColor();
 
-            // plot one over the other
-            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - plotSize.y - ImGui::GetStyle().ItemSpacing.y);
-            ImGui::PushStyleColor(ImGuiCol_PlotLines, ImVec4(0.0f, 0.8f, 1.0f, 1.0f));
-            ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0, 0, 0, 0));
-            ImGui::PlotLines("##Combined2", m_plotEx2_2.data(), static_cast<int>(m_plotEx2_2.size()), 0, nullptr, 0.0f, combinedMax, plotSize);
-            ImGui::PopStyleColor(2);
 
             if (ImGui::IsItemHovered())
             {
