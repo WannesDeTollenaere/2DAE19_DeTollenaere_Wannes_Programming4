@@ -158,6 +158,7 @@ target_link_libraries("${TARGET_NAME}" PUBLIC
   SDL3::SDL3 
   SDL3_ttf::SDL3_ttf
   imgui
+  glm::glm
   nlohmann_json::nlohmann_json
   ${VLD_LIBRARIES}
 )

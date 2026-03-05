@@ -2,7 +2,8 @@
 #include "Component.h"
 #include <vector>
 #include <chrono>
-#include <numeric>
+#include <numeric> 
+#include <algorithm>
 
 
 namespace dae
@@ -58,7 +59,8 @@ namespace dae
 
             for (int stepsize = 1; stepsize <= 1024; stepsize *= 2)
             {
-                float sampleTime = 0.f;
+                std::vector<float> sampleDurations;
+                sampleDurations.reserve(samples);
 
                 for (int s = 0; s < samples; ++s)
                 {
@@ -71,10 +73,23 @@ namespace dae
 
                     auto end = std::chrono::high_resolution_clock::now();
                     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-                    sampleTime += duration;
+
+                    sampleDurations.push_back(static_cast<float>(duration));
                 }
 
-                float avg = sampleTime/samples;
+                float avg = 0.f;
+
+                if (samples > 2) {
+                    auto minmax = std::minmax_element(sampleDurations.begin(), sampleDurations.end());
+                    float totalSum = std::accumulate(sampleDurations.begin(), sampleDurations.end(), 0.0f);
+                    float trimmedSum = totalSum - (*minmax.first) - (*minmax.second);
+
+                    avg = trimmedSum / (samples - 2);
+                } else if (samples > 0){
+                    float totalSum = std::accumulate(sampleDurations.begin(), sampleDurations.end(), 0.0f);
+                    avg = totalSum / samples;
+                }
+
                 outPlotData.push_back(avg);
             }
         }
