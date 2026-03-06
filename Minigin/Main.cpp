@@ -18,6 +18,10 @@
 #include "Components/AnimatorComponent.h"
 #include "Prefab/PlayerPrefab.h"
 #include "SceneLoader.h"
+#include "InputManager.h"
+#include "Commands/MoveCommand.h"
+#include <sstream>
+#include <iomanip>
 
 #include <filesystem>
 namespace fs = std::filesystem;
@@ -25,6 +29,7 @@ namespace fs = std::filesystem;
 static void load()
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene();
+	auto& input = dae::InputManager::GetInstance();
 
 	//dae::SceneLoader::LoadScene(scene, "Levels/Prog4Ass.json");
 	//dae::SceneLoader::LoadScene(scene, "Levels/level1.json");
@@ -65,7 +70,10 @@ static void load()
 		{
 			float dt = dae::GameTime::GetInstance().GetDeltaTime();
 			if (dt <= 0.0f) return std::string("0");
-			return std::format("{:.1f}", 1.0f / dt);
+
+			std::stringstream ss;
+			ss << std::fixed << std::setprecision(1) << (1.0f / dt);
+			return ss.str();
 		});
 	dynamicFPS->SetPostfix(" FPS");
 
@@ -75,7 +83,7 @@ static void load()
 
 
 	// CHARCTERS
-	auto centerAnchor = std::make_unique<dae::GameObject>();
+	/*auto centerAnchor = std::make_unique<dae::GameObject>();
 	centerAnchor->SetPosition(200.f, 300.f);
 
 	auto char1 = std::make_unique<dae::GameObject>();
@@ -97,9 +105,38 @@ static void load()
 	auto profiler = std::make_unique<dae::GameObject>();
 	profiler->AddComponent<dae::CacheProfilerComponent>();
 
-	scene.Add(std::move(profiler));
+	scene.Add(std::move(profiler));*/
 
 
+	auto char1 = std::make_unique<dae::GameObject>();
+	char1->SetPosition(100.f, 200.f); 
+
+	auto tex1 = char1->AddComponent<dae::TextureComponent>();
+	tex1->SetTexture("pacman.png");
+
+
+
+	auto char2 = std::make_unique<dae::GameObject>();
+	char2->SetPosition(300.f, 200.f);
+
+	auto tex2 = char2->AddComponent<dae::TextureComponent>();
+	tex2->SetTexture("pacman.png");
+
+	constexpr float baseSpeed = 50.f;
+	constexpr float doubleSpeed = baseSpeed * 2.f; 
+
+	input.BindKeyboardCommand(SDL_SCANCODE_W, dae::InputState::Pressed, std::make_unique<dae::MoveCommand>(char1.get(), glm::vec2(0, -1), baseSpeed));
+	input.BindKeyboardCommand(SDL_SCANCODE_S, dae::InputState::Pressed, std::make_unique<dae::MoveCommand>(char1.get(), glm::vec2(0, 1), baseSpeed));
+	input.BindKeyboardCommand(SDL_SCANCODE_A, dae::InputState::Pressed, std::make_unique<dae::MoveCommand>(char1.get(), glm::vec2(-1, 0), baseSpeed));
+	input.BindKeyboardCommand(SDL_SCANCODE_D, dae::InputState::Pressed, std::make_unique<dae::MoveCommand>(char1.get(), glm::vec2(1, 0), baseSpeed));
+
+	input.BindCommand(0, dae::Gamepad::ControllerButton::DPadUp, dae::InputState::Pressed, std::make_unique<dae::MoveCommand>(char2.get(), glm::vec2(0, -1), doubleSpeed));
+	input.BindCommand(0, dae::Gamepad::ControllerButton::DPadDown, dae::InputState::Pressed, std::make_unique<dae::MoveCommand>(char2.get(), glm::vec2(0, 1), doubleSpeed));
+	input.BindCommand(0, dae::Gamepad::ControllerButton::DPadLeft, dae::InputState::Pressed, std::make_unique<dae::MoveCommand>(char2.get(), glm::vec2(-1, 0), doubleSpeed));
+	input.BindCommand(0, dae::Gamepad::ControllerButton::DPadRight, dae::InputState::Pressed, std::make_unique<dae::MoveCommand>(char2.get(), glm::vec2(1, 0), doubleSpeed));
+
+	scene.Add(std::move(char1));
+	scene.Add(std::move(char2));
 	// ANIMATION 
 	//scene.Add(dae::PlayerPrefab::Create(100.f, 100.f));
 }

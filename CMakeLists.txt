@@ -28,7 +28,7 @@ add_executable(${TARGET_NAME} ${TARGET_PARAM}
   Minigin/Texture2D.cpp
   Minigin/Transform.cpp
   
- "Minigin/Components/TextureComponent.cpp" "Minigin/Components/TextComponent.cpp" "Minigin/Components/DynamicTextComponent.cpp" "Minigin/Components/RotatorComponent.cpp" "Minigin/Components/CacheProfilerComponent.h" "Minigin/Components/CacheProfilerComponent.cpp" "Minigin/Components/AnimatorComponent.h" "Minigin/Components/AnimatorComponent.cpp" "Minigin/Components/PlayerComponent.h" "Minigin/Components/PlayerComponent.cpp" "Minigin/Prefab/PlayerPrefab.h" "Minigin/SceneLoader.h" "Minigin/SceneLoader.cpp" )
+ "Minigin/Components/TextureComponent.cpp" "Minigin/Components/TextComponent.cpp" "Minigin/Components/DynamicTextComponent.cpp" "Minigin/Components/RotatorComponent.cpp" "Minigin/Components/CacheProfilerComponent.h" "Minigin/Components/CacheProfilerComponent.cpp" "Minigin/Components/AnimatorComponent.h" "Minigin/Components/AnimatorComponent.cpp" "Minigin/Components/PlayerComponent.h" "Minigin/Components/PlayerComponent.cpp" "Minigin/Prefab/PlayerPrefab.h" "Minigin/SceneLoader.h" "Minigin/SceneLoader.cpp"  "Minigin/Commands/Command.h" "Minigin/Gamepad.h" "Minigin/Gamepad.cpp" "Minigin/Commands/MoveCommand.h" "Minigin/Commands/GameObjectCommand.h")
 
 # enable c++20 features
 target_compile_features(${TARGET_NAME} PUBLIC cxx_std_20)
@@ -162,6 +162,10 @@ target_link_libraries("${TARGET_NAME}" PUBLIC
   nlohmann_json::nlohmann_json
   ${VLD_LIBRARIES}
 )
+
+if (WIN32)
+  target_link_libraries("${TARGET_NAME}" PUBLIC xinput)
+endif()
 
 if(MSVC)
   # compile at warning level 4 + treat warnings as errors

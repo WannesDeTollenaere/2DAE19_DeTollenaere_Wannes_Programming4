@@ -12,6 +12,8 @@
 #include "Components/TextureComponent.h"
 #include "GameTime.h"
 
+#include <sstream>
+#include <iomanip>
 #include <fstream>
 #include <iostream>
 
@@ -109,7 +111,10 @@ void dae::SceneLoader::ParseGameObject(const json& objData, Scene& scene, GameOb
                 auto dynamicFPS = gameObject->AddComponent<DynamicTextComponent>([]() {
                     float dt = GameTime::GetInstance().GetDeltaTime();
                     if (dt <= 0.0f) return std::string("0");
-                    return std::format("{:.1f}", 1.0f / dt);
+
+                    std::stringstream ss;
+                    ss << std::fixed << std::setprecision(1) << (1.0f / dt);
+                    return ss.str();
                     });
                 dynamicFPS->SetPostfix(compData.value("postfix", " FPS"));
             }
