@@ -7,7 +7,7 @@ namespace dae
     {
     public:
         CharacterControllerComponent(GameObject* owner, float speed, bool useKeyboard, int controllerIndex = 0);
-        virtual ~CharacterControllerComponent();
+        ~CharacterControllerComponent() = default;
 
     private:
         bool m_useKeyboard;

@@ -1,4 +1,3 @@
-// In Game/Main.cpp
 #include <SDL3/SDL_main.h>
 #include <Minigin.h> 
 #include <SceneManager.h>

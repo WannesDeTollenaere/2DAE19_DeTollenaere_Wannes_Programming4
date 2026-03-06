@@ -26,24 +26,4 @@ namespace dae
             input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadRight, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(1, 0), speed));
         }
     }
-
-    CharacterControllerComponent::~CharacterControllerComponent()
-    {
-        //auto& input = InputManager::GetInstance();
-
-        //if (m_useKeyboard)
-        //{
-        //    input.UnbindKeyboardCommand(SDL_SCANCODE_W, InputState::Pressed);
-        //    input.UnbindKeyboardCommand(SDL_SCANCODE_S, InputState::Pressed);
-        //    input.UnbindKeyboardCommand(SDL_SCANCODE_A, InputState::Pressed);
-        //    input.UnbindKeyboardCommand(SDL_SCANCODE_D, InputState::Pressed);
-        //}
-        //else
-        //{
-        //    input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadUp, InputState::Pressed);
-        //    input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadDown, InputState::Pressed);
-        //    input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadLeft, InputState::Pressed);
-        //    input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadRight, InputState::Pressed);
-        //}
-    }
 }
