@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObjectCommand.h"
+#include <Commands/GameObjectCommand.h>
 #include <glm/glm.hpp>
 #include "GameTime.h"
 

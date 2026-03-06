@@ -9,8 +9,6 @@
 #include "Components/DynamicTextComponent.h"
 #include "Components/RotatorComponent.h"
 #include "Components/CacheProfilerComponent.h"
-#include "Components/CharacterControllerComponent.h"
-
 
 // DTO
 #include "DTO/AnimatorComponentDTO.h"
@@ -19,7 +17,6 @@
 #include "DTO/RotatorComponentDTO.h"
 #include "DTO/TextComponentDTO.h"
 #include "DTO/TextureComponentDTO.h"
-#include "DTO//CharacterControllerDTO.h"
 
 #include <sstream>
 #include <iomanip>
@@ -85,13 +82,6 @@ namespace dae
             SceneLoader::RegisterComponentParser("CacheProfilerComponent", [](GameObject* go, const nlohmann::json&) {
                 //auto dto = CacheProfilerComponentDTO::FromJson(data);
                 go->AddComponent<CacheProfilerComponent>();
-                });
-
-            SceneLoader::RegisterComponentParser("CharacterControllerComponent", [](dae::GameObject* go, const nlohmann::json& data) {
-
-                auto dto = CharacterControllerDTO::FromJson(data);
-
-                go->AddComponent<CharacterControllerComponent>(dto.speed, dto.useKeyboard, dto.controllerIndex);
                 });
         }
     };

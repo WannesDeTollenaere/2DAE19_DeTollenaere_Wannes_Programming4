@@ -16,6 +16,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "ComponentsRegistry.h"
 
 SDL_Window* g_window{};
 
@@ -78,6 +79,8 @@ dae::Minigin::Minigin(const std::filesystem::path& dataPath)
 
 	Renderer::GetInstance().Init(g_window);
 	ResourceManager::GetInstance().Init(dataPath);
+
+	dae::ComponentsRegistry::RegisterAll();
 }
 
 dae::Minigin::~Minigin()
