@@ -4,6 +4,7 @@
 #include <memory>
 #include <map>
 #include "Singleton.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
@@ -15,8 +16,9 @@ namespace dae
 		void Init(const std::filesystem::path& data);
 		std::shared_ptr<Texture2D> LoadTexture(const std::string& file);
 		std::shared_ptr<Font> LoadFont(const std::string& file, uint8_t size);
+		nlohmann::json LoadJson(const std::string& file);
 
-		std::filesystem::path GetDatePath() { return m_dataPath; };
+		std::filesystem::path GetDataPath() { return m_dataPath; };
 	private:
 		friend class Singleton<ResourceManager>;
 		ResourceManager() = default;

@@ -5,7 +5,6 @@
 
 #include "Components/AnimatorComponent.h"
 #include "Components/CacheProfilerComponent.h"
-#include "Components/PlayerComponent.h"
 #include "Components/DynamicTextComponent.h"
 #include "Components/RotatorComponent.h"
 #include "Components/TextComponent.h"
@@ -19,20 +18,21 @@
 
 using json = nlohmann::json;
 
+std::unordered_map<std::string, std::function<void(dae::GameObject*, const nlohmann::json&)>> dae::SceneLoader::s_ComponentParsers{};
+
 void dae::SceneLoader::LoadScene(Scene& scene, const std::string& jsonFilePath)
 {
-    std::ifstream file("Data/" +jsonFilePath);
-    if (!file.is_open())
+    json sceneData;
+
+    try
     {
-        std::cerr << "Failed to open scene file: " << jsonFilePath << "\n";
+        sceneData = ResourceManager::GetInstance().LoadJson(jsonFilePath);
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << "SceneLoader Error: " << e.what() << "\n";
         return;
     }
-
-    json sceneData;
-    file >> sceneData;
-
-    std::string sceneName = sceneData.value("name", "Unnamed Scene");
-    std::cout << "Loading Scene: " << sceneName << "\n";
 
     if (sceneData.contains("objects") && sceneData["objects"].is_array())
     {
@@ -68,65 +68,14 @@ void dae::SceneLoader::ParseGameObject(const json& objData, Scene& scene, GameOb
         {
             std::string type = compData.value("type", "");
 
-            if (type == "TextureComponent")
+            auto it = s_ComponentParsers.find(type);
+            if (it != s_ComponentParsers.end())
             {
-                auto texComp = gameObject->AddComponent<TextureComponent>();
-                if (compData.contains("texture"))
-                {
-                    texComp->SetTexture(compData["texture"].get<std::string>());
-                }
+                it->second(pGameObject, compData);
             }
-            else if (type == "AnimatorComponent")
+            else
             {
-                int width = compData.value("frameWidth", 16);
-                int height = compData.value("frameHeight", 16);
-                gameObject->AddComponent<AnimatorComponent>(width, height);
-            }
-            else if (type == "PlayerComponent")
-            {
-                gameObject->AddComponent<PlayerComponent>();
-            }
-            else if (type == "TextComponent")
-            {
-                std::string text = compData.value("text", "");
-                std::string fontName = compData.value("font", "Lingua.otf");
-                uint8_t fontSize = static_cast<uint8_t>(compData.value("fontSize", 36));
-
-                auto font = ResourceManager::GetInstance().LoadFont(fontName, fontSize);
-                auto textComp = gameObject->AddComponent<TextComponent>(text, font);
-
-
-                if (compData.contains("color")) {
-                    auto colorData = compData["color"];
-                    textComp->SetColor({
-                        static_cast<unsigned char>(colorData.value("r", 255)),
-                        static_cast<unsigned char>(colorData.value("g", 255)),
-                        static_cast<unsigned char>(colorData.value("b", 255)),
-                        static_cast<unsigned char>(colorData.value("a", 255))
-                        });
-                }
-            }
-            else if (type == "FPSDynamicTextComponent")
-            {
-                auto dynamicFPS = gameObject->AddComponent<DynamicTextComponent>([]() {
-                    float dt = GameTime::GetInstance().GetDeltaTime();
-                    if (dt <= 0.0f) return std::string("0");
-
-                    std::stringstream ss;
-                    ss << std::fixed << std::setprecision(1) << (1.0f / dt);
-                    return ss.str();
-                    });
-                dynamicFPS->SetPostfix(compData.value("postfix", " FPS"));
-            }
-            else if (type == "RotatorComponent")
-            {
-                float radius = compData.value("radius", 10.f);
-                float speed = compData.value("speed", 10.f);
-                gameObject->AddComponent<RotatorComponent>(radius, speed);
-            }
-            else if (type == "CacheProfilerComponent")
-            {
-                gameObject->AddComponent<CacheProfilerComponent>();
+                std::cerr << "Warning: Unknown component type in JSON: " << type << "\n";
             }
         }
     }
@@ -142,4 +91,7 @@ void dae::SceneLoader::ParseGameObject(const json& objData, Scene& scene, GameOb
     }
 }
 
-
+void dae::SceneLoader::RegisterComponentParser(const std::string& type, std::function<void(dae::GameObject*, const nlohmann::json&) > parser)
+{
+    s_ComponentParsers[type] = parser;
+}

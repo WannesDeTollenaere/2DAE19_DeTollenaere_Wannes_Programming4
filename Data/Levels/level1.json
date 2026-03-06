@@ -22,10 +22,52 @@
         {
           "type": "AnimatorComponent",
           "frameWidth": 16,
-          "frameHeight": 16
-        },
-        {
-          "type": "PlayerComponent"
+          "frameHeight": 16,
+          "playOnStart": "Idle",
+          "animations": {
+            "Idle": {
+              "startRow": 1,
+              "startCol": 0,
+              "frameCount": 1,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkDown": {
+              "startRow": 0,
+              "startCol": 0,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkUp": {
+              "startRow": 0,
+              "startCol": 6,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkLeft": {
+              "startRow": 0,
+              "startCol": 3,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkRight": {
+              "startRow": 0,
+              "startCol": 9,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "Die": {
+              "startRow": 1,
+              "startCol": 3,
+              "frameCount": 6,
+              "frameTime": 0.2,
+              "isLooping": false
+            }
+          }
         }
       ]
     }
