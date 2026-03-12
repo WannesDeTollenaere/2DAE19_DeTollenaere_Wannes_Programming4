@@ -1,3 +1,7 @@
+#if _DEBUG && __has_include(<vld.h>)
+#include <vld.h>
+#endif
+
 #include <SDL3/SDL_main.h>
 #include <Minigin.h> 
 #include <SceneManager.h>
