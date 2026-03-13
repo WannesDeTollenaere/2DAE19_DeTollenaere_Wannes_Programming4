@@ -84,8 +84,11 @@
         },
         {
           "type": "HealthComponent",
-          "maxHealth": 1,
-          "id": 0
+          "maxHealth": 1
+        },
+        {
+          "type": "TagComponent",
+          "tag": "Player1"
         }
       ]
     },
@@ -111,7 +114,33 @@
         {
           "type": "HealthDisplayComponent",
           "startingLives": 3,
-          "targetId": 0
+          "targetTag": "Player1"
+        }
+      ]
+    },
+    {
+      "transform": {
+        "x": 300,
+        "y": 200
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pacman.png"
+        },
+        {
+          "type": "HealthComponent",
+          "maxHealth": 1
+        },
+        {
+          "type": "TagComponent",
+          "tag": "Player2"
+        },
+        {
+          "type": "CharacterControllerComponent",
+          "inputType": "gamepad",
+          "controllerIndex": 0,
+          "speed": 100.0
         }
       ]
     },
@@ -137,31 +166,50 @@
         {
           "type": "HealthDisplayComponent",
           "startingLives": 3,
-          "targetId": 1
+          "targetTag": "Player2"
         }
       ]
     },
     {
       "transform": {
-        "x": 300,
-        "y": 200
+        "x": 10,
+        "y": 400
       },
       "components": [
         {
-          "type": "TextureComponent",
-          "texture": "pacman.png"
+          "type": "TextComponent",
+          "text": "P1 (Keyboard): WASD to Move, C to Damage",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          }
         },
+        { "type": "TextureComponent" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 10,
+        "y": 430
+      },
+      "components": [
         {
-          "type": "HealthComponent",
-          "maxHealth": 1,
-          "id": 1
+          "type": "TextComponent",
+          "text": "P2 (Gamepad): D-Pad to Move, X to Damage",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          }
         },
-        {
-          "type": "CharacterControllerComponent",
-          "inputType": "gamepad",
-          "controllerIndex": 0,
-          "speed": 100.0
-        }
+        { "type": "TextureComponent" }
       ]
     }
   ]

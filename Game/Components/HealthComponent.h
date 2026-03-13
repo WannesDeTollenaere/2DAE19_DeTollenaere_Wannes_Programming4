@@ -1,17 +1,17 @@
 #pragma once
 #include "Component.h"
-//#include <ObserverSys/Subject.h>
+#include <ObserverSys/Observer.h>
 
 namespace dae
 {
-	class HealthComponent final : public Component
+	class HealthComponent final : public Component, public Observer
 	{
 	public:
-		HealthComponent(GameObject* owner, int maxHealth, int id = 0)
-			: Component(owner), m_health(maxHealth), m_id( id) {
-		}
+		HealthComponent(GameObject* owner, int maxHealth);
 
 		void Damage(int amount);
+
+		void HandleEvent(const Event* pEvent) override;
 
 		int GetHealth() const { return m_health; }
 
@@ -19,7 +19,6 @@ namespace dae
 
 	private:
 		int m_health;
-		int m_id;
 		//Subject m_subject;
 	};
 }

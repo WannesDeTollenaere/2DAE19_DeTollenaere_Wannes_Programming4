@@ -6,9 +6,11 @@
 #include "DTO/HealthComponentDTO.h"
 #include "Components/HealthDisplayComponent.h"
 #include "DTO/HealthDisplayComponentDTO.h"
+#include "Components/TagComponent.h"
 
 #include <SceneLoader.h> 
 #include <GameObject.h>
+#include "sdbm_hash.h"
 
 namespace dae
 {
@@ -32,7 +34,7 @@ namespace dae
             // Register Lives Display Component
             SceneLoader::RegisterComponentParser("HealthDisplayComponent", [](dae::GameObject* go, const nlohmann::json& data) {
                 auto dto = LivesDisplayComponentDTO::FromJson(data);
-                go->AddComponent<HealthDisplayComponent>(dto.startingLives, dto.targetId);
+                go->AddComponent<HealthDisplayComponent>(dto.startingLives, dae::make_sdbm_hash_rt(dto.targetTag));
                 });
         }
     };

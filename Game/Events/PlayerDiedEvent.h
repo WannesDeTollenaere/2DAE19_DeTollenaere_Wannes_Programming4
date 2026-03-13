@@ -1,14 +1,14 @@
 #pragma once
 #include "ObserverSys/Event.h"
+#include "sdbm_hash.h"
 
 namespace dae {
-    struct PlayerDiedEvent : public Event
-    {
-        int playerId;
-        float timeOfDeath;
+    class GameObject;
 
-        PlayerDiedEvent(int id, float time)
-            : Event(make_sdbm_hash("PlayerDied")), playerId(id), timeOfDeath(time) {
+    struct PlayerDiedEvent : public GameObjectEvent
+    {
+        PlayerDiedEvent(GameObject* actor)
+            : GameObjectEvent(make_sdbm_hash("PlayerDied"), actor) {
         }
     };
 }

@@ -6,13 +6,13 @@ namespace dae
     struct LivesDisplayComponentDTO
     {
         int startingLives{ 3 };
-        int targetId{ 0 };
+        std::string targetTag{};
 
         static LivesDisplayComponentDTO FromJson(const nlohmann::json& data)
         {
             LivesDisplayComponentDTO dto;
             dto.startingLives = data.value("startingLives", 3);
-            dto.targetId = data.value("targetId", 0);
+            dto.targetTag = data.value("targetTag", "Player1");
             return dto;
         }
 

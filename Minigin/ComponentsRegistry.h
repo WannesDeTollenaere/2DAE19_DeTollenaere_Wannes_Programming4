@@ -17,6 +17,10 @@
 #include "DTO/RotatorComponentDTO.h"
 #include "DTO/TextComponentDTO.h"
 #include "DTO/TextureComponentDTO.h"
+#include "Components/TagComponent.h"
+#include "DTO/TagComponentDTO.h"
+
+#include "sdbm_hash.h"
 
 #include <sstream>
 #include <iomanip>
@@ -82,6 +86,11 @@ namespace dae
             SceneLoader::RegisterComponentParser("CacheProfilerComponent", [](GameObject* go, const nlohmann::json&) {
                 //auto dto = CacheProfilerComponentDTO::FromJson(data);
                 go->AddComponent<CacheProfilerComponent>();
+                });
+
+            SceneLoader::RegisterComponentParser("TagComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = TagComponentDTO::FromJson(data);
+                go->AddComponent<TagComponent>(make_sdbm_hash_rt(dto.tag));
                 });
         }
     };
