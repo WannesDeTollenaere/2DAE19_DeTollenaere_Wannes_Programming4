@@ -14,6 +14,7 @@ void LoadGame()
     dae::GameComponentsRegistry::RegisterAll();
 
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
+
     dae::SceneLoader::LoadScene(scene, "Levels/Prog4Ass.json");
 }
 

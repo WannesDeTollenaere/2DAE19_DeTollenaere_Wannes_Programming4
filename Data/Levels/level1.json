@@ -68,6 +68,11 @@
               "isLooping": false
             }
           }
+        },
+        {
+          "type": "CharacterControllerComponent",
+          "inputType": "keyboard",
+          "speed": 100.0
         }
       ]
     }

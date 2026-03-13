@@ -4,7 +4,6 @@
 #include <type_traits>
 #include "Transform.h"
 #include "Component.h"
-#include <vector>
 
 namespace dae
 {
