@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "Commands/MoveCommand.h"
 #include "Commands/DamageCommand.h"
+#include "Commands/IncreaseScoreCommand.h"
 #include <SDL3/SDL.h>
 
 namespace dae
@@ -22,7 +23,8 @@ namespace dae
 
             //DAMAGE
             input.BindKeyboardCommand(SDL_SCANCODE_C, InputState::Down, std::make_unique<DamageCommand>(owner, 1));
-
+            // SCORE
+            input.BindKeyboardCommand(SDL_SCANCODE_V, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 10));
         }
         else
         {
@@ -32,6 +34,8 @@ namespace dae
             input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadRight, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(1, 0), speed));
             //DAMAGE
             input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::X, InputState::Down, std::make_unique<DamageCommand>(owner, 1));
+            // SCORE
+            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::Y, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 10));
         }
     }
 }

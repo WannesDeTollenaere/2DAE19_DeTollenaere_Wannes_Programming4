@@ -7,24 +7,22 @@ namespace dae
 {
     class GameObject;
 
-    class DamageCommand final : public Command
+    class DamageCommand final : public GameObjectCommand
     {
     public:
         DamageCommand(GameObject* targetActor, int damageAmount)
-            : m_targetActor(targetActor), m_damageAmount(damageAmount) {
+            : GameObjectCommand(targetActor), m_damageAmount(damageAmount) {
         }
 
         void Execute() override
         {
-            if (m_targetActor)
-            {
-                DealDamageEvent damageEvent(m_targetActor, m_damageAmount);
-                EventManager::GetInstance().SendEvent(&damageEvent);
-            }
+
+            DealDamageEvent damageEvent(GetGameObject(), m_damageAmount);
+            EventManager::GetInstance().SendEvent(&damageEvent);
+            
         }
 
     private:
-        GameObject* m_targetActor;
         int m_damageAmount;
     };
 }

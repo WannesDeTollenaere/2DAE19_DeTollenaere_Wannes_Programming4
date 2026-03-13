@@ -49,4 +49,5 @@ void dae::HealthDisplayComponent::Update()
 	}
 
 	m_textComponent->SetText("Lives: " + std::to_string(m_lives));
+	m_textIsInvalid = false;
 }

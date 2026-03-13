@@ -178,7 +178,7 @@
       "components": [
         {
           "type": "TextComponent",
-          "text": "P1 (Keyboard): WASD to Move, C to Damage",
+          "text": "P1 (Keyboard): WASD to Move, C to Damage, V to pickupItem",
           "font": "Lingua.otf",
           "fontSize": 24,
           "color": {
@@ -199,7 +199,7 @@
       "components": [
         {
           "type": "TextComponent",
-          "text": "P2 (Gamepad): D-Pad to Move, X to Damage",
+          "text": "P2 (Gamepad): D-Pad to Move, X to Damage, Y To pickup item",
           "font": "Lingua.otf",
           "fontSize": 24,
           "color": {
@@ -210,6 +210,58 @@
           }
         },
         { "type": "TextureComponent" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 160,
+        "y": 50
+      },
+      "components": [
+        {
+          "type": "TextComponent",
+          "text": "Score: 0",
+          "font": "Lingua.otf",
+          "fontSize": 36,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 0,
+            "a": 255
+          }
+        },
+        { "type": "TextureComponent" },
+        {
+          "type": "ScoreDisplayComponent",
+          "startingScore": 0,
+          "targetTag": "Player1"
+        }
+      ]
+    },
+    {
+      "transform": {
+        "x": 160,
+        "y": 100
+      },
+      "components": [
+        {
+          "type": "TextComponent",
+          "text": "Score: 0",
+          "font": "Lingua.otf",
+          "fontSize": 36,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 0,
+            "a": 255
+          }
+        },
+        { "type": "TextureComponent" },
+        {
+          "type": "ScoreDisplayComponent",
+          "startingScore": 0,
+          "targetTag": "Player2"
+        }
       ]
     }
   ]
