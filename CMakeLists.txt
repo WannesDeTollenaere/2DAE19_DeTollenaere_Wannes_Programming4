@@ -133,6 +133,11 @@ target_link_libraries(Minigin PUBLIC
   ${VLD_LIBRARIES}
 )
 
+if(Steamworks_FOUND)
+  target_link_libraries(Minigin PUBLIC Steamworks::Steamworks)
+  target_compile_definitions(Minigin PUBLIC USE_STEAMWORKS=1)
+endif()
+
 if (WIN32)
   target_link_libraries(Minigin PUBLIC xinput)
 endif()
@@ -186,6 +191,7 @@ if(EMSCRIPTEN)
     COMMAND "${CMAKE_COMMAND}" -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/web" "$<TARGET_FILE_DIR:${GAME_TARGET}>/"
   )
   set(CMAKE_EXECUTABLE_SUFFIX ".html")
+
 
 elseif(WIN32)
   set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${GAME_TARGET})

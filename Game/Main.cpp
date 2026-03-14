@@ -26,6 +26,7 @@ int main(int, char* [])
     std::filesystem::path data_location = "./Data/";
 #endif
 
+
     dae::Minigin engine(data_location);
 
     engine.Run(LoadGame);

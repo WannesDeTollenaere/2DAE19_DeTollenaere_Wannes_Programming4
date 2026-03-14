@@ -7,6 +7,13 @@
 #include <windows.h>
 #endif
 
+#if USE_STEAMWORKS
+#pragma warning (push)
+#pragma warning (disable:4996)
+#include <steam_api.h>
+#pragma warning (pop)
+#endif
+
 #include "GameTime.h"
 #include <SDL3/SDL.h>
 //#include <SDL3_image/SDL_image.h>
@@ -17,6 +24,7 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "ComponentsRegistry.h"
+
 
 SDL_Window* g_window{};
 
@@ -81,6 +89,11 @@ dae::Minigin::Minigin(const std::filesystem::path& dataPath)
 	ResourceManager::GetInstance().Init(dataPath);
 
 	dae::ComponentsRegistry::RegisterAll();
+
+#if USE_STEAMWORKS
+	if (!SteamAPI_Init())
+		throw std::runtime_error(std::string("Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)."));
+#endif
 }
 
 dae::Minigin::~Minigin()
@@ -89,6 +102,10 @@ dae::Minigin::~Minigin()
 	SDL_DestroyWindow(g_window);
 	g_window = nullptr;
 	SDL_Quit();
+
+#if USE_STEAMWORKS
+	SteamAPI_Shutdown();
+#endif
 }
 
 void dae::Minigin::Run(const std::function<void()>& load)
@@ -125,4 +142,8 @@ void dae::Minigin::RunOneFrame()
 
 	// sleep if we finished the frame to fast (see slide 14/33 of game loop...)
 	GameTime::GetInstance().Sleep();
+
+#if USE_STEAMWORKS
+	SteamAPI_RunCallbacks();
+#endif 
 }
