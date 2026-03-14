@@ -3,10 +3,10 @@
 
 namespace dae
 {
-    class PlayerCollisionHandler final : public BaseCollisionHandler
+    class ItemCollisionHandler final : public BaseCollisionHandler
     {
     public:
-        PlayerCollisionHandler(GameObject* owner) : BaseCollisionHandler(owner) {}
+        ItemCollisionHandler(GameObject* owner) : BaseCollisionHandler(owner) {}
 
     protected:
         void OnCollision(GameObject* otherObject, TagComponent* otherTagComp) override;

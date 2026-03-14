@@ -18,6 +18,9 @@
 #include "Components/Collision/PlayerCollisionHandler.h"
 #include "DTO/PlayerCollisionHandlerDTO.h"
 
+#include "Components/Collision/ItemCollisionHandler.h"
+#include "DTO/ItemCollisionHandlerDTO.h"
+
 #include <SceneLoader.h> 
 #include <GameObject.h>
 #include "sdbm_hash.h"
@@ -59,6 +62,12 @@ namespace dae
                 //auto dto = PlayerCollisionHandlerDTO::FromJson(data);
                 go->AddComponent<PlayerCollisionHandler>();
                 });
+
+            SceneLoader::RegisterComponentParser("ItemCollisionHandler", [](dae::GameObject* go, const nlohmann::json&) {
+                //auto dto = PlayerCollisionHandlerDTO::FromJson(data);
+                go->AddComponent<ItemCollisionHandler>();
+                });
+
         }
     };
 }

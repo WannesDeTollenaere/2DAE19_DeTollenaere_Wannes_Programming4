@@ -14,6 +14,7 @@ namespace dae
 	{
 	public:
 		HealthDisplayComponent(GameObject* owner, int startingLives, Tag targetPlayer);
+		~HealthDisplayComponent();
 
 		void HandleEvent(const Event* pEvent) override;
 

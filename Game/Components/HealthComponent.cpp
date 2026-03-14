@@ -10,6 +10,12 @@ dae::HealthComponent::HealthComponent(GameObject* owner, int maxHealth) : Compon
 	EventManager::GetInstance().AttachEvent(make_sdbm_hash("DealDamage"), this);
 }
 
+dae::HealthComponent::~HealthComponent()
+{
+	EventManager::GetInstance().DetachEvent(make_sdbm_hash("DealDamage"), this);
+
+}
+
 void dae::HealthComponent::Damage(int amount)
 {
 

@@ -8,6 +8,7 @@ namespace dae
 	{
 	public:
 		HealthComponent(GameObject* owner, int maxHealth);
+		~HealthComponent();
 
 		void Damage(int amount);
 

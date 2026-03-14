@@ -12,6 +12,7 @@ namespace dae
     {
     public:
         ScoreDisplayComponent(GameObject* owner, int initialScore, Tag targetTag);
+        ~ScoreDisplayComponent();
 
         void HandleEvent(const Event* pEvent) override;
         void Update() override;

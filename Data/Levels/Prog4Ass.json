@@ -302,7 +302,7 @@
     {
       "transform": {
         "x": 10,
-        "y": 400
+        "y": 430
       },
       "components": [
         {
@@ -323,7 +323,7 @@
     {
       "transform": {
         "x": 10,
-        "y": 430
+        "y": 460
       },
       "components": [
         {
@@ -344,7 +344,7 @@
     {
       "transform": {
         "x": 10,
-        "y": 460
+        "y": 490
       },
       "components": [
         {
@@ -356,6 +356,27 @@
             "r": 200,
             "g": 200,
             "b": 255,
+            "a": 255
+          }
+        },
+        { "type": "TextureComponent" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 10,
+        "y": 520
+      },
+      "components": [
+        {
+          "type": "TextComponent",
+          "text": "BOTH: Take pickups :)",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 155,
             "a": 255
           }
         },
@@ -410,6 +431,7 @@
         }
       ]
     },
+
     {
       "transform": {
         "x": 160,
@@ -435,6 +457,471 @@
           "targetTag": "Player2"
         }
       ]
+    },
+
+
+
+
+    {
+      "transform": {
+        "x": 500,
+        "y": 300
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup1",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 530,
+        "y": 300
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup2",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 560,
+        "y": 300
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup3",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 590,
+        "y": 300
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup4",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 620,
+        "y": 300
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup5",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 500,
+        "y": 330
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup6",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 530,
+        "y": 330
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup7",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 560,
+        "y": 330
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup8",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 590,
+        "y": 330
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup9",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 620,
+        "y": 330
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup10",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 500,
+        "y": 360
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup11",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 530,
+        "y": 360
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup12",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 560,
+        "y": 360
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup13",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 590,
+        "y": 360
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup14",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 620,
+        "y": 360
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup15",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 500,
+        "y": 390
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup16",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 530,
+        "y": 390
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup17",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 560,
+        "y": 390
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup18",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 590,
+        "y": 390
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup19",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
+    },
+    {
+      "transform": {
+        "x": 620,
+        "y": 390
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pickup.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Pickup20",
+          "tags": [ "Pickup" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        { "type": "ItemCollisionHandler" }
+      ]
     }
+
   ]
 }

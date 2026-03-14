@@ -22,6 +22,11 @@ namespace dae
         }
 
         const Tag& GetUniqueTag() const { return m_UniqueTag; }
+        GameObject* GetGameObject() const
+        {
+            return s_TaggedObjects[m_UniqueTag];
+        }
+
         bool HasTag(Tag t) const
         { 
             auto find = m_TagList.find(t);
@@ -34,8 +39,8 @@ namespace dae
         }
 
     private:
-        Tag m_UniqueTag;
         std::unordered_set<Tag> m_TagList;
+        Tag m_UniqueTag;
 
         static inline std::unordered_map<Tag, GameObject*> s_TaggedObjects;
     };

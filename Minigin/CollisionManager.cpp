@@ -35,6 +35,11 @@ namespace dae
                     CollisionEvent event(colA, colB);
                     EventManager::GetInstance().SendEvent(&event);
                 }
+                if (colB->IsOverlapping(colA))
+                {
+                    CollisionEvent event(colB, colA);
+                    EventManager::GetInstance().SendEvent(&event);
+                }
             }
         }
     }

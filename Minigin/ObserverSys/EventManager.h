@@ -16,6 +16,16 @@ namespace dae
 			m_observers[id].push_back(handler);
 		}
 
+		void DetachEvent(EventId id, Observer* handler)
+		{
+			auto it = m_observers.find(id);
+			if (it != m_observers.end())
+			{
+
+				std::erase(it->second, handler);
+			}
+		}
+
 		void SendEvent(const Event* pEvent)
 		{
 			auto observerList = m_observers[pEvent->id];

@@ -9,6 +9,7 @@ namespace dae
     {
     public:
         ScoreComponent(GameObject* owner, int startingScore);
+        ~ScoreComponent();
 
         void HandleEvent(const Event* pEvent) override;
         void Update() override {}

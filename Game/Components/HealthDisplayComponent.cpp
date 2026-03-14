@@ -12,6 +12,11 @@ dae::HealthDisplayComponent::HealthDisplayComponent(GameObject* owner, int start
 	EventManager::GetInstance().AttachEvent(make_sdbm_hash("PlayerTookDamage"), this);
 }
 
+dae::HealthDisplayComponent::~HealthDisplayComponent()
+{
+	EventManager::GetInstance().DetachEvent(make_sdbm_hash("PlayerTookDamage"), this);
+}
+
 
 void dae::HealthDisplayComponent::HandleEvent(const Event* pEvent)
 {

@@ -14,6 +14,12 @@ namespace dae
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("ScoreIncreased"), this);
     }
 
+    ScoreComponent::~ScoreComponent()
+    {
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash("ScoreIncreased"), this);
+
+    }
+
 
     void ScoreComponent::HandleEvent(const Event* pEvent)
     {

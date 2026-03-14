@@ -14,6 +14,11 @@ namespace dae
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("ScoreChanged"), this);
     }
 
+    ScoreDisplayComponent::~ScoreDisplayComponent()
+    {
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash("ScoreChanged"), this);
+    }
+
     void ScoreDisplayComponent::HandleEvent(const Event* pEvent)
     {
         if (m_targetPlayer == nullptr)
