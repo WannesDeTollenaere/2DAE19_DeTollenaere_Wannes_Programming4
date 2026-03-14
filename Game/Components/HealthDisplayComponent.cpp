@@ -1,6 +1,6 @@
 #include "HealthDisplayComponent.h"
 #include "GameObject.h"
-#include "Events/PlayerDiedEvent.h"
+#include "Events/PlayerTookDamageEvent.h"
 #include "sdbm_hash.h"
 
 dae::HealthDisplayComponent::HealthDisplayComponent(GameObject* owner, int startingLives, Tag targetPlayer) :
@@ -9,7 +9,7 @@ dae::HealthDisplayComponent::HealthDisplayComponent(GameObject* owner, int start
 	m_TargetTag{targetPlayer},
 	m_lives{ startingLives }
 {
-	EventManager::GetInstance().AttachEvent(make_sdbm_hash("PlayerDied"), this);
+	EventManager::GetInstance().AttachEvent(make_sdbm_hash("PlayerTookDamage"), this);
 }
 
 
@@ -23,15 +23,14 @@ void dae::HealthDisplayComponent::HandleEvent(const Event* pEvent)
 
 	switch (pEvent->id)
 	{
-	case make_sdbm_hash("PlayerDied"):
-		const PlayerDiedEvent* pDiedEvent = dynamic_cast<const PlayerDiedEvent*>(pEvent);
+	case make_sdbm_hash("PlayerTookDamage"):
+		const PlayerTookDamageEvent* pDiedEvent = dynamic_cast<const PlayerTookDamageEvent*>(pEvent);
 
 		if (pDiedEvent)
 		{
 			if (pDiedEvent->obj == m_targetPlayer)
 			{
-				m_lives--;
-				if (m_lives < 0) m_lives = 0;
+				m_lives = pDiedEvent->currentHp;
 				m_textIsInvalid = true;
 			}
 		}

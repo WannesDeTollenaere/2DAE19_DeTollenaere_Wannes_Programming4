@@ -19,7 +19,7 @@ namespace dae
 			std::erase(m_observers, observer);
 		}
 
-		void NotifyObservers(const Event& event)
+		void NotifyObservers(const Event* event)
 		{
 			for (auto observer : m_observers)
 				observer->HandleEvent(event);

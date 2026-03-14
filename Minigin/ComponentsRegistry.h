@@ -9,11 +9,13 @@
 #include "Components/DynamicTextComponent.h"
 #include "Components/RotatorComponent.h"
 #include "Components/CacheProfilerComponent.h"
+#include "Components/BoxColliderComponent.h"
 
 // DTO
 #include "DTO/AnimatorComponentDTO.h"
 #include "DTO/CacheProfilerComponentDTO.h"
 #include "DTO/FPSDynamicTextComponentDTO.h"
+#include "DTO/BoxColliderComponentDTO.h"
 #include "DTO/RotatorComponentDTO.h"
 #include "DTO/TextComponentDTO.h"
 #include "DTO/TextureComponentDTO.h"
@@ -90,7 +92,16 @@ namespace dae
 
             SceneLoader::RegisterComponentParser("TagComponent", [](dae::GameObject* go, const nlohmann::json& data) {
                 auto dto = TagComponentDTO::FromJson(data);
-                go->AddComponent<TagComponent>(make_sdbm_hash_rt(dto.tag));
+                std::unordered_set<Tag> to_list;
+                for (const auto& string_tag : dto.tags)
+                    to_list.insert(make_sdbm_hash_rt(string_tag));
+
+                go->AddComponent<TagComponent>(to_list, make_sdbm_hash_rt(dto.uniqueTag));
+                });
+
+            SceneLoader::RegisterComponentParser("BoxColliderComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = BoxColliderComponentDTO::FromJson(data);
+                go->AddComponent<BoxColliderComponent>(dto.width, dto.height);
                 });
         }
     };

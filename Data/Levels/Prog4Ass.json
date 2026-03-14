@@ -75,25 +75,85 @@
       "components": [
         {
           "type": "TextureComponent",
-          "texture": "pacman.png"
+          "texture": "burger_time_spritesheet.png"
+        },
+        {
+          "type": "AnimatorComponent",
+          "frameWidth": 16,
+          "frameHeight": 16,
+          "playOnStart": "Idle",
+          "animations": {
+            "Idle": {
+              "startRow": 1,
+              "startCol": 0,
+              "frameCount": 1,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkDown": {
+              "startRow": 0,
+              "startCol": 0,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkUp": {
+              "startRow": 0,
+              "startCol": 6,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkLeft": {
+              "startRow": 0,
+              "startCol": 3,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkRight": {
+              "startRow": 0,
+              "startCol": 9,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "Die": {
+              "startRow": 1,
+              "startCol": 3,
+              "frameCount": 6,
+              "frameTime": 0.2,
+              "isLooping": false
+            }
+          }
         },
         {
           "type": "CharacterControllerComponent",
           "inputType": "keyboard",
-          "speed": 50.0
+          "speed": 200.0
         },
         {
           "type": "HealthComponent",
-          "maxHealth": 1
+          "maxHealth": 3
         },
         {
           "type": "TagComponent",
-          "tag": "Player1"
+          "uniqueTag": "Player1",
+          "tags": [ "Player" ]
         },
         {
           "type": "ScoreComponent",
           "startingScore": 0,
           "targetTag": "Player1"
+
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        {
+          "type": "PlayerCollisionHandler"
         }
       ]
     },
@@ -131,15 +191,66 @@
       "components": [
         {
           "type": "TextureComponent",
-          "texture": "pacman.png"
+          "texture": "burger_time_spritesheet.png"
+        },
+        {
+          "type": "AnimatorComponent",
+          "frameWidth": 16,
+          "frameHeight": 16,
+          "playOnStart": "Idle",
+          "animations": {
+            "Idle": {
+              "startRow": 1,
+              "startCol": 0,
+              "frameCount": 1,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkDown": {
+              "startRow": 0,
+              "startCol": 0,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkUp": {
+              "startRow": 0,
+              "startCol": 6,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkLeft": {
+              "startRow": 0,
+              "startCol": 3,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "WalkRight": {
+              "startRow": 0,
+              "startCol": 9,
+              "frameCount": 3,
+              "frameTime": 0.1,
+              "isLooping": true
+            },
+            "Die": {
+              "startRow": 1,
+              "startCol": 3,
+              "frameCount": 6,
+              "frameTime": 0.2,
+              "isLooping": false
+            }
+          }
         },
         {
           "type": "HealthComponent",
-          "maxHealth": 1
+          "maxHealth": 5
         },
         {
           "type": "TagComponent",
-          "tag": "Player2"
+          "uniqueTag": "Player2",
+          "tags": [ "Player" ]
         },
         {
           "type": "CharacterControllerComponent",
@@ -151,6 +262,14 @@
           "type": "ScoreComponent",
           "startingScore": 0,
           "targetTag": "Player2"
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
+        },
+        {
+          "type": "PlayerCollisionHandler"
         }
       ]
     },
@@ -175,7 +294,7 @@
         { "type": "TextureComponent" },
         {
           "type": "HealthDisplayComponent",
-          "startingLives": 3,
+          "startingLives": 5,
           "targetTag": "Player2"
         }
       ]
@@ -224,6 +343,27 @@
     },
     {
       "transform": {
+        "x": 10,
+        "y": 460
+      },
+      "components": [
+        {
+          "type": "TextComponent",
+          "text": "BOTH: Run into the pacman to take damage",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 200,
+            "g": 200,
+            "b": 255,
+            "a": 255
+          }
+        },
+        { "type": "TextureComponent" }
+      ]
+    },
+    {
+      "transform": {
         "x": 160,
         "y": 50
       },
@@ -245,6 +385,28 @@
           "type": "ScoreDisplayComponent",
           "startingScore": 0,
           "targetTag": "Player1"
+        }
+      ]
+    },
+    {
+      "transform": {
+        "x": 500,
+        "y": 250
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "pacman.png"
+        },
+        {
+          "type": "TagComponent",
+          "uniqueTag": "Enemy1",
+          "tags": [ "Enemy" ]
+        },
+        {
+          "type": "BoxColliderComponent",
+          "width": 16.0,
+          "height": 16.0
         }
       ]
     },

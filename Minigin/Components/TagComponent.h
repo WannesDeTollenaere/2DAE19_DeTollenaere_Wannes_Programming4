@@ -2,6 +2,7 @@
 #include <Component.h>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace dae
 {
@@ -9,18 +10,23 @@ namespace dae
     class TagComponent final : public Component
     {
     public:
-        TagComponent(GameObject* owner, const Tag& tag)
-            : Component(owner), m_tag(tag)
+        TagComponent(GameObject* owner, const std::unordered_set<Tag>& tags = {}, const Tag& unique_Tag = 0)
+            : Component(owner), m_TagList(tags), m_UniqueTag(unique_Tag)
         {
-            s_TaggedObjects[m_tag] = GetOwner();
+            s_TaggedObjects[m_UniqueTag] = GetOwner();
         }
 
         ~TagComponent() override
         {
-            s_TaggedObjects.erase(m_tag);
+            s_TaggedObjects.erase(m_UniqueTag);
         }
 
-        const Tag& GetTag() const { return m_tag; }
+        const Tag& GetUniqueTag() const { return m_UniqueTag; }
+        bool HasTag(Tag t) const
+        { 
+            auto find = m_TagList.find(t);
+            return find != m_TagList.end();
+        }
 
         static GameObject* FindGameObject(Tag tag)
         {
@@ -28,7 +34,8 @@ namespace dae
         }
 
     private:
-        Tag m_tag;
+        Tag m_UniqueTag;
+        std::unordered_set<Tag> m_TagList;
 
         static inline std::unordered_map<Tag, GameObject*> s_TaggedObjects;
     };

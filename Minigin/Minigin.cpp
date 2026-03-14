@@ -28,6 +28,7 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "ComponentsRegistry.h"
+#include "CollisionManager.h"
 
 
 SDL_Window* g_window{};
@@ -141,6 +142,8 @@ void dae::Minigin::RunOneFrame()
 
 	// normal update
 	SceneManager::GetInstance().Update();
+
+	CollisionManager::GetInstance().Update();
 
 	Renderer::GetInstance().Render();
 

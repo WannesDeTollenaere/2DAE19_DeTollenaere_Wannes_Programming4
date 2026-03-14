@@ -19,9 +19,9 @@ namespace dae
     {
         if (pEvent->id == make_sdbm_hash("ScoreIncreased"))
         {
+
             if (const auto* pScoreEvent = dynamic_cast<const ScoreIncreasedEvent*>(pEvent))
             {
-
                 if (pScoreEvent->obj == GetOwner())
                 {
                     m_score += pScoreEvent->scoreAdded;

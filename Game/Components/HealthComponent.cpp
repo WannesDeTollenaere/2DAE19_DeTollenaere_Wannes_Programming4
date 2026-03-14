@@ -1,9 +1,9 @@
 #include "HealthComponent.h"
 #include "ObserverSys/EventManager.h"
-#include "Events/PlayerDiedEvent.h"
+#include "Events/DealDamageEvent.h"
 #include "GameTime.h"
 #include "sdbm_hash.h"
-#include "Events/DealDamageEvent.h"
+#include "Events/PlayerTookDamageEvent.h"
 
 dae::HealthComponent::HealthComponent(GameObject* owner, int maxHealth) : Component(owner), m_health(maxHealth)
 {
@@ -19,10 +19,13 @@ void dae::HealthComponent::Damage(int amount)
 	{
 		m_health = 0;
 		//EventManager::GetInstance().SendEvent(make_sdbm_hash("PlayerDied"));
-
-		PlayerDiedEvent deathEvent(GetOwner());
-		EventManager::GetInstance().SendEvent(&deathEvent);
 	}
+
+	GetOwner()->SetPosition(200.f, 200.f); // TEMP COLLISION SOLUTION
+
+	PlayerTookDamageEvent hitEvent(GetOwner(), amount, m_health);
+	EventManager::GetInstance().SendEvent(&hitEvent);
+
 }
 
 void dae::HealthComponent::HandleEvent(const Event* pEvent)

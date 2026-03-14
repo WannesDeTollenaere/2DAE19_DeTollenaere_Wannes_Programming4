@@ -15,6 +15,9 @@
 #include "Components/ScoreComponent.h"
 #include "DTO/ScoreComponentDTO.h"
 
+#include "Components/Collision/PlayerCollisionHandler.h"
+#include "DTO/PlayerCollisionHandlerDTO.h"
+
 #include <SceneLoader.h> 
 #include <GameObject.h>
 #include "sdbm_hash.h"
@@ -51,6 +54,10 @@ namespace dae
             SceneLoader::RegisterComponentParser("ScoreComponent", [](dae::GameObject* go, const nlohmann::json& data) {
                 auto dto = ScoreComponentDTO::FromJson(data);
                 go->AddComponent<ScoreComponent>(dto.startingScore);
+                });
+            SceneLoader::RegisterComponentParser("PlayerCollisionHandler", [](dae::GameObject* go, const nlohmann::json&) {
+                //auto dto = PlayerCollisionHandlerDTO::FromJson(data);
+                go->AddComponent<PlayerCollisionHandler>();
                 });
         }
     };

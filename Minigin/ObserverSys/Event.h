@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "GameObject.h"
+#include "sdbm_hash.h"
 
 namespace dae
 {

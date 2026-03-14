@@ -16,6 +16,11 @@ namespace dae
 
     void ScoreDisplayComponent::HandleEvent(const Event* pEvent)
     {
+        if (m_targetPlayer == nullptr)
+        {
+            m_targetPlayer = TagComponent::FindGameObject(m_TargetTag);
+            if (m_targetPlayer == nullptr) return;
+        }
         if (pEvent->id == make_sdbm_hash("ScoreChanged"))
         {
             if (const auto* pScoreChangedEvent = dynamic_cast<const ScoreChangedEvent*>(pEvent))
