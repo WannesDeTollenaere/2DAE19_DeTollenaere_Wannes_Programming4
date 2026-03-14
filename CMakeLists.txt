@@ -110,7 +110,7 @@ add_library(Minigin STATIC
  "Minigin/ObserverSys/Event.h" 
  "Minigin/ObserverSys/Observer.h" 
  "Minigin/ObserverSys/Subject.h" 
- "Minigin/ObserverSys/EventManager.h" "Minigin/Components/TagComponent.h" "Minigin/sdbm_hash.h" "Minigin/DTO/TagComponentDTO.h")
+ "Minigin/ObserverSys/EventManager.h" "Minigin/Components/TagComponent.h" "Minigin/sdbm_hash.h" "Minigin/DTO/TagComponentDTO.h" "Minigin/SteamAchievements/Achievement.h" "Minigin/SteamAchievements/Achievement.cpp")
 
 target_compile_features(Minigin PUBLIC cxx_std_20)
 
@@ -161,7 +161,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Components/HealthDisplayComponent.cpp" 
  "Game/DTO/HealthComponentDTO.h" 
  "Game/DTO/HealthDisplayComponentDTO.h" 
- "Game/Events/PlayerDiedEvent.h" "Game/Events/DealDamageEvent.h" "Game/Commands/DamageCommand.h" "Game/Events/ScoreIncreaseEvent.h" "Game/Commands/IncreaseScoreCommand.h" "Game/Components/ScoreDisplayComponent.h" "Game/Components/ScoreDisplayComponent.cpp" "Game/DTO/ScoreDisplayComponentDTO.h")
+ "Game/Events/PlayerDiedEvent.h" "Game/Events/DealDamageEvent.h" "Game/Commands/DamageCommand.h" "Game/Events/ScoreIncreaseEvent.h" "Game/Commands/IncreaseScoreCommand.h" "Game/Components/ScoreDisplayComponent.h" "Game/Components/ScoreDisplayComponent.cpp" "Game/DTO/ScoreDisplayComponentDTO.h" "Game/Achievements/BurgerTimeAchievements.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 
