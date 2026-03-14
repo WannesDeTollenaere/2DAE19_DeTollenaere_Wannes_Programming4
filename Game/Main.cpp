@@ -7,11 +7,15 @@
 #include <SceneManager.h>
 #include <SceneLoader.h>
 #include "GameComponentsRegistry.h" 
+#include "Achievements/AchievementManager.h"
 
 #if USE_STEAMWORKS
 #include "Achievements/BurgerTimeAchievements.h"
 #include "SteamAchievements/Achievement.h"
 #endif
+
+std::unique_ptr<dae::AchievementManager> g_AchievementManager;
+
 void LoadGame()
 {
 
@@ -21,6 +25,7 @@ void LoadGame()
     dae::g_SteamAchievements = new dae::CSteamAchievements(dae::g_Achievements, 4);
 #endif
 
+    g_AchievementManager = std::make_unique<dae::AchievementManager>();
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
 
     dae::SceneLoader::LoadScene(scene, "Levels/Prog4Ass.json");
@@ -39,6 +44,7 @@ int main(int, char* [])
 
     engine.Run(LoadGame);
 
+    g_AchievementManager.reset();
 #if USE_STEAMWORKS
     delete dae::g_SteamAchievements;
     dae::g_SteamAchievements = nullptr;

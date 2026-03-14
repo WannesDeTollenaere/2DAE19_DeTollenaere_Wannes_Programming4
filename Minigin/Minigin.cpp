@@ -8,10 +8,14 @@
 #endif
 
 #if USE_STEAMWORKS
+#ifdef _MSC_VER
 #pragma warning (push)
 #pragma warning (disable:4996)
+#endif
 #include <steam_api.h>
+#ifdef _MSC_VER
 #pragma warning (pop)
+#endif
 #endif
 
 #include "GameTime.h"

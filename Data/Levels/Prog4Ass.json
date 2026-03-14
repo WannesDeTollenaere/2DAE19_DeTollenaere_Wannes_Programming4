@@ -89,6 +89,11 @@
         {
           "type": "TagComponent",
           "tag": "Player1"
+        },
+        {
+          "type": "ScoreComponent",
+          "startingScore": 0,
+          "targetTag": "Player1"
         }
       ]
     },
@@ -141,6 +146,11 @@
           "inputType": "gamepad",
           "controllerIndex": 0,
           "speed": 100.0
+        },
+        {
+          "type": "ScoreComponent",
+          "startingScore": 0,
+          "targetTag": "Player2"
         }
       ]
     },

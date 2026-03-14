@@ -11,6 +11,10 @@
 #include "DTO/ScoreDisplayComponentDTO.h"
 #include "Components/ScoreDisplayComponent.h"
 
+
+#include "Components/ScoreComponent.h"
+#include "DTO/ScoreComponentDTO.h"
+
 #include <SceneLoader.h> 
 #include <GameObject.h>
 #include "sdbm_hash.h"
@@ -42,6 +46,11 @@ namespace dae
             SceneLoader::RegisterComponentParser("ScoreDisplayComponent", [](dae::GameObject* go, const nlohmann::json& data) {
                 auto dto = ScoreDisplayComponentDTO::FromJson(data);
                 go->AddComponent<ScoreDisplayComponent>(dto.startingScore, dae::make_sdbm_hash_rt(dto.targetTag));
+                });
+
+            SceneLoader::RegisterComponentParser("ScoreComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = ScoreComponentDTO::FromJson(data);
+                go->AddComponent<ScoreComponent>(dto.startingScore);
                 });
         }
     };

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "GameObject.h"
 
 namespace dae
 {

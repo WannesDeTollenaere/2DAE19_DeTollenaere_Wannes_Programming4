@@ -1,58 +1,47 @@
+// Game/Components/ScoreDisplayComponent.cpp
 #include "ScoreDisplayComponent.h"
 #include "ObserverSys/EventManager.h"
-#include "Events/ScoreIncreaseEvent.h"
+#include "Events/ScoreChangedEvent.h"
 #include "sdbm_hash.h"
 #include "GameObject.h"
 
-#include "Achievements/BurgerTimeAchievements.h"
-
-dae::ScoreDisplayComponent::ScoreDisplayComponent(GameObject* owner, int startingScore, Tag targetTag)
-    : Component(owner),
-    m_score(startingScore),
-    m_TargetTag(targetTag),
-    m_targetPlayer{ TagComponent::FindGameObject(targetTag) }
+namespace dae
 {
-    EventManager::GetInstance().AttachEvent(make_sdbm_hash("ScoreIncreased"), this);
-}
-
-
-void dae::ScoreDisplayComponent::HandleEvent(const Event* pEvent)
-{
-    if (pEvent->id == make_sdbm_hash("ScoreIncreased"))
+    ScoreDisplayComponent::ScoreDisplayComponent(GameObject* owner, int initialScore, Tag targetTag)
+        : Component(owner), m_currentScore(initialScore), m_TargetTag(targetTag),
+        m_targetPlayer{ TagComponent::FindGameObject(targetTag) }
     {
-        if (const auto* pScoreEvent = dynamic_cast<const ScoreIncreasedEvent*>(pEvent))
+        EventManager::GetInstance().AttachEvent(make_sdbm_hash("ScoreChanged"), this);
+    }
+
+    void ScoreDisplayComponent::HandleEvent(const Event* pEvent)
+    {
+        if (pEvent->id == make_sdbm_hash("ScoreChanged"))
         {
-            if (m_targetPlayer && pScoreEvent->obj == m_targetPlayer)
+            if (const auto* pScoreChangedEvent = dynamic_cast<const ScoreChangedEvent*>(pEvent))
             {
-                m_score += pScoreEvent->scoreAdded;
-                m_textIsInvalid =  true ;
-                if (m_score >= 500)
+                if (!m_targetPlayer) m_targetPlayer = TagComponent::FindGameObject(m_TargetTag);
+
+                if (m_targetPlayer && pScoreChangedEvent->obj == m_targetPlayer)
                 {
-#if USE_STEAMWORKS
-                    if (g_SteamAchievements != nullptr)
-                    {
-                        g_SteamAchievements->SetAchievement("ACH_WIN_ONE_GAME");
-                    }
-#endif
+                    m_currentScore = pScoreChangedEvent->newScore;
+                    m_textIsInvalid = true;
                 }
             }
         }
     }
-}
 
-void dae::ScoreDisplayComponent::Update()
-{
-    if (!m_textComponent)
+    void ScoreDisplayComponent::Update()
     {
-        m_textComponent = GetOwner()->GetComponent<TextComponent>();
-        m_textIsInvalid =  true;
-    }
-    if (!m_targetPlayer)
-    {
-        m_targetPlayer = TagComponent::FindGameObject(m_TargetTag);
-    }
-    if (!m_textIsInvalid) return;
+        if (!m_textComponent)
+        {
+            m_textComponent = GetOwner()->GetComponent<TextComponent>();
+            m_textIsInvalid = true;
+        }
 
-    m_textComponent->SetText("Score: " + std::to_string(m_score));
-    m_textIsInvalid = false;
+        if (!m_textIsInvalid) return;
+
+        m_textComponent->SetText("Score: " + std::to_string(m_currentScore));
+        m_textIsInvalid = false;
+    }
 }

@@ -81,9 +81,10 @@ if (WIN32)
   find_package(VLD CONFIG)
 endif()
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/steam")
-find_package(Steamworks QUIET)
-
+if(NOT EMSCRIPTEN)
+  list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/steam")
+  find_package(Steamworks QUIET)
+endif()
 
 
 add_library(Minigin STATIC
@@ -161,7 +162,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Components/HealthDisplayComponent.cpp" 
  "Game/DTO/HealthComponentDTO.h" 
  "Game/DTO/HealthDisplayComponentDTO.h" 
- "Game/Events/PlayerDiedEvent.h" "Game/Events/DealDamageEvent.h" "Game/Commands/DamageCommand.h" "Game/Events/ScoreIncreaseEvent.h" "Game/Commands/IncreaseScoreCommand.h" "Game/Components/ScoreDisplayComponent.h" "Game/Components/ScoreDisplayComponent.cpp" "Game/DTO/ScoreDisplayComponentDTO.h" "Game/Achievements/BurgerTimeAchievements.h")
+ "Game/Events/PlayerDiedEvent.h" "Game/Events/DealDamageEvent.h" "Game/Commands/DamageCommand.h" "Game/Events/ScoreIncreaseEvent.h" "Game/Commands/IncreaseScoreCommand.h" "Game/Components/ScoreDisplayComponent.h" "Game/Components/ScoreDisplayComponent.cpp" "Game/DTO/ScoreDisplayComponentDTO.h" "Game/Achievements/BurgerTimeAchievements.h" "Game/Events/ScoreChangedEvent.h" "Game/Components/ScoreComponent.h" "Game/Components/ScoreComponent.cpp" "Game/Achievements/AchievementManager.h" "Game/Achievements/AchievementManager.cpp" "Game/DTO/ScoreComponentDTO.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

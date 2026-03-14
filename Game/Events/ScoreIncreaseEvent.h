@@ -1,5 +1,6 @@
 #pragma once
 #include "ObserverSys/Event.h"
+#include "GameObject.h"
 #include "sdbm_hash.h"
 
 namespace dae
