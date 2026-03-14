@@ -17,7 +17,7 @@ namespace dae
 		ACH_TRAVEL_FAR_SINGLE = 3,
 	};
 
-	Achievement_t g_Achievements[] =
+	inline Achievement_t g_Achievements[] =
 	{
 		_ACH_ID(ACH_WIN_ONE_GAME, "Winner"),
 		_ACH_ID(ACH_WIN_100_GAMES, "Champion"),
@@ -25,7 +25,7 @@ namespace dae
 		_ACH_ID(ACH_TRAVEL_FAR_SINGLE, "Orbiter"),
 	};
 
-	CSteamAchievements* g_SteamAchievements = NULL;
+	inline CSteamAchievements* g_SteamAchievements = nullptr;
 
 }
 #endif

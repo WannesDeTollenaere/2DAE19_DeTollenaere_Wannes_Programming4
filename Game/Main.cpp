@@ -8,10 +8,18 @@
 #include <SceneLoader.h>
 #include "GameComponentsRegistry.h" 
 
+#if USE_STEAMWORKS
+#include "Achievements/BurgerTimeAchievements.h"
+#include "SteamAchievements/Achievement.h"
+#endif
 void LoadGame()
 {
 
     dae::GameComponentsRegistry::RegisterAll();
+
+#if USE_STEAMWORKS
+    dae::g_SteamAchievements = new dae::CSteamAchievements(dae::g_Achievements, 4);
+#endif
 
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
 
@@ -30,6 +38,11 @@ int main(int, char* [])
     dae::Minigin engine(data_location);
 
     engine.Run(LoadGame);
+
+#if USE_STEAMWORKS
+    delete dae::g_SteamAchievements;
+    dae::g_SteamAchievements = nullptr;
+#endif
 
     return 0;
 }

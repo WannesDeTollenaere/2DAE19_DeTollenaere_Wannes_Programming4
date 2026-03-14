@@ -26,6 +26,10 @@ namespace dae
         RequestStats();
     }
 
+    CSteamAchievements::~CSteamAchievements()
+    {
+    }
+
     bool CSteamAchievements::RequestStats()
     {
         // Is Steam loaded? If not we can't get stats.

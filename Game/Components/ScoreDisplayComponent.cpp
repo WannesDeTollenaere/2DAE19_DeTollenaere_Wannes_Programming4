@@ -4,6 +4,8 @@
 #include "sdbm_hash.h"
 #include "GameObject.h"
 
+#include "Achievements/BurgerTimeAchievements.h"
+
 dae::ScoreDisplayComponent::ScoreDisplayComponent(GameObject* owner, int startingScore, Tag targetTag)
     : Component(owner),
     m_score(startingScore),
@@ -24,6 +26,15 @@ void dae::ScoreDisplayComponent::HandleEvent(const Event* pEvent)
             {
                 m_score += pScoreEvent->scoreAdded;
                 m_textIsInvalid =  true ;
+                if (m_score >= 500)
+                {
+#if USE_STEAMWORKS
+                    if (g_SteamAchievements != nullptr)
+                    {
+                        g_SteamAchievements->SetAchievement("ACH_WIN_ONE_GAME");
+                    }
+#endif
+                }
             }
         }
     }

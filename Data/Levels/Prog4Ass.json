@@ -178,7 +178,7 @@
       "components": [
         {
           "type": "TextComponent",
-          "text": "P1 (Keyboard): WASD to Move, C to Damage, V to pickupItem",
+          "text": "P1 (Keyboard): WASD to Move, C to Damage, V to pickupItem, B To pickup big item",
           "font": "Lingua.otf",
           "fontSize": 24,
           "color": {
@@ -199,7 +199,7 @@
       "components": [
         {
           "type": "TextComponent",
-          "text": "P2 (Gamepad): D-Pad to Move, X to Damage, Y To pickup item",
+          "text": "P2 (Gamepad): D-Pad to Move, X to Damage, Y To pickup item, B to pickup big item",
           "font": "Lingua.otf",
           "fontSize": 24,
           "color": {
