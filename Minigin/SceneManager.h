@@ -17,6 +17,7 @@ namespace dae
 		void Update();
 		void Render();
 		void RenderGUI();
+		void Clear() { m_scenes.clear(); }
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;

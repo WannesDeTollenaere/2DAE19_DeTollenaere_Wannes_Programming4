@@ -1,4 +1,3 @@
-// Game/Components/ScoreDisplayComponent.cpp
 #include "ScoreDisplayComponent.h"
 #include "ObserverSys/EventManager.h"
 #include "Events/ScoreChangedEvent.h"

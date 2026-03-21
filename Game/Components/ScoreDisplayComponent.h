@@ -1,4 +1,3 @@
-// Game/Components/ScoreDisplayComponent.h
 #pragma once
 #include "Component.h"
 #include "ObserverSys/Observer.h"

@@ -29,6 +29,7 @@
 #include "ResourceManager.h"
 #include "ComponentsRegistry.h"
 #include "CollisionManager.h"
+#include "ObserverSys/EventManager.h"
 
 
 SDL_Window* g_window{};
@@ -126,6 +127,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 #else
 	emscripten_set_main_loop_arg(&LoopCallback, this, 0, true);
 #endif
+	SceneManager::GetInstance().Clear();
 }
 
 void dae::Minigin::RunOneFrame()

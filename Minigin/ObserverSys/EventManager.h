@@ -21,7 +21,6 @@ namespace dae
 			auto it = m_observers.find(id);
 			if (it != m_observers.end())
 			{
-
 				std::erase(it->second, handler);
 			}
 		}
