@@ -12,7 +12,7 @@
           "type": "LevelGridSetup",
           "cols": 11,
           "rows": 11,
-          "tileSize": 16.0,
+          "tileSize": 48.0,
           "layout": [
             0, 0, 1, 3, 1, 3, 1, 3, 1, 0, 0,
             0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0,
@@ -29,13 +29,14 @@
         },
         {
           "type": "LevelRendererComponent",
-          "texture": "burger_time_spritesheet.png",
-          "frameWidth": 16,
-          "frameHeight": 16,
-          "platformCol": 8,
-          "platformRow": 6,
-          "ladderCol": 6,
-          "ladderRow": 6
+          "texture": "burger_time_spritesheet_x3.png",
+          "frameWidth": 48,
+          "frameHeight": 48,
+          "tileMappings": {
+            "1": [ [ 8, 6 ] ],
+            "2": [ [ 6, 6 ] ],
+            "3": [ [ 7, 6 ] ]
+          }
         }
       ]
     },
@@ -43,7 +44,7 @@
     {
       "name": "Player",
       "transform": {
-        "x": 80.0,
+        "x": 48.0,
         "y": 128.0
       },
       "components": [
@@ -53,12 +54,12 @@
         },
         {
           "type": "TextureComponent",
-          "texture": "burger_time_spritesheet.png"
+          "texture": "burger_time_spritesheet_x3.png"
         },
         {
           "type": "AnimatorComponent",
-          "frameWidth": 16,
-          "frameHeight": 16,
+          "frameWidth": 48,
+          "frameHeight": 48,
           "playOnStart": "Idle",
           "animations": {
             "Idle": {
@@ -107,12 +108,11 @@
         },
         {
           "type": "GridMovementComponent",
-          "speed": 60.0
+          "speed": 100.0
         },
         {
           "type": "CharacterControllerComponent",
-          "inputType": "keyboard",
-          "speed": 60.0
+          "inputType": "keyboard"
         }
       ]
     }

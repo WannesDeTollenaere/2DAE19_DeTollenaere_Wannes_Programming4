@@ -1,4 +1,4 @@
-#include "SpriteSheet.h"
+#include "Helpers/Spritesheet.h"
 #include "ResourceManager.h"
 
 namespace dae

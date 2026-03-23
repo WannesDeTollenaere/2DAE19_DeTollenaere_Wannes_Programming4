@@ -1,25 +1,28 @@
 #pragma once
 #include "Component.h"
 #include <memory>
+#include <unordered_map>
+#include <vector>
 
 namespace dae
 {
     class SpriteSheet; 
 
+    struct TileRenderData
+    {
+        std::vector<std::pair<int, int>> spriteCoords;
+    };
+
     class LevelRendererComponent : public Component
     {
     public:
         LevelRendererComponent(GameObject* pOwner, std::shared_ptr<SpriteSheet> spriteSheet,
-            int platformCol, int platformRow,
-            int ladderCol, int ladderRow);
+            const std::unordered_map<int, TileRenderData>& tileMappings);
 
         virtual void Render() const override;
 
     private:
         std::shared_ptr<SpriteSheet> m_pSpriteSheet;
-        int m_PlatformCol;
-        int m_PlatformRow;
-        int m_LadderCol;
-        int m_LadderRow;
+        std::unordered_map<int, TileRenderData> m_TileMappings;
     };
 }

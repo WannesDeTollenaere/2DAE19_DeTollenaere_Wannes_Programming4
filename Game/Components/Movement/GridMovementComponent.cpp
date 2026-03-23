@@ -42,7 +42,7 @@ namespace dae
         float snappedX = gridX * tileSize;
         float snappedY = gridY * tileSize;
 
-        if (m_DesiredDirX != 0.0f && (currentTile == TileType::Platform || currentTile == TileType::Intersection))
+        if (m_DesiredDirX != 0.0f && grid.IsWalkableHorizontal(currentTile))
         {
             newX += m_DesiredDirX * m_Speed * dt;
 
@@ -55,7 +55,7 @@ namespace dae
 
             newY = snappedY;
         }
-        else if (m_DesiredDirY != 0.0f && (currentTile == TileType::Ladder || currentTile == TileType::Intersection))
+        else if (m_DesiredDirY != 0.0f && grid.IsClimbable(currentTile))
         {
             if (std::abs(pos.x - snappedX) < (tileSize * 0.4f))
             {

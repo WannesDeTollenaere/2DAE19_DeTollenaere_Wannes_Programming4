@@ -103,7 +103,7 @@ namespace dae
 
                 auto sheet = dae::ResourceManager::GetInstance().LoadSpriteSheet(dto.texture, dto.frameWidth, dto.frameHeight);
 
-                go->AddComponent<LevelRendererComponent>(sheet, dto.platformCol, dto.platformRow, dto.ladderCol, dto.ladderRow);
+                go->AddComponent<LevelRendererComponent>(sheet, dto.tileMappings);
                 });
         }
     };

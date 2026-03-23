@@ -36,6 +36,16 @@ namespace dae
             return TileType::Empty;
         }
 
+        bool IsWalkableHorizontal(TileType type) const
+        {
+            return type != TileType::Ladder;
+        }
+
+        bool IsClimbable(TileType type) const
+        {
+            return type != TileType::Platform;
+        }
+
         float GetTileSize() const { return m_TileSize; }
 
         int GetCols() const { return m_Cols; }
