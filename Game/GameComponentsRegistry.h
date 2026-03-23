@@ -31,6 +31,7 @@
 
 #include "Components/Movement/GridDebugRenderer.h"
 
+#include "ResourceManager.h"
 #include <SceneLoader.h> 
 #include <GameObject.h>
 #include "sdbm_hash.h"
@@ -99,7 +100,10 @@ namespace dae
 
             SceneLoader::RegisterComponentParser("LevelRendererComponent", [](dae::GameObject* go, const nlohmann::json& data) {
                 auto dto = LevelRendererDTO::FromJson(data);
-                go->AddComponent<LevelRendererComponent>(dto.texture, dto.platformSrc, dto.ladderSrc);
+
+                auto sheet = dae::ResourceManager::GetInstance().LoadSpriteSheet(dto.texture, dto.frameWidth, dto.frameHeight);
+
+                go->AddComponent<LevelRendererComponent>(sheet, dto.platformCol, dto.platformRow, dto.ladderCol, dto.ladderRow);
                 });
         }
     };

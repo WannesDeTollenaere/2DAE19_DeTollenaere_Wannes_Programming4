@@ -30,8 +30,12 @@
         {
           "type": "LevelRendererComponent",
           "texture": "burger_time_spritesheet.png",
-          "platformSrc": [ 128, 96, 16, 16 ],
-          "ladderSrc": [ 96, 96, 16, 16 ]
+          "frameWidth": 16,
+          "frameHeight": 16,
+          "platformCol": 8,
+          "platformRow": 6,
+          "ladderCol": 6,
+          "ladderRow": 6
         }
       ]
     },

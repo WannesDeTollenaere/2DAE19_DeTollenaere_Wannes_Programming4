@@ -5,6 +5,7 @@
 #include "Texture2D.h"
 #include <fstream>
 #include "Font.h"
+#include "Helpers/Spritesheet.h"
 
 namespace fs = std::filesystem;
 
@@ -35,6 +36,24 @@ std::shared_ptr<dae::Font> dae::ResourceManager::LoadFont(const std::string& fil
 	if(m_loadedFonts.find(key) == m_loadedFonts.end())
 		m_loadedFonts.insert(std::pair(key,std::make_shared<Font>(fullPath.string(), size)));
 	return m_loadedFonts.at(key);
+}
+
+std::shared_ptr<dae::SpriteSheet> dae::ResourceManager::LoadSpriteSheet(const std::string& file, int frameWidth, int frameHeight)
+{
+	std::string key = file + "_" + std::to_string(frameWidth) + "_" + std::to_string(frameHeight);
+
+	auto it = m_SpriteSheets.find(key);
+	if (it != m_SpriteSheets.end())
+	{
+		return it->second;
+	}
+
+	auto texture = LoadTexture(file);
+
+	auto spriteSheet = std::make_shared<dae::SpriteSheet>(texture, frameWidth, frameHeight);
+	m_SpriteSheets.emplace(key, spriteSheet);
+
+	return spriteSheet;
 }
 
 nlohmann::json dae::ResourceManager::LoadJson(const std::string& file)

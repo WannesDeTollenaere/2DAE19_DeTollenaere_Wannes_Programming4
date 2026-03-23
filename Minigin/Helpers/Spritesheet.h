@@ -1,6 +1,5 @@
 #pragma once
 #include <memory>
-#include <string>
 #include <SDL3/SDL_rect.h>
 
 namespace dae
@@ -10,14 +9,13 @@ namespace dae
     class SpriteSheet final
     {
     public:
-        SpriteSheet(const std::string& texturePath, int frameWidth, int frameHeight);
+        SpriteSheet(std::shared_ptr<Texture2D> pTexture, int frameWidth, int frameHeight);
         ~SpriteSheet() = default;
 
         SpriteSheet(const SpriteSheet&) = delete;
         SpriteSheet& operator=(const SpriteSheet&) = delete;
 
         std::shared_ptr<Texture2D> GetTexture() const { return m_Texture; }
-
         SDL_Rect GetSourceRect(int col, int row) const;
 
         int GetFrameWidth() const { return m_FrameWidth; }

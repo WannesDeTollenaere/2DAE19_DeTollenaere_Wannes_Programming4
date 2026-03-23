@@ -3,10 +3,9 @@
 
 namespace dae
 {
-    SpriteSheet::SpriteSheet(const std::string& texturePath, int frameWidth, int frameHeight)
-        : m_FrameWidth(frameWidth), m_FrameHeight(frameHeight)
+    SpriteSheet::SpriteSheet(std::shared_ptr<Texture2D> pTexture, int frameWidth, int frameHeight)
+        : m_Texture(pTexture), m_FrameWidth(frameWidth), m_FrameHeight(frameHeight)
     {
-        m_Texture = ResourceManager::GetInstance().LoadTexture(texturePath);
     }
 
     SDL_Rect SpriteSheet::GetSourceRect(int col, int row) const
