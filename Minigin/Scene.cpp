@@ -62,6 +62,17 @@ void dae::Scene::RenderGUI()
 	}
 }
 
+void dae::Scene::RenderHierarchy(GameObject** selectedObject)
+{
+	for (const auto& object : m_objects)
+	{
+		if (object->GetParent() == nullptr)
+		{
+			object->RenderHierarchy(selectedObject);
+		}
+	}
+}
+
 void dae::Scene::DestroyGameObjectsMarkedForDeletion()
 {
 	// DELETE gameobjects marked for deletion

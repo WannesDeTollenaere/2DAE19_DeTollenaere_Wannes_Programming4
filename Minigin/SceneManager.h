@@ -22,5 +22,6 @@ namespace dae
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
 		std::vector<std::unique_ptr<Scene>> m_scenes{};
+		GameObject* m_pSelectedGameObject{ nullptr };
 	};
 }

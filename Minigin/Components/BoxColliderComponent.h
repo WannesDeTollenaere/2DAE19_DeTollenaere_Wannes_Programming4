@@ -22,10 +22,13 @@ namespace dae
         AABB GetAABB() const;
         GameObject* GetGameObject() const { return GetOwner(); };
 
-        bool IsOverlapping(const BoxColliderComponent* other) const;
+        virtual void RenderGUI() override;
 
+        bool IsOverlapping(const BoxColliderComponent* other) const;
     private:
         float m_width;
         float m_height;
+        bool m_ShowDebug{ false };
+
     };
 }

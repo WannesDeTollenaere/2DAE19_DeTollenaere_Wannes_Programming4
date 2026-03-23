@@ -4,6 +4,7 @@
 #include <type_traits>
 #include "Transform.h"
 #include "Component.h"
+#include <string>
 
 namespace dae
 {
@@ -15,8 +16,13 @@ namespace dae
 		void Update();
 		void Render() const;
 		void RenderGUI();
+		void RenderHierarchy(GameObject** selectedObject);
 
-		GameObject() : m_transform(this) {};
+
+		const std::string& GetName() const { return m_name; }
+		void SetName(const std::string& name) { m_name = name; }
+
+		GameObject(const std::string& name = "GameObject") : m_transform(this), m_name(name) {};
 		~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
@@ -27,6 +33,7 @@ namespace dae
 		template <class T, typename... Args>
 		T* AddComponent(Args&&... args)
 		{
+
 			static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");
 
 			auto component = std::make_unique<T>(this, std::forward<Args>(args)...);
@@ -76,6 +83,7 @@ namespace dae
 
 	private:
 		Transform m_transform;
+		std::string m_name;
 		bool m_markedForDeletion{ false };
 		bool m_IsActive{ true };
 		std::vector<std::unique_ptr<Component>> m_components{};

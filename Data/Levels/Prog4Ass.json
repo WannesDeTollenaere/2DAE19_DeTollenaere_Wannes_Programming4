@@ -2,6 +2,7 @@
   "name": "Programming 4 Assignment",
   "objects": [
     {
+      "name": "Background",
       "components": [
         {
           "type": "TextureComponent",
@@ -10,6 +11,7 @@
       ]
     },
     {
+      "name": "Level Background",
       "transform": {
         "x": 358,
         "y": 180
@@ -22,6 +24,7 @@
       ]
     },
     {
+      "name": "Title Text",
       "transform": {
         "x": 292,
         "y": 20
@@ -43,6 +46,7 @@
       ]
     },
     {
+      "name": "FPS Display",
       "transform": {
         "x": 10,
         "y": 10
@@ -68,6 +72,7 @@
       ]
     },
     {
+      "name": "Player 1",
       "transform": {
         "x": 100,
         "y": 200
@@ -145,7 +150,6 @@
           "type": "ScoreComponent",
           "startingScore": 0,
           "targetTag": "Player1"
-
         },
         {
           "type": "BoxColliderComponent",
@@ -158,6 +162,7 @@
       ]
     },
     {
+      "name": "Player 1 Health Display",
       "transform": {
         "x": 10,
         "y": 50
@@ -184,6 +189,7 @@
       ]
     },
     {
+      "name": "Player 2",
       "transform": {
         "x": 300,
         "y": 200
@@ -274,6 +280,7 @@
       ]
     },
     {
+      "name": "Player 2 Health Display",
       "transform": {
         "x": 10,
         "y": 100
@@ -300,6 +307,7 @@
       ]
     },
     {
+      "name": "P1 Instructions Text",
       "transform": {
         "x": 10,
         "y": 430
@@ -321,6 +329,7 @@
       ]
     },
     {
+      "name": "P2 Instructions Text",
       "transform": {
         "x": 10,
         "y": 460
@@ -342,6 +351,7 @@
       ]
     },
     {
+      "name": "Damage Instruction Text",
       "transform": {
         "x": 10,
         "y": 490
@@ -363,6 +373,7 @@
       ]
     },
     {
+      "name": "Pickup Instruction Text",
       "transform": {
         "x": 10,
         "y": 520
@@ -384,6 +395,7 @@
       ]
     },
     {
+      "name": "Player 1 Score Display",
       "transform": {
         "x": 160,
         "y": 50
@@ -410,6 +422,7 @@
       ]
     },
     {
+      "name": "Enemy Pacman",
       "transform": {
         "x": 500,
         "y": 250
@@ -431,8 +444,8 @@
         }
       ]
     },
-
     {
+      "name": "Player 2 Score Display",
       "transform": {
         "x": 160,
         "y": 100
@@ -458,11 +471,8 @@
         }
       ]
     },
-
-
-
-
     {
+      "name": "Pickup 1",
       "transform": {
         "x": 500,
         "y": 300
@@ -486,6 +496,7 @@
       ]
     },
     {
+      "name": "Pickup 2",
       "transform": {
         "x": 530,
         "y": 300
@@ -509,6 +520,7 @@
       ]
     },
     {
+      "name": "Pickup 3",
       "transform": {
         "x": 560,
         "y": 300
@@ -532,6 +544,7 @@
       ]
     },
     {
+      "name": "Pickup 4",
       "transform": {
         "x": 590,
         "y": 300
@@ -555,6 +568,7 @@
       ]
     },
     {
+      "name": "Pickup 5",
       "transform": {
         "x": 620,
         "y": 300
@@ -578,6 +592,7 @@
       ]
     },
     {
+      "name": "Pickup 6",
       "transform": {
         "x": 500,
         "y": 330
@@ -601,6 +616,7 @@
       ]
     },
     {
+      "name": "Pickup 7",
       "transform": {
         "x": 530,
         "y": 330
@@ -624,6 +640,7 @@
       ]
     },
     {
+      "name": "Pickup 8",
       "transform": {
         "x": 560,
         "y": 330
@@ -647,6 +664,7 @@
       ]
     },
     {
+      "name": "Pickup 9",
       "transform": {
         "x": 590,
         "y": 330
@@ -670,6 +688,7 @@
       ]
     },
     {
+      "name": "Pickup 10",
       "transform": {
         "x": 620,
         "y": 330
@@ -693,6 +712,7 @@
       ]
     },
     {
+      "name": "Pickup 11",
       "transform": {
         "x": 500,
         "y": 360
@@ -716,6 +736,7 @@
       ]
     },
     {
+      "name": "Pickup 12",
       "transform": {
         "x": 530,
         "y": 360
@@ -739,6 +760,7 @@
       ]
     },
     {
+      "name": "Pickup 13",
       "transform": {
         "x": 560,
         "y": 360
@@ -762,6 +784,7 @@
       ]
     },
     {
+      "name": "Pickup 14",
       "transform": {
         "x": 590,
         "y": 360
@@ -785,6 +808,7 @@
       ]
     },
     {
+      "name": "Pickup 15",
       "transform": {
         "x": 620,
         "y": 360
@@ -808,6 +832,7 @@
       ]
     },
     {
+      "name": "Pickup 16",
       "transform": {
         "x": 500,
         "y": 390
@@ -831,6 +856,7 @@
       ]
     },
     {
+      "name": "Pickup 17",
       "transform": {
         "x": 530,
         "y": 390
@@ -854,6 +880,7 @@
       ]
     },
     {
+      "name": "Pickup 18",
       "transform": {
         "x": 560,
         "y": 390
@@ -877,6 +904,7 @@
       ]
     },
     {
+      "name": "Pickup 19",
       "transform": {
         "x": 590,
         "y": 390
@@ -900,6 +928,7 @@
       ]
     },
     {
+      "name": "Pickup 20",
       "transform": {
         "x": 620,
         "y": 390
@@ -922,6 +951,5 @@
         { "type": "ItemCollisionHandler" }
       ]
     }
-
   ]
 }

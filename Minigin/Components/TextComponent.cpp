@@ -6,6 +6,8 @@
 #include "Texture2D.h"
 #include "GameObject.h" 
 #include "TextureComponent.h"
+#include <imgui.h>
+#include <cstring>
 
 dae::TextComponent::TextComponent(GameObject* owner, const std::string& text, std::shared_ptr<Font> font)
 	: Component(owner),
@@ -48,9 +50,50 @@ void dae::TextComponent::Render() const
 	m_textureComponent->Render();
 }
 
+void dae::TextComponent::RenderGUI()
+{
+	char textBuffer[1024];
+#ifdef __EMSCRIPTEN__
+	strncpy(textBuffer, m_text.c_str(), sizeof(textBuffer));
+
+#else
+	strncpy_s(textBuffer, m_text.c_str(), sizeof(textBuffer));
+
+#endif // EMSCRIPTEN
+
+
+	textBuffer[sizeof(textBuffer) - 1] = '\0';
+
+	if (ImGui::InputTextMultiline("Content", textBuffer, sizeof(textBuffer)))
+	{
+		SetText(textBuffer);
+	}
+
+	ImGui::Separator();
+
+	float color[4] = {
+		m_color.r / 255.0f,
+		m_color.g / 255.0f,
+		m_color.b / 255.0f,
+		m_color.a / 255.0f
+	};
+
+	if (ImGui::ColorEdit4("Text Color", color))
+	{
+		SDL_Color newColor;
+		newColor.r = static_cast<uint8_t>(color[0] * 255.0f);
+		newColor.g = static_cast<uint8_t>(color[1] * 255.0f);
+		newColor.b = static_cast<uint8_t>(color[2] * 255.0f);
+		newColor.a = static_cast<uint8_t>(color[3] * 255.0f);
+
+		SetColor(newColor);
+	}
+
+}
+
 void dae::TextComponent::SetText(const std::string& text)
 {
-	if (text == m_text)
+	if (text == m_text || text == "")
 		return;
 
 	m_text = text;

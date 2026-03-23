@@ -3,12 +3,30 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "Texture2D.h"
+#include <imgui.h>
 
 dae::TextureComponent::TextureComponent(GameObject* owner) : Component(owner) {}
 
 dae::TextureComponent::TextureComponent(GameObject* owner, const SDL_FRect& srcRect) : Component(owner)
 {
 	SetSourceRect(srcRect);
+}
+
+void dae::TextureComponent::RenderGUI()
+{
+	ImGui::Text("Choose new asset file:");
+
+	
+	static char textureBuffer[256] = "";
+
+	if (ImGui::InputText("Filename", textureBuffer, sizeof(textureBuffer), ImGuiInputTextFlags_EnterReturnsTrue))
+	{
+		try
+		{
+			SetTexture(textureBuffer);
+		}
+		catch (...) {};
+	}
 }
 
 void dae::TextureComponent::Render() const

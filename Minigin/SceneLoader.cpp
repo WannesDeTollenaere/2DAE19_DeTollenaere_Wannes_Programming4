@@ -45,8 +45,14 @@ void dae::SceneLoader::LoadScene(Scene& scene, const std::string& jsonFilePath)
 
 void dae::SceneLoader::ParseGameObject(const json& objData, Scene& scene, GameObject* parent)
 {
+    std::string objectName = "GameObject";
 
-    auto gameObject = std::make_unique<GameObject>();
+    if (objData.contains("name"))
+    {
+        objectName = objData["name"];
+    }
+
+    auto gameObject = std::make_unique<GameObject>(objectName);
     GameObject* pGameObject = gameObject.get(); 
 
     if (objData.contains("transform"))

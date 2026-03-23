@@ -19,6 +19,8 @@ namespace dae
 
 		void SetPositionDirty();
 
+		void RenderGUI() override;
+
 	private:
 
 		glm::vec3 m_localPosition{};

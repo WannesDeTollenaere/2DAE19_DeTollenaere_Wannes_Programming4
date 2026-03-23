@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "GameObject.h"
+#include <imgui.h>
 
 void dae::Transform::SetLocalPosition(const float x, const float y, const float z)
 {
@@ -23,6 +24,18 @@ void dae::Transform::SetPositionDirty()
 	{
 		GetOwner()->GetChildAt(i)->GetTransform().SetPositionDirty();
 	}
+}
+
+void dae::Transform::RenderGUI()
+{
+	float pos[3] = { m_localPosition.x, m_localPosition.y, m_localPosition.z };
+
+	if (ImGui::DragFloat3("Local Position", pos, 0.1f))
+	{
+		SetLocalPosition(pos[0], pos[1], pos[2]);
+	}
+
+	ImGui::Text("World position: [%.2f, %.2f, %.2f]", m_worldPosition.x, m_worldPosition.y, m_worldPosition.z);
 }
 
 const glm::vec3& dae::Transform::GetWorldPosition()

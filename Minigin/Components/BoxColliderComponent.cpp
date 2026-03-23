@@ -1,6 +1,7 @@
 #include "BoxColliderComponent.h"
 #include "GameObject.h"
 #include "CollisionManager.h" 
+#include <imgui.h>
 
 namespace dae
 {
@@ -25,6 +26,40 @@ namespace dae
             m_width,
             m_height
         };
+    }
+
+    void BoxColliderComponent::RenderGUI()
+    {
+
+        ImGui::Checkbox("Show Collider", &m_ShowDebug);
+
+        ImGui::Separator();
+
+        float size[2] = { m_width, m_height };
+        if (ImGui::DragFloat2("Size (W, H)", size, 1.0f, 0.0f, 2000.0f))
+        {
+            m_width = size[0];
+            m_height = size[1];
+        }
+
+        ImGui::Text("Area: %.1f sqr px", m_width * m_height);
+
+        if (m_ShowDebug)
+        {
+            const auto& pos = GetOwner()->GetTransform().GetWorldPosition();
+
+            ImVec2 rect_min = ImVec2(pos.x, pos.y);
+            ImVec2 rect_max = ImVec2(pos.x + m_width, pos.y + m_height);
+
+            ImGui::GetForegroundDrawList()->AddRect(
+                rect_min,
+                rect_max,
+                IM_COL32(0, 255, 0, 255), 
+                0.0f,                     
+                0,                        
+                2.0f                 
+            );
+        }
     }
 
     bool BoxColliderComponent::IsOverlapping(const BoxColliderComponent* other) const

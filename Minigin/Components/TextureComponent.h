@@ -15,6 +15,7 @@ namespace dae
 		TextureComponent(GameObject* owner, const SDL_FRect& srcRect);
 		virtual ~TextureComponent() = default;
 
+		void RenderGUI() override;
 		void Render() const override;
 		void SetTexture(const std::string& filename);
 		void SetTexture(std::shared_ptr<Texture2D> texture) { m_texture = std::move(texture); }
@@ -24,6 +25,7 @@ namespace dae
 
 	private:
 		std::shared_ptr<Texture2D> m_texture{};
+		std::string m_textureName;
 
 		bool m_useSourceRect{ false };
 		SDL_FRect m_srcRect{};

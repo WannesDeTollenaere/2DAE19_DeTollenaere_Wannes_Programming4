@@ -17,6 +17,7 @@ namespace dae
 
 		void Update() override;
 		void Render() const override;
+		void RenderGUI() override;
 
 		void SetText(const std::string& text);
 		void SetColor(const SDL_Color& color);

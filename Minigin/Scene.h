@@ -17,6 +17,7 @@ namespace dae
 		void Update();
 		void Render() const;
 		void RenderGUI();
+		void RenderHierarchy(GameObject** selectedObject);
 
 		~Scene() = default;
 		Scene(const Scene& other) = delete;

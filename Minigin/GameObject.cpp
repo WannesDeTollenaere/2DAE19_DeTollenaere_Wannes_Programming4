@@ -40,42 +40,63 @@ void dae::GameObject::Render() const
 }
 void dae::GameObject::RenderGUI()
 {
+	ImGui::Text("GameObject Details");
+	ImGui::Separator();
+
+	ImGui::PushID("Transform");
+	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
+	{
+		m_transform.RenderGUI();
+	}
+	ImGui::PopID();
+
+	ImGui::Checkbox("Is Active", &m_IsActive);
+
+	ImGui::Spacing();
+	ImGui::Separator();
+	ImGui::Text("Components:");
+
+	for (const auto& comp : m_components)
+	{
+		ImGui::PushID(comp.get());
+
+		// this resolves issues with emscripten
+		Component* pRawComp = comp.get();
+
+		if (ImGui::CollapsingHeader(typeid(*pRawComp).name(), ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			comp->RenderGUI();
+		}
+
+		ImGui::PopID();
+	}
+}
+
+void dae::GameObject::RenderHierarchy(GameObject** selectedObject)
+{
 	ImGui::PushID(this);
 
-	if (ImGui::TreeNode("GameObject"))
+	ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;
+
+	if (*selectedObject == this)
+		nodeFlags |= ImGuiTreeNodeFlags_Selected;
+
+	if (m_children.empty())
+		nodeFlags |= ImGuiTreeNodeFlags_Leaf;
+
+	bool nodeOpen = ImGui::TreeNodeEx(m_name.c_str(), nodeFlags);
+
+	if (ImGui::IsItemClicked())
 	{
-		if (!m_components.empty())
+		*selectedObject = this;
+	}
+
+	if (nodeOpen)
+	{
+		for (auto child : m_children)
 		{
-			if (ImGui::TreeNode("Components"))
-			{
-				for (const auto& comp : m_components)
-				{
-					ImGui::PushID(comp.get());
-
-					if (ImGui::TreeNode(typeid(*comp).name()))
-					{
-						comp->RenderGUI();
-						ImGui::TreePop();
-					}
-
-					ImGui::PopID();
-				}
-				ImGui::TreePop();
-			}
+			child->RenderHierarchy(selectedObject);
 		}
-
-		if (!m_children.empty())
-		{
-			if (ImGui::TreeNode("Children"))
-			{
-				for (auto child : m_children)
-				{
-					child->RenderGUI();
-				}
-				ImGui::TreePop();
-			}
-		}
-
 		ImGui::TreePop();
 	}
 

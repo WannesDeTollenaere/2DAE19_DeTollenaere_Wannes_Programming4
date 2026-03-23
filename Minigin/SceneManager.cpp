@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "Scene.h"
+#include <imgui.h>
 
 void dae::SceneManager::FixedUpdate()
 {
@@ -25,27 +26,32 @@ void dae::SceneManager::Render()
 	}
 }
 
-#include <imgui.h>
-
 void dae::SceneManager::RenderGUI()
 {
     ImGui::Begin("Hierarchy");
-
     for (size_t i = 0; i < m_scenes.size(); ++i)
     {
         ImGui::PushID(m_scenes[i].get());
-
         std::string sceneName = "Scene " + std::to_string(i);
 
-        if (ImGui::TreeNode(sceneName.c_str()))
+        if (ImGui::TreeNodeEx(sceneName.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
         {
-            m_scenes[i]->RenderGUI();
+            m_scenes[i]->RenderHierarchy(&m_pSelectedGameObject);
             ImGui::TreePop();
         }
-
         ImGui::PopID();
     }
+    ImGui::End();
 
+    ImGui::Begin("Inspector");
+    if (m_pSelectedGameObject != nullptr)
+    {
+        m_pSelectedGameObject->RenderGUI();
+    }
+    else
+    {
+        ImGui::TextColored(ImVec4(0.5f, 0.5f, 0.5f, 1.0f), "Select a GameObject to view its details.");
+    }
     ImGui::End();
 }
 
