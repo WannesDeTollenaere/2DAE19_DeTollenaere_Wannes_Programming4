@@ -2,19 +2,51 @@
   "name": "Level 1",
   "objects": [
     {
-      "name": "Background",
-      "transform": { "x": 0.0, "y": 0.0 },
+      "name": "LevelManager",
+      "transform": {
+        "x": 0.0,
+        "y": 0.0
+      },
       "components": [
         {
-          "type": "TextureComponent",
-          "texture": "background.png"
+          "type": "LevelGridSetup",
+          "cols": 11,
+          "rows": 11,
+          "tileSize": 16.0,
+          "layout": [
+            0, 0, 1, 3, 1, 3, 1, 3, 1, 0, 0,
+            0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0,
+            1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1,
+            0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0,
+            1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1,
+            0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0,
+            1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1,
+            0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0,
+            1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1,
+            0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0,
+            0, 3, 1, 1, 1, 3, 1, 1, 1, 3, 0
+          ]
+        },
+        {
+          "type": "LevelRendererComponent",
+          "texture": "burger_time_spritesheet.png",
+          "platformSrc": [ 128, 96, 16, 16 ],
+          "ladderSrc": [ 96, 96, 16, 16 ]
         }
       ]
     },
+    
     {
       "name": "Player",
-      "transform": { "x": 100.0, "y": 100.0 },
+      "transform": {
+        "x": 80.0,
+        "y": 128.0
+      },
       "components": [
+        {
+          "type": "GridMovementComponent",
+          "speed": 100
+        },
         {
           "type": "TextureComponent",
           "texture": "burger_time_spritesheet.png"
@@ -70,9 +102,13 @@
           }
         },
         {
+          "type": "GridMovementComponent",
+          "speed": 60.0
+        },
+        {
           "type": "CharacterControllerComponent",
           "inputType": "keyboard",
-          "speed": 100.0
+          "speed": 60.0
         }
       ]
     }

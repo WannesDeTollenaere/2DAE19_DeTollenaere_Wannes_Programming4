@@ -111,7 +111,7 @@ add_library(Minigin STATIC
  "Minigin/ObserverSys/Event.h" 
  "Minigin/ObserverSys/Observer.h" 
   
- "Minigin/ObserverSys/EventManager.h" "Minigin/Components/TagComponent.h" "Minigin/sdbm_hash.h" "Minigin/DTO/TagComponentDTO.h" "Minigin/SteamAchievements/Achievement.h" "Minigin/SteamAchievements/Achievement.cpp" "Minigin/Components/BoxColliderComponent.h" "Minigin/Components/BoxColliderComponent.cpp" "Minigin/CollisionManager.h" "Minigin/CollisionManager.cpp" "Minigin/DTO/BoxColliderComponentDTO.h" "Minigin/ObserverSys/CollisionEvent.h" "Minigin/Components/BaseCollisionHandler.h" "Minigin/Components/BaseCollisionHandler.cpp")
+ "Minigin/ObserverSys/EventManager.h" "Minigin/Components/TagComponent.h" "Minigin/sdbm_hash.h" "Minigin/DTO/TagComponentDTO.h" "Minigin/SteamAchievements/Achievement.h" "Minigin/SteamAchievements/Achievement.cpp" "Minigin/Components/BoxColliderComponent.h" "Minigin/Components/BoxColliderComponent.cpp" "Minigin/CollisionManager.h" "Minigin/CollisionManager.cpp" "Minigin/DTO/BoxColliderComponentDTO.h" "Minigin/ObserverSys/CollisionEvent.h" "Minigin/Components/BaseCollisionHandler.h" "Minigin/Components/BaseCollisionHandler.cpp" "Minigin/Helpers/Spritesheet.h" "Minigin/Helpers/Spritesheet.cpp")
 
 target_compile_features(Minigin PUBLIC cxx_std_20)
 
@@ -179,7 +179,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/DTO/ScoreComponentDTO.h" 
  "Game/Components/Collision/PlayerCollisionHandler.h" 
  "Game/Components/Collision/PlayerCollisionHandler.cpp" 
- "Game/DTO/PlayerCollisionHandlerDTO.h" "Game/Events/PlayerTookDamageEvent.h" "Game/Components/Collision/ItemCollisionHandler.h" "Game/Components/Collision/ItemCollisionHandler.cpp" "Game/DTO/ItemCollisionHandlerDTO.h")
+ "Game/DTO/PlayerCollisionHandlerDTO.h" "Game/Events/PlayerTookDamageEvent.h" "Game/Components/Collision/ItemCollisionHandler.h" "Game/Components/Collision/ItemCollisionHandler.cpp" "Game/DTO/ItemCollisionHandlerDTO.h" "Game/Helpers/LevelGrid.h" "Game/Components/Movement/GridMovementComponent.h" "Game/Components/Movement/GridMovementComponent.cpp" "Game/DTO/LevelGridDTO.h" "Game/Components/Movement/GridDebugRenderer.h" "Game/Components/Movement/GridDebugRenderer.cpp" "Game/DTO/GridMovementComponentDTO.h" "Game/Components/Movement/LevelRenderComponent.h" "Game/Components/Movement/LevelRenderComponent.cpp" "Game/DTO/LevelRendererDTO.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

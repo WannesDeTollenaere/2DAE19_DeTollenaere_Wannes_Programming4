@@ -21,6 +21,16 @@
 #include "Components/Collision/ItemCollisionHandler.h"
 #include "DTO/ItemCollisionHandlerDTO.h"
 
+#include "DTO/LevelGridDTO.h"
+#include "Helpers/LevelGrid.h"
+
+#include "Components/Movement/GridMovementComponent.h"
+#include "DTO/GridMovementComponentDTO.h"
+#include "Components/Movement/LevelRenderComponent.h"
+#include "DTO/LevelRendererDTO.h"
+
+#include "Components/Movement/GridDebugRenderer.h"
+
 #include <SceneLoader.h> 
 #include <GameObject.h>
 #include "sdbm_hash.h"
@@ -68,6 +78,29 @@ namespace dae
                 go->AddComponent<ItemCollisionHandler>();
                 });
 
+            SceneLoader::RegisterComponentParser("LevelGridSetup", [](dae::GameObject*, const nlohmann::json& data) {
+                auto dto = LevelGridDTO::FromJson(data);
+
+                LevelGrid::GetInstance().Initialize(dto.cols, dto.rows, dto.tileSize);
+
+                for (size_t i = 0; i < dto.layout.size(); ++i)
+                {
+                    int x = i % dto.cols;
+                    int y = static_cast<int>(i) / dto.cols;
+                    LevelGrid::GetInstance().SetTile(x, y, static_cast<TileType>(dto.layout[i]));
+                }
+                //go->AddComponent<GridDebugRenderer>();
+                });
+
+            SceneLoader::RegisterComponentParser("GridMovementComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = GridMovementComponentDTO::FromJson(data);
+                go->AddComponent<GridMovementComponent>(dto.speed);
+                });
+
+            SceneLoader::RegisterComponentParser("LevelRendererComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = LevelRendererDTO::FromJson(data);
+                go->AddComponent<LevelRendererComponent>(dto.texture, dto.platformSrc, dto.ladderSrc);
+                });
         }
     };
 }
