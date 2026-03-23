@@ -27,7 +27,7 @@ void LoadGame()
     //g_AchievementManager = std::make_unique<dae::AchievementManager>();
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
 
-    dae::SceneLoader::LoadScene(scene, "Levels/level1.json");
+    dae::SceneLoader::LoadScene(scene, "Levels/Prog4Ass.json");
 }
 
 int main(int, char* [])

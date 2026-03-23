@@ -50,11 +50,15 @@ void Scene::Render() const
 		object->Render();
 	}
 }
-void Scene::RenderGUI()
+
+void dae::Scene::RenderGUI()
 {
 	for (const auto& object : m_objects)
 	{
-		object->RenderGUI();
+		if (object->GetParent() == nullptr)
+		{
+			object->RenderGUI();
+		}
 	}
 }
 

@@ -25,12 +25,28 @@ void dae::SceneManager::Render()
 	}
 }
 
+#include <imgui.h>
+
 void dae::SceneManager::RenderGUI()
 {
-	for (const auto& scene : m_scenes)
-	{
-		scene->RenderGUI();
-	}
+    ImGui::Begin("Hierarchy");
+
+    for (size_t i = 0; i < m_scenes.size(); ++i)
+    {
+        ImGui::PushID(m_scenes[i].get());
+
+        std::string sceneName = "Scene " + std::to_string(i);
+
+        if (ImGui::TreeNode(sceneName.c_str()))
+        {
+            m_scenes[i]->RenderGUI();
+            ImGui::TreePop();
+        }
+
+        ImGui::PopID();
+    }
+
+    ImGui::End();
 }
 
 dae::Scene& dae::SceneManager::CreateScene()

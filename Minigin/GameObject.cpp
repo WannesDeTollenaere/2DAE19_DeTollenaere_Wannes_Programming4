@@ -5,7 +5,8 @@
 #include "Component.h"
 #include <algorithm>
 #include "Transform.h"
-
+#include <imgui.h>
+#include <typeinfo>
 
 void dae::GameObject::FixedUpdate()
 {
@@ -39,12 +40,46 @@ void dae::GameObject::Render() const
 }
 void dae::GameObject::RenderGUI()
 {
-	if (!m_IsActive) return;
+	ImGui::PushID(this);
 
-	for (const auto& component : m_components)
+	if (ImGui::TreeNode("GameObject"))
 	{
-		if (component->IsActive()) component->RenderGUI();
+		if (!m_components.empty())
+		{
+			if (ImGui::TreeNode("Components"))
+			{
+				for (const auto& comp : m_components)
+				{
+					ImGui::PushID(comp.get());
+
+					if (ImGui::TreeNode(typeid(*comp).name()))
+					{
+						comp->RenderGUI();
+						ImGui::TreePop();
+					}
+
+					ImGui::PopID();
+				}
+				ImGui::TreePop();
+			}
+		}
+
+		if (!m_children.empty())
+		{
+			if (ImGui::TreeNode("Children"))
+			{
+				for (auto child : m_children)
+				{
+					child->RenderGUI();
+				}
+				ImGui::TreePop();
+			}
+		}
+
+		ImGui::TreePop();
 	}
+
+	ImGui::PopID();
 }
 void dae::GameObject::Destroy()
 {
