@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "Components/Movement/LevelRenderComponent.h"
+#include "Components/Movement/GridRenderComponent.h"
 
 namespace dae
 {

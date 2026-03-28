@@ -179,7 +179,19 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/DTO/ScoreComponentDTO.h" 
  "Game/Components/Collision/PlayerCollisionHandler.h" 
  "Game/Components/Collision/PlayerCollisionHandler.cpp" 
- "Game/DTO/PlayerCollisionHandlerDTO.h" "Game/Events/PlayerTookDamageEvent.h" "Game/Components/Collision/ItemCollisionHandler.h" "Game/Components/Collision/ItemCollisionHandler.cpp" "Game/DTO/ItemCollisionHandlerDTO.h" "Game/Helpers/LevelGrid.h" "Game/Components/Movement/GridMovementComponent.h" "Game/Components/Movement/GridMovementComponent.cpp" "Game/DTO/LevelGridDTO.h" "Game/Components/Movement/GridDebugRenderer.h" "Game/Components/Movement/GridDebugRenderer.cpp" "Game/DTO/GridMovementComponentDTO.h" "Game/Components/Movement/LevelRenderComponent.h" "Game/Components/Movement/LevelRenderComponent.cpp" "Game/DTO/LevelRendererDTO.h")
+ "Game/DTO/PlayerCollisionHandlerDTO.h" 
+ "Game/Events/PlayerTookDamageEvent.h" 
+ "Game/Components/Collision/ItemCollisionHandler.h" 
+ "Game/Components/Collision/ItemCollisionHandler.cpp" 
+ "Game/DTO/ItemCollisionHandlerDTO.h" 
+ "Game/Helpers/LevelGrid.h" 
+ "Game/Components/Movement/GridMovementComponent.h" 
+ "Game/Components/Movement/GridMovementComponent.cpp" 
+ "Game/DTO/LevelGridDTO.h" 
+ "Game/Components/Movement/GridDebugRenderer.h" 
+ "Game/Components/Movement/GridDebugRenderer.cpp" 
+ "Game/DTO/GridMovementComponentDTO.h" 
+ "Game/Components/Movement/GridRenderComponent.h" "Game/Components/Movement/GridRenderComponent.cpp" "Game/DTO/LevelRendererDTO.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

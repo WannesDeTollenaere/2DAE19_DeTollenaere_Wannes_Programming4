@@ -1,19 +1,20 @@
-#include "LevelRenderComponent.h"
+#include "GridRenderComponent.h"
 #include "Helpers/LevelGrid.h"
 #include "Helpers/Spritesheet.h"
 #include "Renderer.h"
 #include "Texture2D.h"
 #include <SDL3/SDL.h>
+#include "GameObject.h"
 
 namespace dae
 {
-    LevelRendererComponent::LevelRendererComponent(GameObject* pOwner, std::shared_ptr<SpriteSheet> spriteSheet,
+    GridRendererComponent::GridRendererComponent(GameObject* pOwner, std::shared_ptr<SpriteSheet> spriteSheet,
         const std::unordered_map<int, TileRenderData>& tileMappings)
         : Component(pOwner), m_pSpriteSheet(spriteSheet), m_TileMappings(tileMappings)
     {
     }
 
-    void LevelRendererComponent::Render() const
+    void GridRendererComponent::Render() const
     {
         if (!m_pSpriteSheet || !m_pSpriteSheet->GetTexture()) return;
 
@@ -21,6 +22,9 @@ namespace dae
         float tileSize = grid.GetTileSize();
         SDL_Renderer* sdlRenderer = Renderer::GetInstance().GetSDLRenderer();
         SDL_Texture* pTex = m_pSpriteSheet->GetTexture()->GetSDLTexture();
+
+        const glm::vec3& ownerPos = GetOwner()->GetTransform().GetWorldPosition();
+
         if (!sdlRenderer || !pTex) return;
 
         for (int r = 0; r < grid.GetRows(); ++r)
@@ -32,7 +36,7 @@ namespace dae
                 auto it = m_TileMappings.find(tileTypeInt);
                 if (it == m_TileMappings.end()) continue;
 
-                SDL_FRect destRect{ c * tileSize, r * tileSize, tileSize, tileSize };
+                SDL_FRect destRect{ ownerPos.x + c * tileSize,ownerPos.y+ r * tileSize, tileSize, tileSize };
 
                 for (const auto& coords : it->second.spriteCoords)
                 {
@@ -42,5 +46,9 @@ namespace dae
                 }
             }
         }
+    }
+    void GridRendererComponent::RenderGUI()
+    {
+        dae::LevelGrid::GetInstance().RenderGUI();
     }
 }

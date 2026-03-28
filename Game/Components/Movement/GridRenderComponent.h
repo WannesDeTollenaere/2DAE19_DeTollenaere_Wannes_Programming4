@@ -13,14 +13,14 @@ namespace dae
         std::vector<std::pair<int, int>> spriteCoords;
     };
 
-    class LevelRendererComponent : public Component
+    class GridRendererComponent : public Component
     {
     public:
-        LevelRendererComponent(GameObject* pOwner, std::shared_ptr<SpriteSheet> spriteSheet,
+        GridRendererComponent(GameObject* pOwner, std::shared_ptr<SpriteSheet> spriteSheet,
             const std::unordered_map<int, TileRenderData>& tileMappings);
 
         virtual void Render() const override;
-
+        virtual void RenderGUI() override;
     private:
         std::shared_ptr<SpriteSheet> m_pSpriteSheet;
         std::unordered_map<int, TileRenderData> m_TileMappings;

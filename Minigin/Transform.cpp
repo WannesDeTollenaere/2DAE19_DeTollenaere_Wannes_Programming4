@@ -38,7 +38,7 @@ void dae::Transform::RenderGUI()
 	ImGui::Text("World position: [%.2f, %.2f, %.2f]", m_worldPosition.x, m_worldPosition.y, m_worldPosition.z);
 }
 
-const glm::vec3& dae::Transform::GetWorldPosition()
+const glm::vec3& dae::Transform::GetWorldPosition() 
 {
 	if (m_positionIsDirty)
 		UpdateWorldPosition();

@@ -2,7 +2,7 @@
   "name": "Level 1",
   "objects": [
     {
-      "name": "LevelManager",
+      "name": "GridLevelManager",
       "transform": {
         "x": 0.0,
         "y": 0.0
@@ -38,81 +38,78 @@
             "3": [ [ 7, 6 ] ]
           }
         }
-      ]
-    },
-    
-    {
-      "name": "Player",
-      "transform": {
-        "x": 48.0,
-        "y": 128.0
-      },
-      "components": [
+      ],
+      "children": [
         {
-          "type": "GridMovementComponent",
-          "speed": 100
-        },
-        {
-          "type": "TextureComponent",
-          "texture": "burger_time_spritesheet_x3.png"
-        },
-        {
-          "type": "AnimatorComponent",
-          "frameWidth": 48,
-          "frameHeight": 48,
-          "playOnStart": "Idle",
-          "animations": {
-            "Idle": {
-              "startRow": 1,
-              "startCol": 0,
-              "frameCount": 1,
-              "frameTime": 0.1,
-              "isLooping": true
+          "name": "Player",
+          "transform": {
+            "x": 48.0,
+            "y": 128.0
+          },
+          "components": [
+            {
+              "type": "TextureComponent",
+              "texture": "burger_time_spritesheet_x3.png"
             },
-            "WalkDown": {
-              "startRow": 0,
-              "startCol": 0,
-              "frameCount": 3,
-              "frameTime": 0.1,
-              "isLooping": true
+            {
+              "type": "AnimatorComponent",
+              "frameWidth": 48,
+              "frameHeight": 48,
+              "playOnStart": "Idle",
+              "animations": {
+                "Idle": {
+                  "startRow": 1,
+                  "startCol": 0,
+                  "frameCount": 1,
+                  "frameTime": 0.1,
+                  "isLooping": true
+                },
+                "WalkDown": {
+                  "startRow": 0,
+                  "startCol": 0,
+                  "frameCount": 3,
+                  "frameTime": 0.1,
+                  "isLooping": true
+                },
+                "WalkUp": {
+                  "startRow": 0,
+                  "startCol": 6,
+                  "frameCount": 3,
+                  "frameTime": 0.1,
+                  "isLooping": true
+                },
+                "WalkLeft": {
+                  "startRow": 0,
+                  "startCol": 3,
+                  "frameCount": 3,
+                  "frameTime": 0.1,
+                  "isLooping": true
+                },
+                "WalkRight": {
+                  "startRow": 0,
+                  "startCol": 9,
+                  "frameCount": 3,
+                  "frameTime": 0.1,
+                  "isLooping": true
+                },
+                "Die": {
+                  "startRow": 1,
+                  "startCol": 3,
+                  "frameCount": 6,
+                  "frameTime": 0.2,
+                  "isLooping": false
+                }
+              }
             },
-            "WalkUp": {
-              "startRow": 0,
-              "startCol": 6,
-              "frameCount": 3,
-              "frameTime": 0.1,
-              "isLooping": true
+            {
+              "type": "GridMovementComponent",
+              "speed": 100.0
             },
-            "WalkLeft": {
-              "startRow": 0,
-              "startCol": 3,
-              "frameCount": 3,
-              "frameTime": 0.1,
-              "isLooping": true
-            },
-            "WalkRight": {
-              "startRow": 0,
-              "startCol": 9,
-              "frameCount": 3,
-              "frameTime": 0.1,
-              "isLooping": true
-            },
-            "Die": {
-              "startRow": 1,
-              "startCol": 3,
-              "frameCount": 6,
-              "frameTime": 0.2,
-              "isLooping": false
+            {
+              "type": "CharacterControllerComponent",
+              "inputType": "keyboard"
             }
-          }
-        },
-        {
-          "type": "GridMovementComponent",
-          "speed": 100.0
-        },
-        {
-          "type": "CharacterControllerComponent",
-          "inputType": "keyboard"
+          ]
         }
       ]
     }

@@ -26,7 +26,7 @@
 
 #include "Components/Movement/GridMovementComponent.h"
 #include "DTO/GridMovementComponentDTO.h"
-#include "Components/Movement/LevelRenderComponent.h"
+#include "Components/Movement/GridRenderComponent.h"
 #include "DTO/LevelRendererDTO.h"
 
 #include "Components/Movement/GridDebugRenderer.h"
@@ -103,7 +103,7 @@ namespace dae
 
                 auto sheet = dae::ResourceManager::GetInstance().LoadSpriteSheet(dto.texture, dto.frameWidth, dto.frameHeight);
 
-                go->AddComponent<LevelRendererComponent>(sheet, dto.tileMappings);
+                go->AddComponent<GridRendererComponent>(sheet, dto.tileMappings);
                 });
         }
     };
