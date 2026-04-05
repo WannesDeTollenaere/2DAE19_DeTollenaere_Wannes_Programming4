@@ -7,6 +7,7 @@
 #include <SceneManager.h>
 #include <SceneLoader.h>
 #include "GameComponentsRegistry.h" 
+#include "rendere"
 //#include "Achievements/AchievementManager.h"
 
 #if USE_STEAMWORKS

@@ -23,9 +23,11 @@
 #include "DTO/TagComponentDTO.h"
 
 #include "sdbm_hash.h"
+#include "Helpers/Spritesheet.h"
 
 #include <sstream>
 #include <iomanip>
+
 
 namespace dae
 {
@@ -40,6 +42,24 @@ namespace dae
                 if (!dto.texture.empty()) {
                     texComp->SetTexture(dto.texture);
                 }
+                if (dto.useSpriteSheet && !dto.texture.empty())
+                {
+                    auto pTexture = dae::ResourceManager::GetInstance().LoadSpriteSheet(dto.texture, dto.frameWidth, dto.frameHeight);
+                    texComp->SetTexture(pTexture->GetTexture());
+
+                    SDL_Rect srcRect = pTexture->GetSourceRect(dto.col, dto.row);
+
+                    srcRect.w *= dto.colSpan;
+
+                    SDL_FRect fRect{
+                        static_cast<float>(srcRect.x),
+                        static_cast<float>(srcRect.y),
+                        static_cast<float>(srcRect.w),
+                        static_cast<float>(srcRect.h)
+                    };
+                    texComp->SetSourceRect(fRect);
+                }
+
                 });
 
             SceneLoader::RegisterComponentParser("AnimatorComponent", [](GameObject* go, const nlohmann::json& data) {

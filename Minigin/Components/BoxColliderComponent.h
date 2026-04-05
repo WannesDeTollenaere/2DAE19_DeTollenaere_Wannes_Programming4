@@ -28,7 +28,7 @@ namespace dae
     private:
         float m_width;
         float m_height;
-        bool m_ShowDebug{ false };
+        bool m_ShowDebug{ true };
 
     };
 }

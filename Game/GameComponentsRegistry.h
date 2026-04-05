@@ -29,6 +29,9 @@
 #include "Components/Movement/GridRenderComponent.h"
 #include "DTO/LevelRendererDTO.h"
 
+#include "DTO/BurgerIngredientDTO.h"
+#include "Components/Ingredients/BurgerIngredientComponent.h"
+
 #include "Components/Movement/GridDebugRenderer.h"
 
 #include "ResourceManager.h"
@@ -104,6 +107,13 @@ namespace dae
                 auto sheet = dae::ResourceManager::GetInstance().LoadSpriteSheet(dto.texture, dto.frameWidth, dto.frameHeight);
 
                 go->AddComponent<GridRendererComponent>(sheet, dto.tileMappings);
+                });
+
+            SceneLoader::RegisterComponentParser("BurgerIngredientComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = BurgerIngredientComponentDTO::FromJson(data);
+
+
+                go->AddComponent<BurgerIngredientComponent>(dto.widthInTiles);
                 });
         }
     };

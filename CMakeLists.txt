@@ -191,7 +191,10 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Components/Movement/GridDebugRenderer.h" 
  "Game/Components/Movement/GridDebugRenderer.cpp" 
  "Game/DTO/GridMovementComponentDTO.h" 
- "Game/Components/Movement/GridRenderComponent.h" "Game/Components/Movement/GridRenderComponent.cpp" "Game/DTO/LevelRendererDTO.h")
+ "Game/Components/Movement/GridRenderComponent.h" 
+ "Game/Components/Movement/GridRenderComponent.cpp" 
+ "Game/DTO/LevelRendererDTO.h"
+ "Game/Components/Ingredients/BurgerIngredientComponent.h" "Game/Components/Ingredients/BurgerIngredientComponent.cpp" "Game/DTO/BurgerIngredientDTO.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

@@ -24,7 +24,7 @@ namespace dae
         const Tag& GetUniqueTag() const { return m_UniqueTag; }
         GameObject* GetGameObject() const
         {
-            return s_TaggedObjects[m_UniqueTag];
+            return GetOwner();
         }
 
         bool HasTag(Tag t) const

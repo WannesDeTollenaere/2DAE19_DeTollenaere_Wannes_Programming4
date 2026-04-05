@@ -48,6 +48,16 @@
           },
           "components": [
             {
+              "type": "TagComponent",
+              "tags": [ "Player" ]
+            },
+            {
+              "type": "BoxColliderComponent",
+              "width": 48.0,
+              "height": 48.0,
+              "isTrigger": false
+            },
+            {
               "type": "TextureComponent",
               "texture": "burger_time_spritesheet_x3.png"
             },
@@ -57,48 +67,12 @@
               "frameHeight": 48,
               "playOnStart": "Idle",
               "animations": {
-                "Idle": {
-                  "startRow": 1,
-                  "startCol": 0,
-                  "frameCount": 1,
-                  "frameTime": 0.1,
-                  "isLooping": true
-                },
-                "WalkDown": {
-                  "startRow": 0,
-                  "startCol": 0,
-                  "frameCount": 3,
-                  "frameTime": 0.1,
-                  "isLooping": true
-                },
-                "WalkUp": {
-                  "startRow": 0,
-                  "startCol": 6,
-                  "frameCount": 3,
-                  "frameTime": 0.1,
-                  "isLooping": true
-                },
-                "WalkLeft": {
-                  "startRow": 0,
-                  "startCol": 3,
-                  "frameCount": 3,
-                  "frameTime": 0.1,
-                  "isLooping": true
-                },
-                "WalkRight": {
-                  "startRow": 0,
-                  "startCol": 9,
-                  "frameCount": 3,
-                  "frameTime": 0.1,
-                  "isLooping": true
-                },
-                "Die": {
-                  "startRow": 1,
-                  "startCol": 3,
-                  "frameCount": 6,
-                  "frameTime": 0.2,
-                  "isLooping": false
-                }
+                "Idle": { "startRow": 1, "startCol": 0, "frameCount": 1, "frameTime": 0.1, "isLooping": true },
+                "WalkDown": { "startRow": 0, "startCol": 0, "frameCount": 3, "frameTime": 0.1, "isLooping": true },
+                "WalkUp": { "startRow": 0, "startCol": 6, "frameCount": 3, "frameTime": 0.1, "isLooping": true },
+                "WalkLeft": { "startRow": 0, "startCol": 3, "frameCount": 3, "frameTime": 0.1, "isLooping": true },
+                "WalkRight": { "startRow": 0, "startCol": 9, "frameCount": 3, "frameTime": 0.1, "isLooping": true },
+                "Die": { "startRow": 1, "startCol": 3, "frameCount": 6, "frameTime": 0.2, "isLooping": false }
               }
             },
             {
@@ -108,6 +82,108 @@
             {
               "type": "CharacterControllerComponent",
               "inputType": "keyboard"
+            }
+          ]
+        },
+        {
+          "name": "TopBun_1",
+          "transform": {
+            "x": 96.0,
+            "y": 24.0
+          },
+          "components": [
+            {
+              "type": "TextureComponent",
+              "texture": "burger_time_spritesheet_x3.png",
+              "spriteSheet": {
+                "frameWidth": 48,
+                "frameHeight": 24,
+                "row": 6,
+                "col": 7,
+                "colSpan": 2
+              }
+            },
+            {
+              "type": "BurgerIngredientComponent",
+              "widthInTiles": 2
+            },
+            {
+              "type": "BoxColliderComponent",
+              "width": 96.0,
+              "height": 24.0,
+              "isTrigger": true
+            },
+            {
+              "type": "TagComponent",
+              "tags": [ "Ingredient" ]
+            }
+          ]
+        },
+        {
+          "name": "Patty_1",
+          "transform": {
+            "x": 96.0,
+            "y": 216.0
+          },
+          "components": [
+            {
+              "type": "TextureComponent",
+              "texture": "burger_time_spritesheet_x3.png",
+              "spriteSheet": {
+                "frameWidth": 48,
+                "frameHeight": 24,
+                "row": 9,
+                "col": 7,
+                "colSpan": 2
+              }
+            },
+            {
+              "type": "BurgerIngredientComponent",
+              "widthInTiles": 2
+            },
+            {
+              "type": "BoxColliderComponent",
+              "width": 96.0,
+              "height": 24.0,
+              "isTrigger": true
+            },
+            {
+              "type": "TagComponent",
+              "tags": [ "Ingredient" ]
+            }
+          ]
+        },
+        {
+          "name": "BottomBun_1",
+          "transform": {
+            "x": 96.0,
+            "y": 408.0
+          },
+          "components": [
+            {
+              "type": "TextureComponent",
+              "texture": "burger_time_spritesheet_x3.png",
+              "spriteSheet": {
+                "frameWidth": 48,
+                "frameHeight": 24,
+                "row": 7,
+                "col": 7,
+                "colSpan": 2
+              }
+            },
+            {
+              "type": "BurgerIngredientComponent",
+              "widthInTiles": 2
+            },
+            {
+              "type": "BoxColliderComponent",
+              "width": 96.0,
+              "height": 24.0,
+              "isTrigger": true
+            },
+            {
+              "type": "TagComponent",
+              "tags": [ "Ingredient" ]
             }
           ]
         }
