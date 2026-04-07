@@ -23,6 +23,9 @@ namespace dae
         glm::vec2 m_CurrentDirection{ 1.0f, 0.0f };
         glm::vec3 m_LastPosition{};
 
+        const float m_CooldownDuration{ .3f };
+        bool m_DecisionAvailable{ true };
+
         void PickNewDirection();
         void UpdateAnimation();
     };

@@ -3,6 +3,7 @@
 #include "Components/Movement/GridMovementComponent.h"
 #include "Components/AnimatorComponent.h"
 #include "Helpers/LevelGrid.h"
+#include "GameTime.h"
 #include <cstdlib> 
 
 namespace dae
@@ -35,8 +36,10 @@ namespace dae
         float snappedY = gridY * tileSize;
         bool isCentered = (std::abs(pos.x - snappedX) < 1.0f && std::abs(pos.y - snappedY) < 1.0f);
 
-        if (isStuck || (currentTile == TileType::Intersection && isCentered))
+        if (m_DecisionAvailable && (isStuck || (currentTile == TileType::Intersection && isCentered)))
         {
+            m_DecisionAvailable = false;
+            GameTime::GetInstance().AddTimer(m_CooldownDuration, [&]() { m_DecisionAvailable = true; });
             PickNewDirection();
         }
 

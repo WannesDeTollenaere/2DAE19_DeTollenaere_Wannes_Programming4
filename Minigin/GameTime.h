@@ -1,10 +1,22 @@
 #pragma once
 #include <chrono>
 #include <thread>
+#include <functional>
+#include <vector>
+#include <algorithm>
 #include "Singleton.h"
 
 namespace dae
 {
+    struct TimerHandle
+    {
+        float timeLeft;
+        float duration;
+        bool isLooping;
+        std::function<void()> callback;
+        bool isDone{ false };
+    };
+
     class GameTime final : public Singleton<GameTime>
     {
     public:
@@ -26,6 +38,43 @@ namespace dae
             m_totalTime = totalDuration.count();
 
             m_lastFrameTime = currentFrameTime;
+
+            for (auto& timer : m_Timers)
+            {
+                if (timer.isDone) continue;
+
+                timer.timeLeft -= m_deltaTime;
+                if (timer.timeLeft <= 0.0f)
+                {
+                    timer.callback();
+
+                    if (timer.isLooping)
+                    {
+                        timer.timeLeft = timer.duration;
+                    }
+                    else
+                    {
+                        timer.isDone = true;
+                    }
+                }
+            }
+
+            m_Timers.erase(std::remove_if(m_Timers.begin(), m_Timers.end(),
+                [](const TimerHandle& t) { return t.isDone; }), m_Timers.end());
+
+        }
+
+        void AddTimer(float duration, std::function<void()> callback, bool loop = false)
+        {
+            TimerHandle newTimer{ duration, duration, loop, std::move(callback), false };
+
+            m_Timers.push_back(std::move(newTimer));
+            
+        }
+
+        void ClearAllTimers()
+        {
+            m_Timers.clear();
         }
 
         float GetDeltaTime() const { return m_deltaTime; }
@@ -73,5 +122,7 @@ namespace dae
 
         std::chrono::time_point<std::chrono::high_resolution_clock> m_startTime;
         std::chrono::time_point<std::chrono::high_resolution_clock> m_lastFrameTime;
+
+        std::vector<TimerHandle> m_Timers;
     };
 }
