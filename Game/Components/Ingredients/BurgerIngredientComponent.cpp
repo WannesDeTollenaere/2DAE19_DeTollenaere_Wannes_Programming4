@@ -111,11 +111,10 @@ namespace dae
                 auto it = std::find(m_CascadingEnemies.begin(), m_CascadingEnemies.end(), otherObject);
                 if (it == m_CascadingEnemies.end())
                 {
-                    if (auto wander = otherObject->GetComponent<EnemyWanderComponent>()) {
-                        dae::EnemyCrushedEvent crushEvent(otherObject);
-                        EventManager::GetInstance().SendEvent(&crushEvent);
-                    }
-                    
+
+                    dae::EnemyCrushedEvent crushEvent(otherObject);
+                    EventManager::GetInstance().SendEvent(&crushEvent);
+
                 }
             }
         }
