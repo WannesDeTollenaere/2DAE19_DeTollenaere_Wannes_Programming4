@@ -31,7 +31,7 @@ namespace dae
         if (!m_pAnimator) m_pAnimator = GetOwner()->GetComponent<AnimatorComponent>();
         if (!m_pMovementComponent) return;
 
-        if (IsDead()) return;
+        if (IsDead() || IsStunned()) return;
 
         FindPlayer();
 
@@ -205,6 +205,7 @@ namespace dae
 
     void EnemyWanderComponent::RenderGUI()
     {
+        Component::RenderGUI();
         static bool showPath = true;
         ImGui::Checkbox("Show pathfinding", &showPath);
         ImGui::SliderFloat("Random wander chance", &m_RandomWanderChance, 0.0f, 1.0f, "%.2f");
@@ -212,7 +213,10 @@ namespace dae
         {
             Die();
         }
-
+        if (ImGui::Button("Stun"))
+        {
+            Stun();
+        }
 
         if (showPath && m_Path.size() > 1)
         {
@@ -235,6 +239,7 @@ namespace dae
                 ImVec2 target(m_Path.back().x * tileSize + tileSize / 2.0f, m_Path.back().y * tileSize + tileSize / 2.0f);
                 drawList->AddCircleFilled(target, 6.0f, IM_COL32(50, 255, 50, 255));
             }
+
         }
     }
     void EnemyWanderComponent::HandleEvent(const Event* event)
@@ -264,5 +269,22 @@ namespace dae
         if (collider) collider->SetActive(false);
 
         GameTime::GetInstance().AddTimer(m_TimeBeforeDestroy, [&]() { GetOwner()->Destroy(); });
+    }
+    void dae::EnemyWanderComponent::Stun()
+    {
+        if (m_IsDead || m_IsStunned) return;
+
+        m_IsStunned = true;
+
+        if (m_pAnimator)
+        {
+            m_pAnimator->PlayAnimation("Pickled");
+        }
+
+        GameTime::GetInstance().AddTimer(m_StunDuration, [&]() 
+            { 
+                m_IsStunned = false; 
+            
+            });
     }
 }

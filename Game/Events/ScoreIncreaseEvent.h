@@ -9,10 +9,10 @@ namespace dae
 
     struct ScoreIncreasedEvent final : public GameObjectEvent
     {
-        int scoreAdded;
+        int points;
 
         ScoreIncreasedEvent(GameObject* target, int amount)
-            : GameObjectEvent(make_sdbm_hash("ScoreIncreased"), target), scoreAdded(amount) {
+            : GameObjectEvent(make_sdbm_hash("ScoreIncreased"), target), points(amount) {
         }
     };
 }

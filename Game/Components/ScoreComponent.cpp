@@ -29,7 +29,7 @@ namespace dae
             {
                 if (pScoreEvent->obj == GetOwner())
                 {
-                    m_score += pScoreEvent->scoreAdded;
+                    m_score += pScoreEvent->points;
 
                     ScoreChangedEvent changedEvent(GetOwner(), m_score);
                     EventManager::GetInstance().SendEvent(&changedEvent);

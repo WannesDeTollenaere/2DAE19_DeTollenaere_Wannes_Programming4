@@ -194,7 +194,16 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Components/Movement/GridRenderComponent.h" 
  "Game/Components/Movement/GridRenderComponent.cpp" 
  "Game/DTO/LevelRendererDTO.h"
- "Game/Components/Ingredients/BurgerIngredientComponent.h" "Game/Components/Ingredients/BurgerIngredientComponent.cpp" "Game/DTO/BurgerIngredientDTO.h" "Game/Components/Movement/EnemyWanderComponent.h" "Game/Components/Movement/EnemyWanderComponent.cpp" "Game/DTO/EnemyWanderComponentDTO.h" "Game/Events/EnemyCrushedEvent.h")
+ "Game/Components/Ingredients/BurgerIngredientComponent.h" 
+ "Game/Components/Ingredients/BurgerIngredientComponent.cpp" 
+ "Game/DTO/BurgerIngredientDTO.h" 
+ "Game/Components/Movement/EnemyWanderComponent.h" 
+ "Game/Components/Movement/EnemyWanderComponent.cpp" 
+ "Game/DTO/EnemyWanderComponentDTO.h" 
+ "Game/Events/EnemyCrushedEvent.h" 
+ "Game/Components/PlayerCharacter/SaltComponent.h" 
+ "Game/Components/PlayerCharacter/SaltComponent.cpp" 
+ "Game/Commands/ThrowSaltCommand.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

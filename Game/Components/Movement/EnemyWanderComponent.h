@@ -22,6 +22,9 @@ namespace dae
 
         void Die();
         bool IsDead() const { return m_IsDead; }
+
+        void Stun();
+        bool IsStunned() const { return m_IsStunned; }
     private:
 
         GridMovementComponent* m_pMovementComponent{ nullptr };
@@ -41,6 +44,10 @@ namespace dae
         // Die
         bool m_IsDead{ false };
         const float m_TimeBeforeDestroy{ 1.0f };
+
+        // Stun
+        bool m_IsStunned{ false };
+        const float m_StunDuration{ 3.0f };
 
         void PickNewDirection();
         void UpdateAnimation();

@@ -1,4 +1,5 @@
 #pragma once
+#include "imgui.h"
 
 namespace dae
 {
@@ -16,7 +17,7 @@ namespace dae
 		virtual void FixedUpdate() {}
 		virtual void Update() {}
 		virtual void Render() const {}
-		virtual void RenderGUI() {}
+		virtual void RenderGUI() { ImGui::Checkbox("Is active", &m_IsActive); }
 		void Destroy() { m_markedForDeletion = true; }
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; }
 		void SetActive(bool active) { m_IsActive = active; }
