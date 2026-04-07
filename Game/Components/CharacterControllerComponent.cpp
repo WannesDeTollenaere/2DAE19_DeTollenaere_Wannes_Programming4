@@ -70,7 +70,7 @@ namespace dae
 
         auto saltObj = std::make_unique<GameObject>("SaltProjectile");
 
-        auto playerPos = GetOwner()->GetTransform().GetLocalPosition();
+        auto playerPos = GetOwner()->GetTransform().GetWorldPosition();
         float tileSize = LevelGrid::GetInstance().GetTileSize();
 
         saltObj->GetTransform().SetLocalPosition(
