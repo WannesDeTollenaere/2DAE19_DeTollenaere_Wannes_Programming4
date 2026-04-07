@@ -74,6 +74,15 @@ void dae::GameObject::RenderGUI()
 
 void dae::GameObject::RenderHierarchy(GameObject** selectedObject)
 {
+	if (IsMarkedForDeletion())
+	{
+		if (*selectedObject == this)
+		{
+			*selectedObject = nullptr;
+		}
+		return;
+	}
+
 	ImGui::PushID(this);
 
 	ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;

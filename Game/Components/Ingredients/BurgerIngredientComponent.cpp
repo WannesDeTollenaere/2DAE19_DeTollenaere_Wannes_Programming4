@@ -5,6 +5,8 @@
 #include "GameTime.h" 
 #include <algorithm>
 #include <iostream>
+#include "Events/EnemyCrushedEvent.h"
+#include "ObserverSys/EventManager.h"
 
 namespace dae
 {
@@ -95,6 +97,14 @@ namespace dae
                         StartFalling();
                     }
                 }
+            }
+        }
+        else if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Enemy")))
+        {
+            if (m_IsFalling)
+            {
+                dae::EnemyCrushedEvent crushEvent(otherObject);
+                EventManager::GetInstance().SendEvent(&crushEvent);
             }
         }
     }

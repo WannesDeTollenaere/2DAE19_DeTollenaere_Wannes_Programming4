@@ -1,5 +1,7 @@
 #include <algorithm>
 #include "Scene.h"
+#include "Components/TagComponent.h"
+#include "sdbm_hash.h"
 
 using namespace dae;
 
@@ -71,6 +73,34 @@ void dae::Scene::RenderHierarchy(GameObject** selectedObject)
 			object->RenderHierarchy(selectedObject);
 		}
 	}
+}
+
+// returns nullptr if nothing found
+GameObject* Scene::GetGameObjectByTag(const std::string& tag) const
+{
+	for (const auto& object : m_objects)
+	{
+		auto tagComp = object->GetComponent<TagComponent>();
+		if (tagComp && tagComp->HasTag(make_sdbm_hash_rt(tag)))
+		{
+			return object.get();
+		}
+	}
+	return nullptr;
+}
+
+std::vector<GameObject*> Scene::GetGameObjectsByTag(const std::string& tag) const
+{
+	std::vector<GameObject*> foundObjects;
+	for (const auto& object : m_objects)
+	{
+		auto tagComp = object->GetComponent<TagComponent>();
+		if (tagComp && tagComp->HasTag(make_sdbm_hash_rt(tag)))
+		{
+			foundObjects.push_back(object.get());
+		}
+	}
+	return foundObjects;
 }
 
 void dae::Scene::DestroyGameObjectsMarkedForDeletion()

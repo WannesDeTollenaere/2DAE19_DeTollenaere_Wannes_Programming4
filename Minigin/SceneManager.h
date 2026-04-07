@@ -18,6 +18,7 @@ namespace dae
 		void Render();
 		void RenderGUI();
 		void Clear() { m_scenes.clear(); }
+		Scene* GetActiveScene() { return m_scenes.empty() ? nullptr : m_scenes.back().get(); }
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;

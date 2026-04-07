@@ -19,6 +19,9 @@ namespace dae
 		void RenderGUI();
 		void RenderHierarchy(GameObject** selectedObject);
 
+		GameObject* GetGameObjectByTag(const std::string& tag) const;
+		std::vector<GameObject*> GetGameObjectsByTag(const std::string& tag) const;
+
 		~Scene() = default;
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;

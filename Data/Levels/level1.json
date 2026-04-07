@@ -176,7 +176,7 @@
          {
           "name": "Enemy_Egg_1",
           "transform": {
-            "x": 336.0,
+            "x": 100.0,
             "y": 96.0
           },
           "components": [
@@ -220,7 +220,7 @@
         {
           "name": "Enemy_Egg_2",
           "transform": {
-            "x": 144.0,
+            "x": 300.0,
             "y": 288.0
           },
           "components": [
