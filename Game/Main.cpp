@@ -14,6 +14,7 @@
 #include "SteamAchievements/Achievement.h"
 #endif
 
+
 //std::unique_ptr<dae::AchievementManager> g_AchievementManager;
 
 void LoadGame()

@@ -86,6 +86,182 @@
           ]
         },
         {
+          "name": "Enemy_HotDog_1",
+          "transform": {
+            "x": 336.0,
+            "y": 96.0
+          },
+          "components": [
+            {
+              "type": "TagComponent",
+              "tags": [ "Enemy" ]
+            },
+            {
+              "type": "BoxColliderComponent",
+              "width": 48.0,
+              "height": 48.0,
+              "isTrigger": true
+            },
+            {
+              "type": "TextureComponent",
+              "texture": "burger_time_spritesheet_x3.png"
+            },
+            {
+              "type": "AnimatorComponent",
+              "frameWidth": 48,
+              "frameHeight": 48,
+              "playOnStart": "WalkDown",
+              "animations": {
+                "WalkDown": { "startRow": 2, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkUp": { "startRow": 2, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkLeft": { "startRow": 2, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkRight": { "startRow": 2, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "Die": { "startRow": 3, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
+                "Pickled": { "startRow": 3, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": false }
+              }
+            },
+            {
+              "type": "GridMovementComponent",
+              "speed": 65.0
+            },
+            {
+              "type": "EnemyWanderComponent"
+            }
+          ]
+        },
+        {
+          "name": "Enemy_HotDog_2",
+          "transform": {
+            "x": 144.0,
+            "y": 288.0
+          },
+          "components": [
+            {
+              "type": "TagComponent",
+              "tags": [ "Enemy" ]
+            },
+            {
+              "type": "BoxColliderComponent",
+              "width": 48.0,
+              "height": 48.0,
+              "isTrigger": true
+            },
+            {
+              "type": "TextureComponent",
+              "texture": "burger_time_spritesheet_x3.png"
+            },
+            {
+              "type": "AnimatorComponent",
+              "frameWidth": 48,
+              "frameHeight": 48,
+              "playOnStart": "WalkRight",
+              "animations": {
+                "WalkDown": { "startRow": 2, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkUp": { "startRow": 2, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkLeft": { "startRow": 2, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkRight": { "startRow": 2, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "Die": { "startRow": 3, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
+                "Pickled": { "startRow": 3, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": false }
+              }
+            },
+            {
+              "type": "GridMovementComponent",
+              "speed": 65.0
+            },
+            {
+              "type": "EnemyWanderComponent"
+            }
+          ]
+        },
+         {
+          "name": "Enemy_Egg_1",
+          "transform": {
+            "x": 336.0,
+            "y": 96.0
+          },
+          "components": [
+            {
+              "type": "TagComponent",
+              "tags": [ "Enemy" ]
+            },
+            {
+              "type": "BoxColliderComponent",
+              "width": 48.0,
+              "height": 48.0,
+              "isTrigger": true
+            },
+            {
+              "type": "TextureComponent",
+              "texture": "burger_time_spritesheet_x3.png"
+            },
+            {
+              "type": "AnimatorComponent",
+              "frameWidth": 48,
+              "frameHeight": 48,
+              "playOnStart": "WalkDown",
+              "animations": {
+                "WalkDown": { "startRow": 6, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkUp": { "startRow": 6, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkLeft": { "startRow": 6, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkRight": { "startRow": 7, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "Die": { "startRow": 7, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
+                "Pickled": { "startRow": 7, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": false }
+              }
+            },
+            {
+              "type": "GridMovementComponent",
+              "speed": 65.0
+            },
+            {
+              "type": "EnemyWanderComponent"
+            }
+          ]
+        },
+        {
+          "name": "Enemy_Egg_2",
+          "transform": {
+            "x": 144.0,
+            "y": 288.0
+          },
+          "components": [
+            {
+              "type": "TagComponent",
+              "tags": [ "Enemy" ]
+            },
+            {
+              "type": "BoxColliderComponent",
+              "width": 48.0,
+              "height": 48.0,
+              "isTrigger": true
+            },
+            {
+              "type": "TextureComponent",
+              "texture": "burger_time_spritesheet_x3.png"
+            },
+            {
+              "type": "AnimatorComponent",
+              "frameWidth": 48,
+              "frameHeight": 48,
+              "playOnStart": "WalkRight",
+              "animations": {
+                "WalkDown": { "startRow": 6, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkUp": { "startRow": 6, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkLeft": { "startRow": 6, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkRight": { "startRow": 7, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "Die": { "startRow": 7, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
+                "Pickled": { "startRow": 7, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": false }
+              }
+            },
+            {
+              "type": "GridMovementComponent",
+              "speed": 65.0
+            },
+            {
+              "type": "EnemyWanderComponent"
+            }
+          ]
+        },
+        {
           "name": "TopBun_1",
           "transform": {
             "x": 96.0,

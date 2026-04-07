@@ -34,6 +34,9 @@
 
 #include "Components/Movement/GridDebugRenderer.h"
 
+#include "Components/Movement/EnemyWanderComponent.h"
+#include "DTO/EnemyWanderComponentDTO.h"
+
 #include "ResourceManager.h"
 #include <SceneLoader.h> 
 #include <GameObject.h>
@@ -114,6 +117,12 @@ namespace dae
 
 
                 go->AddComponent<BurgerIngredientComponent>(dto.widthInTiles);
+                });
+
+            SceneLoader::RegisterComponentParser("EnemyWanderComponent", [](dae::GameObject* go, const nlohmann::json&) {
+                //auto dto = EnemyWanderComponentDTO::FromJson(data);
+
+                go->AddComponent<EnemyWanderComponent>();
                 });
         }
     };

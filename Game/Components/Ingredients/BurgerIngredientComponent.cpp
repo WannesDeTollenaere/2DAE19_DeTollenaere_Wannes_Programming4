@@ -118,8 +118,6 @@ namespace dae
         {
             pos.y = m_TargetDropY;
             m_IsFalling = false;
-
-            // todo: cascading logic
         }
 
         GetOwner()->GetTransform().SetLocalPosition(pos.x, pos.y, pos.z);
@@ -136,7 +134,7 @@ namespace dae
         int col = static_cast<int>(pos.x / tileSize);
 
         int targetRow = currentRow + 1;
-        // check if under player is a platform or intersection
+        // check if under player is a platform or intersection - sort of raycast
         while (targetRow < grid.GetRows())
         {
             dae::TileType type = grid.GetTile(col, targetRow);
