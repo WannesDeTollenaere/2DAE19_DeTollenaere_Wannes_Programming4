@@ -41,6 +41,30 @@
       ],
       "children": [
         {
+          "name": "ScoreUI",
+          "transform": {
+            "x": 10.0,
+            "y": 10.0
+          },
+          "components": [
+            {
+              "type": "TextureComponent"
+            },
+            {
+              "type": "TextComponent",
+              "text": "Score: 0",
+              "font": "Lingua.otf",
+              "fontSize": 24,
+              "color": { "r": 255, "g": 0, "b": 0, "a": 255 }
+            },
+            {
+              "type": "ScoreDisplayComponent",
+              "startingScore": 0,
+              "targetTag": "Player1"
+            }
+          ]
+        },
+        {
           "name": "Player",
           "transform": {
             "x": 48.0,
@@ -49,7 +73,12 @@
           "components": [
             {
               "type": "TagComponent",
-              "tags": [ "Player" ]
+              "tags": [ "Player" ],
+              "uniqueTag": "Player1"
+            },
+            {
+              "type": "ScoreComponent",
+              "startingScore": 0
             },
             {
               "type": "BoxColliderComponent",
@@ -88,7 +117,7 @@
         {
           "name": "Enemy_HotDog_1",
           "transform": {
-            "x": 336.0,
+            "x": 0.0,
             "y": 96.0
           },
           "components": [
@@ -132,8 +161,8 @@
         {
           "name": "Enemy_HotDog_2",
           "transform": {
-            "x": 144.0,
-            "y": 288.0
+            "x": 480.0,
+            "y": 96.0
           },
           "components": [
             {
@@ -176,8 +205,8 @@
          {
           "name": "Enemy_Egg_1",
           "transform": {
-            "x": 100.0,
-            "y": 96.0
+            "x": 0.0,
+            "y": 384.0
           },
           "components": [
             {
@@ -213,15 +242,16 @@
               "speed": 65.0
             },
             {
-              "type": "EnemyWanderComponent"
+              "type": "EnemyWanderComponent",
+              "enemyType": "Egg"
             }
           ]
         },
         {
           "name": "Enemy_Egg_2",
           "transform": {
-            "x": 300.0,
-            "y": 288.0
+            "x": 480.0,
+            "y": 384.0
           },
           "components": [
             {
@@ -257,7 +287,8 @@
               "speed": 65.0
             },
             {
-              "type": "EnemyWanderComponent"
+              "type": "EnemyWanderComponent",
+              "enemyType": "Egg"
             }
           ]
         },

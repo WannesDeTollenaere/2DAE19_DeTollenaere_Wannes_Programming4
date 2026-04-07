@@ -1,5 +1,6 @@
 #pragma once
 #include "Components/BaseCollisionHandler.h" 
+#include "Components/Movement/EnemyWanderComponent.h"
 #include <vector>
 
 namespace dae
@@ -18,6 +19,8 @@ namespace dae
 
     protected:
         void OnCollision(GameObject* otherObject, TagComponent* otherTagComp) override;
+        void OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp) override;
+        void OnCollisionExit(GameObject* otherObject, TagComponent* otherTagComp) override;
 
     private:
         void StartFalling();
@@ -30,5 +33,7 @@ namespace dae
         bool m_IsFalling{ false };
         float m_FallSpeed{ 150.0f };
         float m_TargetDropY{ 0.0f };
+
+        std::vector<GameObject*> m_CascadingEnemies;
     };
 }

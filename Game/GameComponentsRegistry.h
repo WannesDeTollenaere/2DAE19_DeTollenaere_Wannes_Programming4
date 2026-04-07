@@ -119,10 +119,12 @@ namespace dae
                 go->AddComponent<BurgerIngredientComponent>(dto.widthInTiles);
                 });
 
-            SceneLoader::RegisterComponentParser("EnemyWanderComponent", [](dae::GameObject* go, const nlohmann::json&) {
-                //auto dto = EnemyWanderComponentDTO::FromJson(data);
+            SceneLoader::RegisterComponentParser("EnemyWanderComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = EnemyWanderComponentDTO::FromJson(data);
 
-                go->AddComponent<EnemyWanderComponent>();
+                auto wanderComp = go->AddComponent<EnemyWanderComponent>();
+
+                wanderComp->SetEnemyType(dto.type);
                 });
         }
     };

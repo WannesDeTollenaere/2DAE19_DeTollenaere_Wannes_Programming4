@@ -18,6 +18,8 @@ namespace dae
         : Component(pOwner)
     {
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("EnemyCrushed"), this);
+
+        m_OriginalSpawnPosition = GetOwner()->GetTransform().GetLocalPosition();
     }
 
     EnemyWanderComponent::~EnemyWanderComponent()
@@ -31,7 +33,7 @@ namespace dae
         if (!m_pAnimator) m_pAnimator = GetOwner()->GetComponent<AnimatorComponent>();
         if (!m_pMovementComponent) return;
 
-        if (IsDead() || IsStunned()) return;
+        if (m_State != EnemyState::Wandering) return;
 
         FindPlayer();
 
@@ -209,6 +211,17 @@ namespace dae
         static bool showPath = true;
         ImGui::Checkbox("Show pathfinding", &showPath);
         ImGui::SliderFloat("Random wander chance", &m_RandomWanderChance, 0.0f, 1.0f, "%.2f");
+        ImGui::SliderFloat("Respawn duration", &m_RespawnDuration, 0.5f, 20.0f, "%.1f sec");
+
+        float pos[3] = { m_OriginalSpawnPosition.x, m_OriginalSpawnPosition.y, m_OriginalSpawnPosition.z };
+
+        if (ImGui::DragFloat3("Spawn position", pos, 0.1f))
+        {
+            m_OriginalSpawnPosition.x = pos[0];
+            m_OriginalSpawnPosition.y = pos[1];
+            m_OriginalSpawnPosition.z = pos[2];
+        }
+
         if (ImGui::Button("Die"))
         {
             Die();
@@ -216,6 +229,14 @@ namespace dae
         if (ImGui::Button("Stun"))
         {
             Stun();
+        }
+        if (ImGui::Button("Disable movement"))
+        {
+            DisableMovement();
+        }
+        if (ImGui::Button("Enable movement"))
+        {
+            EnableMovement();
         }
 
         if (showPath && m_Path.size() > 1)
@@ -256,9 +277,9 @@ namespace dae
     }
     void EnemyWanderComponent::Die()
     {
-        if (m_IsDead) return;
+        if (m_State == EnemyState::Dead) return;
 
-        m_IsDead = true;
+        m_State = EnemyState::Dead;
 
         if (m_pAnimator)
         {
@@ -268,13 +289,21 @@ namespace dae
         auto collider = GetOwner()->GetComponent<BoxColliderComponent>();
         if (collider) collider->SetActive(false);
 
-        GameTime::GetInstance().AddTimer(m_TimeBeforeDestroy, [&]() { GetOwner()->Destroy(); });
+        GameTime::GetInstance().AddTimer(m_TimeBeforeDestroy, [this]() {
+
+            GetOwner()->SetActive(false);
+
+            GameTime::GetInstance().AddTimer(m_RespawnDuration, [this]() {
+                Respawn();
+                });
+
+            });
     }
     void dae::EnemyWanderComponent::Stun()
     {
-        if (m_IsDead || m_IsStunned) return;
+        if (m_State == EnemyState::Dead || m_State == EnemyState::Cascading || m_State == EnemyState::Stunned || m_State == EnemyState::Disabled) return;
 
-        m_IsStunned = true;
+        m_State = EnemyState::Stunned;
 
         if (m_pAnimator)
         {
@@ -283,8 +312,57 @@ namespace dae
 
         GameTime::GetInstance().AddTimer(m_StunDuration, [&]() 
             { 
-                m_IsStunned = false; 
+                m_State = EnemyState::Wandering;
             
             });
+    }
+    void EnemyWanderComponent::DisableMovement()
+    {
+        m_State = EnemyState::Disabled;
+        if (m_pAnimator)
+        {
+            m_pAnimator->SetActive(false); 
+        }
+    }
+    void EnemyWanderComponent::EnableMovement()
+    {
+        m_State = EnemyState::Wandering;
+        if (m_pAnimator)
+        {
+            m_pAnimator->SetActive(true);
+        }
+    }
+    void EnemyWanderComponent::SetCascading(bool cascading)
+    {
+        if (m_State == EnemyState::Dead) return;
+
+        if (cascading)
+        {
+            m_State = EnemyState::Cascading;
+        }
+        else
+        {
+            m_State = EnemyState::Wandering;
+        }
+    }
+    void dae::EnemyWanderComponent::Respawn()
+    {
+        // Reset pos
+        GetOwner()->GetTransform().SetLocalPosition(m_OriginalSpawnPosition);
+
+        m_State = EnemyState::Wandering;
+
+        GetOwner()->SetActive(true);
+
+        auto collider = GetOwner()->GetComponent<BoxColliderComponent>();
+        if (collider) collider->SetActive(true);
+
+        if (m_pAnimator)
+        {
+            m_pAnimator->PlayAnimation("WalkDown");
+        }
+
+        m_Path.clear();
+        m_DecisionAvailable = true;
     }
 }

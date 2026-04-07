@@ -2,6 +2,7 @@
 #include "Singleton.h" 
 #include <vector>
 #include <functional>
+#include <set>
 
 namespace dae
 {
@@ -20,5 +21,7 @@ namespace dae
         CollisionManager() = default;
 
         std::vector<BoxColliderComponent*> m_colliders;
+
+        std::set<std::pair<BoxColliderComponent*, BoxColliderComponent*>> m_ActiveCollisions;
     };
 }

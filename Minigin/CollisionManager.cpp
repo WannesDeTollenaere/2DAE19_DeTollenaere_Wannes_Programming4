@@ -20,6 +20,8 @@ namespace dae
 
     void CollisionManager::Update()
     {
+        std::set<std::pair<BoxColliderComponent*, BoxColliderComponent*>> currentCollisions;
+
         for (size_t i = 0; i < m_colliders.size(); ++i)
         {
             for (size_t j = i + 1; j < m_colliders.size(); ++j)
@@ -32,15 +34,39 @@ namespace dae
 
                 if (colA->IsOverlapping(colB))
                 {
-                    CollisionEvent event(colA, colB);
-                    EventManager::GetInstance().SendEvent(&event);
-                }
-                if (colB->IsOverlapping(colA))
-                {
-                    CollisionEvent event(colB, colA);
-                    EventManager::GetInstance().SendEvent(&event);
+                    auto pair = (colA < colB) ? std::make_pair(colA, colB) : std::make_pair(colB, colA);
+                    currentCollisions.insert(pair);
+
+                    if (m_ActiveCollisions.find(pair) == m_ActiveCollisions.end())
+                    {
+                        CollisionEnterEvent enterA(colA, colB);
+                        EventManager::GetInstance().SendEvent(&enterA);
+                        CollisionEnterEvent enterB(colB, colA);
+                        EventManager::GetInstance().SendEvent(&enterB);
+                    }
+
+                    CollisionEvent eventA(colA, colB);
+                    EventManager::GetInstance().SendEvent(&eventA);
+                    CollisionEvent eventB(colB, colA);
+                    EventManager::GetInstance().SendEvent(&eventB);
                 }
             }
         }
+
+        for (const auto& pair : m_ActiveCollisions)
+        {
+            if (currentCollisions.find(pair) == currentCollisions.end())
+            {
+                if (!pair.first->IsMarkedForDeletion() && !pair.second->IsMarkedForDeletion())
+                {
+                    CollisionExitEvent exitA(pair.first, pair.second);
+                    EventManager::GetInstance().SendEvent(&exitA);
+                    CollisionExitEvent exitB(pair.second, pair.first);
+                    EventManager::GetInstance().SendEvent(&exitB);
+                }
+            }
+        }
+
+        m_ActiveCollisions = currentCollisions;
     }
 }

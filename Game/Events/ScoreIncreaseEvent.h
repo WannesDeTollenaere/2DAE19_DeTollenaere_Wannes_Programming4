@@ -7,6 +7,8 @@ namespace dae
 {
     class GameObject;
 
+    // SHOULD BE UNUSED NOW
+
     struct ScoreIncreasedEvent final : public GameObjectEvent
     {
         int points;

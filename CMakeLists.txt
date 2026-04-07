@@ -203,7 +203,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Events/EnemyCrushedEvent.h" 
  "Game/Components/PlayerCharacter/SaltComponent.h" 
  "Game/Components/PlayerCharacter/SaltComponent.cpp" 
- "Game/Commands/ThrowSaltCommand.h")
+ "Game/Commands/ThrowSaltCommand.h" "Game/Events/BurgerDroppedEvent.h" "Game/Events/BurgerCascadeEvent.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

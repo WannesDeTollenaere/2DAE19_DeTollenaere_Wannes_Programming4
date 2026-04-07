@@ -9,6 +9,22 @@ namespace dae
     class GridMovementComponent;
     class AnimatorComponent;
 
+    enum class EnemyType : uint8_t
+    {
+        HotDog,
+        Pickle,
+        Egg
+    };
+
+    enum class EnemyState : uint8_t
+    {
+        Wandering,
+        Disabled,
+        Cascading,
+        Stunned,
+        Dead
+    };
+
     class EnemyWanderComponent final : public Component, public Observer
     {
     public:
@@ -20,11 +36,26 @@ namespace dae
 
         void HandleEvent(const Event* event) override;
 
+        // DIE
         void Die();
-        bool IsDead() const { return m_IsDead; }
+        bool IsDead() const { return m_State == EnemyState::Dead; }
+        void Respawn();
 
+        // STUN
         void Stun();
-        bool IsStunned() const { return m_IsStunned; }
+        bool IsStunned() const { return m_State == EnemyState::Stunned; }
+
+        void DisableMovement();
+        void EnableMovement();
+        bool IsMovementDisabled() const { return m_State == EnemyState::Disabled; }
+
+        // CASCADING
+        void SetCascading(bool cascading);
+        bool IsCascading() const { return m_State == EnemyState::Cascading; }
+
+        // TYPE
+        EnemyType GetEnemyType() const { return m_EnemyType; }
+        void SetEnemyType(EnemyType type) { m_EnemyType = type; }
     private:
 
         GridMovementComponent* m_pMovementComponent{ nullptr };
@@ -42,16 +73,19 @@ namespace dae
         std::vector<glm::ivec2> m_Path;
 
         // Die
-        bool m_IsDead{ false };
         const float m_TimeBeforeDestroy{ 1.0f };
 
         // Stun
-        bool m_IsStunned{ false };
         const float m_StunDuration{ 3.0f };
+
+        glm::vec3 m_OriginalSpawnPosition{};
+        float m_RespawnDuration{ 4.0f };
 
         void PickNewDirection();
         void UpdateAnimation();
         void FindPlayer();
 
+        EnemyState m_State{ EnemyState::Wandering };
+        EnemyType m_EnemyType{ EnemyType::HotDog };
     };
 }

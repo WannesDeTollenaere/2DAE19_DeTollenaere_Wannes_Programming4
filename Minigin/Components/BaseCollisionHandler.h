@@ -23,7 +23,9 @@ namespace dae
         void HandleEvent(const Event* event) override;
 
     protected:
-        virtual void OnCollision(GameObject* otherObject, TagComponent* otherTagComp) = 0;
+        virtual void OnCollision(GameObject* , TagComponent* ) {}
+        virtual void OnCollisionEnter(GameObject* , TagComponent* ) {}
+        virtual void OnCollisionExit(GameObject* , TagComponent* ) {}
 
     private:
         BoxColliderComponent* m_collider;
