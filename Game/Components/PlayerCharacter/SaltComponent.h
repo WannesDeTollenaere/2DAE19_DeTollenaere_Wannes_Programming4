@@ -10,7 +10,6 @@ namespace dae
         SaltComponent(GameObject* pOwner, float lifetime = 0.4f);
         ~SaltComponent() = default;
 
-
     protected:
         void OnCollision(GameObject* otherObject, TagComponent* otherTagComp) override;
 
