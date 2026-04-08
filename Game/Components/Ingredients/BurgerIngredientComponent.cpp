@@ -34,7 +34,7 @@ namespace dae
 
     void BurgerIngredientComponent::StepOnSegment(int colOffset)
     {
-        if (m_IsFalling) return;
+        if (m_IsFalling || m_IsInPlate) return;
         if (colOffset < 0 || colOffset >= m_WidthInTiles) return;
 
         if (!m_SteppedSegments[colOffset])
@@ -60,14 +60,26 @@ namespace dae
 
     void BurgerIngredientComponent::ForceDrop()
     {
-        if (!m_IsFalling)
+        if (!m_IsFalling && !m_IsInPlate)
         {
             StartFalling();
         }
     }
 
+    void BurgerIngredientComponent::StopFallingAt(float targetY)
+    {
+        m_TargetDropY = targetY;
+
+        float currentY = GetOwner()->GetTransform().GetLocalPosition().y;
+        if (currentY >= targetY)
+        {
+            m_TargetDropY = currentY;
+        }
+    }
+
     void BurgerIngredientComponent::OnCollision(GameObject* otherObject, TagComponent* otherTagComp)
     {
+
         if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Player")))
         {
             float myX = GetOwner()->GetTransform().GetWorldPosition().x;
@@ -88,18 +100,27 @@ namespace dae
         }
         else if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Ingredient")))
         {
+            auto otherIngredient = otherObject->GetComponent<dae::BurgerIngredientComponent>();
+
             if (!m_IsFalling)
             {
-                auto otherIngredient = otherObject->GetComponent<dae::BurgerIngredientComponent>();
-
                 if (otherIngredient && otherIngredient->IsFalling())
                 {
-                    float myY = GetOwner()->GetTransform().GetWorldPosition().y;
-                    float otherY = otherObject->GetTransform().GetWorldPosition().y;
-
-                    if (otherY < myY - 2.0f)
+                    if (m_IsInPlate)
                     {
-                        StartFalling();
+                        float myY = GetOwner()->GetTransform().GetWorldPosition().y;
+                        otherIngredient->StopFallingAt(myY - 24.0f); 
+                        otherIngredient->SetInPlate(true);
+                    }
+                    else
+                    {
+                        float myY = GetOwner()->GetTransform().GetWorldPosition().y;
+                        float otherY = otherObject->GetTransform().GetWorldPosition().y;
+
+                        if (otherY < myY - 2.0f)
+                        {
+                            StartFalling();
+                        }
                     }
                 }
             }
@@ -122,6 +143,8 @@ namespace dae
 
     void dae::BurgerIngredientComponent::StartFalling()
     {
+        if (m_IsInPlate) return;
+
         m_IsFalling = true;
         m_TargetDropY = FindNextPlatformY();
         std::fill(m_SteppedSegments.begin(), m_SteppedSegments.end(), false);
@@ -194,19 +217,38 @@ namespace dae
             }
             targetRow++;
         }
+        if (targetRow == currentRow + 1)
+            return FLT_MAX;
 
         return targetRow * tileSize + tileSize/2;
     }
     void BurgerIngredientComponent::OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp)
     {
-        if (m_IsFalling) return;
+        if (m_IsFalling)
+        {
+            if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Plate")))
+            {
+
+                auto collisionComp =  otherObject->GetComponent<BoxColliderComponent>();
+                auto collisionCompSelf = GetOwner()->GetComponent<BoxColliderComponent>();
+
+                if (!m_IsInPlate && collisionComp)
+                {
+                    m_TargetDropY = (collisionComp->GetAABB().y + collisionComp->GetAABB().height) - collisionCompSelf->GetAABB().height*1.5f;
+                    m_IsInPlate = true;
+                }
+            }
+            return;
+        }
 
         if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Enemy")))
         {
-            if (auto wander = otherObject->GetComponent<EnemyWanderComponent>()) {
-                if(!wander->IsCascading())
-                    m_CascadingEnemies.push_back(otherObject);
+            auto wander = otherObject->GetComponent<EnemyWanderComponent>();
+            if (wander && wander->IsCascading()) return;
 
+            if (std::find(m_CascadingEnemies.begin(), m_CascadingEnemies.end(), otherObject) == m_CascadingEnemies.end())
+            {
+                m_CascadingEnemies.push_back(otherObject);
             }
         }
     }

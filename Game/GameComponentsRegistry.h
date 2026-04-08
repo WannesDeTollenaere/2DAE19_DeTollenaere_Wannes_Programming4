@@ -38,6 +38,9 @@
 #include "DTO/EnemyWanderComponentDTO.h"
 #include "Components/ScoreVFXComponent.h"
 
+#include "DTO/PlateComponentDTO.h"
+#include "Components/Ingredients/PlateComponent.h"
+
 #include "ResourceManager.h"
 #include <SceneLoader.h> 
 #include <GameObject.h>
@@ -131,6 +134,13 @@ namespace dae
             SceneLoader::RegisterComponentParser("ScoreVfxSpawnerComponent", [](dae::GameObject* go, const nlohmann::json&) {
                 go->AddComponent<ScoreVfxSpawnerComponent>();
                 });
+
+            SceneLoader::RegisterComponentParser("PlateComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = PlateComponentDTO::FromJson(data);
+                go->AddComponent<PlateComponent>(dto.requiredIngredients);
+                }); 
+
+
         }
     };
 }

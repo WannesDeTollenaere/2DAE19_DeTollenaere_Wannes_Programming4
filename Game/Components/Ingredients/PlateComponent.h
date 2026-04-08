@@ -12,7 +12,6 @@ namespace dae
 
     protected:
         void OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp) override;
-        void OnCollisionExit(GameObject* otherObject, TagComponent* otherTagComp) override;
 
     private:
         int m_RequiredIngredients;

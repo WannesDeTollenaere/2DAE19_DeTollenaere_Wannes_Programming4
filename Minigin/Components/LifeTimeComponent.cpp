@@ -1,4 +1,4 @@
-#include "LifetimeComponent.h"
+#include "LifeTimeComponent.h"
 #include "GameObject.h"
 
 namespace dae

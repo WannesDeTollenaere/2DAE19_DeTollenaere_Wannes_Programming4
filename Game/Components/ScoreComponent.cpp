@@ -7,6 +7,7 @@
 #include "Components/Movement/EnemyWanderComponent.h"
 #include "sdbm_hash.h"
 #include "GameObject.h"
+#include "Events/BurgerCompletedEvent.h"
 
 namespace dae
 {
@@ -16,6 +17,7 @@ namespace dae
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("EnemyCrushed"), this);
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("BurgerDropped"), this);
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("BurgerCascaded"), this);
+        EventManager::GetInstance().AttachEvent(make_sdbm_hash("BurgerCompleted"), this);
     }
 
     ScoreComponent::~ScoreComponent()
@@ -23,6 +25,7 @@ namespace dae
         EventManager::GetInstance().DetachEvent(make_sdbm_hash("EnemyCrushed"), this);
         EventManager::GetInstance().DetachEvent(make_sdbm_hash("BurgerDropped"), this);
         EventManager::GetInstance().DetachEvent(make_sdbm_hash("BurgerCascaded"), this);
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash("BurgerCompleted"), this);
     }
 
     void ScoreComponent::HandleEvent(const Event* pEvent)
@@ -70,6 +73,12 @@ namespace dae
                 }
                 scoreChanged = true;
             }
+        }
+        // FINISHING BURGER
+        else if (pEvent->id == make_sdbm_hash("BurgerCompleted"))
+        {
+            m_score += 1000; 
+            scoreChanged = true;
         }
 
         // BROADCAST for scoredisplay

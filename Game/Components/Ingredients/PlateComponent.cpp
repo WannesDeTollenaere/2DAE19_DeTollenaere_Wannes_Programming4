@@ -20,9 +20,10 @@ namespace dae
             {
                 m_CaughtIngredients.push_back(otherObject);
 
-                if (m_CaughtIngredients.size() >= m_RequiredIngredients)
+                if (static_cast<int>(m_CaughtIngredients.size()) >= m_RequiredIngredients)
                 {
                     m_IsComplete = true;
+
 
                     BurgerCompletedEvent event(GetOwner());
                     EventManager::GetInstance().SendEvent(&event);

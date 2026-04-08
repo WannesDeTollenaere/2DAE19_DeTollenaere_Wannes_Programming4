@@ -13,7 +13,7 @@
 #include "Components/TextureComponent.h"
 #include "Components/PlayerCharacter/SaltComponent.h"
 #include "Commands/ThrowSaltCommand.h"
-#include "Components/LifetimeComponent.h"
+#include "Components/LifeTimeComponent.h"
 
 namespace dae
 {

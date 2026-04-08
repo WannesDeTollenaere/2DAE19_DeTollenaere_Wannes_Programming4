@@ -15,6 +15,7 @@ namespace dae
     {
         if (otherTagComp && otherTagComp->HasTag(dae::make_sdbm_hash_rt("Enemy")))
         {
+
             auto pEnemyWander = otherObject->GetComponent<EnemyWanderComponent>();
             if (pEnemyWander && !pEnemyWander->IsStunned() && !pEnemyWander->IsDead())
             {

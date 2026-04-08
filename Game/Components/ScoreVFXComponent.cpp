@@ -5,7 +5,7 @@
 #include "SceneManager.h"
 #include "Components/TextComponent.h"
 #include "Components/TextureComponent.h"
-#include "Components/LifetimeComponent.h" 
+#include "Components/LifeTimeComponent.h" 
 #include "ResourceManager.h"
 #include "GameObject.h"
 #include "GameTime.h"
