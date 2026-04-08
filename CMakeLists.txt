@@ -111,7 +111,24 @@ add_library(Minigin STATIC
  "Minigin/ObserverSys/Event.h" 
  "Minigin/ObserverSys/Observer.h" 
   
- "Minigin/ObserverSys/EventManager.h" "Minigin/Components/TagComponent.h" "Minigin/sdbm_hash.h" "Minigin/DTO/TagComponentDTO.h" "Minigin/SteamAchievements/Achievement.h" "Minigin/SteamAchievements/Achievement.cpp" "Minigin/Components/BoxColliderComponent.h" "Minigin/Components/BoxColliderComponent.cpp" "Minigin/CollisionManager.h" "Minigin/CollisionManager.cpp" "Minigin/DTO/BoxColliderComponentDTO.h" "Minigin/ObserverSys/CollisionEvent.h" "Minigin/Components/BaseCollisionHandler.h" "Minigin/Components/BaseCollisionHandler.cpp" "Minigin/Helpers/Spritesheet.h" "Minigin/Helpers/Spritesheet.cpp")
+ "Minigin/ObserverSys/EventManager.h" 
+ "Minigin/Components/TagComponent.h" 
+ "Minigin/sdbm_hash.h" 
+ "Minigin/DTO/TagComponentDTO.h" 
+ "Minigin/SteamAchievements/Achievement.h" 
+ "Minigin/SteamAchievements/Achievement.cpp" 
+ "Minigin/Components/BoxColliderComponent.h" 
+ "Minigin/Components/BoxColliderComponent.cpp" 
+ "Minigin/CollisionManager.h" 
+ "Minigin/CollisionManager.cpp" 
+ "Minigin/DTO/BoxColliderComponentDTO.h" 
+ "Minigin/ObserverSys/CollisionEvent.h" 
+ "Minigin/Components/BaseCollisionHandler.h" 
+ "Minigin/Components/BaseCollisionHandler.cpp" 
+ "Minigin/Helpers/Spritesheet.h" 
+ "Minigin/Helpers/Spritesheet.cpp" 
+ "Minigin/Components/LifeTimeComponent.h"
+"Minigin/Components/LifeTimeComponent.cpp")
 
 target_compile_features(Minigin PUBLIC cxx_std_20)
 
@@ -203,7 +220,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Events/EnemyCrushedEvent.h" 
  "Game/Components/PlayerCharacter/SaltComponent.h" 
  "Game/Components/PlayerCharacter/SaltComponent.cpp" 
- "Game/Commands/ThrowSaltCommand.h" "Game/Events/BurgerDroppedEvent.h" "Game/Events/BurgerCascadeEvent.h")
+ "Game/Commands/ThrowSaltCommand.h" "Game/Events/BurgerDroppedEvent.h" "Game/Events/BurgerCascadeEvent.h" "Game/Components/ScoreVFXComponent.h" "Game/Components/ScoreVFXComponent.cpp" "Game/Events/BurgerCompletedEvent.h" "Game/Components/Ingredients/PlateComponent.h" "Game/Components/Ingredients/PlateComponent.cpp")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

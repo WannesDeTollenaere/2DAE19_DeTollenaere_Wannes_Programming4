@@ -6,10 +6,9 @@
 
 namespace dae
 {
-    SaltComponent::SaltComponent(GameObject* pOwner, float lifetime)
-        : BaseCollisionHandler(pOwner), m_Lifetime(lifetime)
+    SaltComponent::SaltComponent(GameObject* pOwner)
+        : BaseCollisionHandler(pOwner)
     {
-        GameTime::GetInstance().AddTimer(m_Lifetime, [&]() { GetOwner()->Destroy(); });
     }
 
     void SaltComponent::OnCollision(GameObject* otherObject, TagComponent* otherTagComp)

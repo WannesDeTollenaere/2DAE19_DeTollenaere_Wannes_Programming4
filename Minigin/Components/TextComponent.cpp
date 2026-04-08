@@ -47,6 +47,7 @@ void dae::TextComponent::Update()
 
 void dae::TextComponent::Render() const
 {
+	if (!m_textureComponent) return;
 	m_textureComponent->Render();
 }
 

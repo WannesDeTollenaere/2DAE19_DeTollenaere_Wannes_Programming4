@@ -8,8 +8,11 @@
 
 namespace dae
 {
+    using TimerId = size_t;
+
     struct TimerHandle
     {
+        TimerId id;
         float timeLeft;
         float duration;
         bool isLooping;
@@ -64,12 +67,24 @@ namespace dae
 
         }
 
-        void AddTimer(float duration, std::function<void()> callback, bool loop = false)
+        TimerId AddTimer(float duration, std::function<void()> callback, bool loop = false)
         {
-            TimerHandle newTimer{ duration, duration, loop, std::move(callback), false };
-
+            TimerId id = ++m_NextTimerId;
+            TimerHandle newTimer{ id, duration, duration, loop, std::move(callback), false };
             m_Timers.push_back(std::move(newTimer));
-            
+            return id;
+        }
+
+        void RemoveTimer(TimerId id)
+        {
+            for (auto& timer : m_Timers)
+            {
+                if (timer.id == id)
+                {
+                    timer.isDone = true;
+                    break;
+                }
+            }
         }
 
         void ClearAllTimers()
@@ -120,8 +135,10 @@ namespace dae
         const float m_fixedTimeStep{ 0.02f }; // 50 updates per frame
         const int m_msPerFrame{ 6 };         // 144 fps
 
+
         std::chrono::time_point<std::chrono::high_resolution_clock> m_startTime;
         std::chrono::time_point<std::chrono::high_resolution_clock> m_lastFrameTime;
+        TimerId m_NextTimerId{ 0 };
 
         std::vector<TimerHandle> m_Timers;
     };

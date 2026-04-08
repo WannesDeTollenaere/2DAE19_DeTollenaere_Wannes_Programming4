@@ -36,6 +36,7 @@
 
 #include "Components/Movement/EnemyWanderComponent.h"
 #include "DTO/EnemyWanderComponentDTO.h"
+#include "Components/ScoreVFXComponent.h"
 
 #include "ResourceManager.h"
 #include <SceneLoader.h> 
@@ -125,6 +126,10 @@ namespace dae
                 auto wanderComp = go->AddComponent<EnemyWanderComponent>();
 
                 wanderComp->SetEnemyType(dto.type);
+                });
+
+            SceneLoader::RegisterComponentParser("ScoreVfxSpawnerComponent", [](dae::GameObject* go, const nlohmann::json&) {
+                go->AddComponent<ScoreVfxSpawnerComponent>();
                 });
         }
     };

@@ -13,6 +13,7 @@
 #include "Components/TextureComponent.h"
 #include "Components/PlayerCharacter/SaltComponent.h"
 #include "Commands/ThrowSaltCommand.h"
+#include "Components/LifetimeComponent.h"
 
 namespace dae
 {
@@ -91,7 +92,8 @@ namespace dae
         std::unordered_set<Tag> tags = { make_sdbm_hash_rt("Salt") };
         saltObj->AddComponent<TagComponent>(tags);
 
-        saltObj->AddComponent<SaltComponent>(0.4f);
+        saltObj->AddComponent<SaltComponent>();
+        saltObj->AddComponent<LifetimeComponent>(0.4f);
 
         scene->Add(std::move(saltObj));
     }

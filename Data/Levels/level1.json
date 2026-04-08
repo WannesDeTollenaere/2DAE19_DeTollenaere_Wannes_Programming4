@@ -2,6 +2,18 @@
   "name": "Level 1",
   "objects": [
     {
+      "name": "ScoreVfxManager",
+      "transform": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "components": [
+        {
+          "type": "ScoreVfxSpawnerComponent"
+        }
+      ]
+    },
+    {
       "name": "GridLevelManager",
       "transform": {
         "x": 0.0,
