@@ -1,0 +1,53 @@
+{
+  "name": "WinScene",
+  "objects": [
+    {
+      "name": "WinText",
+      "transform": {
+        "x": 180.0,
+        "y": 350.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent"
+        },
+        {
+          "type": "TextComponent",
+          "text": "YOU WIN!",
+          "font": "Lingua.otf",
+          "fontSize": 48,
+          "color": {
+            "r": 0,
+            "g": 255,
+            "b": 0,
+            "a": 255
+          }
+        }
+      ]
+    },
+    {
+      "name": "SubText",
+      "transform": {
+        "x": 160.0,
+        "y": 420.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent"
+        },
+        {
+          "type": "TextComponent",
+          "text": "All burgers are complete.",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          }
+        }
+      ]
+    }
+  ]
+}

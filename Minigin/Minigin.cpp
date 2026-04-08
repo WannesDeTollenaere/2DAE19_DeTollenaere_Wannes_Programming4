@@ -150,6 +150,7 @@ void dae::Minigin::RunOneFrame()
 	Renderer::GetInstance().Render();
 
 	// sleep if we finished the frame to fast (see slide 14/33 of game loop...)
+	SceneManager::GetInstance().HandleLateSceneTransition();
 	GameTime::GetInstance().Sleep();
 
 #if USE_STEAMWORKS

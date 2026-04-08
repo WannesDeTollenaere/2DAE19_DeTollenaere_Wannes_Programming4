@@ -27,8 +27,8 @@ void LoadGame()
 
     //g_AchievementManager = std::make_unique<dae::AchievementManager>();
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
-
-    dae::SceneLoader::LoadScene(scene, "Levels/level1.json");
+      
+    dae::SceneLoader::LoadScene(scene, "Levels/level1.json"); 
 }
 
 int main(int, char* [])
@@ -38,10 +38,10 @@ int main(int, char* [])
 #else
     std::filesystem::path data_location = "./Data/";
 #endif
-
+     
 
     dae::Minigin engine(data_location);
-
+     
     engine.Run(LoadGame);
 
     //g_AchievementManager.reset();
@@ -50,5 +50,5 @@ int main(int, char* [])
     dae::g_SteamAchievements = nullptr;
 #endif
 
-    return 0;
+    return 0; 
 }

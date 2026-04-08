@@ -9,7 +9,7 @@
 #include "ResourceManager.h"
 #include "GameObject.h"
 #include "GameTime.h"
-#include "Helpers/Spritesheet.h"
+#include "Helpers/Spritesheet.h"  
 
 namespace dae
 {

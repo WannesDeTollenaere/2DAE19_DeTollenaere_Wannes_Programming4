@@ -1,29 +1,31 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include <imgui.h>
+#include <iostream>
+#include "SceneLoader.h"
 
 void dae::SceneManager::FixedUpdate()
 {
-	for (auto& scene : m_scenes)
-	{
-		scene->FixedUpdate();
-	}
+    for (auto& scene : m_scenes)
+    {
+        scene->FixedUpdate();
+    }
 }
 
 void dae::SceneManager::Update()
 {
-	for(auto& scene : m_scenes)
-	{
-		scene->Update();
-	}
+    for (auto& scene : m_scenes)
+    {
+        scene->Update();
+    }
 }
 
 void dae::SceneManager::Render()
 {
-	for (const auto& scene : m_scenes)
-	{
-		scene->Render();
-	}
+    for (const auto& scene : m_scenes)
+    {
+        scene->Render();
+    }
 }
 
 void dae::SceneManager::RenderGUI()
@@ -57,6 +59,27 @@ void dae::SceneManager::RenderGUI()
 
 dae::Scene& dae::SceneManager::CreateScene()
 {
-	m_scenes.emplace_back(new Scene());
-	return *m_scenes.back();
+    m_scenes.emplace_back(new Scene());
+    return *m_scenes.back();
+}
+
+
+void dae::SceneManager::SetActiveScene(const std::string& sceneName)
+{
+    m_SceneToLoad = sceneName;
+    m_LoadSceneNextFrame = true;
+}
+
+void dae::SceneManager::HandleLateSceneTransition()
+{
+    if (m_LoadSceneNextFrame)
+    {
+        Clear();
+
+        auto& scene = CreateScene();
+
+        dae::SceneLoader::LoadScene(scene, m_SceneToLoad);
+
+        m_LoadSceneNextFrame = false;
+    }
 }

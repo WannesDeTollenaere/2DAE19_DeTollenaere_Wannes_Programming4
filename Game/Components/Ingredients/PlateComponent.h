@@ -8,7 +8,7 @@ namespace dae
     {
     public:
         PlateComponent(GameObject* owner, int requiredIngredients = 3);
-        void Update() override {}
+        void RenderGUI() override;
 
     protected:
         void OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp) override;
@@ -17,5 +17,7 @@ namespace dae
         int m_RequiredIngredients;
         std::vector<GameObject*> m_CaughtIngredients;
         bool m_IsComplete{ false };
+
+        void CalculateColliderHeight();
     };
 }

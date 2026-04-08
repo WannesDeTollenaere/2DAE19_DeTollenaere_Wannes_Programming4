@@ -22,7 +22,7 @@ namespace dae
         m_SteppedSegments.resize(m_WidthInTiles, false);
     }
 
-    void BurgerIngredientComponent::Update()
+    void BurgerIngredientComponent::Update() 
     {
         if (m_IsFalling)
         {
@@ -206,6 +206,8 @@ namespace dae
         int col = static_cast<int>(pos.x / tileSize);
 
         int targetRow = currentRow + 1;
+        bool foundHit = false;
+
         // check if under player is a platform or intersection - sort of raycast
         while (targetRow < grid.GetRows())
         {
@@ -213,11 +215,12 @@ namespace dae
 
             if (type == dae::TileType::Platform || type == dae::TileType::Intersection)
             {
+                foundHit = true;
                 break;
             }
             targetRow++;
         }
-        if (targetRow == currentRow + 1)
+        if (!foundHit)
             return FLT_MAX;
 
         return targetRow * tileSize + tileSize/2;

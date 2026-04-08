@@ -12,7 +12,7 @@ void dae::Transform::SetLocalPosition(const float x, const float y, const float 
 
 void dae::Transform::SetLocalPosition(const glm::vec3& position)
 {
-	m_localPosition = position;
+	m_localPosition = position; 
 	SetPositionDirty();
 }
 

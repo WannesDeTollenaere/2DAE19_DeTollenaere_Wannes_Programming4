@@ -22,12 +22,19 @@ namespace dae
         AABB GetAABB() const;
         GameObject* GetGameObject() const { return GetOwner(); };
 
+        void SetHeight(float height) { m_height = height; }
+        void SetWidth(float width) { m_width = width; }
+        void SetOffset(float offsetX, float offsetY) { m_offsetX = offsetX; m_offsetY = offsetY; }
+        float GetHeight() const { return m_height; }
+
         virtual void RenderGUI() override;
 
         bool IsOverlapping(const BoxColliderComponent* other) const;
     private:
         float m_width;
         float m_height;
+        float m_offsetX{ 0.0f };
+        float m_offsetY{ 0.0f };
         bool m_ShowDebug{ true };
 
     };

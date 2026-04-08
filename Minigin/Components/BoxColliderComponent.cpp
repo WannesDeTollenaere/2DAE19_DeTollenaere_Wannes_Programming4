@@ -21,16 +21,16 @@ namespace dae
         const auto& pos = GetOwner()->GetTransform().GetWorldPosition();
 
         return AABB{
-            pos.x,
-            pos.y,
+            pos.x + m_offsetX,
+            pos.y + m_offsetY,
             m_width,
             m_height
         };
     }
 
+
     void BoxColliderComponent::RenderGUI()
     {
-
         ImGui::Checkbox("Show Collider", &m_ShowDebug);
 
         ImGui::Separator();
@@ -42,22 +42,29 @@ namespace dae
             m_height = size[1];
         }
 
+        float offset[2] = { m_offsetX, m_offsetY };
+        if (ImGui::DragFloat2("Offset (X, Y)", offset, 1.0f))
+        {
+            m_offsetX = offset[0];
+            m_offsetY = offset[1];
+        }
+
         ImGui::Text("Area: %.1f sqr px", m_width * m_height);
 
         if (m_ShowDebug)
         {
             const auto& pos = GetOwner()->GetTransform().GetWorldPosition();
 
-            ImVec2 rect_min = ImVec2(pos.x, pos.y);
-            ImVec2 rect_max = ImVec2(pos.x + m_width, pos.y + m_height);
+            ImVec2 rect_min = ImVec2(pos.x + m_offsetX, pos.y + m_offsetY);
+            ImVec2 rect_max = ImVec2(pos.x + m_offsetX + m_width, pos.y + m_offsetY + m_height);
 
             ImGui::GetForegroundDrawList()->AddRect(
                 rect_min,
                 rect_max,
-                IM_COL32(0, 255, 0, 255), 
-                0.0f,                     
-                0,                        
-                2.0f                 
+                IM_COL32(0, 255, 0, 255),
+                0.0f,
+                0,
+                2.0f
             );
         }
     }

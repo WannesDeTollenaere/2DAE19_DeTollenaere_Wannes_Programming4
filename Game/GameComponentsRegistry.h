@@ -41,6 +41,8 @@
 #include "DTO/PlateComponentDTO.h"
 #include "Components/Ingredients/PlateComponent.h"
 
+#include "Components/PlayerCharacter/WinConditionComponent.h"
+
 #include "ResourceManager.h"
 #include <SceneLoader.h> 
 #include <GameObject.h>
@@ -140,7 +142,13 @@ namespace dae
                 go->AddComponent<PlateComponent>(dto.requiredIngredients);
                 }); 
 
+            SceneLoader::RegisterComponentParser("WinConditionComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                int totalBurgers = data.value("totalBurgers", 4);
+                std::string winScene = data.value("winScene", "WinScene"); 
 
+                go->AddComponent<WinConditionComponent>(totalBurgers, winScene);
+                });
         }
     };
 }
+ 
