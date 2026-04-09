@@ -72,33 +72,51 @@ namespace dae
 
     void EnemyWanderComponent::PickNewDirection()
     {
-        float randomChoice = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
-
-        // wander randomly chance
-        if (!m_pPlayer || randomChoice < m_RandomWanderChance)
-        {
-            m_Path.clear();
-
-            int randDir = std::rand() % 4;
-            switch (randDir)
-            {
-            case 0: m_CurrentDirection = glm::vec2(0.0f, -1.0f); break;
-            case 1: m_CurrentDirection = glm::vec2(0.0f, 1.0f); break;
-            case 2: m_CurrentDirection = glm::vec2(-1.0f, 0.0f); break;
-            case 3: m_CurrentDirection = glm::vec2(1.0f, 0.0f); break;
-            }
-            return;
-        }
-
-        // BFS
         auto& grid = LevelGrid::GetInstance();
         float tileSize = grid.GetTileSize();
 
         auto pos = GetOwner()->GetTransform().GetLocalPosition();
-        auto playerPos = m_pPlayer->GetTransform().GetLocalPosition();
-
         int startX = static_cast<int>((pos.x + tileSize / 2.0f) / tileSize);
         int startY = static_cast<int>((pos.y + tileSize / 2.0f) / tileSize);
+
+        TileType startTile = grid.GetTile(startX, startY);
+        std::vector<glm::ivec2> startNeighbors;
+
+        if (grid.IsWalkableHorizontal(startTile))
+        {
+            if (grid.GetTile(startX - 1, startY) != TileType::Empty) startNeighbors.push_back({ startX - 1, startY });
+            if (grid.GetTile(startX + 1, startY) != TileType::Empty) startNeighbors.push_back({ startX + 1, startY });
+        }
+        if (grid.IsClimbable(startTile))
+        {
+            if (grid.GetTile(startX, startY - 1) != TileType::Empty) startNeighbors.push_back({ startX, startY - 1 });
+            if (grid.GetTile(startX, startY + 1) != TileType::Empty) startNeighbors.push_back({ startX, startY + 1 });
+        }
+
+        // prevent 180 degree turns unless stuck
+        glm::ivec2 reverseTile = { startX - static_cast<int>(m_CurrentDirection.x), startY - static_cast<int>(m_CurrentDirection.y) };
+        if (startNeighbors.size() > 1)
+        {
+            startNeighbors.erase(std::remove_if(startNeighbors.begin(), startNeighbors.end(), [&](const glm::ivec2& n) {
+                return n.x == reverseTile.x && n.y == reverseTile.y;
+                }), startNeighbors.end());
+        }
+
+        if (startNeighbors.empty()) return; 
+
+        // random wander chance
+        float randomChoice = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
+        if (!m_pPlayer || randomChoice < m_RandomWanderChance)
+        {
+            m_Path.clear();
+            int randIdx = std::rand() % startNeighbors.size();
+            glm::ivec2 chosen = startNeighbors[randIdx];
+            m_CurrentDirection = glm::vec2(static_cast<float>(chosen.x - startX), static_cast<float>(chosen.y - startY));
+            return;
+        }
+
+        // BFS
+        auto playerPos = m_pPlayer->GetTransform().GetLocalPosition();
         int targetX = static_cast<int>((playerPos.x + tileSize / 2.0f) / tileSize);
         int targetY = static_cast<int>((playerPos.y + tileSize / 2.0f) / tileSize);
 
@@ -122,24 +140,32 @@ namespace dae
                 break;
             }
 
-            TileType currentTile = grid.GetTile(current.x, current.y);
             std::vector<glm::ivec2> neighbors;
 
-            if (grid.IsWalkableHorizontal(currentTile))
+            // prevent turning around
+            if (current.x == startX && current.y == startY)
             {
-                if (grid.GetTile(current.x - 1, current.y) != TileType::Empty) neighbors.push_back({ current.x - 1, current.y });
-                if (grid.GetTile(current.x + 1, current.y) != TileType::Empty) neighbors.push_back({ current.x + 1, current.y });
+                neighbors = startNeighbors;
             }
-            if (grid.IsClimbable(currentTile))
+            else
             {
-                if (grid.GetTile(current.x, current.y - 1) != TileType::Empty) neighbors.push_back({ current.x, current.y - 1 });
-                if (grid.GetTile(current.x, current.y + 1) != TileType::Empty) neighbors.push_back({ current.x, current.y + 1 });
+                TileType currentTile = grid.GetTile(current.x, current.y);
+                if (grid.IsWalkableHorizontal(currentTile))
+                {
+                    if (grid.GetTile(current.x - 1, current.y) != TileType::Empty) neighbors.push_back({ current.x - 1, current.y });
+                    if (grid.GetTile(current.x + 1, current.y) != TileType::Empty) neighbors.push_back({ current.x + 1, current.y });
+                }
+                if (grid.IsClimbable(currentTile))
+                {
+                    if (grid.GetTile(current.x, current.y - 1) != TileType::Empty) neighbors.push_back({ current.x, current.y - 1 });
+                    if (grid.GetTile(current.x, current.y + 1) != TileType::Empty) neighbors.push_back({ current.x, current.y + 1 });
+                }
             }
 
             for (const auto& next : neighbors)
             {
                 int nextIdx = next.y * grid.GetCols() + next.x;
-                if (cameFrom.find(nextIdx) == cameFrom.end()) // if not visited
+                if (cameFrom.find(nextIdx) == cameFrom.end()) 
                 {
                     frontier.push(next);
                     cameFrom[nextIdx] = current;
@@ -147,7 +173,6 @@ namespace dae
             }
         }
 
-        // backtrack path
         m_Path.clear();
 
         if (found)
@@ -173,15 +198,9 @@ namespace dae
         }
         else
         {
-            // default to wandering if path is blocked completely
-            int randDir = std::rand() % 4;
-            switch (randDir)
-            {
-            case 0: m_CurrentDirection = glm::vec2(0.0f, -1.0f); break;
-            case 1: m_CurrentDirection = glm::vec2(0.0f, 1.0f); break;
-            case 2: m_CurrentDirection = glm::vec2(-1.0f, 0.0f); break;
-            case 3: m_CurrentDirection = glm::vec2(1.0f, 0.0f); break;
-            }
+            int randIdx = std::rand() % startNeighbors.size();
+            glm::ivec2 chosen = startNeighbors[randIdx];
+            m_CurrentDirection = glm::vec2(static_cast<float>(chosen.x - startX), static_cast<float>(chosen.y - startY));
         }
     }
     
