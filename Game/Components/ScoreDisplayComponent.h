@@ -21,6 +21,6 @@ namespace dae
         Tag m_TargetTag;
         GameObject* m_targetPlayer{ nullptr };
         TextComponent* m_textComponent{ nullptr };
-        bool m_textIsInvalid{ true };
+        bool m_textIsInvalid{ true }; 
     };
 }

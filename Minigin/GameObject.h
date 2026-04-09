@@ -79,7 +79,7 @@ namespace dae
 		void SetParent(GameObject* parent, bool keepWorldTransform = false);
 		int GetChildCount() const { return static_cast<int>(m_children.size()); }
 		GameObject* GetChildAt(int index) const;
-
+		std::vector<GameObject*> GetChildren() const { return m_children; }
 
 	private:
 		Transform m_transform;

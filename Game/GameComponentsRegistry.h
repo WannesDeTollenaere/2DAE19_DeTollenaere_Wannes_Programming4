@@ -43,6 +43,8 @@
 
 #include "Components/PlayerCharacter/WinConditionComponent.h"
 
+#include "Components/PlayerCharacter/SaltDisplayComponent.h"
+
 #include "ResourceManager.h"
 #include <SceneLoader.h> 
 #include <GameObject.h>
@@ -69,7 +71,7 @@ namespace dae
 
             SceneLoader::RegisterComponentParser("HealthDisplayComponent", [](dae::GameObject* go, const nlohmann::json& data) {
                 auto dto = LivesDisplayComponentDTO::FromJson(data);
-                go->AddComponent<HealthDisplayComponent>(dto.startingLives, dae::make_sdbm_hash_rt(dto.targetTag));
+                go->AddComponent<HealthDisplayComponent>();
                 });
 
             SceneLoader::RegisterComponentParser("ScoreDisplayComponent", [](dae::GameObject* go, const nlohmann::json& data) {
@@ -147,6 +149,9 @@ namespace dae
                 std::string winScene = data.value("winScene", "WinScene"); 
 
                 go->AddComponent<WinConditionComponent>(totalBurgers, winScene);
+                });
+            SceneLoader::RegisterComponentParser("SaltDisplayComponent", [](dae::GameObject* go, const nlohmann::json&) {
+                go->AddComponent<SaltDisplayComponent>();
                 });
         }
     };

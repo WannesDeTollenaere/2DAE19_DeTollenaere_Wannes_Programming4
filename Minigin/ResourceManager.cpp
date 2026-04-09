@@ -61,20 +61,20 @@ nlohmann::json dae::ResourceManager::LoadJson(const std::string& file)
 	const auto fullPath = m_dataPath / file;
 	std::ifstream inputStream(fullPath);
 
-	if (!inputStream.is_open())
+	if (!inputStream.is_open()) 
 	{
 		throw std::runtime_error(std::string("Failed to load JSON file: ") + fullPath.string());
 	}
 
 	nlohmann::json jsonObject;
-	inputStream >> jsonObject;
-	return jsonObject;
+ 	inputStream >> jsonObject;
+	return jsonObject; 
 }
 void dae::ResourceManager::UnloadUnusedResources()
 {
 	for (auto it = m_loadedTextures.begin(); it != m_loadedTextures.end();)
 	{
-		if (it->second.use_count() == 1)
+		if (it->second.use_count() == 1) 
 			it = m_loadedTextures.erase(it);
 		else
 			++it;

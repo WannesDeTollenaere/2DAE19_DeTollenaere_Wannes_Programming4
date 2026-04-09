@@ -220,7 +220,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Events/EnemyCrushedEvent.h" 
  "Game/Components/PlayerCharacter/SaltComponent.h" 
  "Game/Components/PlayerCharacter/SaltComponent.cpp" 
- "Game/Commands/ThrowSaltCommand.h" "Game/Events/BurgerDroppedEvent.h" "Game/Events/BurgerCascadeEvent.h" "Game/Components/ScoreVFXComponent.h" "Game/Components/ScoreVFXComponent.cpp" "Game/Events/BurgerCompletedEvent.h" "Game/Components/Ingredients/PlateComponent.h" "Game/Components/Ingredients/PlateComponent.cpp" "Game/DTO/PlateComponentDTO.h" "Game/Components/PlayerCharacter/WinConditionComponent.h" "Game/Components/PlayerCharacter/WinConditionComponent.cpp" "Game/GameManager.h")
+ "Game/Commands/ThrowSaltCommand.h" "Game/Events/BurgerDroppedEvent.h" "Game/Events/BurgerCascadeEvent.h" "Game/Components/ScoreVFXComponent.h" "Game/Components/ScoreVFXComponent.cpp" "Game/Events/BurgerCompletedEvent.h" "Game/Components/Ingredients/PlateComponent.h" "Game/Components/Ingredients/PlateComponent.cpp" "Game/DTO/PlateComponentDTO.h" "Game/Components/PlayerCharacter/WinConditionComponent.h" "Game/Components/PlayerCharacter/WinConditionComponent.cpp" "Game/GameManager.h" "Game/Events/SaltThrownEvent.h" "Game/GameManager.cpp" "Game/Helpers/PrefabFactory.h" "Game/Helpers/PrefabFactory.cpp" "Game/Events/SaltChangedEvent.h" "Game/Components/PlayerCharacter/SaltDisplayComponent.h" "Game/Components/PlayerCharacter/SaltDisplayComponent.cpp"  "Game/Events/LivesChangedEvent.h" "Game/Events/LivesLostEvent.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

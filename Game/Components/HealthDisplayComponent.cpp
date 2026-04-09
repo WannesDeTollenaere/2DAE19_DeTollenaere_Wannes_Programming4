@@ -1,57 +1,44 @@
 #include "HealthDisplayComponent.h"
 #include "GameObject.h"
-#include "Events/PlayerTookDamageEvent.h"
-#include "sdbm_hash.h"
+#include "ObserverSys/EventManager.h"
+#include "Events/LivesChangedEvent.h"
+#include "GameManager.h"
 
-dae::HealthDisplayComponent::HealthDisplayComponent(GameObject* owner, int startingLives, Tag targetPlayer) :
-	Component(owner),
-	m_targetPlayer{ TagComponent::FindGameObject(targetPlayer) },
-	m_TargetTag{targetPlayer},
-	m_lives{ startingLives }
+namespace dae
 {
-	EventManager::GetInstance().AttachEvent(make_sdbm_hash("PlayerTookDamage"), this);
-}
+    HealthDisplayComponent::HealthDisplayComponent(GameObject* pOwner)
+        : Component(pOwner)
+    {
+        EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("LivesChanged"), this);
+        m_Lives = GameManager::GetInstance().GetLives();
+        UpdateVisuals();
+    }
 
-dae::HealthDisplayComponent::~HealthDisplayComponent()
-{
-	EventManager::GetInstance().DetachEvent(make_sdbm_hash("PlayerTookDamage"), this);
-}
+    HealthDisplayComponent::~HealthDisplayComponent()
+    {
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash_rt("LivesChanged"), this);
+    }
 
+    void HealthDisplayComponent::HandleEvent(const Event* event)
+    {
+        if (auto pEvent = dynamic_cast<const LivesChangedEvent*>(event))
+        {
+            m_Lives = pEvent->lives;
+            UpdateVisuals();
+        }
+    }
 
-void dae::HealthDisplayComponent::HandleEvent(const Event* pEvent)
-{
-	if (m_targetPlayer == nullptr)
-	{
-		m_targetPlayer = TagComponent::FindGameObject(m_TargetTag);
-		if (m_targetPlayer == nullptr) return;
-	}
+    void HealthDisplayComponent::UpdateVisuals()
+    {
+      
+        const auto children = GetOwner()->GetChildren();
 
-	switch (pEvent->id)
-	{
-	case make_sdbm_hash("PlayerTookDamage"):
-		const PlayerTookDamageEvent* pDiedEvent = dynamic_cast<const PlayerTookDamageEvent*>(pEvent);
-
-		if (pDiedEvent)
-		{
-			if (pDiedEvent->obj == m_targetPlayer)
-			{
-				m_lives = pDiedEvent->currentHp;
-				m_textIsInvalid = true;
-			}
-		}
-		break;
-	}
-}
-
-void dae::HealthDisplayComponent::Update()
-{
-	if (!m_textIsInvalid) return;
-	if (!m_textComponent)
-	{
-		m_textComponent = GetOwner()->GetComponent<TextComponent>();
-		return;
-	}
-
-	m_textComponent->SetText("Lives: " + std::to_string(m_lives));
-	m_textIsInvalid = false;
+        for (size_t i = 0; i < children.size(); ++i)
+        {
+            if (children[i])
+            {
+                children[i]->SetActive(i < static_cast<size_t>(m_Lives));
+            }
+        }
+    }
 }

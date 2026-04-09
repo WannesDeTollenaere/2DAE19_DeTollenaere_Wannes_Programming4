@@ -24,7 +24,7 @@ namespace dae
     void ScoreDisplayComponent::HandleEvent(const Event* pEvent)
     {
         if (m_targetPlayer == nullptr)
-        {
+        {  
             m_targetPlayer = TagComponent::FindGameObject(m_TargetTag);
             if (m_targetPlayer == nullptr) return;
         }
@@ -50,10 +50,10 @@ namespace dae
             m_textComponent = GetOwner()->GetComponent<TextComponent>();
             m_textIsInvalid = true;
         }
-
+         
         if (!m_textIsInvalid) return;
 
-        m_textComponent->SetText("Score: " + std::to_string(m_currentScore));
+        m_textComponent->SetText(std::to_string(m_currentScore));
         m_textIsInvalid = false;
     }
 }

@@ -28,7 +28,7 @@ namespace dae
     private:
         void StartFalling();
         void HandleFalling(float deltaTime); 
-        float FindNextPlatformY();
+        float FindNextPlatformY(int levelsToDrop);
 
         int m_WidthInTiles;
         std::vector<bool> m_SteppedSegments;

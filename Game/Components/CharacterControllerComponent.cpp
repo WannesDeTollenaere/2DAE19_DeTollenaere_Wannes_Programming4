@@ -14,14 +14,19 @@
 #include "Components/PlayerCharacter/SaltComponent.h"
 #include "Commands/ThrowSaltCommand.h"
 #include "Components/LifeTimeComponent.h"
+#include "GameManager.h"
+#include "ObserverSys/EventManager.h"
+#include "Events/SaltThrownEvent.h"
+#include "Helpers/PrefabFactory.h"
+#include "Components/Movement/EnemyWanderComponent.h"
 
 namespace dae
 {
     CharacterControllerComponent::CharacterControllerComponent(GameObject* owner, float, bool useKeyboard, int controllerIndex)
-        : Component(owner), m_useKeyboard(useKeyboard), m_controllerIndex(controllerIndex)
+        : BaseCollisionHandler(owner), m_useKeyboard(useKeyboard), m_controllerIndex(controllerIndex)
     {
         m_Anim = GetOwner()->GetComponent<AnimatorComponent>();
-
+        m_SpawnPosition = GetOwner()->GetTransform().GetLocalPosition();
         auto& input = InputManager::GetInstance();
 
         if (m_useKeyboard)
@@ -52,6 +57,20 @@ namespace dae
         input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::Y, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 10));
         input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::B, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 100));
     }
+    void CharacterControllerComponent::OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp)
+    {
+        if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Enemy")))
+        {
+            auto enemyWander = otherObject->GetComponent<EnemyWanderComponent>();
+
+            if (enemyWander && !enemyWander->IsStunned() && !enemyWander->IsDead())
+            {
+                GameManager::GetInstance().LoseLife();
+
+                GetOwner()->GetTransform().SetLocalPosition(m_SpawnPosition);
+            }
+        }
+    }
     void CharacterControllerComponent::Update()
     {
         if (!m_Anim) return;
@@ -66,35 +85,22 @@ namespace dae
 
     void dae::CharacterControllerComponent::ThrowSalt()
     {
+        if (GameManager::GetInstance().GetSalt() <= 0) return;
+
         auto scene = SceneManager::GetInstance().GetActiveScene();
         if (!scene) return;
 
-        auto saltObj = std::make_unique<GameObject>("SaltProjectile");
-
         auto playerPos = GetOwner()->GetTransform().GetWorldPosition();
         float tileSize = LevelGrid::GetInstance().GetTileSize();
-
-        saltObj->GetTransform().SetLocalPosition(
+        glm::vec3 spawnPos{
             playerPos.x + m_FacingDirection.x * tileSize,
             playerPos.y + m_FacingDirection.y * tileSize,
             0.0f
-        );
+        };
 
-        auto tex = saltObj->AddComponent<TextureComponent>();
-        tex->SetTexture("burger_time_spritesheet_x3.png");
+        scene->Add(PrefabFactory::CreateSaltProjectile(spawnPos));
 
-        auto anim = saltObj->AddComponent<AnimatorComponent>(48, 48); 
-        anim->AddAnimation("Splash", { 1, 12, 4, 0.1f, false }); 
-        anim->PlayAnimation("Splash");
-
-        saltObj->AddComponent<BoxColliderComponent>(tileSize, tileSize);
-
-        std::unordered_set<Tag> tags = { make_sdbm_hash_rt("Salt") };
-        saltObj->AddComponent<TagComponent>(tags);
-
-        saltObj->AddComponent<SaltComponent>();
-        saltObj->AddComponent<LifetimeComponent>(0.4f);
-
-        scene->Add(std::move(saltObj));
+        dae::SaltThrownEvent saltEvent;
+        dae::EventManager::GetInstance().SendEvent(&saltEvent);
     }
 }

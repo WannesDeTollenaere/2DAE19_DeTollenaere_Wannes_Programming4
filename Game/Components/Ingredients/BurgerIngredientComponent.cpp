@@ -146,7 +146,8 @@ namespace dae
         if (m_IsInPlate) return;
 
         m_IsFalling = true;
-        m_TargetDropY = FindNextPlatformY();
+        int levelsToDrop = 1 + static_cast<int>(m_CascadingEnemies.size());
+        m_TargetDropY = FindNextPlatformY(levelsToDrop);
         std::fill(m_SteppedSegments.begin(), m_SteppedSegments.end(), false);
 
         for (auto enemy : m_CascadingEnemies)
@@ -179,10 +180,11 @@ namespace dae
             m_IsFalling = false;
             for (auto enemy : m_CascadingEnemies)
             {
-                if (auto wander = enemy->GetComponent<EnemyWanderComponent>()) {
-                    wander->EnableMovement();
-                }
+                dae::EnemyCrushedEvent crushEvent(enemy);
+                EventManager::GetInstance().SendEvent(&crushEvent);
             }
+
+            m_CascadingEnemies.clear();
         }
 
         GetOwner()->GetTransform().SetLocalPosition(pos.x, pos.y, pos.z);
@@ -195,7 +197,7 @@ namespace dae
         }
     }
 
-    float BurgerIngredientComponent::FindNextPlatformY()
+    float BurgerIngredientComponent::FindNextPlatformY(int levelsToDrop)
     {
         auto& grid = dae::LevelGrid::GetInstance();
         float tileSize = grid.GetTileSize();
@@ -206,7 +208,9 @@ namespace dae
         int col = static_cast<int>(pos.x / tileSize);
 
         int targetRow = currentRow + 1;
-        bool foundHit = false;
+
+        int platformsFound = 0;
+        float lastFoundY = FLT_MAX;
 
         // check if under player is a platform or intersection - sort of raycast
         while (targetRow < grid.GetRows())
@@ -215,15 +219,18 @@ namespace dae
 
             if (type == dae::TileType::Platform || type == dae::TileType::Intersection)
             {
-                foundHit = true;
-                break;
+                platformsFound++;
+                lastFoundY = targetRow * tileSize + tileSize / 2;
+
+                if (platformsFound >= levelsToDrop)
+                {
+                    return lastFoundY;
+                }
             }
             targetRow++;
         }
-        if (!foundHit)
-            return FLT_MAX;
 
-        return targetRow * tileSize + tileSize/2;
+        return FLT_MAX;
     }
     void BurgerIngredientComponent::OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp)
     {

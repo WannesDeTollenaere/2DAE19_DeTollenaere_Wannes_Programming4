@@ -11,6 +11,7 @@
 #include "Components/BoxColliderComponent.h"
 #include "ObserverSys/EventManager.h"
 #include "Events/EnemyCrushedEvent.h"
+#include "Events/LivesLostEvent.h"
 
 namespace dae
 {
@@ -18,6 +19,7 @@ namespace dae
         : Component(pOwner)
     {
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("EnemyCrushed"), this);
+        EventManager::GetInstance().AttachEvent(make_sdbm_hash("LivesLost"), this);
 
         m_OriginalSpawnPosition = GetOwner()->GetTransform().GetLocalPosition();
     }
@@ -25,6 +27,7 @@ namespace dae
     EnemyWanderComponent::~EnemyWanderComponent()
     {
         EventManager::GetInstance().DetachEvent(make_sdbm_hash("EnemyCrushed"), this);
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash("LivesLost"), this);
     }
 
     void EnemyWanderComponent::Update()
@@ -273,6 +276,14 @@ namespace dae
             {
                 Die();
             }
+            return;
+        }
+        auto livesEvent = dynamic_cast<const LivesLostEvent*>(event);
+
+        if (livesEvent)
+        {
+            Respawn(); 
+            return;
         }
     }
     void EnemyWanderComponent::Die()

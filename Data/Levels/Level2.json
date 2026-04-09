@@ -84,6 +84,63 @@
           ]
         },
         {
+          "name": "SaltUI",
+          "transform": { "x": 10.0, "y": 40.0 },
+          "components": [
+            { "type": "TextureComponent" },
+            {
+              "type": "TextComponent",
+              "text": "Salt: 5",
+              "font": "Lingua.otf",
+              "fontSize": 24,
+              "color": { "r": 255, "g": 255, "b": 255, "a": 255 }
+            },
+            { "type": "SaltDisplayComponent" }
+          ]
+        },
+        {
+          "name": "LivesUI",
+          "transform": { "x": 10.0, "y": 70.0 },
+          "components": [
+            { "type": "HealthDisplayComponent" }
+          ],
+          "children": [
+            {
+              "name": "Life_1",
+              "transform": { "x": 0.0, "y": 0.0 },
+              "components": [
+                {
+                  "type": "TextureComponent",
+                  "texture": "burger_time_spritesheet_x3.png",
+                  "spriteSheet": { "frameWidth": 24, "frameHeight": 24, "row": 0, "col": 25 }
+                }
+              ]
+            },
+            {
+              "name": "Life_2",
+              "transform": { "x": 48.0, "y": 0.0 },
+              "components": [
+                {
+                  "type": "TextureComponent",
+                  "texture": "burger_time_spritesheet_x3.png",
+                  "spriteSheet": { "frameWidth": 48, "frameHeight": 48, "row": 0, "col": 25 }
+                }
+              ]
+            },
+            {
+              "name": "Life_3",
+              "transform": { "x": 96.0, "y": 0.0 },
+              "components": [
+                {
+                  "type": "TextureComponent",
+                  "texture": "burger_time_spritesheet_x3.png",
+                  "spriteSheet": { "frameWidth": 48, "frameHeight": 48, "row": 0, "col": 25 }
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "Player",
           "transform": { "x": 480.0, "y": 504.0 },
           "components": [

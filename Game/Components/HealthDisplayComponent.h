@@ -1,31 +1,19 @@
 #pragma once
-#include <Component.h>
-#include "ObserverSys/EventManager.h"
+#include "Component.h"
 #include "ObserverSys/Observer.h"
-#include "Components/TextComponent.h"
-#include <string>
-#include <Components/TagComponent.h>
 
 namespace dae
 {
-	class GameObject;
+    class HealthDisplayComponent final : public Component, public Observer
+    {
+    public:
+        HealthDisplayComponent(GameObject* pOwner);
+        ~HealthDisplayComponent();
 
-	class HealthDisplayComponent final : public Component, public Observer
-	{
-	public:
-		HealthDisplayComponent(GameObject* owner, int startingLives, Tag targetPlayer);
-		~HealthDisplayComponent();
+        void HandleEvent(const Event* event) override;
 
-		void HandleEvent(const Event* pEvent) override;
-
-		void Update() override;
-
-
-	private:
-		bool m_textIsInvalid{ true };
-		GameObject* m_targetPlayer;
-		Tag m_TargetTag;
-		int m_lives;
-		TextComponent* m_textComponent{ nullptr };
-	};
+    private:
+        void UpdateVisuals();
+        int m_Lives;
+    };
 }
