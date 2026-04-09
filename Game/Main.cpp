@@ -12,6 +12,7 @@
 #if USE_STEAMWORKS
 #include "Achievements/BurgerTimeAchievements.h"
 #include "SteamAchievements/Achievement.h"
+#include "Renderer.h"
 #endif
 
 
@@ -29,6 +30,8 @@ void LoadGame()
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
       
     dae::SceneLoader::LoadScene(scene, "Levels/level1.json"); 
+
+    dae::Renderer::GetInstance().SetBackgroundColor(SDL_Color{ 0, 0, 0, 255 });
 }
 
 int main(int, char* [])

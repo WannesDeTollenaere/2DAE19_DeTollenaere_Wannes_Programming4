@@ -18,6 +18,9 @@ namespace dae
 
         void OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp) override;
         void Update() override;
+
+        void Die();
+        bool IsDead() const { return m_IsDead; }
     private:
         bool m_useKeyboard;
         int m_controllerIndex;
@@ -26,5 +29,7 @@ namespace dae
         glm::vec3 m_LastPosition{};
         glm::vec3 m_SpawnPosition{};
         glm::vec2 m_FacingDirection{ 1.0f, 0.0f };
+
+        bool m_IsDead{ false };
     };
 }
