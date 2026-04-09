@@ -122,7 +122,7 @@ namespace dae
         }
          
         dae::GameTime::GetInstance().AddTimer(1.5f, [&]() {
-            //dae::GameManager::GetInstance().LoseLife();
+            dae::GameManager::GetInstance().LoseLife();
             m_IsDead = false;
             GetOwner()->GetTransform().SetLocalPosition(m_SpawnPosition);
             
