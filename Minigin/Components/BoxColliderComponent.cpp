@@ -31,6 +31,8 @@ namespace dae
 
     void BoxColliderComponent::RenderGUI()
     {
+        Component::RenderGUI();
+
         ImGui::Checkbox("Show Collider", &m_ShowDebug);
 
         ImGui::Separator();
@@ -51,7 +53,7 @@ namespace dae
 
         ImGui::Text("Area: %.1f sqr px", m_width * m_height);
 
-        if (m_ShowDebug)
+        if (m_ShowDebug && IsActive())
         {
             const auto& pos = GetOwner()->GetTransform().GetWorldPosition();
 

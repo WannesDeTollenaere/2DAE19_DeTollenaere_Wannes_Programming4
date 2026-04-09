@@ -16,6 +16,18 @@ namespace dae
     {
         if (m_colliders.empty()) return;
         std::erase(m_colliders, collider);
+
+        for (auto it = m_ActiveCollisions.begin(); it != m_ActiveCollisions.end(); )
+        {
+            if (it->first == collider || it->second == collider)
+            {
+                it = m_ActiveCollisions.erase(it);
+            }
+            else
+            {
+                ++it;
+            }
+        }
     }
 
     void CollisionManager::Update()

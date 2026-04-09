@@ -47,7 +47,7 @@ namespace dae
 
         void DisableMovement();
         void EnableMovement();
-        bool IsMovementDisabled() const { return m_State == EnemyState::Disabled; }
+        bool IsMovementDisabled() const { return m_State == EnemyState::Disabled || IsCascading() || IsStunned(); }
 
         // CASCADING
         void SetCascading(bool cascading);
