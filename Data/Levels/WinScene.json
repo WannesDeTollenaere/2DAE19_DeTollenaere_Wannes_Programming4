@@ -2,6 +2,14 @@
   "name": "WinScene",
   "objects": [
     {
+      "name": "Leaderboard",
+      "prefab": "Prefabs/Leaderboard.json",
+      "transform": {
+        "x": 900.0,
+        "y": 100.0
+      }
+    },
+    {
       "name": "WinText",
       "transform": {
         "x": 180.0,
@@ -20,6 +28,34 @@
             "r": 0,
             "g": 255,
             "b": 0,
+            "a": 255
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "ChooseName",
+      "transform": {
+        "x": 160.0,
+        "y": 480.0
+      },
+      "components": [
+        {
+          "type": "HighScoreInputComponent"
+        },
+        {
+          "type": "TextureComponent"
+        },
+        {
+          "type": "TextComponent",
+          "text": "A",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 100,
+            "b": 100,
             "a": 255
           }
         }
@@ -48,6 +84,54 @@
           }
         }
       ]
+    },
+    {
+      "name": "Info_Text",
+      "transform": {
+        "x": 160.0,
+        "y": 520.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent"
+        },
+        {
+          "type": "TextComponent",
+          "text": "Press A To Accept",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 0,
+            "g": 255,
+            "b": 0,
+            "a": 255
+          }
+        }
+      ]
+    },
+    {
+      "name": "Info_Text2",
+      "transform": {
+        "x": 160.0,
+        "y": 550.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent"
+        },
+        {
+          "type": "TextComponent",
+          "text": "Use arrows to choose letters. B To remove a letter",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 155,
+            "g": 155,
+            "b": 0,
+            "a": 255
+          }
+        }
+      ]
     }
   ]
-}
+    }

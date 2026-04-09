@@ -6,6 +6,7 @@
 #include <fstream>
 #include "Font.h"
 #include "Helpers/Spritesheet.h"
+#include <sstream>
 
 namespace fs = std::filesystem;
 
@@ -69,6 +70,24 @@ nlohmann::json dae::ResourceManager::LoadJson(const std::string& file)
 	nlohmann::json jsonObject;
  	inputStream >> jsonObject;
 	return jsonObject; 
+}
+std::string dae::ResourceManager::ReadTextFile(const std::string& filename) const
+{
+	std::ifstream file(m_dataPath.string() + filename);
+	if (!file.is_open()) return "";
+
+	std::stringstream ss;
+	ss << file.rdbuf(); 
+	return ss.str();
+}
+
+void dae::ResourceManager::WriteTextFile(const std::string& filename, const std::string& content) const
+{
+	std::ofstream file(m_dataPath.string() + filename);
+	if (file.is_open())
+	{
+		file << content;
+	}
 }
 void dae::ResourceManager::UnloadUnusedResources()
 {

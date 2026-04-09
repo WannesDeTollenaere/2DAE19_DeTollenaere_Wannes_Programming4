@@ -20,6 +20,8 @@ namespace dae
 		std::shared_ptr<Font> LoadFont(const std::string& file, uint8_t size);
 		std::shared_ptr<SpriteSheet> LoadSpriteSheet(const std::string& file, int frameWidth, int frameHeight);
 		nlohmann::json LoadJson(const std::string& file);
+		std::string ReadTextFile(const std::string& filename) const;
+		void WriteTextFile(const std::string& filename, const std::string& content) const;
 
 		std::filesystem::path GetDataPath() { return m_dataPath; };
 	private:

@@ -1,0 +1,39 @@
+{
+  "name": "LoadingScene",
+  "objects": [
+    {
+      "name": "LeaderboardDisplay",
+      "prefab": "Prefabs/Leaderboard.json",
+      "transform": {
+        "x": 200.0,
+        "y": 50.0
+      }
+    },
+    {
+      "name": "PressStartController",
+      "transform": {
+        "x": 250.0,
+        "y": 400.0
+      },
+      "components": [
+        {
+          "type": "TextComponent",
+          "text": "> PRESS START TO START <",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          }
+        },
+        {
+          "type": "SceneTransitionComponent",
+          "targetScene": "Levels/level1.json"
+        },
+        { "type": "TextureComponent" }
+      ]
+    }
+  ]
+}

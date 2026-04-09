@@ -12,9 +12,9 @@ void dae::GameObject::FixedUpdate()
 {
 	if (!m_IsActive) return;
 
-	for (auto& component : m_components)
+	for (size_t i = 0; i < m_components.size(); ++i)
 	{
-		if(component->IsActive()) component->FixedUpdate();
+		if (m_components[i]->IsActive()) m_components[i]->FixedUpdate();
 	}
 }
 
@@ -22,9 +22,9 @@ void dae::GameObject::Update()
 {
 	if (!m_IsActive) return;
 
-	for (auto& component : m_components)
+	for (size_t i = 0; i < m_components.size(); ++i)
 	{
-		if (component->IsActive()) component->Update();
+		if (m_components[i]->IsActive()) m_components[i]->Update();
 	}
 	DestroyComponentsMarkedForDeletion();
 }

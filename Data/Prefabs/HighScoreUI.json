@@ -1,0 +1,51 @@
+{
+  "children": [
+    {
+      "name": "HighScoreText",
+      "transform": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "components": [
+        { "type": "TextureComponent" },
+        {
+          "type": "TextComponent",
+          "text": "Hi-Score",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        }
+      ]
+    },
+    {
+      "name": "HighScoreDisplay",
+      "transform": {
+        "x": 0.0,
+        "y": 30.0
+      },
+      "components": [
+        { "type": "TextureComponent" },
+        {
+          "type": "TextComponent",
+          "text": "0",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 200,
+            "a": 255
+          }
+        },
+        {
+          "type": "HighScoreDisplayComponent"
+        }
+      ]
+    }
+  ]
+}

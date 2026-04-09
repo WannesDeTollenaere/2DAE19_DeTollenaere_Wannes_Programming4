@@ -81,7 +81,15 @@
         {
           "name": "LivesUI",
           "prefab": "Prefabs/LivesUI.json",
-          "transform": { "x": 10.0, "y": 800.0 }
+          "transform": {
+            "x": 10.0,
+            "y": 800.0
+          }
+        },
+        {
+          "name": "HighScoreUI",
+          "prefab": "Prefabs/HighScoreUI.json",
+          "transform": { "x": 200.0, "y": 10.0 }
         },
         {
           "name": "Player",

@@ -76,6 +76,11 @@
           "transform": { "x": 10.0, "y": 10.0 }
         },
         {
+          "name": "HighScoreUI",
+          "prefab": "Prefabs/HighScoreUI.json",
+          "transform": { "x": 200.0, "y": 10.0 }
+        },
+        {
           "name": "SaltUI",
           "prefab": "Prefabs/SaltUI.json",
           "transform": { "x": 960.0, "y": 10.0 }

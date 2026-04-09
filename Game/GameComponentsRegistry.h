@@ -44,6 +44,12 @@
 #include "Components/PlayerCharacter/WinConditionComponent.h"
 
 #include "Components/PlayerCharacter/SaltDisplayComponent.h"
+#include "Components/HighScoreInputComponent.h"
+#include "Components/PlayerCharacter/HighScoreDisplayComponent.h"
+#include "Components/LeaderboardComponent.h"
+
+#include "Components/SceneTranistionComponent.h"
+#include "DTO/SceneTransitionComponentDTO.h"
 
 #include "ResourceManager.h"
 #include <SceneLoader.h> 
@@ -152,6 +158,20 @@ namespace dae
                 });
             SceneLoader::RegisterComponentParser("SaltDisplayComponent", [](dae::GameObject* go, const nlohmann::json&) {
                 go->AddComponent<SaltDisplayComponent>();
+                });
+            SceneLoader::RegisterComponentParser("HighScoreInputComponent", [](dae::GameObject* go, const nlohmann::json&) {
+                go->AddComponent<HighScoreInputComponent>();
+                });
+            SceneLoader::RegisterComponentParser("HighScoreDisplayComponent", [](dae::GameObject* go, const nlohmann::json&) {
+                go->AddComponent<HighScoreDisplayComponent>();
+                });
+            SceneLoader::RegisterComponentParser("LeaderboardComponent", [](dae::GameObject* go, const nlohmann::json&) {
+                go->AddComponent<LeaderboardComponent>();
+                });
+            SceneLoader::RegisterComponentParser("SceneTransitionComponent", [](dae::GameObject* go, const nlohmann::json& data) {
+                auto dto = SceneTransitionComponentDTO::FromJson(data);
+
+                go->AddComponent<SceneTransitionComponent>(dto.targetScene);
                 });
         }
     };

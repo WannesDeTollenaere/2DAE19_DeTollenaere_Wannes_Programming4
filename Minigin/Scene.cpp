@@ -30,17 +30,17 @@ void Scene::RemoveAll()
 
 void dae::Scene::FixedUpdate()
 {
-	for (auto& object : m_objects)
+	for (size_t i = 0; i < m_objects.size(); ++i)
 	{
-		object->FixedUpdate();
+		m_objects[i]->FixedUpdate();
 	}
 }
 
 void Scene::Update()
 {
-	for(auto& object : m_objects)
+	for (size_t i = 0; i < m_objects.size(); ++i)
 	{
-		object->Update();
+		m_objects[i]->Update();
 	}
 	DestroyGameObjectsMarkedForDeletion();
 }

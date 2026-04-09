@@ -9,7 +9,7 @@ namespace dae
     {
         EnemyType type{ EnemyType::HotDog }; 
 
-        static EnemyWanderComponentDTO FromJson(const nlohmann::json& data)
+        static EnemyWanderComponentDTO FromJson(const nlohmann::json& data) 
         {
             EnemyWanderComponentDTO dto;
 

@@ -8,11 +8,13 @@
 #include <SceneLoader.h>
 #include "GameComponentsRegistry.h" 
 //#include "Achievements/AchievementManager.h"
+#include <Helpers/HighScoreManager.h>
+#include <Renderer.h> 
+
 
 #if USE_STEAMWORKS
 #include "Achievements/BurgerTimeAchievements.h"
 #include "SteamAchievements/Achievement.h"
-#include "Renderer.h" 
 #endif  
 
 
@@ -21,7 +23,7 @@
 void LoadGame()
 {
     dae::GameComponentsRegistry::RegisterAll();
-
+    dae::HighScoreManager::GetInstance().Load();
 #if USE_STEAMWORKS
     dae::g_SteamAchievements = new dae::CSteamAchievements(dae::g_Achievements, 4);
 #endif
@@ -29,9 +31,9 @@ void LoadGame()
     //g_AchievementManager = std::make_unique<dae::AchievementManager>();
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
       
-    dae::SceneLoader::LoadScene(scene, "Levels/level1.json");  
+    dae::SceneLoader::LoadScene(scene, "Levels/LoadingScene.json");   
       
-   // dae::Renderer::GetInstance().SetBackgroundColor(SDL_Color{ 0, 0, 0, 255 });
+   dae::Renderer::GetInstance().SetBackgroundColor(SDL_Color{ 0, 0, 0, 255 });
 }
 
 int main(int, char* [])

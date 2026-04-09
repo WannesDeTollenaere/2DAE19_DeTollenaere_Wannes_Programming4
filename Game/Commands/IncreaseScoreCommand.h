@@ -19,7 +19,7 @@ namespace dae
                 ScoreIncreasedEvent scoreEvent(GetGameObject(), m_amount);
                 EventManager::GetInstance().SendEvent(&scoreEvent);
             }
-        }
+        } 
 
     private:
         int m_amount;

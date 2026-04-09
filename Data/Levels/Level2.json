@@ -72,62 +72,106 @@
         {
           "name": "ScoreUI",
           "prefab": "Prefabs/ScoreUI.json",
-          "transform": { "x": 10.0, "y": 10.0 }
+          "transform": {
+            "x": 10.0,
+            "y": 10.0
+          }
         },
         {
           "name": "SaltUI",
           "prefab": "Prefabs/SaltUI.json",
-          "transform": { "x": 960.0, "y": 10.0 }
+          "transform": {
+            "x": 960.0,
+            "y": 10.0
+          }
         },
         {
           "name": "LivesUI",
           "prefab": "Prefabs/LivesUI.json",
-          "transform": { "x": 10.0, "y": 800.0 }
+          "transform": {
+            "x": 10.0,
+            "y": 800.0
+          }
+        },
+        {
+          "name": "HighScoreUI",
+          "prefab": "Prefabs/HighScoreUI.json",
+          "transform": {
+            "x": 200.0,
+            "y": 10.0
+          }
         },
         {
           "name": "Player",
           "prefab": "Prefabs/Player.json",
-          "transform": { "x": 480.0, "y": 504.0 }
+          "transform": {
+            "x": 480.0,
+            "y": 504.0
+          }
         },
         {
           "name": "Enemy_HotDog_1",
           "prefab": "Prefabs/MrHotDog.json",
-          "transform": { "x": 96.0, "y": 96.0 }
+          "transform": {
+            "x": 96.0,
+            "y": 96.0
+          }
         },
         {
           "name": "Enemy_HotDog_2",
           "prefab": "Prefabs/MrHotDog.json",
-          "transform": { "x": 864.0, "y": 96.0 }
+          "transform": {
+            "x": 864.0,
+            "y": 96.0
+          }
         },
         {
           "name": "Enemy_Egg_1",
           "prefab": "Prefabs/MrEgg.json",
-          "transform": { "x": 96.0, "y": 288.0 }
+          "transform": {
+            "x": 96.0,
+            "y": 288.0
+          }
         },
         {
           "name": "Enemy_Egg_2",
           "prefab": "Prefabs/MrEgg.json",
-          "transform": { "x": 864.0, "y": 288.0 }
+          "transform": {
+            "x": 864.0,
+            "y": 288.0
+          }
         },
         {
           "name": "TopBun_1",
           "prefab": "Prefabs/TopBun.json",
-          "transform": { "x": 168.0, "y": 120.0 }
+          "transform": {
+            "x": 168.0,
+            "y": 120.0
+          }
         },
         {
           "name": "Lettuce_1",
           "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 168.0, "y": 168.0 }
+          "transform": {
+            "x": 168.0,
+            "y": 168.0
+          }
         },
         {
           "name": "Cheese_1",
           "prefab": "Prefabs/Cheese.json",
-          "transform": { "x": 168.0, "y": 216.0 }
+          "transform": {
+            "x": 168.0,
+            "y": 216.0
+          }
         },
         {
           "name": "BottomBun_1",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 168.0, "y": 312.0 }
+          "transform": {
+            "x": 168.0,
+            "y": 312.0
+          }
         },
         {
           "name": "Plate_1",
@@ -146,22 +190,34 @@
         {
           "name": "TopBun_2",
           "prefab": "Prefabs/TopBun.json",
-          "transform": { "x": 360.0, "y": 120.0 }
+          "transform": {
+            "x": 360.0,
+            "y": 120.0
+          }
         },
         {
           "name": "Cheese_2",
           "prefab": "Prefabs/Cheese.json",
-          "transform": { "x": 360.0, "y": 168.0 }
+          "transform": {
+            "x": 360.0,
+            "y": 168.0
+          }
         },
         {
           "name": "Lettuce_2",
           "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 360.0, "y": 264.0 }
+          "transform": {
+            "x": 360.0,
+            "y": 264.0
+          }
         },
         {
           "name": "BottomBun_2",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 360.0, "y": 504.0 }
+          "transform": {
+            "x": 360.0,
+            "y": 504.0
+          }
         },
         {
           "name": "Plate_2",
@@ -180,22 +236,34 @@
         {
           "name": "TopBun_3",
           "prefab": "Prefabs/TopBun.json",
-          "transform": { "x": 552.0, "y": 120.0 }
+          "transform": {
+            "x": 552.0,
+            "y": 120.0
+          }
         },
         {
           "name": "Cheese_3",
           "prefab": "Prefabs/Cheese.json",
-          "transform": { "x": 552.0, "y": 360.0 }
+          "transform": {
+            "x": 552.0,
+            "y": 360.0
+          }
         },
         {
           "name": "Lettuce_3",
           "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 552.0, "y": 456.0 }
+          "transform": {
+            "x": 552.0,
+            "y": 456.0
+          }
         },
         {
           "name": "BottomBun_3",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 552.0, "y": 504.0 }
+          "transform": {
+            "x": 552.0,
+            "y": 504.0
+          }
         },
         {
           "name": "Plate_3",
@@ -214,22 +282,34 @@
         {
           "name": "TopBun_4",
           "prefab": "Prefabs/TopBun.json",
-          "transform": { "x": 744.0, "y": 120.0 }
+          "transform": {
+            "x": 744.0,
+            "y": 120.0
+          }
         },
         {
           "name": "Lettuce_4",
           "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 744.0, "y": 216.0 }
+          "transform": {
+            "x": 744.0,
+            "y": 216.0
+          }
         },
         {
           "name": "Cheese_4",
           "prefab": "Prefabs/Cheese.json",
-          "transform": { "x": 744.0, "y": 254.0 }
+          "transform": {
+            "x": 744.0,
+            "y": 254.0
+          }
         },
         {
           "name": "BottomBun_4",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 744.0, "y": 312.0 }
+          "transform": {
+            "x": 744.0,
+            "y": 312.0
+          }
         },
         {
           "name": "Plate_4",
