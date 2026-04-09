@@ -70,37 +70,116 @@
       "children": [
         {
           "name": "ScoreUI",
-          "transform": { "x": 10.0, "y": 10.0 },
-          "components": [
-            { "type": "TextureComponent" },
+          "transform": {
+            "x": 10.0,
+            "y": 10.0
+          },
+          "children": [
             {
-              "type": "TextComponent",
-              "text": "Score: 0",
-              "font": "Lingua.otf",
-              "fontSize": 24,
-              "color": { "r": 255, "g": 0, "b": 0, "a": 255 }
+              "name": "ScoreText",
+              "transform": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "components": [
+                { "type": "TextureComponent" },
+                {
+                  "type": "TextComponent",
+                  "text": "1UP",
+                  "font": "Lingua.otf",
+                  "fontSize": 24,
+                  "color": {
+                    "r": 255,
+                    "g": 0,
+                    "b": 0,
+                    "a": 255
+                  }
+                }
+              ]
             },
-            { "type": "ScoreDisplayComponent", "startingScore": 0, "targetTag": "Player1" }
+            {
+              "name": "Score",
+              "transform": {
+                "x": 0.0,
+                "y": 30.0
+              },
+              "components": [
+                { "type": "TextureComponent" },
+                {
+                  "type": "TextComponent",
+                  "text": "Score: 0",
+                  "font": "Lingua.otf",
+                  "fontSize": 24,
+                  "color": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 200,
+                    "a": 255
+                  }
+                },
+                {
+                  "type": "ScoreDisplayComponent",
+                  "startingScore": 0,
+                  "targetTag": "Player1"
+                }
+              ]
+            }
           ]
         },
         {
           "name": "SaltUI",
-          "transform": { "x": 10.0, "y": 40.0 },
-          "components": [
-            { "type": "TextureComponent" },
+          "transform": { "x": 960.0, "y": 10.0 },
+          "children": [
             {
-              "type": "TextComponent",
-              "text": "Salt: 5",
-              "font": "Lingua.otf",
-              "fontSize": 24,
-              "color": { "r": 255, "g": 255, "b": 255, "a": 255 }
+              "name": "SaltText",
+              "transform": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "components": [
+                { "type": "TextureComponent" },
+                {
+                  "type": "TextComponent",
+                  "text": "PEPPER",
+                  "font": "Lingua.otf",
+                  "fontSize": 24,
+                  "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 255
+                  }
+                }
+              ]
             },
-            { "type": "SaltDisplayComponent" }
+            {
+              "name": "SaltAmount",
+              "transform": {
+                "x": 73.0,
+                "y": 30.0
+              },
+              "components": [
+                { "type": "TextureComponent" },
+                {
+                  "type": "TextComponent",
+                  "text": "5",
+                  "font": "Lingua.otf",
+                  "fontSize": 24,
+                  "color": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 255
+                  }
+                },
+                { "type": "SaltDisplayComponent" }
+              ]
+            }
           ]
         },
         {
           "name": "LivesUI",
-          "transform": { "x": 10.0, "y": 70.0 },
+          "transform": { "x": 10.0, "y": 800.0 },
           "components": [
             { "type": "HealthDisplayComponent" }
           ],
@@ -118,23 +197,23 @@
             },
             {
               "name": "Life_2",
-              "transform": { "x": 48.0, "y": 0.0 },
+              "transform": { "x": 26.0, "y": 0.0 },
               "components": [
                 {
                   "type": "TextureComponent",
                   "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 48, "frameHeight": 48, "row": 0, "col": 25 }
+                  "spriteSheet": { "frameWidth": 24, "frameHeight": 24, "row": 0, "col": 25 }
                 }
               ]
             },
             {
               "name": "Life_3",
-              "transform": { "x": 96.0, "y": 0.0 },
+              "transform": { "x": 52.0, "y": 0.0 },
               "components": [
                 {
                   "type": "TextureComponent",
                   "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 48, "frameHeight": 48, "row": 0, "col": 25 }
+                  "spriteSheet": { "frameWidth": 24, "frameHeight": 24, "row": 0, "col": 25 }
                 }
               ]
             }

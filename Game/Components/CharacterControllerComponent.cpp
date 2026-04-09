@@ -89,7 +89,7 @@ namespace dae
 
         m_LastPosition = currentPos;
     }
-
+     
     void CharacterControllerComponent::ThrowSalt()
     {
         if (m_IsDead || GameManager::GetInstance().GetSalt() <= 0) return;
@@ -97,7 +97,7 @@ namespace dae
         auto scene = SceneManager::GetInstance().GetActiveScene();
         if (!scene) return;
 
-        auto playerPos = GetOwner()->GetTransform().GetWorldPosition();
+        auto playerPos = GetOwner()->GetTransform().GetWorldPosition();  
         float tileSize = LevelGrid::GetInstance().GetTileSize();
         glm::vec3 spawnPos{
             playerPos.x + m_FacingDirection.x * tileSize,
@@ -117,12 +117,12 @@ namespace dae
         m_IsDead = true;
 
         if (m_Anim)
-        {
-            m_Anim->PlayAnimation("Die");
+        { 
+            m_Anim->PlayAnimation("Die");   
         }
-
+         
         dae::GameTime::GetInstance().AddTimer(1.5f, [&]() {
-            dae::GameManager::GetInstance().LoseLife();
+            //dae::GameManager::GetInstance().LoseLife();
             m_IsDead = false;
             GetOwner()->GetTransform().SetLocalPosition(m_SpawnPosition);
             

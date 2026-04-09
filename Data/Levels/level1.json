@@ -36,24 +36,23 @@
       "components": [
         {
           "type": "LevelGridSetup",
-          "cols": 11,
-          "rows": 13,
+          "cols": 19,
+          "rows": 12,
           "tileSize": 48.0,
           "layout": [
-            1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1,
-            0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0,
-            1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1,
-            0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0,
-            1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1,
-            0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0,
-            1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 
-            0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0,
-            1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1,
-            0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0,
-            0, 3, 1, 1, 1, 3, 1, 1, 1, 3, 0,
-            0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0,
-            0, 3, 1, 1, 1, 3, 1, 1, 1, 3, 0
-          ]
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 3, 1, 1, 1, 3, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 
+  0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 
+  0, 0, 3, 1, 3, 1, 3, 0, 2, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 
+  0, 0, 0, 0, 2, 0, 3, 1, 3, 1, 3, 0, 2, 0, 2, 0, 0, 0, 2, 
+  0, 0, 3, 1, 3, 1, 3, 0, 0, 0, 2, 0, 2, 0, 3, 1, 3, 1, 3, 
+  0, 0, 2, 0, 2, 0, 3, 1, 1, 1, 3, 1, 3, 1, 3, 0, 2, 0, 0, 
+  0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 3, 1, 3, 1, 3, 
+  0, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 0, 2, 0, 2, 
+  0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 
+  0, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 3
+]
         },
         {
           "type": "LevelRendererComponent",
@@ -221,7 +220,7 @@
         },
         {
           "name": "Player",
-          "transform": { "x": 256.0, "y": 128.0 },
+          "transform": { "x": 480.0, "y": 528.0 },
           "components": [
             { "type": "TagComponent", "tags": [ "Player" ], "uniqueTag": "Player1" },
             { "type": "ScoreComponent", "startingScore": 0 },
@@ -247,7 +246,7 @@
         },
         {
           "name": "Enemy_HotDog_1",
-          "transform": { "x": 0.0, "y": 96.0 },
+          "transform": { "x": 96.0, "y": 528.0 },
           "components": [
             { "type": "TagComponent", "tags": [ "Enemy" ] },
             { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
@@ -272,7 +271,32 @@
         },
         {
           "name": "Enemy_HotDog_2",
-          "transform": { "x": 480.0, "y": 96.0 },
+          "transform": { "x": 96.0, "y": 96.0 },
+          "components": [
+            { "type": "TagComponent", "tags": [ "Enemy" ] },
+            { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
+            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png" },
+            {
+              "type": "AnimatorComponent",
+              "frameWidth": 48,
+              "frameHeight": 48,
+              "playOnStart": "WalkRight",
+              "animations": {
+                "WalkDown": { "startRow": 2, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkUp": { "startRow": 2, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkLeft": { "startRow": 2, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "WalkRight": { "startRow": 2, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
+                "Die": { "startRow": 3, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
+                "Pickled": { "startRow": 3, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true }
+              }
+            },
+            { "type": "GridMovementComponent", "speed": 65.0 },
+            { "type": "EnemyWanderComponent" }
+          ]
+        },
+        {
+          "name": "Enemy_HotDog_3",
+          "transform": { "x": 864.0, "y": 96.0 },
           "components": [
             { "type": "TagComponent", "tags": [ "Enemy" ] },
             { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
@@ -297,7 +321,7 @@
         },
         {
           "name": "Enemy_Egg_1",
-          "transform": { "x": 0.0, "y": 384.0 },
+          "transform": { "x": 864.0, "y": 528.0 },
           "components": [
             { "type": "TagComponent", "tags": [ "Enemy" ] },
             { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
@@ -320,36 +344,10 @@
             { "type": "EnemyWanderComponent", "enemyType": "Egg" }
           ]
         },
-        {
-          "name": "Enemy_Egg_2",
-          "transform": { "x": 480.0, "y": 384.0 },
-          "components": [
-            { "type": "TagComponent", "tags": [ "Enemy" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png" },
-            {
-              "type": "AnimatorComponent",
-              "frameWidth": 48,
-              "frameHeight": 48,
-              "playOnStart": "WalkRight",
-              "animations": {
-                "WalkDown": { "startRow": 6, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkUp": { "startRow": 6, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkLeft": { "startRow": 6, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkRight": { "startRow": 7, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "Die": { "startRow": 7, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
-                "Pickled": { "startRow": 7, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true }
-              }
-            },
-            { "type": "GridMovementComponent", "speed": 65.0 },
-            { "type": "EnemyWanderComponent", "enemyType": "Egg" }
-          ]
-        },
-
-        
+       
         {
           "name": "TopBun_1",
-          "transform": { "x": 96.0, "y": 24.0 },
+          "transform": { "x": 168.0, "y": 216.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 6, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -358,18 +356,8 @@
           ]
         },
         {
-          "name": "Tomato_1",
-          "transform": { "x": 96.0, "y": 120.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 10, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
-        },
-        {
           "name": "Lettuce_1",
-          "transform": { "x": 96.0, "y": 216.0 },
+          "transform": { "x": 168.0, "y": 312.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 11, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -378,18 +366,8 @@
           ]
         },
         {
-          "name": "Cheese_1",
-          "transform": { "x": 96.0, "y": 312.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 8, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
-        },
-        {
           "name": "Patty_1",
-          "transform": { "x": 96.0, "y": 408.0 },
+          "transform": { "x": 168.0, "y": 456.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 9, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -399,7 +377,7 @@
         },
         {
           "name": "BottomBun_1",
-          "transform": { "x": 96.0, "y": 504.0 },
+          "transform": { "x": 168.0, "y": 552.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 7, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -407,11 +385,9 @@
             { "type": "TagComponent", "tags": [ "Ingredient" ] }
           ]
         },
-
-
-        {
+                {
           "name": "TopBun_2",
-          "transform": { "x": 192.0, "y": 24.0 },
+          "transform": { "x": 360.0, "y": 120.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 6, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -420,18 +396,8 @@
           ]
         },
         {
-          "name": "Tomato_2",
-          "transform": { "x": 192.0, "y": 120.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 10, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
-        },
-        {
           "name": "Lettuce_2",
-          "transform": { "x": 192.0, "y": 216.0 },
+          "transform": { "x": 360.0, "y": 360.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 11, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -440,18 +406,8 @@
           ]
         },
         {
-          "name": "Cheese_2",
-          "transform": { "x": 192.0, "y": 312.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 8, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
-        },
-        {
           "name": "Patty_2",
-          "transform": { "x": 192.0, "y": 408.0 },
+          "transform": { "x": 360.0, "y": 456.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 9, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -461,7 +417,7 @@
         },
         {
           "name": "BottomBun_2",
-          "transform": { "x": 192.0, "y": 504.0 },
+          "transform": { "x": 360.0, "y": 552.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 7, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -469,11 +425,9 @@
             { "type": "TagComponent", "tags": [ "Ingredient" ] }
           ]
         },
-
-
-        {
+         {
           "name": "TopBun_3",
-          "transform": { "x": 288.0, "y": 24.0 },
+          "transform": { "x": 552.0, "y": 120.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 6, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -482,18 +436,8 @@
           ]
         },
         {
-          "name": "Tomato_3",
-          "transform": { "x": 288.0, "y": 120.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 10, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
-        },
-        {
           "name": "Lettuce_3",
-          "transform": { "x": 288.0, "y": 216.0 },
+          "transform": { "x": 552.0, "y": 216.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 11, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -502,18 +446,8 @@
           ]
         },
         {
-          "name": "Cheese_3",
-          "transform": { "x": 288.0, "y": 312.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 8, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
-        },
-        {
           "name": "Patty_3",
-          "transform": { "x": 288.0, "y": 408.0 },
+          "transform": { "x": 552.0, "y": 360.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 9, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -523,7 +457,7 @@
         },
         {
           "name": "BottomBun_3",
-          "transform": { "x": 288.0, "y": 504.0 },
+          "transform": { "x": 552.0, "y": 552.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 7, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -531,11 +465,9 @@
             { "type": "TagComponent", "tags": [ "Ingredient" ] }
           ]
         },
-
-
-        {
+                 {
           "name": "TopBun_4",
-          "transform": { "x": 384.0, "y": 24.0 },
+          "transform": { "x": 744.0, "y": 120.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 6, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -544,18 +476,8 @@
           ]
         },
         {
-          "name": "Tomato_4",
-          "transform": { "x": 384.0, "y": 120.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 10, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
-        },
-        {
           "name": "Lettuce_4",
-          "transform": { "x": 384.0, "y": 216.0 },
+          "transform": { "x": 744.0, "y": 216.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 11, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -564,18 +486,8 @@
           ]
         },
         {
-          "name": "Cheese_4",
-          "transform": { "x": 384.0, "y": 312.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 8, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
-        },
-        {
           "name": "Patty_4",
-          "transform": { "x": 384.0, "y": 408.0 },
+          "transform": { "x": 744.0, "y": 312.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 9, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -585,7 +497,7 @@
         },
         {
           "name": "BottomBun_4",
-          "transform": { "x": 384.0, "y": 504.0 },
+          "transform": { "x": 744.0, "y": 408.0 },
           "components": [
             { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 7, "col": 7, "colSpan": 2 } },
             { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
@@ -594,14 +506,13 @@
           ]
         },
 
-
         {
           "name": "Plate_1",
-          "transform": { "x": 96.0, "y": 730.0 },
+          "transform": { "x": 168.0, "y": 730.0 },
           "components": [
             { "type": "TagComponent", "tags": [ "Plate" ] },
             { "type": "BoxColliderComponent", "width": 48.0, "height": 96.0, "isTrigger": true },
-            { "type": "PlateComponent", "requiredIngredients": 6 }
+            { "type": "PlateComponent", "requiredIngredients": 4 }
           ],
           "children": [
             {
@@ -619,11 +530,11 @@
         },
         {
           "name": "Plate_2",
-          "transform": { "x": 192.0, "y": 730.0 },
+          "transform": { "x": 360.0, "y": 730.0 },
           "components": [
             { "type": "TagComponent", "tags": [ "Plate" ] },
             { "type": "BoxColliderComponent", "width": 48.0, "height": 96.0, "isTrigger": true },
-            { "type": "PlateComponent", "requiredIngredients": 6 }
+            { "type": "PlateComponent", "requiredIngredients": 4 }
           ],
           "children": [
             {
@@ -641,11 +552,11 @@
         },
         {
           "name": "Plate_3",
-          "transform": { "x": 288.0, "y": 730.0 },
+          "transform": { "x": 552.0, "y": 730.0 },
           "components": [
             { "type": "TagComponent", "tags": [ "Plate" ] },
             { "type": "BoxColliderComponent", "width": 48.0, "height": 96.0, "isTrigger": true },
-            { "type": "PlateComponent", "requiredIngredients": 6 }
+            { "type": "PlateComponent", "requiredIngredients": 4 }
           ],
           "children": [
             {
@@ -663,11 +574,11 @@
         },
         {
           "name": "Plate_4",
-          "transform": { "x": 384.0, "y": 730.0 },
+          "transform": { "x": 744.0, "y": 730.0 },
           "components": [
             { "type": "TagComponent", "tags": [ "Plate" ] },
             { "type": "BoxColliderComponent", "width": 48.0, "height": 96.0, "isTrigger": true },
-            { "type": "PlateComponent", "requiredIngredients": 6 }
+            { "type": "PlateComponent", "requiredIngredients": 4 }
           ],
           "children": [
             {
