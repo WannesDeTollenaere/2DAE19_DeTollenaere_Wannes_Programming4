@@ -67,7 +67,7 @@ namespace dae
         glm::vec3 m_LastPosition{};
 
         const float m_CooldownDuration{ .3f };
-        float m_RandomWanderChance{ 0.3f };
+        float m_RandomWanderChance{ 0.15f };
         bool m_DecisionAvailable{ true };
 
         std::vector<glm::ivec2> m_Path;

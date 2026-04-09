@@ -22,8 +22,8 @@
       "components": [
         {
           "type": "WinConditionComponent",
-          "totalBurgers": 4,
-          "winScene": "Levels/Level3.json"
+          "totalBurgers": 6,
+          "winScene": "Levels/WinScene.json"
         }
       ]
     },
@@ -36,24 +36,25 @@
       "components": [
         {
           "type": "LevelGridSetup",
-          "cols": 20,
-          "rows": 13,
+          "cols": 19,
+          "rows": 14,
           "tileSize": 48.0,
           "layout": [
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 0, 
-            0, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 2, 0, 2, 0, 2, 0, 2, 0, 
-            0, 0, 3, 1, 3, 1, 3, 0, 2, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 
-            0, 0, 2, 0, 2, 0, 3, 1, 3, 1, 3, 0, 2, 0, 3, 1, 3, 1, 3, 0, 
-            0, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 1, 3, 1, 1, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 1, 3, 1, 3, 0, 2, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 1, 3, 1, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 1, 3, 1, 3, 1, 3, 1, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0
-          ]
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 4, 1, 1, 1, 4, 1, 4, 1, 1, 1, 4, 1, 1, 1, 1, 1, 4, 
+  0, 0, 3, 1, 1, 1, 3, 1, 3, 1, 4, 1, 3, 1, 4, 1, 1, 1, 3, 
+  0, 0, 3, 1, 1, 1, 3, 1, 4, 0, 3, 0, 0, 0, 3, 1, 1, 1, 3, 
+  0, 0, 3, 1, 1, 1, 4, 1, 3, 1, 3, 1, 4, 1, 3, 1, 1, 1, 3, 
+  0, 0, 0, 0, 0, 0, 3, 0, 2, 0, 3, 1, 3, 1, 4, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 
+  0, 0, 4, 1, 4, 1, 3, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 4, 
+  0, 0, 3, 1, 3, 1, 3, 0, 0, 0, 0, 0, 0, 0, 3, 1, 4, 1, 3, 
+  0, 0, 3, 1, 3, 1, 3, 0, 0, 0, 0, 0, 0, 0, 3, 1, 3, 1, 3, 
+  0, 0, 0, 0, 0, 0, 3, 1, 4, 1, 4, 1, 4, 1, 3, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 0, 0, 0
+]
         },
         {
           "type": "LevelRendererComponent",
@@ -87,11 +88,11 @@
         {
           "name": "Player",
           "prefab": "Prefabs/Player.json",
-          "transform": { "x": 480.0, "y": 504.0 }
+          "transform": { "x": 480.0, "y": 624.0 }
         },
         {
-          "name": "Enemy_HotDog_1",
-          "prefab": "Prefabs/MrHotDog.json",
+          "name": "Enemy_Pickle_1",
+          "prefab": "Prefabs/MrPickle.json",
           "transform": { "x": 96.0, "y": 96.0 }
         },
         {
@@ -102,44 +103,40 @@
         {
           "name": "Enemy_Egg_1",
           "prefab": "Prefabs/MrEgg.json",
-          "transform": { "x": 96.0, "y": 288.0 }
+          "transform": { "x": 96.0, "y": 528.0 }
         },
         {
-          "name": "Enemy_Egg_2",
-          "prefab": "Prefabs/MrEgg.json",
-          "transform": { "x": 864.0, "y": 288.0 }
+          "name": "Enemy_Pickle_2",
+          "prefab": "Prefabs/MrPickle.json",
+          "transform": { "x": 864.0, "y": 528.0 }
         },
+
         {
           "name": "TopBun_1",
           "prefab": "Prefabs/TopBun.json",
           "transform": { "x": 168.0, "y": 120.0 }
         },
         {
-          "name": "Lettuce_1",
-          "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 168.0, "y": 168.0 }
-        },
-        {
-          "name": "Cheese_1",
-          "prefab": "Prefabs/Cheese.json",
+          "name": "Patty_1",
+          "prefab": "Prefabs/BurgerPatty.json",
           "transform": { "x": 168.0, "y": 216.0 }
         },
         {
           "name": "BottomBun_1",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 168.0, "y": 312.0 }
+          "transform": { "x": 168.0, "y": 264.0 }
         },
         {
           "name": "Plate_1",
           "prefab": "Prefabs/Plate.json",
           "transform": {
             "x": 168.0,
-            "y": 384.0
+            "y": 336.0
           },
           "components": [
             {
               "type": "PlateComponent",
-              "requiredIngredients": 4
+              "requiredIngredients": 3
             }
           ]
         },
@@ -149,31 +146,26 @@
           "transform": { "x": 360.0, "y": 120.0 }
         },
         {
-          "name": "Cheese_2",
-          "prefab": "Prefabs/Cheese.json",
+          "name": "Tomato_2",
+          "prefab": "Prefabs/Tomato.json",
           "transform": { "x": 360.0, "y": 168.0 }
-        },
-        {
-          "name": "Lettuce_2",
-          "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 360.0, "y": 264.0 }
         },
         {
           "name": "BottomBun_2",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 360.0, "y": 504.0 }
+          "transform": {  "x": 360.0, "y": 264.0 }
         },
         {
           "name": "Plate_2",
           "prefab": "Prefabs/Plate.json",
           "transform": {
             "x": 360.0,
-            "y": 700.0
+            "y": 480.0
           },
           "components": [
             {
               "type": "PlateComponent",
-              "requiredIngredients": 4
+              "requiredIngredients": 3
             }
           ]
         },
@@ -183,31 +175,26 @@
           "transform": { "x": 552.0, "y": 120.0 }
         },
         {
-          "name": "Cheese_3",
-          "prefab": "Prefabs/Cheese.json",
-          "transform": { "x": 552.0, "y": 360.0 }
-        },
-        {
-          "name": "Lettuce_3",
-          "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 552.0, "y": 456.0 }
+          "name": "Patty_3",
+          "prefab": "Prefabs/BurgerPatty.json",
+          "transform": { "x": 552.0, "y": 168.0 }
         },
         {
           "name": "BottomBun_3",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 552.0, "y": 504.0 }
+          "transform": { "x": 552.0, "y": 264.0 }
         },
         {
           "name": "Plate_3",
           "prefab": "Prefabs/Plate.json",
           "transform": {
             "x": 552.0,
-            "y": 700.0
+            "y": 480.0
           },
           "components": [
             {
               "type": "PlateComponent",
-              "requiredIngredients": 4
+              "requiredIngredients": 3
             }
           ]
         },
@@ -217,31 +204,84 @@
           "transform": { "x": 744.0, "y": 120.0 }
         },
         {
-          "name": "Lettuce_4",
-          "prefab": "Prefabs/Lettuce.json",
+          "name": "Tomato_4",
+          "prefab": "Prefabs/Tomato.json",
           "transform": { "x": 744.0, "y": 216.0 }
-        },
-        {
-          "name": "Cheese_4",
-          "prefab": "Prefabs/Cheese.json",
-          "transform": { "x": 744.0, "y": 254.0 }
         },
         {
           "name": "BottomBun_4",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 744.0, "y": 312.0 }
+          "transform": { "x": 744.0, "y": 264.0 }
         },
         {
           "name": "Plate_4",
           "prefab": "Prefabs/Plate.json",
           "transform": {
             "x": 744.0,
-            "y": 384.0
+            "y": 336.0
           },
           "components": [
             {
               "type": "PlateComponent",
-              "requiredIngredients": 4
+              "requiredIngredients": 3
+            }
+          ]
+        },
+        {
+          "name": "TopBun_5",
+          "prefab": "Prefabs/TopBun.json",
+          "transform": { "x": 168.0, "y": 456.0 }
+        },
+        {
+          "name": "Tomato_5",
+          "prefab": "Prefabs/Tomato.json",
+          "transform": { "x": 168.0, "y": 504.0 }
+        },
+        {
+          "name": "BottomBun_5",
+          "prefab": "Prefabs/BottomBun.json",
+          "transform": { "x": 168.0, "y": 552.0 }
+        },
+        {
+          "name": "Plate_5",
+          "prefab": "Prefabs/Plate.json",
+          "transform": {
+            "x": 168.0,
+            "y": 606.0
+          },
+          "components": [
+            {
+              "type": "PlateComponent",
+              "requiredIngredients": 3
+            }
+          ]
+        },
+        {
+          "name": "TopBun_6",
+          "prefab": "Prefabs/TopBun.json",
+          "transform": { "x": 744.0, "y": 456.0 }
+        },
+        {
+          "name": "Tomato_6",
+          "prefab": "Prefabs/BurgerPatty.json",
+          "transform": { "x": 744.0, "y": 504.0 }
+        },
+        {
+          "name": "BottomBun_6",
+          "prefab": "Prefabs/BottomBun.json",
+          "transform": { "x": 744.0, "y": 552.0 }
+        },
+        {
+          "name": "Plate_6",
+          "prefab": "Prefabs/Plate.json",
+          "transform": {
+            "x": 744.0,
+            "y": 606.0
+          },
+          "components": [
+            {
+              "type": "PlateComponent",
+              "requiredIngredients": 3
             }
           ]
         }

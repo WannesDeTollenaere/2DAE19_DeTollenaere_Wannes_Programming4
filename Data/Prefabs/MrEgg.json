@@ -1,0 +1,60 @@
+{
+  "prefab": "Prefabs/BaseEnemy.json",
+  "components": [
+
+    {
+      "type": "EnemyWanderComponent",
+      "enemyType": "Egg"
+    },
+    {
+      "type": "AnimatorComponent",
+      "frameWidth": 48,
+      "frameHeight": 48,
+      "playOnStart": "WalkDown",
+      "animations": {
+        "WalkDown": {
+          "startRow": 6,
+          "startCol": 0,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        },
+        "WalkUp": {
+          "startRow": 6,
+          "startCol": 4,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        },
+        "WalkLeft": {
+          "startRow": 6,
+          "startCol": 2,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        },
+        "WalkRight": {
+          "startRow": 7,
+          "startCol": 6,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        },
+        "Die": {
+          "startRow": 7,
+          "startCol": 0,
+          "frameCount": 4,
+          "frameTime": 0.15,
+          "isLooping": false
+        },
+        "Pickled": {
+          "startRow": 7,
+          "startCol": 4,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        }
+      }
+    }
+  ]
+}

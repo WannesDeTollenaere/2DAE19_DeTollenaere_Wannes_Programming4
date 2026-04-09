@@ -9,6 +9,8 @@ void dae::ItemCollisionHandler::OnCollision(GameObject* otherObject, TagComponen
         ScoreIncreasedEvent score(otherObject, 100);
         EventManager::GetInstance().SendEvent(&score);
 
-        GetOwner()->Destroy();
-    }
+        GetOwner()->Destroy(); 
+    } 
 }
+
+  

@@ -1,0 +1,16 @@
+{
+  "prefab": "Prefabs/BaseIngredient.json",
+  "components": [
+    {
+      "type": "TextureComponent",
+      "texture": "burger_time_spritesheet_x3.png",
+      "spriteSheet": {
+        "frameWidth": 48,
+        "frameHeight": 24,
+        "row": 9,
+        "col": 7,
+        "colSpan": 2
+      }
+    }
+  ]
+}

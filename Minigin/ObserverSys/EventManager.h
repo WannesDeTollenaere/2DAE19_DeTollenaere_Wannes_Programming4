@@ -31,7 +31,7 @@ namespace dae
 			for (auto observer : observerList)
 			{
 				observer->HandleEvent(pEvent);
-			}
+ 			}
 		}
 
 		void SendEvent(EventId id)

@@ -1,0 +1,24 @@
+{
+  "components": [
+    {
+      "type": "BoxColliderComponent",
+      "width": 24.0,
+      "height": 40.0,
+      "offsetX": 12.0,
+      "offsetY": 10.0,
+      "isTrigger": false
+    },
+    {
+      "type": "TagComponent",
+      "tags": [ "Enemy" ]
+    },
+    {
+      "type": "TextureComponent",
+      "texture": "burger_time_spritesheet_x3.png"
+    },
+    {
+      "type": "GridMovementComponent",
+      "speed": 65.0
+    }
+  ]
+}

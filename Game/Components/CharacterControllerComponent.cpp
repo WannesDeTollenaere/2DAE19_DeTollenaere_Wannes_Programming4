@@ -52,11 +52,17 @@ namespace dae
 
         input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::A, InputState::Down, std::make_unique<ThrowSaltCommand>(owner));
 
+        dae::EventManager::GetInstance().AttachEvent(make_sdbm_hash("LevelCompleted"), this);
         ////DAMAGE
         //input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::X, InputState::Down, std::make_unique<DamageCommand>(owner, 1));
         //// SCORE
         //input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::Y, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 10));
         //input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::B, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 100));
+    }
+    CharacterControllerComponent::~CharacterControllerComponent()
+    {
+        dae::EventManager::GetInstance().DetachEvent(make_sdbm_hash("LevelCompleted"), this);
+        UnbindInput();
     }
     void CharacterControllerComponent::OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp)
     {
@@ -69,9 +75,24 @@ namespace dae
             }
         }
     }
+    void CharacterControllerComponent::HandleEvent(const Event* event)
+    {
+        BaseCollisionHandler::HandleEvent(event);
+
+        if (event->id == make_sdbm_hash("LevelCompleted"))
+        {
+            m_IsLevelComplete = true; 
+
+            if (m_Anim)
+            {
+                m_Anim->PlayAnimation("Victory");
+                UnbindInput();
+            }
+        }
+    }
     void CharacterControllerComponent::Update()
     {
-        if (!m_Anim || m_IsDead) return;
+        if (!m_Anim || m_IsDead || m_IsLevelComplete) return;
 
         const auto& currentPos = GetOwner()->GetTransform().GetLocalPosition();
 
@@ -92,7 +113,7 @@ namespace dae
      
     void CharacterControllerComponent::ThrowSalt()
     {
-        if (m_IsDead || GameManager::GetInstance().GetSalt() <= 0) return;
+        if (m_IsDead || GameManager::GetInstance().GetSalt() <= 0 || m_IsLevelComplete) return;
 
         auto scene = SceneManager::GetInstance().GetActiveScene();
         if (!scene) return;
@@ -126,6 +147,25 @@ namespace dae
             m_IsDead = false;
             GetOwner()->GetTransform().SetLocalPosition(m_SpawnPosition);
             
-            });
+            });  
+    }
+    void CharacterControllerComponent::UnbindInput()
+    {
+        auto& input = InputManager::GetInstance();
+        if (m_useKeyboard)
+        {
+            input.UnbindKeyboardCommand(SDL_SCANCODE_W, InputState::Pressed);
+            input.UnbindKeyboardCommand(SDL_SCANCODE_S, InputState::Pressed);
+            input.UnbindKeyboardCommand(SDL_SCANCODE_A, InputState::Pressed);
+            input.UnbindKeyboardCommand(SDL_SCANCODE_D, InputState::Pressed);
+            input.UnbindKeyboardCommand(SDL_SCANCODE_SPACE, InputState::Down);
+        }
+
+        input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadUp, InputState::Pressed);
+        input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadDown, InputState::Pressed);
+        input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadLeft, InputState::Pressed);
+        input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadRight, InputState::Pressed);
+
+        input.UnbindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::A, InputState::Down);
     }
 }

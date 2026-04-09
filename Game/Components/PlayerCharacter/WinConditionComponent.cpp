@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include <iostream>
 #include "SceneLoader.h"
+#include "GameTime.h"
 
 namespace dae
 {
@@ -53,8 +54,10 @@ namespace dae
     }
     void WinConditionComponent::Win()
     {
-        std::string targetScene = m_WinSceneName;
+        dae::EventManager::GetInstance().SendEvent(make_sdbm_hash("LevelCompleted"));
 
-        dae::SceneManager::GetInstance().SetActiveScene(targetScene);
+        dae::GameTime::GetInstance().AddTimer(2.5f, [&]() {
+            dae::SceneManager::GetInstance().SetActiveScene(m_WinSceneName);
+            });
     }
 }

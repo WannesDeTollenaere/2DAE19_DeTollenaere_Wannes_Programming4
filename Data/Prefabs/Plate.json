@@ -1,0 +1,36 @@
+{
+  "components": [
+    {
+      "type": "TagComponent",
+      "tags": [ "Plate" ]
+    },
+    {
+      "type": "BoxColliderComponent",
+      "width": 48.0,
+      "height": 96.0,
+      "isTrigger": true
+    }
+  ],
+  "children": [
+    {
+      "name": "Plate_Visual",
+      "transform": {
+        "x": 0.0,
+        "y": 72.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "burger_time_spritesheet_x3.png",
+          "spriteSheet": {
+            "frameWidth": 48,
+            "frameHeight": 24,
+            "row": 17,
+            "col": 3,
+            "colSpan": 2
+          }
+        }
+      ]
+    }
+  ]
+}

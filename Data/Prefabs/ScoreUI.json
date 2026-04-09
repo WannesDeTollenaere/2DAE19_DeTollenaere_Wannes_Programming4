@@ -1,0 +1,53 @@
+{
+  "children": [
+    {
+      "name": "ScoreText",
+      "transform": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "components": [
+        { "type": "TextureComponent" },
+        {
+          "type": "TextComponent",
+          "text": "1UP",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        }
+      ]
+    },
+    {
+      "name": "Score",
+      "transform": {
+        "x": 0.0,
+        "y": 30.0
+      },
+      "components": [
+        { "type": "TextureComponent" },
+        {
+          "type": "TextComponent",
+          "text": "Score: 0",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 200,
+            "a": 255
+          }
+        },
+        {
+          "type": "ScoreDisplayComponent",
+          "startingScore": 0,
+          "targetTag": "Player1"
+        }
+      ]
+    }
+  ]
+}

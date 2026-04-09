@@ -20,6 +20,7 @@ namespace dae
     {
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("EnemyCrushed"), this);
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("LivesLost"), this);
+        EventManager::GetInstance().AttachEvent(make_sdbm_hash("LevelCompleted"), this);
 
         m_OriginalSpawnPosition = GetOwner()->GetTransform().GetLocalPosition();
     }
@@ -28,6 +29,7 @@ namespace dae
     {
         EventManager::GetInstance().DetachEvent(make_sdbm_hash("EnemyCrushed"), this);
         EventManager::GetInstance().DetachEvent(make_sdbm_hash("LivesLost"), this);
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash("LevelCompleted"), this);
     }
 
     void EnemyWanderComponent::Update()
@@ -56,7 +58,7 @@ namespace dae
         float snappedY = gridY * tileSize;
         bool isCentered = (std::abs(pos.x - snappedX) < 1.0f && std::abs(pos.y - snappedY) < 1.0f);
 
-        if (m_DecisionAvailable && (isStuck || (currentTile == TileType::Intersection && isCentered)))
+        if (m_DecisionAvailable && (isStuck || ((currentTile == TileType::Intersection && isCentered))|| (currentTile == TileType::IntersectionDownOnly && isCentered)))
         {
             m_DecisionAvailable = false;
             GameTime::GetInstance().AddTimer(m_CooldownDuration, [&]() { m_DecisionAvailable = true; });
@@ -87,10 +89,20 @@ namespace dae
             if (grid.GetTile(startX - 1, startY) != TileType::Empty) startNeighbors.push_back({ startX - 1, startY });
             if (grid.GetTile(startX + 1, startY) != TileType::Empty) startNeighbors.push_back({ startX + 1, startY });
         }
-        if (grid.IsClimbable(startTile))
+        if (grid.CanClimbUp(startTile))
         {
             if (grid.GetTile(startX, startY - 1) != TileType::Empty) startNeighbors.push_back({ startX, startY - 1 });
-            if (grid.GetTile(startX, startY + 1) != TileType::Empty) startNeighbors.push_back({ startX, startY + 1 });
+        }
+        if (grid.CanClimbDown(startTile))
+        { 
+            TileType tileBelow = grid.GetTile(startX, startY + 1);
+            if (tileBelow != TileType::Empty) 
+            {
+                if (!(tileBelow == TileType::IntersectionDownOnly && startTile != TileType::IntersectionDownOnly))
+                {
+                    startNeighbors.push_back({ startX, startY + 1 });
+                }
+            }
         }
 
         // prevent 180 degree turns unless stuck
@@ -155,10 +167,21 @@ namespace dae
                     if (grid.GetTile(current.x - 1, current.y) != TileType::Empty) neighbors.push_back({ current.x - 1, current.y });
                     if (grid.GetTile(current.x + 1, current.y) != TileType::Empty) neighbors.push_back({ current.x + 1, current.y });
                 }
-                if (grid.IsClimbable(currentTile))
+                if (grid.CanClimbUp(currentTile))
                 {
                     if (grid.GetTile(current.x, current.y - 1) != TileType::Empty) neighbors.push_back({ current.x, current.y - 1 });
-                    if (grid.GetTile(current.x, current.y + 1) != TileType::Empty) neighbors.push_back({ current.x, current.y + 1 });
+                }
+                if (grid.CanClimbDown(currentTile))
+                {
+                    TileType tileBelow = grid.GetTile(current.x, current.y + 1);
+                    if (tileBelow != TileType::Empty)
+                    {
+                     
+                        if (!(tileBelow == TileType::IntersectionDownOnly && currentTile != TileType::IntersectionDownOnly))
+                        {
+                            neighbors.push_back({ current.x, current.y + 1 });
+                        }
+                    }
                 }
             }
 
@@ -304,6 +327,11 @@ namespace dae
             Respawn(); 
             return;
         }
+
+        if (event && event->id == make_sdbm_hash("LevelCompleted"))
+        {
+            DisableMovement();
+        }
     }
     void EnemyWanderComponent::Die()
     {
@@ -387,12 +415,12 @@ namespace dae
         auto collider = GetOwner()->GetComponent<BoxColliderComponent>();
         if (collider) collider->SetActive(true);
 
-        if (m_pAnimator)
+        if (m_pAnimator) 
         {
             m_pAnimator->PlayAnimation("WalkDown");
         }
 
         m_Path.clear();
-        m_DecisionAvailable = true;
+        m_DecisionAvailable = true; 
     }
 }

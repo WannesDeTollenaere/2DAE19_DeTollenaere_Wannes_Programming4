@@ -65,7 +65,7 @@ namespace dae
                     EventManager::GetInstance().SendEvent(&exitB);
                 }
             }
-        }
+        } 
 
         m_ActiveCollisions = currentCollisions;
     }

@@ -1,0 +1,18 @@
+{
+  "components": [
+    {
+      "type": "BurgerIngredientComponent",
+      "widthInTiles": 2
+    },
+    {
+      "type": "BoxColliderComponent",
+      "width": 96.0,
+      "height": 24.0,
+      "isTrigger": true
+    },
+    {
+      "type": "TagComponent",
+      "tags": [ "Ingredient" ]
+    }
+  ]
+}

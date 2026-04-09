@@ -55,16 +55,56 @@ namespace dae
 
             newY = snappedY;
         }
-        else if (m_DesiredDirY != 0.0f && grid.IsClimbable(currentTile))
+        else if (m_DesiredDirY != 0.0f)
         {
-            if (std::abs(pos.x - snappedX) < (tileSize * 0.4f))
+            bool canMoveY = false;
+            bool forceClamp = false;
+
+            if (m_DesiredDirY < 0.0f)  // moving up
+            {
+                if (grid.CanClimbUp(currentTile))
+                {
+                    canMoveY = true;
+                }
+                else if (currentTile == TileType::IntersectionDownOnly && pos.y > snappedY)
+                {
+                    canMoveY = true;
+                    forceClamp = true;
+                }
+            }
+            else // Moving DOWN
+            {
+                canMoveY = grid.CanClimbDown(currentTile);
+
+                if (canMoveY)
+                {
+                    int nextY = gridY + 1;
+                    TileType nextTile = grid.GetTile(gridX, nextY);
+
+                    if (nextTile == TileType::IntersectionDownOnly && currentTile != TileType::IntersectionDownOnly)
+                    {
+                        if (pos.y >= snappedY)
+                        {
+                           
+                            canMoveY = false;
+                        }
+                        else
+                        {
+                           
+                            forceClamp = true;
+                        }
+                    }
+                }
+            }
+
+            if (canMoveY && std::abs(pos.x - snappedX) < (tileSize * 0.4f))
             {
                 newY += m_DesiredDirY * m_Speed * dt;
 
                 int nextY = gridY + (m_DesiredDirY > 0.0f ? 1 : -1);
-                if (grid.GetTile(gridX, nextY) == TileType::Empty)
-                {
 
+                if (forceClamp || grid.GetTile(gridX, nextY) == TileType::Empty)
+                {
                     newY = (m_DesiredDirY > 0.0f) ? std::min(newY, snappedY) : std::max(newY, snappedY);
                 }
 

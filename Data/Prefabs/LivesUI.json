@@ -1,0 +1,64 @@
+{
+  "components": [
+    { "type": "HealthDisplayComponent" }
+  ],
+  "children": [
+    {
+      "name": "Life_1",
+      "transform": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "burger_time_spritesheet_x3.png",
+          "spriteSheet": {
+            "frameWidth": 24,
+            "frameHeight": 24,
+            "row": 0,
+            "col": 25
+          }
+        }
+      ]
+    },
+    {
+      "name": "Life_2",
+      "transform": {
+        "x": 26.0,
+        "y": 0.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "burger_time_spritesheet_x3.png",
+          "spriteSheet": {
+            "frameWidth": 24,
+            "frameHeight": 24,
+            "row": 0,
+            "col": 25
+          }
+        }
+      ]
+    },
+    {
+      "name": "Life_3",
+      "transform": {
+        "x": 52.0,
+        "y": 0.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "burger_time_spritesheet_x3.png",
+          "spriteSheet": {
+            "frameWidth": 24,
+            "frameHeight": 24,
+            "row": 0,
+            "col": 25
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -13,7 +13,8 @@ namespace dae
         Empty = 0,
         Platform = 1,
         Ladder = 2,
-        Intersection = 3 
+        Intersection = 3,
+        IntersectionDownOnly = 4
     };
 
     class LevelGrid final: public Singleton<LevelGrid>
@@ -72,6 +73,16 @@ namespace dae
             return type != TileType::Platform;
         }
 
+        bool CanClimbUp(TileType type) const
+        {
+            return type == TileType::Ladder || type == TileType::Intersection;
+        }
+
+        bool CanClimbDown(TileType type) const
+        {
+            return type == TileType::Ladder || type == TileType::Intersection || type == TileType::IntersectionDownOnly;
+        }
+
         float GetTileSize() const { return m_TileSize; }
 
         int GetCols() const { return m_Cols; }
@@ -85,7 +96,8 @@ namespace dae
             ImGui::RadioButton("Empty", &selectedTileType, 0); ImGui::SameLine();
             ImGui::RadioButton("Platform", &selectedTileType, 1); ImGui::SameLine();
             ImGui::RadioButton("Ladder", &selectedTileType, 2); ImGui::SameLine();
-            ImGui::RadioButton("Intersection", &selectedTileType, 3);
+            ImGui::RadioButton("Intersection", &selectedTileType, 3); ImGui::SameLine();
+            ImGui::RadioButton("Down Only", &selectedTileType, 4);
             ImGui::Separator();
 
             if (ImGui::CollapsingHeader("Grid settings", ImGuiTreeNodeFlags_DefaultOpen))
@@ -128,6 +140,7 @@ namespace dae
                     case 1: label = "P"; color = ImVec4(0.2f, 0.6f, 0.2f, 1.0f); break; 
                     case 2: label = "L"; color = ImVec4(0.8f, 0.6f, 0.2f, 1.0f); break; 
                     case 3: label = "X"; color = ImVec4(0.8f, 0.2f, 0.2f, 1.0f); break; 
+                    case 4: label = "V"; color = ImVec4(0.6f, 0.2f, 0.8f, 1.0f); break;
                     }
 
                     ImGui::PushStyleColor(ImGuiCol_Button, color);

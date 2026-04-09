@@ -11,19 +11,21 @@ namespace dae
     {
     public:
         CharacterControllerComponent(GameObject* owner, float speed, bool useKeyboard, int controllerIndex = 0);
-        ~CharacterControllerComponent() = default;
+        ~CharacterControllerComponent();
 
         void SetFacingDirection(const glm::vec2& dir) { m_FacingDirection = dir; }
         void ThrowSalt();
 
         void OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp) override;
+        void HandleEvent(const Event* event) override;
         void Update() override;
 
         void Die();
         bool IsDead() const { return m_IsDead; }
+
     private:
         bool m_useKeyboard;
-        int m_controllerIndex;
+        int m_controllerIndex;  
 
         AnimatorComponent* m_Anim;
         glm::vec3 m_LastPosition{};
@@ -31,5 +33,8 @@ namespace dae
         glm::vec2 m_FacingDirection{ 1.0f, 0.0f };
 
         bool m_IsDead{ false };
+        bool m_IsLevelComplete{ false };
+
+        void UnbindInput();
     };
 }

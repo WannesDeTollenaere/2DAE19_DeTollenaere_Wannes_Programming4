@@ -114,14 +114,14 @@ namespace dae
                 auto dto = TagComponentDTO::FromJson(data);
                 std::unordered_set<Tag> to_list;
                 for (const auto& string_tag : dto.tags)
-                    to_list.insert(make_sdbm_hash_rt(string_tag));
+                    to_list.insert(make_sdbm_hash_rt(string_tag)); 
 
                 go->AddComponent<TagComponent>(to_list, make_sdbm_hash_rt(dto.uniqueTag));
                 });
 
             SceneLoader::RegisterComponentParser("BoxColliderComponent", [](dae::GameObject* go, const nlohmann::json& data) {
                 auto dto = BoxColliderComponentDTO::FromJson(data);
-                go->AddComponent<BoxColliderComponent>(dto.width, dto.height);
+                go->AddComponent<BoxColliderComponent>(dto.width, dto.height, dto.offsetX, dto.offsetY);
                 });
         }
     };

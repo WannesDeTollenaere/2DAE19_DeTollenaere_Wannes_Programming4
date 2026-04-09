@@ -16,8 +16,9 @@ namespace dae
 
         static void RegisterComponentParser(const std::string& type, std::function<void(GameObject*, const nlohmann::json&)> parser);
 
-    private:
-        static void ParseGameObject(const nlohmann::json& objData, Scene& scene, GameObject* parent = nullptr);
+    private: 
+        static void ParseGameObject(const nlohmann::json& objData, Scene& scene, GameObject* parent = nullptr); 
+        static void ParsePrefab(const std::string& prefabPath, Scene& scene, GameObject* pGameObject);
 
         static std::unordered_map<std::string, std::function<void(GameObject*, const nlohmann::json&)>> s_ComponentParsers;
     };

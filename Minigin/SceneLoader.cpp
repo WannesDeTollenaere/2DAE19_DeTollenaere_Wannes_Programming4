@@ -43,18 +43,13 @@ void dae::SceneLoader::LoadScene(Scene& scene, const std::string& jsonFilePath)
     }
 }
 
-void dae::SceneLoader::ParseGameObject(const json& objData, Scene& scene, GameObject* parent)
+void dae::SceneLoader::ParseGameObject(const nlohmann::json& objData, Scene& scene, GameObject* parent)
 {
-    std::string objectName = "GameObject";
-
-    if (objData.contains("name"))
-    {
-        objectName = objData["name"];
-    }
-
+    std::string objectName = objData.value("name", "GameObject");
     auto gameObject = std::make_unique<GameObject>(objectName);
-    GameObject* pGameObject = gameObject.get(); 
+    GameObject* pGameObject = gameObject.get();
 
+    // transform
     if (objData.contains("transform"))
     {
         float x = objData["transform"].value("x", 0.0f);
@@ -66,6 +61,20 @@ void dae::SceneLoader::ParseGameObject(const json& objData, Scene& scene, GameOb
     {
         bool keepWorldPos = objData.value("keepWorldPosition", false);
         pGameObject->SetParent(parent, keepWorldPos);
+    }
+
+    // PREFAB LOADING
+    if (objData.contains("prefab"))
+    {
+        std::string prefabPath = objData.value("prefab", "");
+        try
+        {
+            ParsePrefab(prefabPath, scene, pGameObject);
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << "Failed to load prefab: " << prefabPath << " - " << e.what() << "\n";
+        }
     }
 
     if (objData.contains("components") && objData["components"].is_array())
@@ -88,6 +97,7 @@ void dae::SceneLoader::ParseGameObject(const json& objData, Scene& scene, GameOb
 
     scene.Add(std::move(gameObject));
 
+    // children
     if (objData.contains("children") && objData["children"].is_array())
     {
         for (const auto& childData : objData["children"])
@@ -95,6 +105,41 @@ void dae::SceneLoader::ParseGameObject(const json& objData, Scene& scene, GameOb
             ParseGameObject(childData, scene, pGameObject);
         }
     }
+}
+
+void dae::SceneLoader::ParsePrefab(const std::string& prefabPath, Scene& scene, GameObject* pGameObject)
+{
+    nlohmann::json prefabData = ResourceManager::GetInstance().LoadJson(prefabPath);
+
+    if (prefabData.contains("prefab"))
+    {
+        ParsePrefab(prefabData.value("prefab", ""), scene, pGameObject);
+    }
+
+    if (prefabData.contains("components") && prefabData["components"].is_array())
+    {
+        for (const auto& compData : prefabData["components"])
+        {
+            std::string type = compData.value("type", "");
+            auto it = s_ComponentParsers.find(type);
+            if (it != s_ComponentParsers.end())
+            {
+                it->second(pGameObject, compData);
+            }
+            else
+            {
+                std::cerr << "Warning: Unknown prefab component type: " << type << "\n";
+            }
+        }
+    }
+
+    if (prefabData.contains("children") && prefabData["children"].is_array())
+    {
+        for (const auto& childData : prefabData["children"])
+        {
+            ParseGameObject(childData, scene, pGameObject);
+        }
+    } 
 }
 
 void dae::SceneLoader::RegisterComponentParser(const std::string& type, std::function<void(dae::GameObject*, const nlohmann::json&) > parser)

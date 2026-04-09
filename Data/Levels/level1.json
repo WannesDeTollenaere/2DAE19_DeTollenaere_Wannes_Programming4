@@ -40,19 +40,19 @@
           "rows": 12,
           "tileSize": 48.0,
           "layout": [
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-  0, 0, 3, 1, 1, 1, 3, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 
-  0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 
-  0, 0, 3, 1, 3, 1, 3, 0, 2, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 
-  0, 0, 0, 0, 2, 0, 3, 1, 3, 1, 3, 0, 2, 0, 2, 0, 0, 0, 2, 
-  0, 0, 3, 1, 3, 1, 3, 0, 0, 0, 2, 0, 2, 0, 3, 1, 3, 1, 3, 
-  0, 0, 2, 0, 2, 0, 3, 1, 1, 1, 3, 1, 3, 1, 3, 0, 2, 0, 0, 
-  0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 3, 1, 3, 1, 3, 
-  0, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 0, 2, 0, 2, 
-  0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 
-  0, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 3
-]
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+            0, 0, 4, 1, 1, 1, 4, 1, 4, 1, 4, 1, 1, 1, 4, 1, 1, 1, 4, 
+            0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 
+            0, 0, 3, 1, 4, 1, 3, 0, 2, 0, 3, 1, 4, 1, 3, 1, 1, 1, 3, 
+            0, 0, 0, 0, 2, 0, 3, 1, 3, 1, 3, 0, 2, 0, 2, 0, 0, 0, 2, 
+            0, 0, 4, 1, 3, 1, 3, 0, 0, 0, 2, 0, 2, 0, 3, 1, 4, 1, 3, 
+            0, 0, 2, 0, 2, 0, 3, 1, 1, 1, 3, 1, 3, 1, 3, 0, 2, 0, 0, 
+            0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 3, 1, 3, 1, 4, 
+            0, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 0, 2, 0, 2, 
+            0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 
+            0, 0, 3, 1, 3, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 3, 1, 3
+          ]
         },
         {
           "type": "LevelRendererComponent",
@@ -62,535 +62,179 @@
           "tileMappings": {
             "1": [ [ 8, 6 ] ],
             "2": [ [ 6, 6 ] ],
-            "3": [ [ 7, 6 ] ]
+            "3": [ [ 7, 6 ] ],
+            "4": [ [ 9, 6 ] ]
           }
         }
       ],
       "children": [
         {
           "name": "ScoreUI",
-          "transform": {
-            "x": 10.0,
-            "y": 10.0
-          },
-          "children": [
-            {
-              "name": "ScoreText",
-              "transform": {
-                "x": 0.0,
-                "y": 0.0
-              },
-              "components": [
-                { "type": "TextureComponent" },
-                {
-                  "type": "TextComponent",
-                  "text": "1UP",
-                  "font": "Lingua.otf",
-                  "fontSize": 24,
-                  "color": {
-                    "r": 255,
-                    "g": 0,
-                    "b": 0,
-                    "a": 255
-                  }
-                }
-              ]
-            },
-            {
-              "name": "Score",
-              "transform": {
-                "x": 0.0,
-                "y": 30.0
-              },
-              "components": [
-                { "type": "TextureComponent" },
-                {
-                  "type": "TextComponent",
-                  "text": "Score: 0",
-                  "font": "Lingua.otf",
-                  "fontSize": 24,
-                  "color": {
-                    "r": 255,
-                    "g": 255,
-                    "b": 200,
-                    "a": 255
-                  }
-                },
-                {
-                  "type": "ScoreDisplayComponent",
-                  "startingScore": 0,
-                  "targetTag": "Player1"
-                }
-              ]
-            }
-          ]
+          "prefab": "Prefabs/ScoreUI.json",
+          "transform": { "x": 10.0, "y": 10.0 }
         },
         {
           "name": "SaltUI",
-          "transform": { "x": 624.0, "y": 10.0 },
-          "children": [
-            {
-              "name": "SaltText",
-              "transform": {
-                "x": 0.0,
-                "y": 0.0
-              },
-              "components": [
-                { "type": "TextureComponent" },
-                {
-                  "type": "TextComponent",
-                  "text": "PEPPER",
-                  "font": "Lingua.otf",
-                  "fontSize": 24,
-                  "color": {
-                    "r": 0,
-                    "g": 255,
-                    "b": 0,
-                    "a": 255
-                  }
-                }
-              ]
-            },
-            {
-              "name": "SaltAmount",
-              "transform": {
-                "x": 73.0,
-                "y": 30.0
-              },
-              "components": [
-                { "type": "TextureComponent" },
-                {
-                  "type": "TextComponent",
-                  "text": "5",
-                  "font": "Lingua.otf",
-                  "fontSize": 24,
-                  "color": {
-                    "r": 255,
-                    "g": 255,
-                    "b": 255,
-                    "a": 255
-                  }
-                },
-                { "type": "SaltDisplayComponent" }
-              ]
-            }
-          ]
+          "prefab": "Prefabs/SaltUI.json",
+          "transform": { "x": 624.0, "y": 10.0 }
         },
         {
           "name": "LivesUI",
-          "transform": { "x": 10.0, "y": 800.0 },
-          "components": [
-            { "type": "HealthDisplayComponent" }
-          ],
-          "children": [
-            {
-              "name": "Life_1",
-              "transform": { "x": 0.0, "y": 0.0 },
-              "components": [
-                {
-                  "type": "TextureComponent",
-                  "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 24, "frameHeight": 24, "row": 0, "col": 25 }
-                }
-              ]
-            },
-            {
-              "name": "Life_2",
-              "transform": { "x": 26.0, "y": 0.0 },
-              "components": [
-                {
-                  "type": "TextureComponent",
-                  "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 24, "frameHeight": 24, "row": 0, "col": 25 }
-                }
-              ]
-            },
-            {
-              "name": "Life_3",
-              "transform": { "x": 52.0, "y": 0.0 },
-              "components": [
-                {
-                  "type": "TextureComponent",
-                  "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 24, "frameHeight": 24, "row": 0, "col": 25 }
-                }
-              ]
-            }
-          ]
+          "prefab": "Prefabs/LivesUI.json",
+          "transform": { "x": 10.0, "y": 800.0 }
         },
         {
           "name": "Player",
-          "transform": { "x": 480.0, "y": 528.0 },
-          "components": [
-            { "type": "TagComponent", "tags": [ "Player" ], "uniqueTag": "Player1" },
-            { "type": "ScoreComponent", "startingScore": 0 },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": false },
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png" },
-            {
-              "type": "AnimatorComponent",
-              "frameWidth": 48,
-              "frameHeight": 48,
-              "playOnStart": "Idle",
-              "animations": {
-                "Idle": { "startRow": 1, "startCol": 0, "frameCount": 1, "frameTime": 0.1, "isLooping": true },
-                "WalkDown": { "startRow": 0, "startCol": 0, "frameCount": 3, "frameTime": 0.1, "isLooping": true },
-                "WalkUp": { "startRow": 0, "startCol": 6, "frameCount": 3, "frameTime": 0.1, "isLooping": true },
-                "WalkLeft": { "startRow": 0, "startCol": 3, "frameCount": 3, "frameTime": 0.1, "isLooping": true },
-                "WalkRight": { "startRow": 0, "startCol": 9, "frameCount": 3, "frameTime": 0.1, "isLooping": true },
-                "Die": { "startRow": 1, "startCol": 3, "frameCount": 6, "frameTime": 0.2, "isLooping": false }
-              }
-            },
-            { "type": "GridMovementComponent", "speed": 100.0 },
-            { "type": "CharacterControllerComponent", "inputType": "keyboard" }
-          ]
+          "prefab": "Prefabs/Player.json",
+          "transform": { "x": 480.0, "y": 528.0 }
         },
         {
           "name": "Enemy_HotDog_1",
-          "transform": { "x": 96.0, "y": 528.0 },
-          "components": [
-            { "type": "TagComponent", "tags": [ "Enemy" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png" },
-            {
-              "type": "AnimatorComponent",
-              "frameWidth": 48,
-              "frameHeight": 48,
-              "playOnStart": "WalkDown",
-              "animations": {
-                "WalkDown": { "startRow": 2, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkUp": { "startRow": 2, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkLeft": { "startRow": 2, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkRight": { "startRow": 2, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "Die": { "startRow": 3, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
-                "Pickled": { "startRow": 3, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true }
-              }
-            },
-            { "type": "GridMovementComponent", "speed": 65.0 },
-            { "type": "EnemyWanderComponent" }
-          ]
+          "prefab": "Prefabs/MrHotDog.json",
+          "transform": { "x": 96.0, "y": 528.0 }
         },
         {
           "name": "Enemy_HotDog_2",
-          "transform": { "x": 96.0, "y": 96.0 },
-          "components": [
-            { "type": "TagComponent", "tags": [ "Enemy" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png" },
-            {
-              "type": "AnimatorComponent",
-              "frameWidth": 48,
-              "frameHeight": 48,
-              "playOnStart": "WalkRight",
-              "animations": {
-                "WalkDown": { "startRow": 2, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkUp": { "startRow": 2, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkLeft": { "startRow": 2, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkRight": { "startRow": 2, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "Die": { "startRow": 3, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
-                "Pickled": { "startRow": 3, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true }
-              }
-            },
-            { "type": "GridMovementComponent", "speed": 65.0 },
-            { "type": "EnemyWanderComponent" }
-          ]
+          "prefab": "Prefabs/MrHotDog.json",
+          "transform": { "x": 96.0, "y": 96.0 }
         },
         {
           "name": "Enemy_HotDog_3",
-          "transform": { "x": 864.0, "y": 96.0 },
-          "components": [
-            { "type": "TagComponent", "tags": [ "Enemy" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png" },
-            {
-              "type": "AnimatorComponent",
-              "frameWidth": 48,
-              "frameHeight": 48,
-              "playOnStart": "WalkRight",
-              "animations": {
-                "WalkDown": { "startRow": 2, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkUp": { "startRow": 2, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkLeft": { "startRow": 2, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkRight": { "startRow": 2, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "Die": { "startRow": 3, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
-                "Pickled": { "startRow": 3, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true }
-              }
-            },
-            { "type": "GridMovementComponent", "speed": 65.0 },
-            { "type": "EnemyWanderComponent" }
-          ]
+          "prefab": "Prefabs/MrHotDog.json",
+          "transform": { "x": 864.0, "y": 96.0 }
         },
         {
           "name": "Enemy_Egg_1",
-          "transform": { "x": 864.0, "y": 528.0 },
-          "components": [
-            { "type": "TagComponent", "tags": [ "Enemy" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 48.0, "isTrigger": true },
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png" },
-            {
-              "type": "AnimatorComponent",
-              "frameWidth": 48,
-              "frameHeight": 48,
-              "playOnStart": "WalkDown",
-              "animations": {
-                "WalkDown": { "startRow": 6, "startCol": 0, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkUp": { "startRow": 6, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkLeft": { "startRow": 6, "startCol": 2, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "WalkRight": { "startRow": 7, "startCol": 6, "frameCount": 2, "frameTime": 0.15, "isLooping": true },
-                "Die": { "startRow": 7, "startCol": 0, "frameCount": 4, "frameTime": 0.15, "isLooping": false },
-                "Pickled": { "startRow": 7, "startCol": 4, "frameCount": 2, "frameTime": 0.15, "isLooping": true }
-              }
-            },
-            { "type": "GridMovementComponent", "speed": 65.0 },
-            { "type": "EnemyWanderComponent", "enemyType": "Egg" }
-          ]
+          "prefab": "Prefabs/MrEgg.json",
+          "transform": { "x": 864.0, "y": 528.0 }
         },
-       
         {
           "name": "TopBun_1",
-          "transform": { "x": 168.0, "y": 216.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 6, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/TopBun.json",
+          "transform": { "x": 168.0, "y": 216.0 }
         },
         {
           "name": "Lettuce_1",
-          "transform": { "x": 168.0, "y": 312.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 11, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/Lettuce.json",
+          "transform": { "x": 168.0, "y": 312.0 }
         },
         {
           "name": "Patty_1",
-          "transform": { "x": 168.0, "y": 456.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 9, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/BurgerPatty.json",
+          "transform": { "x": 168.0, "y": 456.0 }
         },
         {
           "name": "BottomBun_1",
-          "transform": { "x": 168.0, "y": 552.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 7, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/BottomBun.json",
+          "transform": { "x": 168.0, "y": 552.0 }
         },
-                {
+        {
           "name": "TopBun_2",
-          "transform": { "x": 360.0, "y": 120.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 6, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/TopBun.json",
+          "transform": { "x": 360.0, "y": 120.0 }
         },
         {
           "name": "Lettuce_2",
-          "transform": { "x": 360.0, "y": 360.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 11, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/Lettuce.json",
+          "transform": { "x": 360.0, "y": 360.0 }
         },
         {
           "name": "Patty_2",
-          "transform": { "x": 360.0, "y": 456.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 9, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/BurgerPatty.json",
+          "transform": { "x": 360.0, "y": 456.0 }
         },
         {
           "name": "BottomBun_2",
-          "transform": { "x": 360.0, "y": 552.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 7, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/BottomBun.json",
+          "transform": { "x": 360.0, "y": 552.0 }
         },
-         {
+        {
           "name": "TopBun_3",
-          "transform": { "x": 552.0, "y": 120.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 6, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/TopBun.json",
+          "transform": { "x": 552.0, "y": 120.0 }
         },
         {
           "name": "Lettuce_3",
-          "transform": { "x": 552.0, "y": 216.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 11, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/Lettuce.json",
+          "transform": { "x": 552.0, "y": 216.0 }
         },
         {
           "name": "Patty_3",
-          "transform": { "x": 552.0, "y": 360.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 9, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/BurgerPatty.json",
+          "transform": { "x": 552.0, "y": 360.0 }
         },
         {
           "name": "BottomBun_3",
-          "transform": { "x": 552.0, "y": 552.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 7, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/BottomBun.json",
+          "transform": { "x": 552.0, "y": 552.0 }
         },
-                 {
+        {
           "name": "TopBun_4",
-          "transform": { "x": 744.0, "y": 120.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 6, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/TopBun.json",
+          "transform": { "x": 744.0, "y": 120.0 }
         },
         {
           "name": "Lettuce_4",
-          "transform": { "x": 744.0, "y": 216.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 11, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/Lettuce.json",
+          "transform": { "x": 744.0, "y": 216.0 }
         },
         {
           "name": "Patty_4",
-          "transform": { "x": 744.0, "y": 312.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 9, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/BurgerPatty.json",
+          "transform": { "x": 744.0, "y": 312.0 }
         },
         {
           "name": "BottomBun_4",
-          "transform": { "x": 744.0, "y": 408.0 },
-          "components": [
-            { "type": "TextureComponent", "texture": "burger_time_spritesheet_x3.png", "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 7, "col": 7, "colSpan": 2 } },
-            { "type": "BurgerIngredientComponent", "widthInTiles": 2 },
-            { "type": "BoxColliderComponent", "width": 96.0, "height": 24.0, "isTrigger": true },
-            { "type": "TagComponent", "tags": [ "Ingredient" ] }
-          ]
+          "prefab": "Prefabs/BottomBun.json",
+          "transform": { "x": 744.0, "y": 408.0 }
         },
-
         {
           "name": "Plate_1",
+          "prefab": "Prefabs/Plate.json",
           "transform": { "x": 168.0, "y": 730.0 },
           "components": [
-            { "type": "TagComponent", "tags": [ "Plate" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 96.0, "isTrigger": true },
-            { "type": "PlateComponent", "requiredIngredients": 4 }
-          ],
-          "children": [
-            {
-              "name": "Plate_Visual_1",
-              "transform": { "x": 0.0, "y": 72.0 },
-              "components": [
-                {
-                  "type": "TextureComponent",
-                  "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 17, "col": 3, "colSpan": 2 }
-                }
-              ]
-            }
-          ]
+        { "type": "PlateComponent", "requiredIngredients": 4 }
+      ]
         },
         {
           "name": "Plate_2",
-          "transform": { "x": 360.0, "y": 730.0 },
+          "prefab": "Prefabs/Plate.json",
+          "transform": {
+            "x": 360.0,
+            "y": 730.0
+          },
           "components": [
-            { "type": "TagComponent", "tags": [ "Plate" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 96.0, "isTrigger": true },
-            { "type": "PlateComponent", "requiredIngredients": 4 }
-          ],
-          "children": [
             {
-              "name": "Plate_Visual_2",
-              "transform": { "x": 0.0, "y": 72.0 },
-              "components": [
-                {
-                  "type": "TextureComponent",
-                  "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 17, "col": 3, "colSpan": 2 }
-                }
-              ]
+              "type": "PlateComponent",
+              "requiredIngredients": 4
             }
           ]
         },
         {
           "name": "Plate_3",
-          "transform": { "x": 552.0, "y": 730.0 },
+          "prefab": "Prefabs/Plate.json",
+          "transform": {
+            "x": 552.0,
+            "y": 730.0
+          },
           "components": [
-            { "type": "TagComponent", "tags": [ "Plate" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 96.0, "isTrigger": true },
-            { "type": "PlateComponent", "requiredIngredients": 4 }
-          ],
-          "children": [
             {
-              "name": "Plate_Visual_3",
-              "transform": { "x": 0.0, "y": 72.0 },
-              "components": [
-                {
-                  "type": "TextureComponent",
-                  "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 17, "col": 3, "colSpan": 2 }
-                }
-              ]
+              "type": "PlateComponent",
+              "requiredIngredients": 4
             }
           ]
         },
         {
           "name": "Plate_4",
-          "transform": { "x": 744.0, "y": 730.0 },
+          "prefab": "Prefabs/Plate.json",
+          "transform": {
+            "x": 744.0,
+            "y": 730.0
+          },
           "components": [
-            { "type": "TagComponent", "tags": [ "Plate" ] },
-            { "type": "BoxColliderComponent", "width": 48.0, "height": 96.0, "isTrigger": true },
-            { "type": "PlateComponent", "requiredIngredients": 4 }
-          ],
-          "children": [
             {
-              "name": "Plate_Visual_4",
-              "transform": { "x": 0.0, "y": 72.0 },
-              "components": [
-                {
-                  "type": "TextureComponent",
-                  "texture": "burger_time_spritesheet_x3.png",
-                  "spriteSheet": { "frameWidth": 48, "frameHeight": 24, "row": 17, "col": 3, "colSpan": 2 }
-                }
-              ]
+              "type": "PlateComponent",
+              "requiredIngredients": 4
             }
           ]
         }

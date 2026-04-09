@@ -12,7 +12,7 @@ namespace dae
     class BoxColliderComponent final : public Component
     {
     public:
-        BoxColliderComponent(GameObject* owner, float width, float height);
+        BoxColliderComponent(GameObject* owner, float width, float height, float offsetX = 0.f, float offsetY = 0.f);
         ~BoxColliderComponent();
         BoxColliderComponent(const BoxColliderComponent& other) = delete;
         BoxColliderComponent(BoxColliderComponent&& other) = delete;
