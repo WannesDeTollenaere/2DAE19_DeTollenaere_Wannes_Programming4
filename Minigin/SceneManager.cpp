@@ -3,6 +3,8 @@
 #include <imgui.h>
 #include <iostream>
 #include "SceneLoader.h"
+#include "GameTime.h"
+#include "InputManager.h"
 
 void dae::SceneManager::FixedUpdate()
 {
@@ -74,7 +76,10 @@ void dae::SceneManager::HandleLateSceneTransition()
 {
     if (m_LoadSceneNextFrame)
     {
+        GameTime::GetInstance().ClearAllTimers();
         Clear();
+
+        InputManager::GetInstance().Clear();
 
         auto& scene = CreateScene();
 

@@ -69,8 +69,8 @@ namespace dae
                     BurgerCompletedEvent event(GetOwner());
                     EventManager::GetInstance().SendEvent(&event);
                 }
-            } 
-        }
+            }  
+        } 
     }
     void dae::PlateComponent::CalculateColliderHeight()
     {

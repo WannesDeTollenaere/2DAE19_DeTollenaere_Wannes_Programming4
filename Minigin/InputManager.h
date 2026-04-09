@@ -41,6 +41,7 @@ namespace dae
 		~InputManager() = default;
 
 		bool ProcessInput();
+		void Clear() { m_KeyboardCommands.clear(); m_ControllerCommands.clear(); }
 
 		void BindCommand(uint16_t controllerIndex, Gamepad::ControllerButton button, InputState state, std::unique_ptr<Command> command);
 		void UnbindCommand(uint16_t controllerIndex, Gamepad::ControllerButton button, InputState state);

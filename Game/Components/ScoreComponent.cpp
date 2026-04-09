@@ -8,6 +8,7 @@
 #include "sdbm_hash.h"
 #include "GameObject.h"
 #include "Events/BurgerCompletedEvent.h"
+#include "GameManager.h"
 
 namespace dae
 {
@@ -32,6 +33,8 @@ namespace dae
     {
         bool scoreChanged = false;
 
+        int scoreToAdd{ 0 };
+
         // ENEMY CRUSHED
         if (pEvent->id == make_sdbm_hash("EnemyCrushed"))
         {
@@ -41,9 +44,9 @@ namespace dae
                 {
                     switch (pWander->GetEnemyType())
                     {
-                    case EnemyType::HotDog: m_score += 100; break;
-                    case EnemyType::Pickle: m_score += 200; break;
-                    case EnemyType::Egg:    m_score += 300; break;
+                    case EnemyType::HotDog: scoreToAdd += 100; break;
+                    case EnemyType::Pickle: scoreToAdd += 200; break;
+                    case EnemyType::Egg:    scoreToAdd += 300; break;
                     }
                     scoreChanged = true;
                 }
@@ -52,7 +55,7 @@ namespace dae
         // BURGER DROPPED
         else if (pEvent->id == make_sdbm_hash("BurgerDropped"))
         {
-            m_score += 50;
+            scoreToAdd += 50;
             scoreChanged = true;
         }
         // BURGER CASCADED
@@ -62,13 +65,13 @@ namespace dae
             {
                 switch (pCascadeEvent->numEnemies)
                 {
-                case 1: m_score += 500; break;
-                case 2: m_score += 1000; break;
-                case 3: m_score += 2000; break;
-                case 4: m_score += 4000; break;
-                case 5: m_score += 8000; break;
+                case 1: scoreToAdd += 500; break;
+                case 2: scoreToAdd += 1000; break;
+                case 3: scoreToAdd += 2000; break;
+                case 4: scoreToAdd += 4000; break;
+                case 5: scoreToAdd += 8000; break;
                 default:
-                    if (pCascadeEvent->numEnemies >= 6) m_score += 16000;
+                    if (pCascadeEvent->numEnemies >= 6) scoreToAdd += 16000;
                     break;
                 }
                 scoreChanged = true;
@@ -77,14 +80,16 @@ namespace dae
         // FINISHING BURGER
         else if (pEvent->id == make_sdbm_hash("BurgerCompleted"))
         {
-            m_score += 1000; 
+            scoreToAdd += 1000;
             scoreChanged = true;
         }
 
         // BROADCAST for scoredisplay
         if (scoreChanged)
         {
-            ScoreChangedEvent changedEvent(GetOwner(), m_score);
+            GameManager::GetInstance().AddScore(scoreToAdd);
+
+            ScoreChangedEvent changedEvent(GetOwner(), GameManager::GetInstance().GetScore());
             EventManager::GetInstance().SendEvent(&changedEvent);
         }
     }

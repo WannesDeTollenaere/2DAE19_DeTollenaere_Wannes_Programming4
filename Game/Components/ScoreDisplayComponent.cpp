@@ -3,6 +3,7 @@
 #include "Events/ScoreChangedEvent.h"
 #include "sdbm_hash.h"
 #include "GameObject.h"
+#include "GameManager.h"
 
 namespace dae
 {
@@ -11,6 +12,8 @@ namespace dae
         m_targetPlayer{ TagComponent::FindGameObject(targetTag) }
     {
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("ScoreChanged"), this);
+
+        m_currentScore = GameManager::GetInstance().GetScore();
     }
 
     ScoreDisplayComponent::~ScoreDisplayComponent()

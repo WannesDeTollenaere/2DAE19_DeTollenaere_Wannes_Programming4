@@ -220,7 +220,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Events/EnemyCrushedEvent.h" 
  "Game/Components/PlayerCharacter/SaltComponent.h" 
  "Game/Components/PlayerCharacter/SaltComponent.cpp" 
- "Game/Commands/ThrowSaltCommand.h" "Game/Events/BurgerDroppedEvent.h" "Game/Events/BurgerCascadeEvent.h" "Game/Components/ScoreVFXComponent.h" "Game/Components/ScoreVFXComponent.cpp" "Game/Events/BurgerCompletedEvent.h" "Game/Components/Ingredients/PlateComponent.h" "Game/Components/Ingredients/PlateComponent.cpp" "Game/DTO/PlateComponentDTO.h" "Game/Components/PlayerCharacter/WinConditionComponent.h" "Game/Components/PlayerCharacter/WinConditionComponent.cpp")
+ "Game/Commands/ThrowSaltCommand.h" "Game/Events/BurgerDroppedEvent.h" "Game/Events/BurgerCascadeEvent.h" "Game/Components/ScoreVFXComponent.h" "Game/Components/ScoreVFXComponent.cpp" "Game/Events/BurgerCompletedEvent.h" "Game/Components/Ingredients/PlateComponent.h" "Game/Components/Ingredients/PlateComponent.cpp" "Game/DTO/PlateComponentDTO.h" "Game/Components/PlayerCharacter/WinConditionComponent.h" "Game/Components/PlayerCharacter/WinConditionComponent.cpp" "Game/GameManager.h")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 
