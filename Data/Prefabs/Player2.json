@@ -3,11 +3,7 @@
     {
       "type": "TagComponent",
       "tags": [ "Player" ],
-      "uniqueTag": "Player1"
-    },
-    {
-      "type": "ScoreComponent",
-      "startingScore": 0
+      "uniqueTag": "Player2"
     },
     {
       "type": "BoxColliderComponent",
@@ -28,49 +24,49 @@
       "playOnStart": "Idle",
       "animations": {
         "Idle": {
-          "startRow": 1,
-          "startCol": 0,
+          "startRow": 9,
+          "startCol": 6,
           "frameCount": 1,
           "frameTime": 0.1,
           "isLooping": true
         },
         "WalkDown": {
-          "startRow": 0,
-          "startCol": 0,
-          "frameCount": 3,
-          "frameTime": 0.1,
-          "isLooping": true
-        },
-        "WalkUp": {
-          "startRow": 0,
+          "startRow": 8,
           "startCol": 6,
           "frameCount": 3,
           "frameTime": 0.1,
           "isLooping": true
         },
-        "WalkLeft": {
-          "startRow": 0,
-          "startCol": 3,
+        "WalkUp": {
+          "startRow": 8,
+          "startCol": 12,
           "frameCount": 3,
           "frameTime": 0.1,
           "isLooping": true
         },
-        "WalkRight": {
-          "startRow": 0,
+        "WalkLeft": {
+          "startRow": 8,
           "startCol": 9,
           "frameCount": 3,
           "frameTime": 0.1,
           "isLooping": true
         },
+        "WalkRight": {
+          "startRow": 10,
+          "startCol": 11,
+          "frameCount": 3,
+          "frameTime": 0.1,
+          "isLooping": true
+        },
         "Die": {
-          "startRow": 1,
-          "startCol": 3,
+          "startRow": 9,
+          "startCol": 9,
           "frameCount": 6,
           "frameTime": 0.2,
           "isLooping": false
         },
         "Victory": {
-          "startRow": 1,
+          "startRow": 10,
           "startCol": 9,
           "frameCount": 2,
           "frameTime": 0.2,
@@ -84,8 +80,8 @@
     },
     {
       "type": "CharacterControllerComponent",
-      "inputType": "keyboard",
-      "controllerIndex":  0
+      "inputType": "Controller",
+      "controllerIndex":  1
     }
   ]
 }

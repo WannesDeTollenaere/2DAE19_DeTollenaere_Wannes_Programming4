@@ -34,7 +34,7 @@ namespace dae
 	};
 
 	class InputManager final : public Singleton<InputManager>
-	{
+	{ 
 	public:
 		InputManager();
 		InputManager(uint16_t amountOfControllers);

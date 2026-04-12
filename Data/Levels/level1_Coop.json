@@ -1,5 +1,5 @@
 {
-  "name": "Level 1",
+  "name": "Level 1 coop",
   "objects": [
     {
       "name": "ScoreVfxManager",
@@ -94,10 +94,12 @@
         {
           "name": "Player",
           "prefab": "Prefabs/Player.json",
-          "transform": {
-            "x": 480.0,
-            "y": 528.0
-          }
+          "transform": { "x": 480.0, "y": 528.0 }
+        },
+                {
+          "name": "Player2",
+          "prefab": "Prefabs/Player2.json",
+          "transform": { "x": 480.0, "y": 528.0 }
         },
         {
           "name": "Enemy_HotDog_1",

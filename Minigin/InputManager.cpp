@@ -2,7 +2,7 @@
 #include <backends/imgui_impl_sdl3.h>
 #include "InputManager.h"
 
-dae::InputManager::InputManager() : InputManager(1) {}
+dae::InputManager::InputManager() : InputManager(2) {}
 
 dae::InputManager::InputManager(uint16_t amountOfControllers)
 {

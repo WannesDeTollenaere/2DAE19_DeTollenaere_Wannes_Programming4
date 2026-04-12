@@ -59,19 +59,21 @@ namespace dae
             input.BindKeyboardCommand(SDL_SCANCODE_D, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(1, 0)));
 
             input.BindKeyboardCommand(SDL_SCANCODE_SPACE, InputState::Down, std::make_unique<ThrowSaltCommand>(owner));
-
+             
             ////DAMAGE
             //input.BindKeyboardCommand(SDL_SCANCODE_C, InputState::Down, std::make_unique<DamageCommand>(owner, 1));
             //// SCORE
             //input.BindKeyboardCommand(SDL_SCANCODE_V, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 10));
             //input.BindKeyboardCommand(SDL_SCANCODE_B, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 100));
         }
-        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadUp, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(0, -1)));
-        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadDown, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(0, 1)));
-        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadLeft, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(-1, 0)));
-        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadRight, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(1, 0)));
 
-        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::A, InputState::Down, std::make_unique<ThrowSaltCommand>(owner));
+            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadUp, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(0, -1)));
+            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadDown, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(0, 1)));
+            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadLeft, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(-1, 0)));
+            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadRight, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(1, 0)));
+
+            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::A, InputState::Down, std::make_unique<ThrowSaltCommand>(owner));
+         
 
         dae::EventManager::GetInstance().AttachEvent(make_sdbm_hash("LevelCompleted"), this);
         ////DAMAGE

@@ -21,7 +21,7 @@ namespace dae
         void Update() override;
 
         void Die();
-        bool IsDead() const { return m_IsDead; }
+        bool IsDead() const { return m_IsDead; } 
 
     private:
         bool m_useKeyboard;
