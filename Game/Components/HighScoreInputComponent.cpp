@@ -108,7 +108,7 @@ namespace dae
 
         HighScoreManager::GetInstance().AddScore(m_Name, m_Score);
 
-        SceneManager::GetInstance().SetActiveScene("Levels/level1.json");
+        SceneManager::GetInstance().SetActiveScene("Levels/LoadingScene.json");
     }
 
     void HighScoreInputComponent::UpdateVisualText()

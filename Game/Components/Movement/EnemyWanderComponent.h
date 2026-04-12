@@ -45,9 +45,11 @@ namespace dae
         void Stun();
         bool IsStunned() const { return m_State == EnemyState::Stunned; }
 
+        bool IsDangerous() const { return !IsStunned() && !IsDead() && !IsCascading(); }
+
         void DisableMovement();
         void EnableMovement();
-        bool IsMovementDisabled() const { return m_State == EnemyState::Disabled || IsCascading() || IsStunned(); }
+        bool IsMovementDisabled() const { return m_State == EnemyState::Disabled || IsCascading() || IsStunned() || IsDead(); }
 
         // CASCADING
         void SetCascading(bool cascading);
