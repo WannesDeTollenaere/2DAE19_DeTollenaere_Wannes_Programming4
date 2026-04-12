@@ -1,0 +1,98 @@
+{
+	"name": "MainMenu",
+	"children": [
+		{
+			"name": "MenuContainer",
+			"components": [ { "type": "MenuComponent" } ],
+			"children": [
+				{
+					"name": "Solo",
+					"transform": {
+						"x": 0.0,
+						"y": 0.0
+					},
+					"components": [
+						{
+							"type": "TextComponent",
+							"text": "PLAY SOLO"
+						},
+						{
+							"type": "MenuItemComponent",
+							"action": "load_scene",
+							"scene": "Levels/LoadingScene.json"
+						},
+						{
+							"type": "TextureComponent"
+						}
+					]
+				},
+
+				{
+					"name": "Coop",
+					"transform": {
+						"x": 0.0,
+						"y": 50.0
+					},
+					"components": [
+						{
+							"type": "TextComponent",
+							"text": "PLAY COOP"
+						},
+						{
+							"type": "MenuItemComponent",
+							"action": "load_scene",
+							"scene": "Levels/Coop/LoadingScene.json"
+						},
+						{
+							"type": "TextureComponent"
+						}
+					]
+				},
+
+				{
+					"name": "Vs",
+					"transform": {
+						"x": 0.0,
+						"y": 100.0
+					},
+					"components": [
+						{
+							"type": "TextComponent",
+							"text": "PLAY VS"
+						},
+						{
+							"type": "MenuItemComponent",
+							"action": "load_scene",
+							"scene": "Levels/VS/level1.json"
+						},
+						{
+							"type": "TextureComponent"
+						}
+					]
+				},
+
+				{
+					"name": "Quit",
+					"transform": {
+						"x": 0.0,
+						"y": 150.0
+					},
+					"components": [
+						{
+							"type": "TextComponent",
+							"text": "QUIT GAME"
+						},
+						{
+							"type": "MenuItemComponent",
+							"action": "quit",
+							"parameter": ""
+						},
+						{
+							"type": "TextureComponent"
+						}
+					]
+				}
+			]
+		}
+	]
+}

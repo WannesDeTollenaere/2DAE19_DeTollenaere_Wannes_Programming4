@@ -126,7 +126,7 @@ add_library(Minigin STATIC
  "Minigin/Helpers/Spritesheet.h" 
  "Minigin/Helpers/Spritesheet.cpp" 
  "Minigin/Components/LifeTimeComponent.h"
-"Minigin/Components/LifeTimeComponent.cpp")
+"Minigin/Components/LifeTimeComponent.cpp" "Minigin/Commands/QuitCommand.h")
 
 target_compile_features(Minigin PUBLIC cxx_std_20)
 
@@ -238,7 +238,11 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Components/LeaderboardComponent.cpp" 
  "Game/Commands/LoadSceneCommand.h" 
  "Game/Components/SceneTranistionComponent.h" 
- "Game/Components/SceneTransitionComponent.cpp" )
+ "Game/Components/SceneTransitionComponent.cpp"  
+ "Game/Commands/MenuNavigationCommand.h" 
+ "Game/Components/UI/MenuItemComponent.h" 
+ "Game/Components/UI/MenuComponent.h" 
+ "Game/Components/UI/MenuComponent.cpp")
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 

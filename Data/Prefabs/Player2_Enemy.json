@@ -1,0 +1,94 @@
+{
+  "components": [
+    {
+      "type": "TagComponent",
+      "tags": [ "Enemy" ],
+      "uniqueTag": "Player2"
+    },
+    {
+      "type": "BoxColliderComponent",
+      "width": 32.0,
+      "height": 32.0,
+      "offsetX": 8.0,
+      "offsetY": 8.0,
+      "isTrigger": false
+    },
+    {
+      "type": "TextureComponent",
+      "texture": "burger_time_spritesheet_x3.png"
+    },
+    {
+      "type": "AnimatorComponent",
+      "frameWidth": 48,
+      "frameHeight": 48,
+      "playOnStart": "Idle",
+      "animations": {
+        "Idle": {
+          "startRow": 9,
+          "startCol": 6,
+          "frameCount": 1,
+          "frameTime": 0.1,
+          "isLooping": true
+        },
+        "WalkDown": {
+          "startRow": 2,
+          "startCol": 0,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        },
+        "WalkUp": {
+          "startRow": 2,
+          "startCol": 4,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        },
+        "WalkLeft": {
+          "startRow": 2,
+          "startCol": 2,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        },
+        "WalkRight": {
+          "startRow": 2,
+          "startCol": 6,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        },
+        "Die": {
+          "startRow": 3,
+          "startCol": 0,
+          "frameCount": 4,
+          "frameTime": 0.15,
+          "isLooping": false
+        },
+        "Victory": {
+          "startRow": 10,
+          "startCol": 9,
+          "frameCount": 2,
+          "frameTime": 0.2,
+          "isLooping": true
+        },
+        "Pickled": {
+          "startRow": 3,
+          "startCol": 4,
+          "frameCount": 2,
+          "frameTime": 0.15,
+          "isLooping": true
+        }
+      }
+    },
+    {
+      "type": "GridMovementComponent",
+      "speed": 100.0
+    },
+    {
+      "type": "CharacterControllerComponent",
+      "inputType": "Controller",
+      "controllerIndex":  1
+    }
+  ]
+}

@@ -18,7 +18,7 @@
       "components": [
         {
           "type": "SceneTransitionComponent",
-          "targetScene": "Levels/level1.json",
+          "targetScene": "Levels/Coop/level1.json",
           "timeAmount": 3.0
         }
       ]

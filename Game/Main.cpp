@@ -16,12 +16,12 @@
 #include "Achievements/BurgerTimeAchievements.h"
 #include "SteamAchievements/Achievement.h"
 #endif  
-
+ 
 
 //std::unique_ptr<dae::AchievementManager> g_AchievementManager;
 
-void LoadGame()
-{
+void LoadGame()   
+{ 
     //dae::GameComponentsRegistry::RegisterAll();
     dae::HighScoreManager::GetInstance().Load();
 #if USE_STEAMWORKS
@@ -32,7 +32,7 @@ void LoadGame()
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
       
     //dae::SceneLoader::LoadScene(scene, "Levels/LoadingScene.json");
-    dae::SceneLoader::LoadScene(scene, "Levels/level1_Coop.json");
+    dae::SceneLoader::LoadScene(scene, "Levels/MainMenu.json");
       
    dae::Renderer::GetInstance().SetBackgroundColor(SDL_Color{ 0, 0, 0, 255 });
 }

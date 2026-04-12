@@ -1,0 +1,13 @@
+{
+  "name": "MainMenuScene",
+  "objects": [
+    {
+      "name": "MainMenu",
+      "prefab": "Prefabs/MainMenu.json",
+      "transform": {
+        "x": 100.0,
+        "y": 100.0
+      }
+    }
+  ]
+}

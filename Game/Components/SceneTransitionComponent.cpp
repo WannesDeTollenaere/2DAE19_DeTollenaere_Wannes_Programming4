@@ -4,6 +4,7 @@
 #include <SDL3/SDL.h>
 #include "SceneLoader.h"
 #include <nlohmann/json.hpp>
+#include "GameTime.h"
 
 namespace dae
 {
@@ -13,15 +14,16 @@ namespace dae
         void Parse(GameObject* go, const nlohmann::json& data) override
         {
             std::string targetScene = data.value("targetScene", "");
+            float amountOfTime = data.value("timeAmount", -1.f);
 
-            go->AddComponent<SceneTransitionComponent>(targetScene);
+            go->AddComponent<SceneTransitionComponent>(targetScene, amountOfTime);
         }
     };
 
     REGISTER_COMPONENT_PARSER(SceneTransitionComponent, SceneTransitionComponentParser);
 
 
-    SceneTransitionComponent::SceneTransitionComponent(GameObject* owner, const std::string& targetScene, int controllerIndex)
+    SceneTransitionComponent::SceneTransitionComponent(GameObject* owner, const std::string& targetScene, float amountOfTime, int controllerIndex)
         : Component(owner)
     {
         auto& input = InputManager::GetInstance();
@@ -38,5 +40,12 @@ namespace dae
             InputState::Down,
             std::make_unique<LoadSceneCommand>(targetScene)
         );
+
+        if (amountOfTime > 0.f)
+        {
+            GameTime::GetInstance().AddTimer(amountOfTime, [targetScene]() {
+                SceneManager::GetInstance().SetActiveScene(targetScene);
+                });
+        }
     }
 }
