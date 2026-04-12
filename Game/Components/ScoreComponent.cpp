@@ -9,9 +9,25 @@
 #include "GameObject.h"
 #include "Events/BurgerCompletedEvent.h"
 #include "GameManager.h"
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+    class ScoreComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            int startingScore = data.value("startingScore", 0);
+
+            go->AddComponent<ScoreComponent>(startingScore);
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(ScoreComponent, ScoreComponentParser);
+
+
     ScoreComponent::ScoreComponent(GameObject* owner, int startingScore)
         : Component(owner), m_score(startingScore)
     {

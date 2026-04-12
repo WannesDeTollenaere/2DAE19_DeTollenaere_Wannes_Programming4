@@ -7,9 +7,12 @@
 #include <imgui.h>
 #include <SDL3/SDL.h>
 #include "Components/TextComponent.h"
+#include "SceneLoader.h"
 
 namespace dae
 {
+    REGISTER_COMPONENT_PARSER(HighScoreInputComponent, SimpleParser<HighScoreInputComponent>);
+
     HighScoreInputComponent::HighScoreInputComponent(GameObject* owner, int controllerIndex)
         : Component(owner), m_ControllerIndex(controllerIndex)
     {

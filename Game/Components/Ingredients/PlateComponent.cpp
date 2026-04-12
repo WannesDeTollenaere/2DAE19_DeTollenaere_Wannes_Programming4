@@ -4,9 +4,25 @@
 #include "Events/BurgerCompletedEvent.h"
 #include "Components/BoxColliderComponent.h"
 #include <algorithm>
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+    class PlateComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            int requiredIngredients = data.value("requiredIngredients", 3);
+
+            go->AddComponent<PlateComponent>(requiredIngredients);
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(PlateComponent, PlateComponentParser);
+
+
     PlateComponent::PlateComponent(GameObject* owner, int requiredIngredients)
         : BaseCollisionHandler(owner), m_RequiredIngredients(requiredIngredients) {
         CalculateColliderHeight();

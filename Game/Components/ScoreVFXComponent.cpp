@@ -10,9 +10,12 @@
 #include "GameObject.h"
 #include "GameTime.h"
 #include "Helpers/Spritesheet.h"  
+#include "SceneLoader.h"
 
 namespace dae
 {
+    REGISTER_COMPONENT_PARSER(FloatingVfxComponent, SimpleParser<FloatingVfxComponent>);
+
     // FLOATING COMPONENT
     void FloatingVfxComponent::Update()
     {

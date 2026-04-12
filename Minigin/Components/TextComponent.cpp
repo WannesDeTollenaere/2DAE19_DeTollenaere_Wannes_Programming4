@@ -8,6 +8,40 @@
 #include "TextureComponent.h"
 #include <imgui.h>
 #include <cstring>
+#include "SceneLoader.h"
+#include "ResourceManager.h"
+#include <nlohmann/json.hpp>
+
+namespace dae
+{
+	class TextComponentParser final : public IComponentParser
+	{
+	public:
+		void Parse(GameObject* go, const nlohmann::json& data) override
+		{
+			std::string text = data.value("text", "");
+			std::string fontName = data.value("font", "Lingua.otf");
+			uint8_t fontSize = static_cast<uint8_t>(data.value("fontSize", 36));
+
+			auto font = ResourceManager::GetInstance().LoadFont(fontName, fontSize);
+			auto textComp = go->AddComponent<TextComponent>(text, font);
+
+			if (data.contains("color"))
+			{
+				auto colorData = data["color"];
+				SDL_Color color;
+				color.r = static_cast<Uint8>(colorData.value("r", 255));
+				color.g = static_cast<Uint8>(colorData.value("g", 255));
+				color.b = static_cast<Uint8>(colorData.value("b", 255));
+				color.a = static_cast<Uint8>(colorData.value("a", 255));
+
+				textComp->SetColor(color);
+			}
+		}
+	};
+
+	REGISTER_COMPONENT_PARSER(TextComponent, TextComponentParser);
+}
 
 dae::TextComponent::TextComponent(GameObject* owner, const std::string& text, std::shared_ptr<Font> font)
 	: Component(owner),

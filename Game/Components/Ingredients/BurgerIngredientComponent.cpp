@@ -12,9 +12,27 @@
 #include "Events/BurgerCascadeEvent.h"
 #include "Components/BoxColliderComponent.h"
 #include "Scene.h"
+#include "SceneLoader.h" 
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+
+        class BurgerIngredientComponentParser final : public IComponentParser
+        {
+        public:
+            void Parse(GameObject* go, const nlohmann::json& data) override
+            {
+                int widthInTiles = data.value("widthInTiles", 1);
+
+                go->AddComponent<BurgerIngredientComponent>(widthInTiles);
+            }
+        };
+
+        REGISTER_COMPONENT_PARSER(BurgerIngredientComponent, BurgerIngredientComponentParser);
+    
+
+
     BurgerIngredientComponent::BurgerIngredientComponent(GameObject* owner, int widthInTiles)
         : BaseCollisionHandler(owner)
         , m_WidthInTiles(widthInTiles)

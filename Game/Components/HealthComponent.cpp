@@ -4,6 +4,19 @@
 #include "GameTime.h"
 #include "sdbm_hash.h"
 #include "Events/PlayerTookDamageEvent.h"
+#include "SceneLoader.h"
+
+namespace dae {
+	class HealthComponentParser final : public IComponentParser {
+		REGISTER_COMPONENT_PARSER(HealthComponent, HealthComponentParser);
+	public:
+		void Parse(GameObject* go, const nlohmann::json& data) override {
+			int maxHealth = data.value("maxHealth", 100);
+			go->AddComponent<HealthComponent>(maxHealth);
+		}
+	};
+}
+
 
 dae::HealthComponent::HealthComponent(GameObject* owner, int maxHealth) : Component(owner), m_health(maxHealth)
 {

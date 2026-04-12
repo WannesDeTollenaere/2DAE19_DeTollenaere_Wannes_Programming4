@@ -5,9 +5,25 @@
 #include <iostream>
 #include "SceneLoader.h"
 #include "GameTime.h"
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+    class WinConditionComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            int totalBurgers = data.value("totalBurgers", 4);
+            std::string winScene = data.value("winScene", "WinScene");
+
+            go->AddComponent<WinConditionComponent>(totalBurgers, winScene);
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(WinConditionComponent, WinConditionComponentParser);
+
     WinConditionComponent::WinConditionComponent(GameObject* owner, int totalBurgersNeeded, const std::string& winSceneName)
         : Component(owner), m_TotalBurgersNeeded(totalBurgersNeeded), m_WinSceneName(winSceneName)
     {

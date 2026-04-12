@@ -5,9 +5,13 @@
 #include "ObserverSys/EventManager.h"
 #include "Events/ScoreChangedEvent.h" 
 #include "GameManager.h"
+#include "SceneLoader.h"
 
 namespace dae
 {
+    REGISTER_COMPONENT_PARSER(HighScoreDisplayComponent, SimpleParser<HighScoreDisplayComponent>);
+
+
     HighScoreDisplayComponent::HighScoreDisplayComponent(GameObject* pOwner)
         : Component(pOwner)
     {

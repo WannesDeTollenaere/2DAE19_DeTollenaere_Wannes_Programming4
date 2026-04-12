@@ -3,9 +3,13 @@
 #include <chrono>
 #include <numeric>
 #include <algorithm>
+#include "SceneLoader.h"
 
 namespace dae
 {
+    REGISTER_COMPONENT_PARSER(CacheProfilerComponent, SimpleParser<CacheProfilerComponent>);
+
+
     CacheProfilerComponent::CacheProfilerComponent(GameObject* owner) : Component(owner) {}
 
 

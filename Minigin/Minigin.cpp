@@ -27,7 +27,6 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
-#include "ComponentsRegistry.h"
 #include "CollisionManager.h"
 #include "ObserverSys/EventManager.h"
 
@@ -94,7 +93,7 @@ dae::Minigin::Minigin(const std::filesystem::path& dataPath)
 	Renderer::GetInstance().Init(g_window);
 	ResourceManager::GetInstance().Init(dataPath);
 
-	dae::ComponentsRegistry::RegisterAll();
+	//dae::ComponentsRegistry::RegisterAll();
 
 #if USE_STEAMWORKS
 	if (!SteamAPI_Init())

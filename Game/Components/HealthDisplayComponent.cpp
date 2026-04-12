@@ -3,9 +3,26 @@
 #include "ObserverSys/EventManager.h"
 #include "Events/LivesChangedEvent.h"
 #include "GameManager.h"
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+    class HealthDisplayComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& ) override
+        {
+
+            //int startingLives = data.value("startingLives", 3);
+            //std::string targetTag = data.value("targetTag", "Player1");
+
+            go->AddComponent<HealthDisplayComponent>();
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(HealthDisplayComponent, HealthDisplayComponentParser);
+
     HealthDisplayComponent::HealthDisplayComponent(GameObject* pOwner)
         : Component(pOwner)
     {

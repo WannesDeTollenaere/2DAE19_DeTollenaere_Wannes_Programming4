@@ -18,7 +18,11 @@
 
 using json = nlohmann::json;
 
-std::unordered_map<std::string, std::function<void(dae::GameObject*, const nlohmann::json&)>> dae::SceneLoader::s_ComponentParsers{};
+std::unordered_map<std::string, std::unique_ptr<dae::IComponentParser>>& dae::SceneLoader::GetParsersMap()
+{
+    static std::unordered_map<std::string, std::unique_ptr<IComponentParser>> s_ComponentParsers;
+    return s_ComponentParsers;
+}
 
 void dae::SceneLoader::LoadScene(Scene& scene, const std::string& jsonFilePath)
 {
@@ -82,15 +86,16 @@ void dae::SceneLoader::ParseGameObject(const nlohmann::json& objData, Scene& sce
         for (const auto& compData : objData["components"])
         {
             std::string type = compData.value("type", "");
+            auto& parsers = GetParsersMap();
 
-            auto it = s_ComponentParsers.find(type);
-            if (it != s_ComponentParsers.end())
+            auto it = parsers.find(type);
+            if (it != parsers.end())
             {
-                it->second(pGameObject, compData);
+                it->second->Parse(pGameObject, compData);
             }
             else
             {
-                std::cerr << "Warning: Unknown component type in JSON: " << type << "\n";
+                std::cerr << "Warning: Unknown component type: " << type << "\n";
             }
         }
     }
@@ -121,10 +126,12 @@ void dae::SceneLoader::ParsePrefab(const std::string& prefabPath, Scene& scene, 
         for (const auto& compData : prefabData["components"])
         {
             std::string type = compData.value("type", "");
-            auto it = s_ComponentParsers.find(type);
-            if (it != s_ComponentParsers.end())
+            auto& parsers = GetParsersMap();
+
+            auto it = parsers.find(type);
+            if (it != parsers.end())
             {
-                it->second(pGameObject, compData);
+                it->second->Parse(pGameObject, compData);
             }
             else
             {
@@ -142,7 +149,6 @@ void dae::SceneLoader::ParsePrefab(const std::string& prefabPath, Scene& scene, 
     } 
 }
 
-void dae::SceneLoader::RegisterComponentParser(const std::string& type, std::function<void(dae::GameObject*, const nlohmann::json&) > parser)
-{
-    s_ComponentParsers[type] = parser;
+void dae::SceneLoader::RegisterComponentParser(const std::string& type, std::unique_ptr<IComponentParser> parser) {
+    GetParsersMap()[type] = std::move(parser);
 }

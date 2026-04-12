@@ -5,9 +5,13 @@
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include "Components/TextureComponent.h"
+#include "SceneLoader.h"
 
 namespace dae
 {
+    REGISTER_COMPONENT_PARSER(LeaderboardComponent, SimpleParser<LeaderboardComponent>);
+
+
     LeaderboardComponent::LeaderboardComponent(GameObject* pOwner)
         : Component(pOwner)
     {

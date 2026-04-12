@@ -3,6 +3,9 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include "SceneLoader.h"
+#include "sdbm_hash.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
@@ -44,4 +47,26 @@ namespace dae
 
         static inline std::unordered_map<Tag, GameObject*> s_TaggedObjects;
     };
+
+    class TagComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            std::string uniqueTag = data.value("uniqueTag", "");
+
+            std::unordered_set<Tag> hashedTags;
+            if (data.contains("tags") && data["tags"].is_array())
+            {
+                for (const auto& tagStr : data["tags"])
+                {
+                    hashedTags.insert(make_sdbm_hash_rt(tagStr.get<std::string>()));
+                }
+            }
+
+            go->AddComponent<TagComponent>(hashedTags, make_sdbm_hash_rt(uniqueTag));
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(TagComponent, TagComponentParser);
 }

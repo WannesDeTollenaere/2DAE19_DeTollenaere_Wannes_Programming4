@@ -4,9 +4,27 @@
 #include "sdbm_hash.h"
 #include "GameObject.h"
 #include "GameManager.h"
+#include "SceneLoader.h"
+#include "sdbm_hash.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+    class ScoreDisplayComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            int startingScore = data.value("startingScore", 0);
+            std::string targetTag = data.value("targetTag", "Player1");
+
+            go->AddComponent<ScoreDisplayComponent>(startingScore, dae::make_sdbm_hash_rt(targetTag));
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(ScoreDisplayComponent, ScoreDisplayComponentParser);
+
+
     ScoreDisplayComponent::ScoreDisplayComponent(GameObject* owner, int initialScore, Tag targetTag)
         : Component(owner), m_currentScore(initialScore), m_TargetTag(targetTag),
         m_targetPlayer{ TagComponent::FindGameObject(targetTag) }

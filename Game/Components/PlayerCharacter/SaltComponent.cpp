@@ -3,9 +3,12 @@
 #include "Components/TagComponent.h"
 #include "Components/Movement/EnemyWanderComponent.h"
 #include "GameTime.h"
+#include "SceneLoader.h"
 
 namespace dae
 {
+    REGISTER_COMPONENT_PARSER(SaltComponent, SimpleParser<SaltComponent>);
+
     SaltComponent::SaltComponent(GameObject* pOwner)
         : BaseCollisionHandler(pOwner)
     {

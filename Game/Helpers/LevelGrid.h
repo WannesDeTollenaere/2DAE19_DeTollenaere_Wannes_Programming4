@@ -5,6 +5,8 @@
 #include <sstream>
 #include <imgui.h>
 #include "Singleton.h"
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
@@ -184,4 +186,32 @@ namespace dae
         float m_TileSize{ 16.0f };
         std::vector<TileType> m_Grid;
     };
+
+    class LevelGridSetupParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject*, const nlohmann::json& data) override
+        {
+            int cols = data.value("cols", 0);
+            int rows = data.value("rows", 0);
+            float tileSize = data.value("tileSize", 16.0f);
+
+            std::vector<int> layout;
+            if (data.contains("layout") && data["layout"].is_array())
+            {
+                layout = data["layout"].get<std::vector<int>>();
+            }
+
+            LevelGrid::GetInstance().Initialize(cols, rows, tileSize);
+
+            for (size_t i = 0; i < layout.size(); ++i)
+            {
+                int x = static_cast<int>(i % static_cast<size_t>(cols));
+                int y = static_cast<int>(i / static_cast<size_t>(cols));
+                LevelGrid::GetInstance().SetTile(x, y, static_cast<TileType>(layout[i]));
+            }
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(LevelGridSetup, LevelGridSetupParser);
 }

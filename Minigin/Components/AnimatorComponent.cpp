@@ -4,6 +4,47 @@
 #include "ResourceManager.h"
 #include "GameTime.h"
 #include "TextureComponent.h" 
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
+
+namespace dae
+{
+    class AnimatorComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            int frameWidth = data.value("frameWidth", 16);
+            int frameHeight = data.value("frameHeight", 16);
+
+            auto animator = go->AddComponent<AnimatorComponent>(frameWidth, frameHeight);
+
+            if (data.contains("animations") && data["animations"].is_object())
+            {
+                for (auto& [name, val] : data["animations"].items())
+                {
+                    dae::AnimationClip clip{};
+                    clip.startRow = val.value("startRow", 0);
+                    clip.startCol = val.value("startCol", 0);
+                    clip.frameCount = val.value("frameCount", 1);
+                    clip.frameTime = val.value("frameTime", 0.1f);
+                    clip.isLooping = val.value("isLooping", true);
+
+                    animator->AddAnimation(name, clip);
+                }
+            }
+
+            std::string playOnStart = data.value("playOnStart", "");
+            if (!playOnStart.empty())
+            {
+                animator->PlayAnimation(playOnStart);
+            }
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(AnimatorComponent, AnimatorComponentParser);
+}
+
 
 dae::AnimatorComponent::AnimatorComponent(GameObject* owner, int frameWidth, int frameHeight)
     : Component(owner), m_frameWidth(frameWidth), m_frameHeight(frameHeight)

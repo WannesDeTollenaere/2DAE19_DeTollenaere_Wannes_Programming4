@@ -4,9 +4,25 @@
 #include "Helpers/LevelGrid.h"
 #include <cmath>
 #include <algorithm>
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+    class GridMovementComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            float speed = data.value("speed", 50.0f);
+
+            go->AddComponent<GridMovementComponent>(speed);
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(GridMovementComponent, GridMovementComponentParser);
+
+
     GridMovementComponent::GridMovementComponent(GameObject* pOwner, float speed)
         : Component(pOwner), m_Speed(speed)
     {

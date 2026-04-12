@@ -3,6 +3,25 @@
 #include "GameTime.h"
 #include <cmath>
 #include <glm/gtc/constants.hpp>
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
+
+namespace dae
+{
+    class RotatorComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            float radius = data.value("radius", 10.f);
+            float speed = data.value("speed", 10.f);
+
+            go->AddComponent<RotatorComponent>(radius, speed);
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(RotatorComponent, RotatorComponentParser);
+}
 
 dae::RotatorComponent::RotatorComponent(GameObject* owner, float radius, float speed)
     : Component(owner), m_radius(radius), m_speed(speed), m_angle(0.0f)

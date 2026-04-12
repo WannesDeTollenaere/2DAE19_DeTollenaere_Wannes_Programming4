@@ -2,9 +2,27 @@
 #include "GameObject.h"
 #include "CollisionManager.h" 
 #include <imgui.h>
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+    class BoxColliderComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            float width = data.value("width", 16.0f);
+            float height = data.value("height", 16.0f);
+            float offsetX = data.value("offsetX", 0.f);
+            float offsetY = data.value("offsetY", 0.f);
+
+            go->AddComponent<BoxColliderComponent>(width, height, offsetX, offsetY);
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(BoxColliderComponent, BoxColliderComponentParser);
+
     BoxColliderComponent::BoxColliderComponent(GameObject* owner, float width, float height, float offsetX, float offsetY)
         : Component(owner), m_width(width), m_height(height), m_offsetX(offsetX), m_offsetY(offsetY)
     {

@@ -6,7 +6,7 @@
 #include <Minigin.h> 
 #include <SceneManager.h>
 #include <SceneLoader.h>
-#include "GameComponentsRegistry.h" 
+//#include "GameComponentsRegistry.h" 
 //#include "Achievements/AchievementManager.h"
 #include <Helpers/HighScoreManager.h>
 #include <Renderer.h> 
@@ -22,7 +22,7 @@
 
 void LoadGame()
 {
-    dae::GameComponentsRegistry::RegisterAll();
+    //dae::GameComponentsRegistry::RegisterAll();
     dae::HighScoreManager::GetInstance().Load();
 #if USE_STEAMWORKS
     dae::g_SteamAchievements = new dae::CSteamAchievements(dae::g_Achievements, 4);

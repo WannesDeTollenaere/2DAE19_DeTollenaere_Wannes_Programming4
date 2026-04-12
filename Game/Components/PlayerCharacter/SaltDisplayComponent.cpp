@@ -5,9 +5,12 @@
 #include "Events/SaltChangedEvent.h"
 #include "GameManager.h"
 #include <string>
+#include "SceneLoader.h"
 
 namespace dae
 {
+    REGISTER_COMPONENT_PARSER(SaltDisplayComponent, SimpleParser<SaltDisplayComponent>);
+
     SaltDisplayComponent::SaltDisplayComponent(GameObject* pOwner)
         : Component(pOwner)
     {

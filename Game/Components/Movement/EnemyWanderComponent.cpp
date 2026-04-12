@@ -12,9 +12,39 @@
 #include "ObserverSys/EventManager.h"
 #include "Events/EnemyCrushedEvent.h"
 #include "Events/LivesLostEvent.h"
+#include <nlohmann/json.hpp>
+#include <string>
+#include "SceneLoader.h"
 
 namespace dae
 {
+    class EnemyWanderComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            EnemyType type = EnemyType::HotDog;
+            std::string typeStr = data.value("enemyType", "HotDog");
+
+            if (typeStr == "Pickle")
+            {
+                type = EnemyType::Pickle;
+            }
+            else if (typeStr == "Egg")
+            {
+                type = EnemyType::Egg;
+            }
+            else
+            {
+                type = EnemyType::HotDog;
+            }
+
+            auto wanderComp = go->AddComponent<EnemyWanderComponent>();
+            wanderComp->SetEnemyType(type);
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(EnemyWanderComponent, EnemyWanderComponentParser);
     EnemyWanderComponent::EnemyWanderComponent(GameObject* pOwner)
         : Component(pOwner)
     {

@@ -20,9 +20,30 @@
 #include "Helpers/PrefabFactory.h"
 #include "Components/Movement/EnemyWanderComponent.h"
 #include "Components/AnimatorComponent.h"
+#include "SceneLoader.h"
+#include <nlohmann/json.hpp>
 
 namespace dae
 {
+    class CharacterControllerComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            float speed = data.value("speed", 50.0f);
+
+            std::string inputType = data.value("inputType", "keyboard");
+            bool useKeyboard = (inputType == "keyboard");
+
+            int controllerIndex = data.value("controllerIndex", 0);
+
+            go->AddComponent<CharacterControllerComponent>(speed, useKeyboard, controllerIndex);
+        }
+    };
+
+    REGISTER_COMPONENT_PARSER(CharacterControllerComponent, CharacterControllerComponentParser);
+
+
     CharacterControllerComponent::CharacterControllerComponent(GameObject* owner, float, bool useKeyboard, int controllerIndex)
         : BaseCollisionHandler(owner), m_useKeyboard(useKeyboard), m_controllerIndex(controllerIndex)
     {
