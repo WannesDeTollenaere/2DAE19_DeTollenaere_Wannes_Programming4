@@ -23,7 +23,7 @@
         {
           "type": "WinConditionComponent",
           "totalBurgers": 4,
-          "winScene": "Levels/Level2.json"
+          "winScene": "Levels/Coop/Level2.json"
         }
       ]
     },
@@ -99,7 +99,7 @@
                 {
           "name": "Player2",
           "prefab": "Prefabs/Player2.json",
-          "transform": { "x": 480.0, "y": 528.0 }
+          "transform": { "x": 528.0, "y": 528.0 }
         },
         {
           "name": "Enemy_HotDog_1",
