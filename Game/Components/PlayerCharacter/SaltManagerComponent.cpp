@@ -3,6 +3,7 @@
 #include "ObserverSys/EventManager.h"
 #include "Events/SaltChangedEvent.h"
 #include <nlohmann/json.hpp>
+#include "GameManager.h"
 #include "SceneLoader.h"
 
 namespace dae
@@ -20,7 +21,7 @@ namespace dae
 
 
     SaltManagerComponent::SaltManagerComponent(GameObject* pOwner, int startingSalt)
-        : Component(pOwner), m_StartingSalt(startingSalt), m_Salt(startingSalt)
+        : Component(pOwner), m_Salt(startingSalt), m_StartingSalt(startingSalt)
     {
     }
 
@@ -29,6 +30,21 @@ namespace dae
         auto tagComp = GetOwner()->GetComponent<TagComponent>();
 
         return tagComp ? tagComp->GetUniqueTag() : make_sdbm_hash("Player1");
+    }
+
+    void SaltManagerComponent::Update()
+    {
+        if (!m_IsInitialized)
+        {
+            Tag myTag = GetPlayerTag();
+
+            m_Salt = GameManager::GetInstance().GetPersistentSalt(myTag);
+
+            SaltChangedEvent saltEvent(myTag, m_Salt);
+            EventManager::GetInstance().SendEvent(&saltEvent);
+
+            m_IsInitialized = true;
+        }
     }
 
     void SaltManagerComponent::AddSalt(int amount)

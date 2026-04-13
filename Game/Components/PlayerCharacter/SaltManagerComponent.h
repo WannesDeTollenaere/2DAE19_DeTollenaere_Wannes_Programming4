@@ -10,6 +10,8 @@ namespace dae
         SaltManagerComponent(GameObject* pOwner, int startingSalt = 5);
         ~SaltManagerComponent() = default;
 
+        void Update() override;
+
         void AddSalt(int amount);
         int GetSalt() const { return m_Salt; }
         void ResetSalt();
@@ -17,6 +19,8 @@ namespace dae
     private:
         int m_Salt{ 5 };
         int m_StartingSalt{ 5 };
+
+        bool m_IsInitialized{ false };
 
         Tag GetPlayerTag() const;
     };

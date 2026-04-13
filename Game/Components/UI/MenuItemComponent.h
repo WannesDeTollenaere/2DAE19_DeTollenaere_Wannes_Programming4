@@ -5,7 +5,7 @@
 
 #include "MenuItemComponent.h"
 #include "SceneLoader.h"
-#include "Commands/LoadSceneCommand.h"
+#include "Commands/StartGameCommand.h"
 #include "Commands/QuitCommand.h" 
 #include <nlohmann/json.hpp>
 
@@ -36,7 +36,7 @@ namespace dae
 
             if (action == "load_scene") {
                 std::string scene = data.value("scene", "");
-                pCmd = std::make_unique<LoadSceneCommand>(scene);
+                pCmd = std::make_unique<StartGameCommand>(scene);
             }
             else if (action == "quit") {
                 pCmd = std::make_unique<QuitCommand>();

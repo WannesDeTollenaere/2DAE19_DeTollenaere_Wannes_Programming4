@@ -12,8 +12,35 @@ namespace dae
 {
     GameManager::GameManager()
     {
+        EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("SaltChanged"), this);
     }
 
+    GameManager::~GameManager()
+    {
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash_rt("SaltChanged"), this);
+    }
+
+
+    void GameManager::HandleEvent(const Event* event)
+    {
+        if (event->id == make_sdbm_hash_rt("SaltChanged"))
+        {
+            auto saltEvent = static_cast<const SaltChangedEvent*>(event);
+            m_PersistentSalts[saltEvent->playerTag] = saltEvent->currentSalt;
+        }
+    }
+    int GameManager::GetPersistentSalt(Tag playerTag)
+    {
+        if (m_PersistentSalts.find(playerTag) == m_PersistentSalts.end())
+        {
+            return 5; 
+        }
+        return m_PersistentSalts[playerTag];
+    }
+    void GameManager::ResetPersistentData()
+    {
+        m_PersistentSalts.clear();
+    }
 
     void GameManager::LoseLife()
     {
@@ -29,6 +56,7 @@ namespace dae
         {
             ResetScore();
             ResetLives();
+            ResetPersistentData();
 
             SceneManager::GetInstance().SetActiveScene("Levels/GameOver.json");
         }
