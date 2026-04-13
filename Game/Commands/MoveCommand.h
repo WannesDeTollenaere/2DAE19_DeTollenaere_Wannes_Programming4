@@ -1,8 +1,10 @@
+// MoveCommand.h
 #pragma once
 #include <Commands/GameObjectCommand.h>
 #include <glm/glm.hpp>
 #include "Components/Movement/GridMovementComponent.h" 
 #include "Components/CharacterControllerComponent.h"
+#include "Components/PlayerCharacter/PlayerEnemyController.h" 
 
 namespace dae
 {
@@ -10,8 +12,7 @@ namespace dae
     {
     public:
         MoveCommand(GameObject* pActor, const glm::vec2& direction)
-            : GameObjectCommand(pActor), m_Direction{ direction }
-        {
+            : GameObjectCommand(pActor), m_Direction{ direction } {
         }
 
         void Execute() override
@@ -19,27 +20,27 @@ namespace dae
             GameObject* pActor = GetGameObject();
             if (!pActor) return;
 
-            // lazy load
             if (!m_pGridMovementComp) m_pGridMovementComp = pActor->GetComponent<GridMovementComponent>();
-            if (!m_pCharCtrlComp) m_pCharCtrlComp = pActor->GetComponent<CharacterControllerComponent>();
 
-            if (m_pCharCtrlComp->IsDead()) return;
-
-            if (m_pGridMovementComp)
-            {
-                m_pGridMovementComp->SetDesiredDirection(m_Direction.x, m_Direction.y);
+            // Handle chef
+            if (auto charCtrl = pActor->GetComponent<CharacterControllerComponent>()) {
+                if (charCtrl->IsDead()) return;
+                charCtrl->SetFacingDirection(m_Direction);
+            }
+            // Handle playerenemy
+            else if (auto enemyCtrl = pActor->GetComponent<PlayerEnemyControllerComponent>()) {
+                if (enemyCtrl->IsMovementDisabled()) return;
+                enemyCtrl->SetFacingDirection(m_Direction);
             }
 
-            if (m_pCharCtrlComp)
-            {
-                m_pCharCtrlComp->SetFacingDirection(m_Direction);
+            // Apply movement
+            if (m_pGridMovementComp) {
+                m_pGridMovementComp->SetDesiredDirection(m_Direction.x, m_Direction.y);
             }
         }
 
     private:
         glm::vec2 m_Direction;
-
         GridMovementComponent* m_pGridMovementComp{ nullptr };
-        CharacterControllerComponent* m_pCharCtrlComp{ nullptr };
     };
 }

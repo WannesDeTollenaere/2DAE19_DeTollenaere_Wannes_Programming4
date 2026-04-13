@@ -14,7 +14,13 @@
 					"components": [
 						{
 							"type": "TextComponent",
-							"text": "PLAY SOLO"
+							"text": "PLAY SOLO",
+							"color": {
+								"r": 255,
+								"g": 255,
+								"b": 0,
+								"a": 255
+							}
 						},
 						{
 							"type": "MenuItemComponent",

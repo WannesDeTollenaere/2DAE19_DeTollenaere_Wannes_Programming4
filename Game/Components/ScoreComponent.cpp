@@ -4,7 +4,7 @@
 #include "Events/BurgerDroppedEvent.h"
 #include "Events/BurgerCascadeEvent.h"
 #include "Events/ScoreChangedEvent.h"
-#include "Components/Movement/EnemyWanderComponent.h"
+#include "Components/Enemy/EnemyComponent.h"
 #include "sdbm_hash.h"
 #include "GameObject.h"
 #include "Events/BurgerCompletedEvent.h"
@@ -56,7 +56,7 @@ namespace dae
         {
             if (const auto* pCrushEvent = dynamic_cast<const EnemyCrushedEvent*>(pEvent))
             {
-                if (auto pWander = pCrushEvent->obj->GetComponent<EnemyWanderComponent>())
+                if (auto pWander = pCrushEvent->obj->GetComponent<EnemyComponent>())
                 {
                     switch (pWander->GetEnemyType())
                     {
@@ -98,7 +98,7 @@ namespace dae
         {
             scoreToAdd += 1000;
             scoreChanged = true;
-        }
+        } 
 
         // BROADCAST for scoredisplay
         if (scoreChanged)

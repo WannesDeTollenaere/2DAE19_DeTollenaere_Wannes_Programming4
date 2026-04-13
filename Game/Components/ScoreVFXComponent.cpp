@@ -1,7 +1,7 @@
 #include "ScoreVFXComponent.h"
 #include "ObserverSys/EventManager.h"
 #include "Events/EnemyCrushedEvent.h"
-#include "Components/Movement/EnemyWanderComponent.h"
+#include "Components/Enemy/EnemyComponent.h"
 #include "SceneManager.h"
 #include "Components/TextComponent.h"
 #include "Components/TextureComponent.h"
@@ -14,7 +14,7 @@
 
 namespace dae
 {
-    REGISTER_COMPONENT_PARSER(FloatingVfxComponent, SimpleParser<FloatingVfxComponent>);
+    REGISTER_COMPONENT_PARSER(ScoreVfxSpawnerComponent, SimpleParser<ScoreVfxSpawnerComponent>);
 
     // FLOATING COMPONENT
     void FloatingVfxComponent::Update()
@@ -46,7 +46,7 @@ namespace dae
             int scoreCol = 0;
             int scoreRow = 10;
 
-            if (auto wander = crushEvent->obj->GetComponent<EnemyWanderComponent>())
+            if (auto wander = crushEvent->obj->GetComponent<EnemyComponent>())
             {
                 switch (wander->GetEnemyType())
                 {

@@ -1,9 +1,12 @@
 #pragma once
 #include "Component.h"
-#include "ObserverSys/Observer.h" 
+#include "ObserverSys/Observer.h"
+#include "Components/TagComponent.h"
 
 namespace dae
 {
+    class TextComponent;
+
     class SaltDisplayComponent final : public Component, public Observer
     {
     public:
@@ -12,8 +15,10 @@ namespace dae
 
         void HandleEvent(const Event* event) override;
 
+        void SetTargetTag(Tag tag) { m_TargetTag = tag; }
+
     private:
-        void UpdateText();
-        int m_Salt;
+        Tag m_TargetTag;
+        TextComponent* m_pTextComponent{ nullptr };
     };
 }

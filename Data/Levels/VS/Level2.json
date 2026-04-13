@@ -1,5 +1,5 @@
 {
-  "name": "Level 2 Coop",
+  "name": "Level 2 VS",
   "objects": [
     {
       "name": "ScoreVfxManager",
@@ -23,7 +23,7 @@
         {
           "type": "WinConditionComponent",
           "totalBurgers": 4,
-          "winScene": "Levels/Coop/Level3.json"
+          "winScene": "Levels/VS/Level3.json"
         }
       ]
     },
@@ -78,18 +78,10 @@
           }
         },
         {
-          "name": "PepperUI",
+          "name": "SaltUI",
           "prefab": "Prefabs/SaltUI.json",
           "transform": {
             "x": 960.0,
-            "y": 10.0
-          }
-        },
-        {
-          "name": "SaltUI",
-          "prefab": "Prefabs/SaltUI_Player2.json",
-          "transform": {
-            "x": 1100.0,
             "y": 10.0
           }
         },
@@ -102,14 +94,6 @@
           }
         },
         {
-          "name": "HighScoreUI",
-          "prefab": "Prefabs/HighScoreUI.json",
-          "transform": {
-            "x": 200.0,
-            "y": 10.0
-          }
-        },
-        {
           "name": "Player",
           "prefab": "Prefabs/Player.json",
           "transform": {
@@ -119,42 +103,10 @@
         },
         {
           "name": "Player2",
-          "prefab": "Prefabs/Player2.json",
-          "transform": {
-            "x": 480.0,
-            "y": 552.0
-          }
-        },
-        {
-          "name": "Enemy_HotDog_1",
-          "prefab": "Prefabs/MrHotDog.json",
+          "prefab": "Prefabs/Player2_Enemy.json",
           "transform": {
             "x": 96.0,
             "y": 96.0
-          }
-        },
-        {
-          "name": "Enemy_HotDog_2",
-          "prefab": "Prefabs/MrHotDog.json",
-          "transform": {
-            "x": 864.0,
-            "y": 96.0
-          }
-        },
-        {
-          "name": "Enemy_Egg_1",
-          "prefab": "Prefabs/MrEgg.json",
-          "transform": {
-            "x": 96.0,
-            "y": 288.0
-          }
-        },
-        {
-          "name": "Enemy_Egg_2",
-          "prefab": "Prefabs/MrEgg.json",
-          "transform": {
-            "x": 864.0,
-            "y": 288.0
           }
         },
         {

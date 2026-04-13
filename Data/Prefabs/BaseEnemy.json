@@ -19,6 +19,9 @@
     {
       "type": "GridMovementComponent",
       "speed": 65.0
+    },
+    {
+      "type": "EnemyComponent"
     }
   ]
 }

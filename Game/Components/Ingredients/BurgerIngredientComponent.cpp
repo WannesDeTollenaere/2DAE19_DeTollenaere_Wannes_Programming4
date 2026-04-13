@@ -14,6 +14,7 @@
 #include "Scene.h"
 #include "SceneLoader.h" 
 #include <nlohmann/json.hpp>
+#include "Components/Enemy/EnemyComponent.h"
 
 namespace dae
 {
@@ -170,7 +171,7 @@ namespace dae
 
         for (auto enemy : m_CascadingEnemies)
         {
-            if (auto wander = enemy->GetComponent<EnemyWanderComponent>()) {
+            if (auto wander = enemy->GetComponent<EnemyComponent>()) {
                 wander->SetCascading(true);
             }
         }
@@ -271,7 +272,7 @@ namespace dae
 
         if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Enemy")))
         {
-            auto wander = otherObject->GetComponent<EnemyWanderComponent>();
+            auto wander = otherObject->GetComponent<EnemyComponent>();
             if (wander && wander->IsCascading()) return;
 
             if (std::find(m_CascadingEnemies.begin(), m_CascadingEnemies.end(), otherObject) == m_CascadingEnemies.end())

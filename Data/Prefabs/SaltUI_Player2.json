@@ -1,0 +1,52 @@
+{
+  "children": [
+    {
+      "name": "SaltText",
+      "transform": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "components": [
+        { "type": "TextureComponent" },
+        {
+          "type": "TextComponent",
+          "text": "SALT",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 240,
+            "g": 113,
+            "b": 197,
+            "a": 255
+          }
+        }
+      ]
+    },
+    {
+      "name": "SaltAmount",
+      "transform": {
+        "x": 45.0,
+        "y": 30.0
+      },
+      "components": [
+        { "type": "TextureComponent" },
+        {
+          "type": "TextComponent",
+          "text": "5",
+          "font": "Lingua.otf",
+          "fontSize": 24,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          }
+        },
+        {
+          "type": "SaltDisplayComponent",
+          "targetTag":  "Player2"
+        }
+      ]
+    }
+  ]
+}

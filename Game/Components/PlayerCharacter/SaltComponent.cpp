@@ -1,7 +1,7 @@
 #include "SaltComponent.h"
 #include "GameObject.h"
 #include "Components/TagComponent.h"
-#include "Components/Movement/EnemyWanderComponent.h"
+#include "Components/Enemy/EnemyComponent.h"
 #include "GameTime.h"
 #include "SceneLoader.h"
 
@@ -19,7 +19,7 @@ namespace dae
         if (otherTagComp && otherTagComp->HasTag(dae::make_sdbm_hash_rt("Enemy")))
         {
 
-            auto pEnemyWander = otherObject->GetComponent<EnemyWanderComponent>();
+            auto pEnemyWander = otherObject->GetComponent<EnemyComponent>();
             if (pEnemyWander && !pEnemyWander->IsStunned() && !pEnemyWander->IsDead())
             {
                 pEnemyWander->Stun();

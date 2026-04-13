@@ -1,5 +1,5 @@
 {
-  "name": "Level 1 coop",
+  "name": "Level 1 vs",
   "objects": [
     {
       "name": "ScoreVfxManager",
@@ -23,7 +23,7 @@
         {
           "type": "WinConditionComponent",
           "totalBurgers": 4,
-          "winScene": "Levels/Level2.json"
+          "winScene": "Levels/VS/Level2.json"
         }
       ]
     },
@@ -85,11 +85,6 @@
             "x": 10.0,
             "y": 800.0
           }
-        },
-        {
-          "name": "HighScoreUI",
-          "prefab": "Prefabs/HighScoreUI.json",
-          "transform": { "x": 200.0, "y": 10.0 }
         },
         {
           "name": "Player",

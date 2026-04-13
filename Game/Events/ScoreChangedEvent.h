@@ -1,4 +1,3 @@
-// Game/Events/ScoreChangedEvent.h
 #pragma once
 #include "ObserverSys/Event.h"
 #include "sdbm_hash.h"

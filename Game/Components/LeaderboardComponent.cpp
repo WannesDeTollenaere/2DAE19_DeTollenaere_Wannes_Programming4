@@ -9,7 +9,7 @@
 
 namespace dae
 {
-    REGISTER_COMPONENT_PARSER(LeaderboardComponent, SimpleParser<LeaderboardComponent>);
+    REGISTER_COMPONENT_PARSER(LeaderboardComponent, SimpleParser<LeaderboardComponent>); 
 
 
     LeaderboardComponent::LeaderboardComponent(GameObject* pOwner)

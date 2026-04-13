@@ -1,45 +1,59 @@
 #include "SaltDisplayComponent.h"
 #include "GameObject.h"
-#include "Components/TextComponent.h"
 #include "ObserverSys/EventManager.h"
 #include "Events/SaltChangedEvent.h"
-#include "GameManager.h"
-#include <string>
+#include "Components/TextComponent.h"
+#include <nlohmann/json.hpp>
 #include "SceneLoader.h"
+#include "sdbm_hash.h" 
 
 namespace dae
 {
-    REGISTER_COMPONENT_PARSER(SaltDisplayComponent, SimpleParser<SaltDisplayComponent>);
+    class SaltDisplayComponentParser final : public IComponentParser
+    {
+    public:
+        void Parse(GameObject* go, const nlohmann::json& data) override
+        {
+            auto comp = go->AddComponent<SaltDisplayComponent>();
+
+            std::string targetStr = data.value("targetTag", "Player1");
+
+            Tag targetTag = make_sdbm_hash_rt(targetStr.c_str());
+
+            comp->SetTargetTag(targetTag);
+        }
+    };
+    REGISTER_COMPONENT_PARSER(SaltDisplayComponent, SaltDisplayComponentParser);
+
 
     SaltDisplayComponent::SaltDisplayComponent(GameObject* pOwner)
         : Component(pOwner)
     {
-        EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("SaltChanged"), this);
+        m_TargetTag = make_sdbm_hash("Player1");
 
-        m_Salt = GameManager::GetInstance().GetSalt();
-        UpdateText();
+        EventManager::GetInstance().AttachEvent(make_sdbm_hash("SaltChanged"), this);
     }
 
     SaltDisplayComponent::~SaltDisplayComponent()
     {
-        EventManager::GetInstance().DetachEvent(make_sdbm_hash_rt("SaltChanged"), this);
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash("SaltChanged"), this);
     }
-
 
     void SaltDisplayComponent::HandleEvent(const Event* event)
     {
-        if (auto pEvent = dynamic_cast<const SaltChangedEvent*>(event))
+        if (event->id == make_sdbm_hash("SaltChanged"))
         {
-            m_Salt = pEvent->currentSalt;
-            UpdateText();
-        }
-    }
+            auto saltEvent = static_cast<const SaltChangedEvent*>(event);
 
-    void SaltDisplayComponent::UpdateText()
-    {
-        if (auto textComp = GetOwner()->GetComponent<TextComponent>())
-        {
-            textComp->SetText("" + std::to_string(m_Salt));
+            if (saltEvent->playerTag == m_TargetTag)
+            {
+                if (!m_pTextComponent) m_pTextComponent = GetOwner()->GetComponent<TextComponent>();
+
+                if (m_pTextComponent)
+                {
+                    m_pTextComponent->SetText(std::to_string(saltEvent->currentSalt));
+                }
+            }
         }
     }
 }

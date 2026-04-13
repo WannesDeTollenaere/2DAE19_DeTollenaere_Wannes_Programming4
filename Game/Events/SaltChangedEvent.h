@@ -1,15 +1,16 @@
 #pragma once
 #include "ObserverSys/Event.h"
-#include "sdbm_hash.h"
-
+#include "Components/TagComponent.h" 
 namespace dae
 {
-    struct SaltChangedEvent : public Event
+    struct SaltChangedEvent final : public Event
     {
-        SaltChangedEvent(int currentSaltAmount)
-            : Event(make_sdbm_hash("SaltChanged")), currentSalt(currentSaltAmount) {
-        }
-
+        Tag playerTag;
         int currentSalt;
+
+        SaltChangedEvent(Tag tag, int amount)
+            : Event(make_sdbm_hash_rt("SaltChanged")), playerTag(tag), currentSalt(amount)
+        {
+        }
     };
 }

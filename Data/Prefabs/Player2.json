@@ -6,6 +6,10 @@
       "uniqueTag": "Player2"
     },
     {
+      "type": "SaltManagerComponent",
+      "startingSalt": 5
+    },
+    {
       "type": "BoxColliderComponent",
       "width": 32.0,
       "height": 32.0,

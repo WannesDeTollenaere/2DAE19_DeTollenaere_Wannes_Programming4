@@ -18,9 +18,10 @@
 #include "ObserverSys/EventManager.h"
 #include "Events/SaltThrownEvent.h"
 #include "Helpers/PrefabFactory.h"
-#include "Components/Movement/EnemyWanderComponent.h"
+#include "Components/Enemy/EnemyComponent.h"
 #include "Components/AnimatorComponent.h"
 #include "SceneLoader.h"
+#include "Components/PlayerCharacter/SaltManagerComponent.h" 
 #include <nlohmann/json.hpp>
 
 namespace dae
@@ -91,7 +92,7 @@ namespace dae
     {
         if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Enemy")))
         {
-            auto enemyWander = otherObject->GetComponent<EnemyWanderComponent>();
+            auto enemyWander = otherObject->GetComponent<EnemyComponent>();
             if (enemyWander && enemyWander->IsDangerous())
             {
                 Die();
@@ -134,14 +135,18 @@ namespace dae
         m_LastPosition = currentPos;
     }
      
+
+
     void CharacterControllerComponent::ThrowSalt()
     {
-        if (m_IsDead || GameManager::GetInstance().GetSalt() <= 0 || m_IsLevelComplete) return;
+        auto saltComp = GetOwner()->GetComponent<SaltManagerComponent>();
+
+        if (m_IsDead || m_IsLevelComplete || !saltComp || saltComp->GetSalt() <= 0) return;
 
         auto scene = SceneManager::GetInstance().GetActiveScene();
         if (!scene) return;
 
-        auto playerPos = GetOwner()->GetTransform().GetWorldPosition();  
+        auto playerPos = GetOwner()->GetTransform().GetWorldPosition();
         float tileSize = LevelGrid::GetInstance().GetTileSize();
         glm::vec3 spawnPos{
             playerPos.x + m_FacingDirection.x * tileSize,
@@ -151,8 +156,7 @@ namespace dae
 
         scene->Add(PrefabFactory::CreateSaltProjectile(spawnPos));
 
-        dae::SaltThrownEvent saltEvent;
-        dae::EventManager::GetInstance().SendEvent(&saltEvent);
+        saltComp->AddSalt(-1);
     }
 
     void CharacterControllerComponent::Die()

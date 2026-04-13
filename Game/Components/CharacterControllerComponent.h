@@ -8,7 +8,7 @@ namespace dae
 {
     class AnimatorComponent;
     class CharacterControllerComponent final : public BaseCollisionHandler
-    {
+    { 
     public:
         CharacterControllerComponent(GameObject* owner, float speed, bool useKeyboard, int controllerIndex = 0);
         ~CharacterControllerComponent();

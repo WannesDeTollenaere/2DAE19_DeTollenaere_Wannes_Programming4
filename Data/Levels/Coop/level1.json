@@ -71,12 +71,26 @@
         {
           "name": "ScoreUI",
           "prefab": "Prefabs/ScoreUI.json",
-          "transform": { "x": 10.0, "y": 10.0 }
+          "transform": {
+            "x": 10.0,
+            "y": 10.0
+          }
+        },
+        {
+          "name": "PepperUI",
+          "prefab": "Prefabs/SaltUI.json",
+          "transform": {
+            "x": 624.0,
+            "y": 10.0
+          }
         },
         {
           "name": "SaltUI",
-          "prefab": "Prefabs/SaltUI.json",
-          "transform": { "x": 624.0, "y": 10.0 }
+          "prefab": "Prefabs/SaltUI_Player2.json",
+          "transform": {
+            "x": 800.0,
+            "y": 10.0
+          }
         },
         {
           "name": "LivesUI",
@@ -89,125 +103,200 @@
         {
           "name": "HighScoreUI",
           "prefab": "Prefabs/HighScoreUI.json",
-          "transform": { "x": 200.0, "y": 10.0 }
+          "transform": {
+            "x": 200.0,
+            "y": 10.0
+          }
         },
         {
           "name": "Player",
           "prefab": "Prefabs/Player.json",
-          "transform": { "x": 480.0, "y": 528.0 }
+          "transform": {
+            "x": 480.0,
+            "y": 528.0
+          }
         },
-                {
+        {
           "name": "Player2",
           "prefab": "Prefabs/Player2.json",
-          "transform": { "x": 528.0, "y": 528.0 }
+          "transform": {
+            "x": 528.0,
+            "y": 528.0
+          }
         },
         {
           "name": "Enemy_HotDog_1",
           "prefab": "Prefabs/MrHotDog.json",
-          "transform": { "x": 96.0, "y": 528.0 }
+          "transform": {
+            "x": 96.0,
+            "y": 528.0
+          }
         },
         {
           "name": "Enemy_HotDog_2",
           "prefab": "Prefabs/MrHotDog.json",
-          "transform": { "x": 96.0, "y": 96.0 }
+          "transform": {
+            "x": 96.0,
+            "y": 96.0
+          }
         },
         {
           "name": "Enemy_HotDog_3",
           "prefab": "Prefabs/MrHotDog.json",
-          "transform": { "x": 864.0, "y": 96.0 }
+          "transform": {
+            "x": 864.0,
+            "y": 96.0
+          }
         },
         {
           "name": "Enemy_Egg_1",
           "prefab": "Prefabs/MrEgg.json",
-          "transform": { "x": 864.0, "y": 528.0 }
+          "transform": {
+            "x": 864.0,
+            "y": 528.0
+          }
         },
         {
           "name": "TopBun_1",
           "prefab": "Prefabs/TopBun.json",
-          "transform": { "x": 168.0, "y": 216.0 }
+          "transform": {
+            "x": 168.0,
+            "y": 216.0
+          }
         },
         {
           "name": "Lettuce_1",
           "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 168.0, "y": 312.0 }
+          "transform": {
+            "x": 168.0,
+            "y": 312.0
+          }
         },
         {
           "name": "Patty_1",
           "prefab": "Prefabs/BurgerPatty.json",
-          "transform": { "x": 168.0, "y": 456.0 }
+          "transform": {
+            "x": 168.0,
+            "y": 456.0
+          }
         },
         {
           "name": "BottomBun_1",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 168.0, "y": 552.0 }
+          "transform": {
+            "x": 168.0,
+            "y": 552.0
+          }
         },
         {
           "name": "TopBun_2",
           "prefab": "Prefabs/TopBun.json",
-          "transform": { "x": 360.0, "y": 120.0 }
+          "transform": {
+            "x": 360.0,
+            "y": 120.0
+          }
         },
         {
           "name": "Lettuce_2",
           "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 360.0, "y": 360.0 }
+          "transform": {
+            "x": 360.0,
+            "y": 360.0
+          }
         },
         {
           "name": "Patty_2",
           "prefab": "Prefabs/BurgerPatty.json",
-          "transform": { "x": 360.0, "y": 456.0 }
+          "transform": {
+            "x": 360.0,
+            "y": 456.0
+          }
         },
         {
           "name": "BottomBun_2",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 360.0, "y": 552.0 }
+          "transform": {
+            "x": 360.0,
+            "y": 552.0
+          }
         },
         {
           "name": "TopBun_3",
           "prefab": "Prefabs/TopBun.json",
-          "transform": { "x": 552.0, "y": 120.0 }
+          "transform": {
+            "x": 552.0,
+            "y": 120.0
+          }
         },
         {
           "name": "Lettuce_3",
           "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 552.0, "y": 216.0 }
+          "transform": {
+            "x": 552.0,
+            "y": 216.0
+          }
         },
         {
           "name": "Patty_3",
           "prefab": "Prefabs/BurgerPatty.json",
-          "transform": { "x": 552.0, "y": 360.0 }
+          "transform": {
+            "x": 552.0,
+            "y": 360.0
+          }
         },
         {
           "name": "BottomBun_3",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 552.0, "y": 552.0 }
+          "transform": {
+            "x": 552.0,
+            "y": 552.0
+          }
         },
         {
           "name": "TopBun_4",
           "prefab": "Prefabs/TopBun.json",
-          "transform": { "x": 744.0, "y": 120.0 }
+          "transform": {
+            "x": 744.0,
+            "y": 120.0
+          }
         },
         {
           "name": "Lettuce_4",
           "prefab": "Prefabs/Lettuce.json",
-          "transform": { "x": 744.0, "y": 216.0 }
+          "transform": {
+            "x": 744.0,
+            "y": 216.0
+          }
         },
         {
           "name": "Patty_4",
           "prefab": "Prefabs/BurgerPatty.json",
-          "transform": { "x": 744.0, "y": 312.0 }
+          "transform": {
+            "x": 744.0,
+            "y": 312.0
+          }
         },
         {
           "name": "BottomBun_4",
           "prefab": "Prefabs/BottomBun.json",
-          "transform": { "x": 744.0, "y": 408.0 }
+          "transform": {
+            "x": 744.0,
+            "y": 408.0
+          }
         },
         {
           "name": "Plate_1",
           "prefab": "Prefabs/Plate.json",
-          "transform": { "x": 168.0, "y": 730.0 },
+          "transform": {
+            "x": 168.0,
+            "y": 730.0
+          },
           "components": [
-        { "type": "PlateComponent", "requiredIngredients": 4 }
-      ]
+            {
+              "type": "PlateComponent",
+              "requiredIngredients": 4
+            }
+          ]
         },
         {
           "name": "Plate_2",

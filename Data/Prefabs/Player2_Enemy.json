@@ -18,18 +18,26 @@
       "texture": "burger_time_spritesheet_x3.png"
     },
     {
+      "type": "EnemyComponent",
+      "enemyType": "HotDog"
+    },
+    {
+      "type": "PlayerEnemyControllerComponent",
+      "controllerIndex": 1
+    },
+    {
+      "type": "ScoreVFXComponent"
+    },
+    {
+      "type": "GridMovementComponent",
+      "speed": 100.0
+    },
+    {
       "type": "AnimatorComponent",
       "frameWidth": 48,
       "frameHeight": 48,
-      "playOnStart": "Idle",
+      "playOnStart": "WalkDown",
       "animations": {
-        "Idle": {
-          "startRow": 9,
-          "startCol": 6,
-          "frameCount": 1,
-          "frameTime": 0.1,
-          "isLooping": true
-        },
         "WalkDown": {
           "startRow": 2,
           "startCol": 0,
@@ -65,13 +73,6 @@
           "frameTime": 0.15,
           "isLooping": false
         },
-        "Victory": {
-          "startRow": 10,
-          "startCol": 9,
-          "frameCount": 2,
-          "frameTime": 0.2,
-          "isLooping": true
-        },
         "Pickled": {
           "startRow": 3,
           "startCol": 4,
@@ -80,15 +81,6 @@
           "isLooping": true
         }
       }
-    },
-    {
-      "type": "GridMovementComponent",
-      "speed": 100.0
-    },
-    {
-      "type": "CharacterControllerComponent",
-      "inputType": "Controller",
-      "controllerIndex":  1
     }
   ]
 }
