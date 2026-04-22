@@ -63,7 +63,7 @@ namespace dae
     }
     void GameManager::ResetLives()
     {
-        m_Lives = 3;
+        m_Lives = 4;
 
         LivesChangedEvent livesEvent(m_Lives);
         EventManager::GetInstance().SendEvent(&livesEvent);

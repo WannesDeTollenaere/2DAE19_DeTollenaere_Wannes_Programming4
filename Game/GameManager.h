@@ -28,6 +28,6 @@ namespace dae
         std::map<Tag, int> m_PersistentSalts;
 
         int m_Score{ 0 };
-        int m_Lives{ 3 };
+        int m_Lives{ 4 };
     };
 }

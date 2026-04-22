@@ -59,6 +59,25 @@
           }
         }
       ]
+    },
+    {
+      "name": "Life_4",
+      "transform": {
+        "x": 78.0,
+        "y": 0.0
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "burger_time_spritesheet_x3.png",
+          "spriteSheet": {
+            "frameWidth": 24,
+            "frameHeight": 24,
+            "row": 0,
+            "col": 25
+          }
+        }
+      ]
     }
   ]
 }

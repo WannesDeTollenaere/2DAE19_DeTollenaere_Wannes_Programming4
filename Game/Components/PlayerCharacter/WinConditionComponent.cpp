@@ -6,6 +6,8 @@
 #include "SceneLoader.h"
 #include "GameTime.h"
 #include "SceneLoader.h"
+#include "Commands/LoadSceneCommand.h"
+#include "InputManager.h"
 #include <nlohmann/json.hpp>
 
 namespace dae
@@ -28,6 +30,14 @@ namespace dae
         : Component(owner), m_TotalBurgersNeeded(totalBurgersNeeded), m_WinSceneName(winSceneName)
     {
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("BurgerCompleted"), this);
+
+        auto& input = InputManager::GetInstance();
+
+        input.BindKeyboardCommand(
+            SDL_SCANCODE_F1,
+            InputState::Down,
+            std::make_unique<LoadSceneCommand>(winSceneName)
+        );
     }
 
     WinConditionComponent::~WinConditionComponent()
