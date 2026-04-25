@@ -6,6 +6,7 @@
 #include "Events/LivesLostEvent.h"
 #include "SceneManager.h"
 #include <iostream>
+#include "ResourceManager.h"
 
 
 namespace dae
@@ -13,6 +14,13 @@ namespace dae
     GameManager::GameManager()
     {
         EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("SaltChanged"), this);
+
+        auto& soundSys = ServiceLocator::get_sound_system();
+
+        std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/BGM.wav");
+        dae::ServiceLocator::get_sound_system().load(SoundID::BGM, path);
+
+        soundSys.play(SoundID::BGM, 0.5f, -1);
     }
 
     GameManager::~GameManager()

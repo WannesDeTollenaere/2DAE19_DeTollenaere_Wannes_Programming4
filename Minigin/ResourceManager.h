@@ -24,6 +24,11 @@ namespace dae
 		void WriteTextFile(const std::string& filename, const std::string& content) const;
 
 		std::filesystem::path GetDataPath() { return m_dataPath; };
+
+		std::string GetFullPathForFile(const std::string& file) const
+		{
+			return (m_dataPath / file).string();
+		}
 	private:
 		friend class Singleton<ResourceManager>;
 		ResourceManager() = default;

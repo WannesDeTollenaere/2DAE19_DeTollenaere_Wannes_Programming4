@@ -1,15 +1,22 @@
 #pragma once
+#include <string>
 
-using sound_id = unsigned short;
-
-class SoundSystem
+namespace dae
 {
-public:
-	virtual ~SoundSystem() = default;
-	virtual void play(const sound_id id, const float volume) = 0;
-};
+    using sound_id = unsigned short;
 
-class NullSoundSystem final : public SoundSystem
-{
-	void play(const sound_id, const float) override {}
-};
+    class SoundSystem
+    {
+    public:
+        virtual ~SoundSystem() = default;
+        virtual void play(const sound_id id, const float volume, int loops = 0) = 0;
+        virtual void load(const sound_id id, const std::string& filepath, bool isMusic = false) = 0;
+    };
+
+    class NullSoundSystem final : public SoundSystem
+    {
+    public:
+        void play(const sound_id, const float, int) override {}
+        void load(const sound_id, const std::string&, bool) override {}
+    };
+}

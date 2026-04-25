@@ -2,6 +2,8 @@
 #include "Singleton.h"
 #include "ObserverSys/Observer.h" 
 #include "Components/TagComponent.h"
+#include "Sound/ServiceLocator.h"
+#include "Helpers/SoundIDs.h"
 
 namespace dae
 {

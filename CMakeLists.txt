@@ -7,7 +7,7 @@ if(EMSCRIPTEN)
   set(GAME_PARAM )
 else()
   set(GAME_TARGET game)
-  set(GAME_PARAM WIN32)
+  set(GAME_PARAM)
 endif()
 
 
@@ -77,6 +77,19 @@ if(NOT SDL3_ttf_FOUND)
   endif()
 endif()
 
+# SDL3_mixer
+
+find_package(SDL3_mixer 3.2.0 CONFIG QUIET)
+if(NOT SDL3_mixer_FOUND)
+  FetchContent_Declare(SDL3_mixer 
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_mixer.git 
+    GIT_TAG release-3.2.0 
+    GIT_SHALLOW TRUE 
+    GIT_PROGRESS TRUE
+  )
+  FetchContent_MakeAvailable(SDL3_mixer)
+endif()
+
 if (WIN32)
   find_package(VLD CONFIG)
 endif()
@@ -143,6 +156,7 @@ target_include_directories(Minigin PUBLIC
 target_link_libraries(Minigin PUBLIC 
   SDL3::SDL3 
   SDL3_ttf::SDL3_ttf
+  SDL3_mixer::SDL3_mixer
   imgui
   glm::glm
   nlohmann_json::nlohmann_json
@@ -242,7 +256,11 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Commands/MenuNavigationCommand.h" 
  "Game/Components/UI/MenuItemComponent.h" 
  "Game/Components/UI/MenuComponent.h" 
- "Game/Components/UI/MenuComponent.cpp" "Game/Components/Enemy/EnemyComponent.h" "Game/Components/PlayerCharacter/PlayerEnemyController.h" "Game/Components/PlayerCharacter/PlayerEnemyController.cpp" "Game/Components/Enemy/EnemyComponent.cpp" "Game/Components/PlayerCharacter/SaltManagerComponent.h" "Game/Components/PlayerCharacter/SaltManagerComponent.cpp" "Game/Commands/StartGameCommand.h")
+ "Game/Components/UI/MenuComponent.cpp" "Game/Components/Enemy/EnemyComponent.h" "Game/Components/PlayerCharacter/PlayerEnemyController.h" "Game/Components/PlayerCharacter/PlayerEnemyController.cpp" "Game/Components/Enemy/EnemyComponent.cpp" "Game/Components/PlayerCharacter/SaltManagerComponent.h" "Game/Components/PlayerCharacter/SaltManagerComponent.cpp" "Game/Commands/StartGameCommand.h" "Game/Helpers/SoundIDs.h")
+
+ set_target_properties(${GAME_TARGET} PROPERTIES
+    WIN32_EXECUTABLE $<NOT:$<CONFIG:Debug>>
+)
 
 target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 
@@ -278,7 +296,7 @@ elseif(WIN32)
   set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${GAME_TARGET})
   set_target_properties(${GAME_TARGET} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:${GAME_TARGET}>")
 
-  set(SDL_RUNTIME_DLLS SDL3::SDL3 SDL3_ttf::SDL3_ttf)
+  set(SDL_RUNTIME_DLLS SDL3::SDL3 SDL3_ttf::SDL3_ttf SDL3_mixer::SDL3_mixer)
 
   foreach(dllTarget IN LISTS SDL_RUNTIME_DLLS)
     add_custom_command(TARGET ${GAME_TARGET} POST_BUILD

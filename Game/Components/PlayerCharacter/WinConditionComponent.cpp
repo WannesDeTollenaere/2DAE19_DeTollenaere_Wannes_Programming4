@@ -9,6 +9,9 @@
 #include "Commands/LoadSceneCommand.h"
 #include "InputManager.h"
 #include <nlohmann/json.hpp>
+#include "Sound/ServiceLocator.h"
+#include "Helpers/SoundIDs.h"
+#include "ResourceManager.h"
 
 namespace dae
 {
@@ -32,6 +35,8 @@ namespace dae
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("BurgerCompleted"), this);
 
         auto& input = InputManager::GetInstance();
+        std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/Round Clear.wav");
+        ServiceLocator::get_sound_system().load(SoundID::RoundClear, path);
 
         input.BindKeyboardCommand(
             SDL_SCANCODE_F1,
@@ -81,8 +86,9 @@ namespace dae
     void WinConditionComponent::Win()
     {
         dae::EventManager::GetInstance().SendEvent(make_sdbm_hash("LevelCompleted"));
+        ServiceLocator::get_sound_system().play(SoundID::RoundClear, 1.0f, 0);
 
-        dae::GameTime::GetInstance().AddTimer(2.5f, [&]() {
+        dae::GameTime::GetInstance().AddTimer(3.f, [&]() {
             dae::SceneManager::GetInstance().SetActiveScene(m_WinSceneName);
             });
     }
