@@ -29,6 +29,9 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "ObserverSys/EventManager.h"
+#include "Sound/ServiceLocator.h"
+#include "Sound/SdlSoundSystem.h"
+#include "Sound/LoggingSoundSystem.h"
 
 
 SDL_Window* g_window{};
@@ -92,6 +95,15 @@ dae::Minigin::Minigin(const std::filesystem::path& dataPath)
 
 	Renderer::GetInstance().Init(g_window);
 	ResourceManager::GetInstance().Init(dataPath);
+	// Default to a null sound system, so we don't have to check for nullptr everywhere in the code.
+	ServiceLocator::register_sound_system(std::make_unique<NullSoundSystem>());
+
+#if _DEBUG
+	ServiceLocator::register_sound_system(
+		std::make_unique<LoggingSoundSystem>(std::make_unique<SdlSoundSystem>()));
+#else
+	ServiceLocator::register_sound_system(std::make_unique<SdlSoundSystem>());
+#endif
 
 	//dae::ComponentsRegistry::RegisterAll();
 

@@ -126,7 +126,7 @@ add_library(Minigin STATIC
  "Minigin/Helpers/Spritesheet.h" 
  "Minigin/Helpers/Spritesheet.cpp" 
  "Minigin/Components/LifeTimeComponent.h"
-"Minigin/Components/LifeTimeComponent.cpp" "Minigin/Commands/QuitCommand.h")
+"Minigin/Components/LifeTimeComponent.cpp" "Minigin/Commands/QuitCommand.h" "Minigin/Sound/SoundSystem.h" "Minigin/Sound/ServiceLocator.h" "Minigin/Sound/SdlSoundSystem.h" "Minigin/Sound/SdlSoundSystem.cpp" "Minigin/Sound/LoggingSoundSystem.h")
 
 target_compile_features(Minigin PUBLIC cxx_std_20)
 
