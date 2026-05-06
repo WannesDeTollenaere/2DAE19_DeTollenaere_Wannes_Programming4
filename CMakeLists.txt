@@ -256,7 +256,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Commands/MenuNavigationCommand.h" 
  "Game/Components/UI/MenuItemComponent.h" 
  "Game/Components/UI/MenuComponent.h" 
- "Game/Components/UI/MenuComponent.cpp" "Game/Components/Enemy/EnemyComponent.h" "Game/Components/PlayerCharacter/PlayerEnemyController.h" "Game/Components/PlayerCharacter/PlayerEnemyController.cpp" "Game/Components/Enemy/EnemyComponent.cpp" "Game/Components/PlayerCharacter/SaltManagerComponent.h" "Game/Components/PlayerCharacter/SaltManagerComponent.cpp" "Game/Commands/StartGameCommand.h" "Game/Helpers/SoundIDs.h")
+ "Game/Components/UI/MenuComponent.cpp" "Game/Components/Enemy/EnemyComponent.h" "Game/Components/PlayerCharacter/PlayerEnemyController.h" "Game/Components/PlayerCharacter/PlayerEnemyController.cpp" "Game/Components/Enemy/EnemyComponent.cpp" "Game/Components/PlayerCharacter/SaltManagerComponent.h" "Game/Components/PlayerCharacter/SaltManagerComponent.cpp" "Game/Commands/StartGameCommand.h" "Game/Helpers/SoundIDs.h" "Game/Helpers/PlayerState.h" "Game/Helpers/PlayerState.cpp")
 
  set_target_properties(${GAME_TARGET} PROPERTIES
     WIN32_EXECUTABLE $<NOT:$<CONFIG:Debug>>

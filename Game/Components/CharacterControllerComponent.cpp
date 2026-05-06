@@ -1,4 +1,5 @@
 #include "CharacterControllerComponent.h"
+#include "Helpers/PlayerState.h"
 #include "GameObject.h"
 #include "InputManager.h"
 #include "Commands/MoveCommand.h"
@@ -60,34 +61,41 @@ namespace dae
             input.BindKeyboardCommand(SDL_SCANCODE_D, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(1, 0)));
 
             input.BindKeyboardCommand(SDL_SCANCODE_SPACE, InputState::Down, std::make_unique<ThrowSaltCommand>(owner));
-             
-            ////DAMAGE
-            //input.BindKeyboardCommand(SDL_SCANCODE_C, InputState::Down, std::make_unique<DamageCommand>(owner, 1));
-            //// SCORE
-            //input.BindKeyboardCommand(SDL_SCANCODE_V, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 10));
-            //input.BindKeyboardCommand(SDL_SCANCODE_B, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 100));
         }
 
-            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadUp, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(0, -1)));
-            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadDown, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(0, 1)));
-            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadLeft, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(-1, 0)));
-            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadRight, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(1, 0)));
+        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadUp, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(0, -1)));
+        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadDown, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(0, 1)));
+        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadLeft, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(-1, 0)));
+        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::DPadRight, InputState::Pressed, std::make_unique<MoveCommand>(owner, glm::vec2(1, 0)));
 
-            input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::A, InputState::Down, std::make_unique<ThrowSaltCommand>(owner));
-         
+        input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::A, InputState::Down, std::make_unique<ThrowSaltCommand>(owner));
+
 
         dae::EventManager::GetInstance().AttachEvent(make_sdbm_hash("LevelCompleted"), this);
-        ////DAMAGE
-        //input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::X, InputState::Down, std::make_unique<DamageCommand>(owner, 1));
-        //// SCORE
-        //input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::Y, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 10));
-        //input.BindCommand(static_cast<uint16_t>(m_controllerIndex), Gamepad::ControllerButton::B, InputState::Down, std::make_unique<IncreaseScoreCommand>(owner, 100));
+
+        m_pCurrentState = std::make_unique<AliveState>();
     }
+
     CharacterControllerComponent::~CharacterControllerComponent()
     {
         dae::EventManager::GetInstance().DetachEvent(make_sdbm_hash("LevelCompleted"), this);
         UnbindInput();
     }
+
+    void CharacterControllerComponent::ChangeState(std::unique_ptr<PlayerState> newState)
+    {
+        if (newState)
+        {
+            m_pCurrentState = std::move(newState);
+            m_pCurrentState->OnEnter(this);
+        }
+    }
+
+    bool CharacterControllerComponent::IsDead() const
+    {
+        return dynamic_cast<DeadState*>(m_pCurrentState.get()) != nullptr;
+    }
+
     void CharacterControllerComponent::OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp)
     {
         if (otherTagComp && otherTagComp->HasTag(make_sdbm_hash_rt("Enemy")))
@@ -95,53 +103,45 @@ namespace dae
             auto enemyWander = otherObject->GetComponent<EnemyComponent>();
             if (enemyWander && enemyWander->IsDangerous())
             {
-                Die();
+                Die(); 
             }
         }
     }
+
     void CharacterControllerComponent::HandleEvent(const Event* event)
     {
         BaseCollisionHandler::HandleEvent(event);
 
         if (event->id == make_sdbm_hash("LevelCompleted"))
         {
-            m_IsLevelComplete = true; 
-
-            if (m_Anim)
-            {
-                m_Anim->PlayAnimation("Victory");
-                UnbindInput();
-            }
+            auto newState = m_pCurrentState->CompleteLevel(this);
+            ChangeState(std::move(newState));
         }
     }
+
     void CharacterControllerComponent::Update()
     {
-        if (!m_Anim || m_IsDead || m_IsLevelComplete) return;
-
-        const auto& currentPos = GetOwner()->GetTransform().GetLocalPosition();
-
-        if (currentPos == m_LastPosition)
-        {
-            m_Anim->PlayAnimation("Idle");
-        }
-        else
-        {
-            if (m_FacingDirection.y < 0.0f) m_Anim->PlayAnimation("WalkUp");
-            else if (m_FacingDirection.y > 0.0f) m_Anim->PlayAnimation("WalkDown");
-            else if (m_FacingDirection.x < 0.0f) m_Anim->PlayAnimation("WalkLeft");
-            else if (m_FacingDirection.x > 0.0f) m_Anim->PlayAnimation("WalkRight");
-        }
-
-        m_LastPosition = currentPos;
+        auto newState = m_pCurrentState->Update(this);
+        ChangeState(std::move(newState));
     }
-     
-
 
     void CharacterControllerComponent::ThrowSalt()
     {
+        auto newState = m_pCurrentState->ThrowSalt(this);
+        ChangeState(std::move(newState));
+    }
+
+    void CharacterControllerComponent::Die()
+    {
+        auto newState = m_pCurrentState->Die(this);
+        ChangeState(std::move(newState));
+    }
+
+    void CharacterControllerComponent::PerformThrowSalt()
+    {
         auto saltComp = GetOwner()->GetComponent<SaltManagerComponent>();
 
-        if (m_IsDead || m_IsLevelComplete || !saltComp || saltComp->GetSalt() <= 0) return;
+        if (!saltComp || saltComp->GetSalt() <= 0) return;
 
         auto scene = SceneManager::GetInstance().GetActiveScene();
         if (!scene) return;
@@ -159,23 +159,6 @@ namespace dae
         saltComp->AddSalt(-1);
     }
 
-    void CharacterControllerComponent::Die()
-    {
-        if (m_IsDead) return;
-        m_IsDead = true;
-
-        if (m_Anim)
-        { 
-            m_Anim->PlayAnimation("Die");   
-        }
-         
-        dae::GameTime::GetInstance().AddTimer(1.5f, [&]() {
-            dae::GameManager::GetInstance().LoseLife();
-            m_IsDead = false;
-            GetOwner()->GetTransform().SetLocalPosition(m_SpawnPosition);
-            
-            });  
-    }
     void CharacterControllerComponent::UnbindInput()
     {
         auto& input = InputManager::GetInstance();
