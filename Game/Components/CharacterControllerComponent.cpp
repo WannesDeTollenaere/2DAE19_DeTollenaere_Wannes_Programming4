@@ -1,5 +1,5 @@
 #include "CharacterControllerComponent.h"
-#include "Helpers/PlayerState.h"
+#include "States/PlayerState.h"
 #include "GameObject.h"
 #include "InputManager.h"
 #include "Commands/MoveCommand.h"

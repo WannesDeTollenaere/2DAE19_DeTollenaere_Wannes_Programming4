@@ -6,6 +6,7 @@
 #include "Events/EnemyCrushedEvent.h"
 #include "Events/LivesLostEvent.h"
 #include "GameTime.h"
+#include "States/EnemyState.h"
 #include "SceneLoader.h"
 
 namespace dae
@@ -46,6 +47,8 @@ namespace dae
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("LevelCompleted"), this);
 
         m_OriginalSpawnPosition = GetOwner()->GetTransform().GetLocalPosition();
+
+        ChangeState(std::make_unique<EnemyWanderingState>());
     }
 
     EnemyComponent::~EnemyComponent()
@@ -55,12 +58,20 @@ namespace dae
         EventManager::GetInstance().DetachEvent(make_sdbm_hash("LevelCompleted"), this);
     }
 
+    void EnemyComponent::ChangeState(std::unique_ptr<EnemyState> newState)
+    {
+        if (newState)
+        {
+            m_pCurrentState = std::move(newState);
+            m_pCurrentState->OnEnter(this);
+        }
+    }
+
     void EnemyComponent::Update()
     {
         if (!m_pAnimator) m_pAnimator = GetOwner()->GetComponent<AnimatorComponent>();
-        if (m_State != EnemyState::Wandering) return;
 
-        UpdateAnimation();
+        ChangeState(m_pCurrentState->Update(this));
     }
 
     void EnemyComponent::HandleEvent(const Event* event)
@@ -70,7 +81,7 @@ namespace dae
         {
             Die();
             return;
-        } 
+        }
 
         if (dynamic_cast<const LivesLostEvent*>(event))
         {
@@ -80,63 +91,25 @@ namespace dae
 
         if (event && event->id == make_sdbm_hash("LevelCompleted"))
         {
-            DisableMovement(); 
+            DisableMovement();
         }
     }
 
-    void EnemyComponent::UpdateAnimation()
-    {
-        if (!m_pAnimator) return;
-
-        if (m_CurrentDirection.x > 0) m_pAnimator->PlayAnimation("WalkRight");
-        else if (m_CurrentDirection.x < 0) m_pAnimator->PlayAnimation("WalkLeft");
-        else if (m_CurrentDirection.y > 0) m_pAnimator->PlayAnimation("WalkDown");
-        else if (m_CurrentDirection.y < 0) m_pAnimator->PlayAnimation("WalkUp");
-    }
-
-    void EnemyComponent::Die()
-    {
-        if (m_State == EnemyState::Dead) return;
-        m_State = EnemyState::Dead;
-
-        if (m_pAnimator) m_pAnimator->PlayAnimation("Die");
-
-        auto collider = GetOwner()->GetComponent<BoxColliderComponent>();
-        if (collider) collider->SetActive(false);
-
-        GameTime::GetInstance().AddTimer(m_TimeBeforeDestroy, [this]() {
-            GetOwner()->SetActive(false);
-            GameTime::GetInstance().AddTimer(m_RespawnDuration, [this]() {
-                Respawn();
-                });
-            });
-    }
-
-    void EnemyComponent::Stun()
-    {
-        if (m_State != EnemyState::Wandering) return;
-        m_State = EnemyState::Stunned;
-
-        if (m_pAnimator) m_pAnimator->PlayAnimation("Pickled");
-
-        GameTime::GetInstance().AddTimer(m_StunDuration, [this]() {
-            m_State = EnemyState::Wandering;
-            });
-    }
+    void EnemyComponent::Die() { ChangeState(m_pCurrentState->OnDie(this)); }
+    void EnemyComponent::Stun() { ChangeState(m_pCurrentState->OnStun(this)); }
+    void EnemyComponent::DisableMovement() { ChangeState(m_pCurrentState->OnDisable(this)); }
+    void EnemyComponent::EnableMovement() { ChangeState(m_pCurrentState->OnEnable(this)); }
+    void EnemyComponent::SetCascading(bool cascading) { ChangeState(m_pCurrentState->OnSetCascading(this, cascading)); }
 
     void EnemyComponent::Respawn()
     {
         GetOwner()->GetTransform().SetLocalPosition(m_OriginalSpawnPosition);
-        m_State = EnemyState::Wandering;
-        GetOwner()->SetActive(true);
-
-        auto collider = GetOwner()->GetComponent<BoxColliderComponent>();
-        if (collider) collider->SetActive(true);
-
-        if (m_pAnimator) m_pAnimator->PlayAnimation("WalkDown");
+        ChangeState(std::make_unique<EnemyWanderingState>());
     }
 
-    void EnemyComponent::DisableMovement() { m_State = EnemyState::Disabled; }
-    void EnemyComponent::EnableMovement() { m_State = EnemyState::Wandering; }
-    void EnemyComponent::SetCascading(bool cascading) { m_State = cascading ? EnemyState::Cascading : EnemyState::Wandering; }
+    bool EnemyComponent::IsDead() const { return m_pCurrentState->IsDead(); }
+    bool EnemyComponent::IsStunned() const { return m_pCurrentState->IsStunned(); }
+    bool EnemyComponent::IsDangerous() const { return m_pCurrentState->IsDangerous(); }
+    bool EnemyComponent::IsMovementDisabled() const { return m_pCurrentState->IsMovementDisabled(); }
+    bool EnemyComponent::IsCascading() const { return m_pCurrentState->IsCascading(); }
 }

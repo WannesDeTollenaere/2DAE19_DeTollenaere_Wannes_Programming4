@@ -3,29 +3,21 @@
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include "ObserverSys/Observer.h"
+#include <memory>
 
 namespace dae
 {
     class AnimatorComponent;
+    class EnemyState; 
 
     enum class EnemyType : uint8_t
     {
-        HotDog,
-        Pickle,
-        Egg
-    };
-
-    enum class EnemyState : uint8_t
-    {
-        Wandering,
-        Disabled,
-        Cascading,
-        Stunned,
-        Dead
+        HotDog, Pickle, Egg
     };
 
     class EnemyComponent final : public Component, public Observer
     {
+        friend class EnemyState; 
     public:
         EnemyComponent(GameObject* pOwner);
         ~EnemyComponent();
@@ -34,38 +26,33 @@ namespace dae
         void HandleEvent(const Event* event) override;
 
         void Die();
-        bool IsDead() const { return m_State == EnemyState::Dead; }
+        bool IsDead() const;
         void Respawn();
 
         void Stun();
-        bool IsStunned() const { return m_State == EnemyState::Stunned; }
+        bool IsStunned() const;
 
-        bool IsDangerous() const { return !IsStunned() && !IsDead() && !IsCascading(); }
+        bool IsDangerous() const;
 
         void DisableMovement();
         void EnableMovement();
-        bool IsMovementDisabled() const { return m_State == EnemyState::Disabled || IsCascading() || IsStunned() || IsDead(); }
+        bool IsMovementDisabled() const;
 
         void SetCascading(bool cascading);
-        bool IsCascading() const { return m_State == EnemyState::Cascading; }
+        bool IsCascading() const;
 
         EnemyType GetEnemyType() const { return m_EnemyType; }
         void SetEnemyType(EnemyType type) { m_EnemyType = type; }
-
         void SetCurrentDirection(const glm::vec2& dir) { m_CurrentDirection = dir; }
 
     private:
-        EnemyState m_State{ EnemyState::Wandering };
+        std::unique_ptr<EnemyState> m_pCurrentState;
+        void ChangeState(std::unique_ptr<EnemyState> newState);
+
         EnemyType m_EnemyType{ EnemyType::HotDog };
         AnimatorComponent* m_pAnimator{ nullptr };
 
         glm::vec2 m_CurrentDirection{ 0.0f, 1.0f };
         glm::vec3 m_OriginalSpawnPosition{};
-
-        const float m_TimeBeforeDestroy{ 1.0f };
-        const float m_StunDuration{ 3.0f };
-        float m_RespawnDuration{ 4.0f };
-
-        void UpdateAnimation();
     };
 }

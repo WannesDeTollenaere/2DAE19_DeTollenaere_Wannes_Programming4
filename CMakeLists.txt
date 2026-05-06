@@ -139,7 +139,9 @@ add_library(Minigin STATIC
  "Minigin/Helpers/Spritesheet.h" 
  "Minigin/Helpers/Spritesheet.cpp" 
  "Minigin/Components/LifeTimeComponent.h"
-"Minigin/Components/LifeTimeComponent.cpp" "Minigin/Commands/QuitCommand.h" "Minigin/Sound/SoundSystem.h" "Minigin/Sound/ServiceLocator.h" "Minigin/Sound/SdlSoundSystem.h" "Minigin/Sound/SdlSoundSystem.cpp" "Minigin/Sound/LoggingSoundSystem.h")
+"Minigin/Components/LifeTimeComponent.cpp" 
+"Minigin/Commands/QuitCommand.h" 
+"Minigin/Sound/SoundSystem.h" "Minigin/Sound/ServiceLocator.h" "Minigin/Sound/SdlSoundSystem.h" "Minigin/Sound/SdlSoundSystem.cpp" "Minigin/Sound/LoggingSoundSystem.h")
 
 target_compile_features(Minigin PUBLIC cxx_std_20)
 
@@ -256,7 +258,17 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Commands/MenuNavigationCommand.h" 
  "Game/Components/UI/MenuItemComponent.h" 
  "Game/Components/UI/MenuComponent.h" 
- "Game/Components/UI/MenuComponent.cpp" "Game/Components/Enemy/EnemyComponent.h" "Game/Components/PlayerCharacter/PlayerEnemyController.h" "Game/Components/PlayerCharacter/PlayerEnemyController.cpp" "Game/Components/Enemy/EnemyComponent.cpp" "Game/Components/PlayerCharacter/SaltManagerComponent.h" "Game/Components/PlayerCharacter/SaltManagerComponent.cpp" "Game/Commands/StartGameCommand.h" "Game/Helpers/SoundIDs.h" "Game/Helpers/PlayerState.h" "Game/Helpers/PlayerState.cpp")
+ "Game/Components/UI/MenuComponent.cpp" 
+ "Game/Components/Enemy/EnemyComponent.h" 
+ "Game/Components/PlayerCharacter/PlayerEnemyController.h" 
+ "Game/Components/PlayerCharacter/PlayerEnemyController.cpp" 
+ "Game/Components/Enemy/EnemyComponent.cpp" 
+ "Game/Components/PlayerCharacter/SaltManagerComponent.h" 
+ "Game/Components/PlayerCharacter/SaltManagerComponent.cpp" 
+ "Game/Commands/StartGameCommand.h" 
+ "Game/Helpers/SoundIDs.h"
+ "Game/States/PlayerState.h" 
+ "Game/States/PlayerState.cpp" "Game/States/EnemyState.h" "Game/States/EnemyState.cpp")
 
  set_target_properties(${GAME_TARGET} PROPERTIES
     WIN32_EXECUTABLE $<NOT:$<CONFIG:Debug>>
