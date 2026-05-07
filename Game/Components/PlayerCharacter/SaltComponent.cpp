@@ -16,8 +16,8 @@ namespace dae
         : BaseCollisionHandler(pOwner)
     {
         std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/Pepper Shake.wav");
-        ServiceLocator::get_sound_system().load(SoundID::PepperShake, path);
-        ServiceLocator::get_sound_system().play(SoundID::PepperShake, 1.0f, 0);
+        ServiceLocator::GetSoundSystem().load(SoundID::PepperShake, path);
+        ServiceLocator::GetSoundSystem().play(SoundID::PepperShake, 1.0f, 0);
 
     }
 

@@ -96,10 +96,10 @@ dae::Minigin::Minigin(const std::filesystem::path& dataPath)
 	Renderer::GetInstance().Init(g_window);
 	ResourceManager::GetInstance().Init(dataPath);
 	// Default to a null sound system, so we don't have to check for nullptr everywhere in the code.
-	ServiceLocator::register_sound_system(std::make_unique<NullSoundSystem>());
+	ServiceLocator::RegisterSoundSystem(std::make_unique<NullSoundSystem>());
 
 #if _DEBUG
-	ServiceLocator::register_sound_system(
+	ServiceLocator::RegisterSoundSystem(
 		std::make_unique<LoggingSoundSystem>(std::make_unique<SdlSoundSystem>()));
 #else
 	ServiceLocator::register_sound_system(std::make_unique<SdlSoundSystem>());
@@ -116,7 +116,7 @@ dae::Minigin::Minigin(const std::filesystem::path& dataPath)
 dae::Minigin::~Minigin()
 {
 	Renderer::GetInstance().Destroy();
-	dae::ServiceLocator::register_sound_system(std::make_unique<dae::NullSoundSystem>());
+	dae::ServiceLocator::RegisterSoundSystem(std::make_unique<dae::NullSoundSystem>());
 	SDL_DestroyWindow(g_window);
 	g_window = nullptr;
 	SDL_Quit();

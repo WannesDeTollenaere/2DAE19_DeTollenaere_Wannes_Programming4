@@ -97,7 +97,7 @@ namespace dae {
 
                     request = m_queue.front();
                     m_queue.pop();
-                }
+                } // braces to unlock thread after changes to queue
                 ProcessRequest(request);
             }
         }

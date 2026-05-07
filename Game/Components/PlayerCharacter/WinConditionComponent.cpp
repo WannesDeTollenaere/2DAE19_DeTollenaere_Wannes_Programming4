@@ -36,7 +36,7 @@ namespace dae
 
         auto& input = InputManager::GetInstance();
         std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/Round Clear.wav");
-        ServiceLocator::get_sound_system().load(SoundID::RoundClear, path);
+        ServiceLocator::GetSoundSystem().load(SoundID::RoundClear, path);
 
         input.BindKeyboardCommand(
             SDL_SCANCODE_F1,
@@ -86,7 +86,7 @@ namespace dae
     void WinConditionComponent::Win()
     {
         dae::EventManager::GetInstance().SendEvent(make_sdbm_hash("LevelCompleted"));
-        ServiceLocator::get_sound_system().play(SoundID::RoundClear, 1.0f, 0);
+        ServiceLocator::GetSoundSystem().play(SoundID::RoundClear, 1.0f, 0);
 
         dae::GameTime::GetInstance().AddTimer(3.f, [&]() {
             dae::SceneManager::GetInstance().SetActiveScene(m_WinSceneName);

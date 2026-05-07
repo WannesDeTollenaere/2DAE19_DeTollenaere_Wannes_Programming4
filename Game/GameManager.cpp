@@ -15,10 +15,10 @@ namespace dae
     {
         EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("SaltChanged"), this);
 
-        auto& soundSys = ServiceLocator::get_sound_system();
+        auto& soundSys = ServiceLocator::GetSoundSystem();
 
         std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/BGM.wav");
-        dae::ServiceLocator::get_sound_system().load(SoundID::BGM, path);
+        dae::ServiceLocator::GetSoundSystem().load(SoundID::BGM, path);
 
         soundSys.play(SoundID::BGM, 0.5f, -1);
     }
