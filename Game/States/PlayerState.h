@@ -10,53 +10,60 @@ namespace dae
 
     class PlayerState
     {
+    protected:
+        CharacterControllerComponent* m_pPlayer;
+
     public:
+        PlayerState(CharacterControllerComponent* player) : m_pPlayer(player) {}
         virtual ~PlayerState() = default;
 
-        virtual void OnEnter(CharacterControllerComponent*) {}
+        virtual void OnEnter() {}
 
-        virtual std::unique_ptr<PlayerState> Update(CharacterControllerComponent*) { return nullptr; }
-        virtual std::unique_ptr<PlayerState> ThrowSalt(CharacterControllerComponent*) { return nullptr; }
-        virtual std::unique_ptr<PlayerState> Die(CharacterControllerComponent*) { return nullptr; }
-        virtual std::unique_ptr<PlayerState> CompleteLevel(CharacterControllerComponent* ) { return nullptr; }
+        virtual std::unique_ptr<PlayerState> Update() { return nullptr; }
+        virtual std::unique_ptr<PlayerState> ThrowSalt() { return nullptr; }
+        virtual std::unique_ptr<PlayerState> Die() { return nullptr; }
+        virtual std::unique_ptr<PlayerState> CompleteLevel() { return nullptr; }
 
-        GameObject* GetOwner(CharacterControllerComponent* player) const
+        GameObject* GetOwner() const
         {
-            return player->GetOwner(); 
+            return m_pPlayer->GetOwner();
         }
 
-        AnimatorComponent* GetAnimator(CharacterControllerComponent* player) const
+        AnimatorComponent* GetAnimator() const
         {
-            return player->m_Anim;
+            return m_pPlayer->GetAnimator();
         }
 
-        glm::vec3 GetSpawnPosition(CharacterControllerComponent* player) const
+        glm::vec3 GetSpawnPosition() const
         {
-            return player->m_SpawnPosition;
+            return m_pPlayer->GetSpawnPosition();
         }
     };
 
     class AliveState final : public PlayerState
     {
     public:
-        std::unique_ptr<PlayerState> Update(CharacterControllerComponent* player) override;
-        std::unique_ptr<PlayerState> ThrowSalt(CharacterControllerComponent* player) override;
-        std::unique_ptr<PlayerState> Die(CharacterControllerComponent* player) override;
-        std::unique_ptr<PlayerState> CompleteLevel(CharacterControllerComponent* player) override;
+        AliveState(CharacterControllerComponent* player) : PlayerState(player) {}
+        std::unique_ptr<PlayerState> Update() override;
+        std::unique_ptr<PlayerState> ThrowSalt() override;
+        std::unique_ptr<PlayerState> Die() override;
+        std::unique_ptr<PlayerState> CompleteLevel() override;
     };
 
     class DeadState final : public PlayerState
     {
     public:
-        void OnEnter(CharacterControllerComponent* player) override;
-        std::unique_ptr<PlayerState> Update(CharacterControllerComponent* player) override;
+        DeadState(CharacterControllerComponent* player) : PlayerState(player) {}
+        void OnEnter() override;
+        std::unique_ptr<PlayerState> Update() override;
     private:
-        float m_RespawnTimer{ 1.5f }; 
+        float m_RespawnTimer{ 1.5f };
     };
 
     class VictoryState final : public PlayerState
     {
     public:
-        void OnEnter(CharacterControllerComponent* player) override;
+        VictoryState(CharacterControllerComponent* player) : PlayerState(player) {}
+        void OnEnter() override;
     };
 }

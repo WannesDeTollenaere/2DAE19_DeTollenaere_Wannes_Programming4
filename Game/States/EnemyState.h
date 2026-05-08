@@ -9,17 +9,21 @@ namespace dae
 {
     class EnemyState
     {
+    protected:
+        EnemyComponent* m_pEnemy;
+
     public:
+        EnemyState(EnemyComponent* enemy) : m_pEnemy(enemy) {}
         virtual ~EnemyState() = default;
 
-        virtual void OnEnter(EnemyComponent*) {}
-        virtual std::unique_ptr<EnemyState> Update(EnemyComponent*) { return nullptr; }
+        virtual void OnEnter() {}
+        virtual std::unique_ptr<EnemyState> Update() { return nullptr; }
 
-        virtual std::unique_ptr<EnemyState> OnDie(EnemyComponent* ) { return nullptr; }
-        virtual std::unique_ptr<EnemyState> OnStun(EnemyComponent* ) { return nullptr; }
-        virtual std::unique_ptr<EnemyState> OnDisable(EnemyComponent* ) { return nullptr; }
-        virtual std::unique_ptr<EnemyState> OnEnable(EnemyComponent* ) { return nullptr; }
-        virtual std::unique_ptr<EnemyState> OnSetCascading(EnemyComponent* , bool ) { return nullptr; }
+        virtual std::unique_ptr<EnemyState> OnDie() { return nullptr; }
+        virtual std::unique_ptr<EnemyState> OnStun() { return nullptr; }
+        virtual std::unique_ptr<EnemyState> OnDisable() { return nullptr; }
+        virtual std::unique_ptr<EnemyState> OnEnable() { return nullptr; }
+        virtual std::unique_ptr<EnemyState> OnSetCascading(bool) { return nullptr; }
 
         virtual bool IsMovementDisabled() const { return true; }
         virtual bool IsDangerous() const { return false; }
@@ -28,22 +32,23 @@ namespace dae
         virtual bool IsCascading() const { return false; }
 
     protected:
-        GameObject* GetOwner(EnemyComponent* enemy) const { return enemy->GetOwner(); }
-        AnimatorComponent* GetAnimator(EnemyComponent* enemy) const { return enemy->m_pAnimator; }
-        const glm::vec2& GetCurrentDirection(EnemyComponent* enemy) const { return enemy->m_CurrentDirection; }
-        const glm::vec3& GetOriginalSpawnPosition(EnemyComponent* enemy) const { return enemy->m_OriginalSpawnPosition; }
+        GameObject* GetOwner() const { return m_pEnemy->GetOwner(); }
+        AnimatorComponent* GetAnimator() const { return m_pEnemy->m_pAnimator; }
+        const glm::vec2& GetCurrentDirection() const { return m_pEnemy->m_CurrentDirection; }
+        const glm::vec3& GetOriginalSpawnPosition() const { return m_pEnemy->m_OriginalSpawnPosition; }
     };
 
     class EnemyWanderingState final : public EnemyState
     {
     public:
-        void OnEnter(EnemyComponent* enemy) override;
-        std::unique_ptr<EnemyState> Update(EnemyComponent* enemy) override;
+        EnemyWanderingState(EnemyComponent* enemy) : EnemyState(enemy) {}
+        void OnEnter() override;
+        std::unique_ptr<EnemyState> Update() override;
 
-        std::unique_ptr<EnemyState> OnDie(EnemyComponent* enemy) override;
-        std::unique_ptr<EnemyState> OnStun(EnemyComponent* enemy) override;
-        std::unique_ptr<EnemyState> OnDisable(EnemyComponent* enemy) override;
-        std::unique_ptr<EnemyState> OnSetCascading(EnemyComponent* enemy, bool cascading) override;
+        std::unique_ptr<EnemyState> OnDie() override;
+        std::unique_ptr<EnemyState> OnStun() override;
+        std::unique_ptr<EnemyState> OnDisable() override;
+        std::unique_ptr<EnemyState> OnSetCascading(bool cascading) override;
 
         bool IsMovementDisabled() const override { return false; }
         bool IsDangerous() const override { return true; }
@@ -52,9 +57,10 @@ namespace dae
     class EnemyStunnedState final : public EnemyState
     {
     public:
-        void OnEnter(EnemyComponent* enemy) override;
-        std::unique_ptr<EnemyState> Update(EnemyComponent* enemy) override;
-        std::unique_ptr<EnemyState> OnDie(EnemyComponent* enemy) override;
+        EnemyStunnedState(EnemyComponent* enemy) : EnemyState(enemy) {}
+        void OnEnter() override;
+        std::unique_ptr<EnemyState> Update() override;
+        std::unique_ptr<EnemyState> OnDie() override;
 
         bool IsStunned() const override { return true; }
     private:
@@ -64,8 +70,9 @@ namespace dae
     class EnemyDeadState final : public EnemyState
     {
     public:
-        void OnEnter(EnemyComponent* enemy) override;
-        std::unique_ptr<EnemyState> Update(EnemyComponent* enemy) override;
+        EnemyDeadState(EnemyComponent* enemy) : EnemyState(enemy) {}
+        void OnEnter() override;
+        std::unique_ptr<EnemyState> Update() override;
 
         bool IsDead() const override { return true; }
     private:
@@ -77,14 +84,16 @@ namespace dae
     class EnemyDisabledState final : public EnemyState
     {
     public:
-        std::unique_ptr<EnemyState> OnEnable(EnemyComponent* enemy) override;
+        EnemyDisabledState(EnemyComponent* enemy) : EnemyState(enemy) {}
+        std::unique_ptr<EnemyState> OnEnable() override;
     };
 
     class EnemyCascadingState final : public EnemyState
     {
     public:
-        std::unique_ptr<EnemyState> OnSetCascading(EnemyComponent* enemy, bool cascading) override;
-        std::unique_ptr<EnemyState> OnDie(EnemyComponent* enemy) override;
+        EnemyCascadingState(EnemyComponent* enemy) : EnemyState(enemy) {}
+        std::unique_ptr<EnemyState> OnSetCascading(bool cascading) override;
+        std::unique_ptr<EnemyState> OnDie() override;
         bool IsCascading() const override { return true; }
     };
 }

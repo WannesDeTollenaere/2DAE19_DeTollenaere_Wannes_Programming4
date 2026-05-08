@@ -73,7 +73,7 @@ namespace dae
 
         dae::EventManager::GetInstance().AttachEvent(make_sdbm_hash("LevelCompleted"), this);
 
-        m_pCurrentState = std::make_unique<AliveState>();
+        m_pCurrentState = std::make_unique<AliveState>(this);
     }
 
     CharacterControllerComponent::~CharacterControllerComponent()
@@ -87,7 +87,7 @@ namespace dae
         if (newState)
         {
             m_pCurrentState = std::move(newState);
-            m_pCurrentState->OnEnter(this);
+            m_pCurrentState->OnEnter();
         }
     }
 
@@ -111,29 +111,28 @@ namespace dae
     void CharacterControllerComponent::HandleEvent(const Event* event)
     {
         BaseCollisionHandler::HandleEvent(event);
-
         if (event->id == make_sdbm_hash("LevelCompleted"))
         {
-            auto newState = m_pCurrentState->CompleteLevel(this);
+            auto newState = m_pCurrentState->CompleteLevel(); 
             ChangeState(std::move(newState));
         }
     }
 
     void CharacterControllerComponent::Update()
     {
-        auto newState = m_pCurrentState->Update(this);
+        auto newState = m_pCurrentState->Update();
         ChangeState(std::move(newState));
     }
 
     void CharacterControllerComponent::ThrowSalt()
     {
-        auto newState = m_pCurrentState->ThrowSalt(this);
+        auto newState = m_pCurrentState->ThrowSalt();
         ChangeState(std::move(newState));
     }
 
     void CharacterControllerComponent::Die()
     {
-        auto newState = m_pCurrentState->Die(this);
+        auto newState = m_pCurrentState->Die();
         ChangeState(std::move(newState));
     }
 

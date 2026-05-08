@@ -4,20 +4,20 @@
 namespace dae
 {
     // WANDERING
-    void EnemyWanderingState::OnEnter(EnemyComponent* enemy)
+    void EnemyWanderingState::OnEnter()
     {
-        GetOwner(enemy)->SetActive(true);
-        if (auto collider = GetOwner(enemy)->GetComponent<BoxColliderComponent>()) {
+        GetOwner()->SetActive(true);
+        if (auto collider = GetOwner()->GetComponent<BoxColliderComponent>()) {
             collider->SetActive(true);
         }
     }
 
-    std::unique_ptr<EnemyState> EnemyWanderingState::Update(EnemyComponent* enemy)
+    std::unique_ptr<EnemyState> EnemyWanderingState::Update()
     {
-        auto anim = GetAnimator(enemy);
+        auto anim = GetAnimator();
         if (!anim) return nullptr;
 
-        auto dir = GetCurrentDirection(enemy);
+        auto dir = GetCurrentDirection();
         if (dir.x > 0) anim->PlayAnimation("WalkRight");
         else if (dir.x < 0) anim->PlayAnimation("WalkLeft");
         else if (dir.y > 0) anim->PlayAnimation("WalkDown");
@@ -26,37 +26,37 @@ namespace dae
         return nullptr;
     }
 
-    std::unique_ptr<EnemyState> EnemyWanderingState::OnDie(EnemyComponent*) { return std::make_unique<EnemyDeadState>(); }
-    std::unique_ptr<EnemyState> EnemyWanderingState::OnStun(EnemyComponent*) { return std::make_unique<EnemyStunnedState>(); }
-    std::unique_ptr<EnemyState> EnemyWanderingState::OnDisable(EnemyComponent*) { return std::make_unique<EnemyDisabledState>(); }
-    std::unique_ptr<EnemyState> EnemyWanderingState::OnSetCascading(EnemyComponent*, bool cascading)
+    std::unique_ptr<EnemyState> EnemyWanderingState::OnDie() { return std::make_unique<EnemyDeadState>(m_pEnemy); }
+    std::unique_ptr<EnemyState> EnemyWanderingState::OnStun() { return std::make_unique<EnemyStunnedState>(m_pEnemy); }
+    std::unique_ptr<EnemyState> EnemyWanderingState::OnDisable() { return std::make_unique<EnemyDisabledState>(m_pEnemy); }
+    std::unique_ptr<EnemyState> EnemyWanderingState::OnSetCascading(bool cascading)
     {
-        if (cascading) return std::make_unique<EnemyCascadingState>();
+        if (cascading) return std::make_unique<EnemyCascadingState>(m_pEnemy);
         return nullptr;
     }
 
     //STUNNED
-    void EnemyStunnedState::OnEnter(EnemyComponent* enemy)
+    void EnemyStunnedState::OnEnter()
     {
-        if (auto anim = GetAnimator(enemy)) anim->PlayAnimation("Pickled");
+        if (auto anim = GetAnimator()) anim->PlayAnimation("Pickled");
     }
 
-    std::unique_ptr<EnemyState> EnemyStunnedState::Update(EnemyComponent*)
+    std::unique_ptr<EnemyState> EnemyStunnedState::Update()
     {
         m_Timer -= GameTime::GetInstance().GetDeltaTime();
-        if (m_Timer <= 0.0f) return std::make_unique<EnemyWanderingState>();
+        if (m_Timer <= 0.0f) return std::make_unique<EnemyWanderingState>(m_pEnemy);
         return nullptr;
     }
 
-    std::unique_ptr<EnemyState> EnemyStunnedState::OnDie(EnemyComponent*) { return std::make_unique<EnemyDeadState>(); }
+    std::unique_ptr<EnemyState> EnemyStunnedState::OnDie() { return std::make_unique<EnemyDeadState>(m_pEnemy); }
 
     // DEAD
-    void EnemyDeadState::OnEnter(EnemyComponent* enemy)
+    void EnemyDeadState::OnEnter()
     {
-        if (auto anim = GetAnimator(enemy)) anim->PlayAnimation("Die");
-        if (auto collider = GetOwner(enemy)->GetComponent<BoxColliderComponent>()) collider->SetActive(false);
+        if (auto anim = GetAnimator()) anim->PlayAnimation("Die");
+        if (auto collider = GetOwner()->GetComponent<BoxColliderComponent>()) collider->SetActive(false);
     }
-    std::unique_ptr<EnemyState> EnemyDeadState::Update(EnemyComponent* enemy)
+    std::unique_ptr<EnemyState> EnemyDeadState::Update()
     {
         float dt = dae::GameTime::GetInstance().GetDeltaTime();
 
@@ -67,7 +67,7 @@ namespace dae
             if (m_DespawnTimer <= 0.0f)
             {
                 m_IsDespawned = true;
-                GetOwner(enemy)->GetTransform().SetLocalPosition(glm::vec3{ -9999.0f, -9999.0f, 0.0f });
+                GetOwner()->GetTransform().SetLocalPosition(glm::vec3{ -9999.0f, -9999.0f, 0.0f });
             }
         }
         else
@@ -75,26 +75,26 @@ namespace dae
             m_RespawnTimer -= dt;
             if (m_RespawnTimer <= 0.0f)
             {
-                GetOwner(enemy)->GetTransform().SetLocalPosition(GetOriginalSpawnPosition(enemy));
-                if (auto collider = GetOwner(enemy)->GetComponent<BoxColliderComponent>()) collider->SetActive(true);
-                return std::make_unique<EnemyWanderingState>();
+                GetOwner()->GetTransform().SetLocalPosition(GetOriginalSpawnPosition());
+                if (auto collider = GetOwner()->GetComponent<BoxColliderComponent>()) collider->SetActive(true);
+                return std::make_unique<EnemyWanderingState>(m_pEnemy);
             }
         }
         return nullptr;
     }
 
     // DIABLED
-    std::unique_ptr<EnemyState> EnemyDisabledState::OnEnable(EnemyComponent*)
+    std::unique_ptr<EnemyState> EnemyDisabledState::OnEnable()
     {
-        return std::make_unique<EnemyWanderingState>();
+        return std::make_unique<EnemyWanderingState>(m_pEnemy);
     }
 
     // Cascading
-    std::unique_ptr<EnemyState> EnemyCascadingState::OnSetCascading(EnemyComponent*, bool cascading)
+    std::unique_ptr<EnemyState> EnemyCascadingState::OnSetCascading(bool cascading)
     {
-        if (!cascading) return std::make_unique<EnemyWanderingState>();
+        if (!cascading) return std::make_unique<EnemyWanderingState>(m_pEnemy);
         return nullptr;
     }
 
-    std::unique_ptr<EnemyState> EnemyCascadingState::OnDie(EnemyComponent*) { return std::make_unique<EnemyDeadState>(); }
+    std::unique_ptr<EnemyState> EnemyCascadingState::OnDie() { return std::make_unique<EnemyDeadState>(m_pEnemy); }
 }

@@ -7,57 +7,56 @@
 namespace dae
 {
     // ALIVE
-    std::unique_ptr<PlayerState> AliveState::Update(CharacterControllerComponent* player)
+    std::unique_ptr<PlayerState> AliveState::Update()
     {
-        auto anim = player->GetAnimator();
+        auto anim = m_pPlayer->GetAnimator();
         if (!anim) return nullptr;
 
-        const auto& currentPos = GetOwner(player)->GetTransform().GetWorldPosition();
+        const auto& currentPos = GetOwner()->GetTransform().GetWorldPosition();
 
-        if (currentPos == player->GetLastPosition())
+        if (currentPos == m_pPlayer->GetLastPosition())
         {
             anim->PlayAnimation("Idle");
         }
         else
         {
-            auto dir = player->GetFacingDirection();
+            auto dir = m_pPlayer->GetFacingDirection();
             if (dir.y < 0.0f) anim->PlayAnimation("WalkUp");
             else if (dir.y > 0.0f) anim->PlayAnimation("WalkDown");
             else if (dir.x < 0.0f) anim->PlayAnimation("WalkLeft");
             else if (dir.x > 0.0f) anim->PlayAnimation("WalkRight");
         }
 
-        player->SetLastPosition(currentPos);
-        return nullptr; 
-    }
-
-    std::unique_ptr<PlayerState> AliveState::ThrowSalt(CharacterControllerComponent* player)
-    {
-        player->PerformThrowSalt();
+        m_pPlayer->SetLastPosition(currentPos);
         return nullptr;
     }
 
-
-    std::unique_ptr<PlayerState> AliveState::Die(CharacterControllerComponent* )
+    std::unique_ptr<PlayerState> AliveState::ThrowSalt()
     {
-        return std::make_unique<DeadState>();
+        m_pPlayer->PerformThrowSalt();
+        return nullptr;
     }
 
-    std::unique_ptr<PlayerState> AliveState::CompleteLevel(CharacterControllerComponent* )
+    std::unique_ptr<PlayerState> AliveState::Die()
     {
-        return std::make_unique<VictoryState>();
+        return std::make_unique<DeadState>(m_pPlayer);
+    }
+
+    std::unique_ptr<PlayerState> AliveState::CompleteLevel()
+    {
+        return std::make_unique<VictoryState>(m_pPlayer);
     }
 
 
     // DEAD
-    void DeadState::OnEnter(CharacterControllerComponent* player)
+    void DeadState::OnEnter()
     {
-        if (auto anim = player->GetAnimator()) {
+        if (auto anim = m_pPlayer->GetAnimator()) {
             anim->PlayAnimation("Die");
         }
     }
 
-    std::unique_ptr<PlayerState> DeadState::Update(CharacterControllerComponent* player)
+    std::unique_ptr<PlayerState> DeadState::Update()
     {
         m_RespawnTimer -= dae::GameTime::GetInstance().GetDeltaTime();
 
@@ -65,9 +64,9 @@ namespace dae
         {
             dae::GameManager::GetInstance().LoseLife();
 
-            GetOwner(player)->GetTransform().SetLocalPosition(GetSpawnPosition(player));
+            GetOwner()->GetTransform().SetLocalPosition(GetSpawnPosition());
 
-            return std::make_unique<AliveState>();
+            return std::make_unique<AliveState>(m_pPlayer);
         }
 
         return nullptr;
@@ -75,11 +74,11 @@ namespace dae
 
 
     // VICTORY
-    void VictoryState::OnEnter(CharacterControllerComponent* player)
+    void VictoryState::OnEnter()
     {
-        if (auto anim = player->GetAnimator()) {
+        if (auto anim = m_pPlayer->GetAnimator()) {
             anim->PlayAnimation("Victory");
         }
-        player->UnbindInput();
+        m_pPlayer->UnbindInput();
     }
 }

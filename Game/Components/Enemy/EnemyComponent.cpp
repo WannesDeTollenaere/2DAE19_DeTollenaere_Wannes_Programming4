@@ -48,7 +48,7 @@ namespace dae
 
         m_OriginalSpawnPosition = GetOwner()->GetTransform().GetLocalPosition();
 
-        ChangeState(std::make_unique<EnemyWanderingState>());
+        ChangeState(std::make_unique<EnemyWanderingState>(this));
     }
 
     EnemyComponent::~EnemyComponent()
@@ -63,7 +63,7 @@ namespace dae
         if (newState)
         {
             m_pCurrentState = std::move(newState);
-            m_pCurrentState->OnEnter(this);
+            m_pCurrentState->OnEnter();
         }
     }
 
@@ -71,7 +71,7 @@ namespace dae
     {
         if (!m_pAnimator) m_pAnimator = GetOwner()->GetComponent<AnimatorComponent>();
 
-        ChangeState(m_pCurrentState->Update(this));
+        ChangeState(m_pCurrentState->Update());
     }
 
     void EnemyComponent::HandleEvent(const Event* event)
@@ -95,16 +95,16 @@ namespace dae
         }
     }
 
-    void EnemyComponent::Die() { ChangeState(m_pCurrentState->OnDie(this)); }
-    void EnemyComponent::Stun() { ChangeState(m_pCurrentState->OnStun(this)); }
-    void EnemyComponent::DisableMovement() { ChangeState(m_pCurrentState->OnDisable(this)); }
-    void EnemyComponent::EnableMovement() { ChangeState(m_pCurrentState->OnEnable(this)); }
-    void EnemyComponent::SetCascading(bool cascading) { ChangeState(m_pCurrentState->OnSetCascading(this, cascading)); }
+    void EnemyComponent::Die() { ChangeState(m_pCurrentState->OnDie()); }
+    void EnemyComponent::Stun() { ChangeState(m_pCurrentState->OnStun()); }
+    void EnemyComponent::DisableMovement() { ChangeState(m_pCurrentState->OnDisable()); }
+    void EnemyComponent::EnableMovement() { ChangeState(m_pCurrentState->OnEnable()); }
+    void EnemyComponent::SetCascading(bool cascading) { ChangeState(m_pCurrentState->OnSetCascading(cascading)); }
 
     void EnemyComponent::Respawn()
     {
         GetOwner()->GetTransform().SetLocalPosition(m_OriginalSpawnPosition);
-        ChangeState(std::make_unique<EnemyWanderingState>());
+        ChangeState(std::make_unique<EnemyWanderingState>(this));
     }
 
     bool EnemyComponent::IsDead() const { return m_pCurrentState->IsDead(); }
