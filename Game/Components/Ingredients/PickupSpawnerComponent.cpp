@@ -45,6 +45,9 @@ namespace dae
         , m_MinInterval(minInterval)
         , m_MaxInterval(maxInterval)
     {
+        EXPOSE(m_MinInterval);
+        EXPOSE(m_MaxInterval);
+
         std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/Bonus Appear.wav");
         ServiceLocator::GetSoundSystem().load(SoundID::BonusAppear, path);
 

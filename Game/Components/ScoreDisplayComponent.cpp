@@ -29,6 +29,8 @@ namespace dae
         : Component(owner), m_currentScore(initialScore), m_TargetTag(targetTag),
         m_targetPlayer{ TagComponent::FindGameObject(targetTag) }
     {
+        EXPOSE(m_currentScore);
+
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("ScoreChanged"), this);
 
         m_currentScore = GameManager::GetInstance().GetScore();

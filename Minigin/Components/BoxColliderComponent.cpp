@@ -26,7 +26,10 @@ namespace dae
     BoxColliderComponent::BoxColliderComponent(GameObject* owner, float width, float height, float offsetX, float offsetY)
         : Component(owner), m_width(width), m_height(height), m_offsetX(offsetX), m_offsetY(offsetY)
     {
-        CollisionManager::GetInstance().RegisterCollider(this); 
+        EXPOSE(m_offsetX);
+        EXPOSE(m_offsetY);
+
+        CollisionManager::GetInstance().RegisterCollider(this);
     }
 
     BoxColliderComponent::~BoxColliderComponent()

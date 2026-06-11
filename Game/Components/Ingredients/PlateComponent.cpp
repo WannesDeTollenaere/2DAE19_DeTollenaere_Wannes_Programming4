@@ -25,6 +25,8 @@ namespace dae
 
     PlateComponent::PlateComponent(GameObject* owner, int requiredIngredients)
         : BaseCollisionHandler(owner), m_RequiredIngredients(requiredIngredients) {
+        EXPOSE(m_RequiredIngredients);
+
         CalculateColliderHeight();
         
     }

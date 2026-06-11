@@ -20,6 +20,8 @@ namespace dae {
 
 dae::HealthComponent::HealthComponent(GameObject* owner, int maxHealth) : Component(owner), m_health(maxHealth)
 {
+	EXPOSE(m_health);
+
 	EventManager::GetInstance().AttachEvent(make_sdbm_hash("DealDamage"), this);
 }
 

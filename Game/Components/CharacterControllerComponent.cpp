@@ -41,6 +41,7 @@ namespace dae
     CharacterControllerComponent::CharacterControllerComponent(GameObject* owner, float, bool useKeyboard, int controllerIndex)
         : BaseCollisionHandler(owner), m_useKeyboard(useKeyboard), m_controllerIndex(controllerIndex)
     {
+
         m_Anim = GetOwner()->GetComponent<AnimatorComponent>();
         m_SpawnPosition = GetOwner()->GetTransform().GetLocalPosition();
         auto& input = InputManager::GetInstance();

@@ -49,6 +49,8 @@ namespace dae
 dae::AnimatorComponent::AnimatorComponent(GameObject* owner, int frameWidth, int frameHeight)
     : Component(owner), m_frameWidth(frameWidth), m_frameHeight(frameHeight)
 {
+    EXPOSE(m_frameWidth);
+    EXPOSE(m_frameHeight);
 }
 
 void dae::AnimatorComponent::AddAnimation(const std::string& name, const AnimationClip& clip)

@@ -16,6 +16,10 @@ namespace dae
     HighScoreInputComponent::HighScoreInputComponent(GameObject* owner, int controllerIndex)
         : Component(owner), m_ControllerIndex(controllerIndex)
     {
+        EXPOSE(m_Score);
+        EXPOSE(m_CurrentIndex);
+        EXPOSE(m_Submitted);
+
         m_Score = GameManager::GetInstance().GetScore();
         auto& input = InputManager::GetInstance();
 

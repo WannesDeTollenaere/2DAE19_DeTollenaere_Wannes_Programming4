@@ -26,6 +26,7 @@ namespace dae
     GridMovementComponent::GridMovementComponent(GameObject* pOwner, float speed)
         : Component(pOwner), m_Speed(speed)
     {
+        EXPOSE(m_Speed);
     }
 
     void GridMovementComponent::SetDesiredDirection(float x, float y)

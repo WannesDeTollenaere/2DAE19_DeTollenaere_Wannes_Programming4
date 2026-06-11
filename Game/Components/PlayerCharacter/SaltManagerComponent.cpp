@@ -23,6 +23,8 @@ namespace dae
     SaltManagerComponent::SaltManagerComponent(GameObject* pOwner, int startingSalt)
         : Component(pOwner), m_Salt(startingSalt), m_StartingSalt(startingSalt)
     {
+        EXPOSE(m_Salt);
+        EXPOSE(m_StartingSalt);
     }
 
     Tag SaltManagerComponent::GetPlayerTag() const

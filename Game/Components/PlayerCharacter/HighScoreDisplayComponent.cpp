@@ -15,6 +15,8 @@ namespace dae
     HighScoreDisplayComponent::HighScoreDisplayComponent(GameObject* pOwner)
         : Component(pOwner)
     {
+        EXPOSE(m_CurrentHighScore);
+
         const auto scores = HighScoreManager::GetInstance().GetScores();
         if (!scores.empty())
         {

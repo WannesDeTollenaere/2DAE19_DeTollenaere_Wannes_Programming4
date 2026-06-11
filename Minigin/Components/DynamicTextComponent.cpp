@@ -35,6 +35,7 @@ namespace dae
 dae::DynamicTextComponent::DynamicTextComponent(GameObject* owner, std::function<std::string()> valueProvider)
 	: Component(owner), m_valueProvider(std::move(valueProvider))
 {
+	EXPOSE(m_updateDelay);
 }
 
 void dae::DynamicTextComponent::Update()

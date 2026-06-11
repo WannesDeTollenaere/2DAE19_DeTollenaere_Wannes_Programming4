@@ -41,6 +41,9 @@ namespace dae
     {
         std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/Bonus Obtained.wav");
         ServiceLocator::GetSoundSystem().load(SoundID::BonusObtained, path);
+
+        EXPOSE(m_SaltAmount);
+        EXPOSE(m_ScoreValue);
     }
 
     void PickupComponent::OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp)

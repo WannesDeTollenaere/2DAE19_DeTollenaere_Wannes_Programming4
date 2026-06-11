@@ -31,6 +31,8 @@ namespace dae
     ScoreComponent::ScoreComponent(GameObject* owner, int startingScore)
         : Component(owner), m_score(startingScore)
     {
+        EXPOSE(m_score);
+
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("EnemyCrushed"), this);
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("BurgerDropped"), this);
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("BurgerCascaded"), this);

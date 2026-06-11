@@ -26,6 +26,8 @@ namespace dae
     HealthDisplayComponent::HealthDisplayComponent(GameObject* pOwner)
         : Component(pOwner)
     {
+        EXPOSE(m_Lives);
+
         EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("LivesChanged"), this);
         m_Lives = GameManager::GetInstance().GetLives();
         UpdateVisuals();

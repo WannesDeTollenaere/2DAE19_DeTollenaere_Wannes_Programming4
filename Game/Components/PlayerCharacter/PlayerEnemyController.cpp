@@ -23,6 +23,8 @@ namespace dae
     PlayerEnemyControllerComponent::PlayerEnemyControllerComponent(GameObject* owner, int controllerIndex)
         : Component(owner), m_controllerIndex(controllerIndex)
     {
+        EXPOSE(m_controllerIndex);
+
         auto& input = InputManager::GetInstance();
         uint16_t idx = static_cast<uint16_t>(m_controllerIndex);
 

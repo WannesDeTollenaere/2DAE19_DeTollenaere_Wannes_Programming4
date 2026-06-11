@@ -38,6 +38,9 @@ namespace dae
         : BaseCollisionHandler(owner)
         , m_WidthInTiles(widthInTiles)
     {
+        EXPOSE(m_WidthInTiles);
+        EXPOSE(m_FallSpeed);
+
         m_SteppedSegments.resize(m_WidthInTiles, false);
     }
 

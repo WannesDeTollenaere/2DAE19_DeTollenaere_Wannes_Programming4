@@ -32,6 +32,9 @@ namespace dae
     WinConditionComponent::WinConditionComponent(GameObject* owner, int totalBurgersNeeded, const std::string& winSceneName)
         : Component(owner), m_TotalBurgersNeeded(totalBurgersNeeded), m_WinSceneName(winSceneName)
     {
+        EXPOSE(m_TotalBurgersNeeded);
+        EXPOSE(m_BurgersCompleted);
+
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("BurgerCompleted"), this);
 
         auto& input = InputManager::GetInstance();

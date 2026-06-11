@@ -42,6 +42,15 @@ void dae::SceneManager::Render()
 
 void dae::SceneManager::RenderGUI()
 {
+    ImGui::Begin("Time");
+    float timeScale = GameTime::GetInstance().GetTimeScale();
+    if (ImGui::SliderFloat("Time Scale", &timeScale, 0.0f, 3.0f))
+        GameTime::GetInstance().SetTimeScale(timeScale);
+
+    if (ImGui::Button(timeScale == 0.0f ? "Resume" : "Pause"))
+        GameTime::GetInstance().SetTimeScale(timeScale == 0.0f ? 1.0f : 0.0f);
+    ImGui::End();
+
     ImGui::Begin("Hierarchy");
     for (size_t i = 0; i < m_sceneStack.size(); ++i)
     {

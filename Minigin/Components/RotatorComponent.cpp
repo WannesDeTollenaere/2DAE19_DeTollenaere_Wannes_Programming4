@@ -26,6 +26,8 @@ namespace dae
 dae::RotatorComponent::RotatorComponent(GameObject* owner, float radius, float speed)
     : Component(owner), m_radius(radius), m_speed(speed), m_angle(0.0f)
 {
+    EXPOSE(m_radius);
+    EXPOSE(m_speed);
 }
 
 void dae::RotatorComponent::FixedUpdate()

@@ -42,6 +42,8 @@ namespace dae
     EnemyComponent::EnemyComponent(GameObject* pOwner)
         : Component(pOwner)
     {
+        EXPOSE(m_CurrentDirection);
+
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("EnemyCrushed"), this);
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("LivesLost"), this);
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("LevelCompleted"), this);

@@ -27,6 +27,7 @@ namespace dae
     EnemyWanderComponent::EnemyWanderComponent(GameObject* pOwner)
         : Component(pOwner)
     {
+        EXPOSE(m_RandomWanderChance);
     }
 
     void EnemyWanderComponent::Update()
@@ -239,7 +240,6 @@ namespace dae
         Component::RenderGUI();
         static bool showPath = true;
         ImGui::Checkbox("Show pathfinding", &showPath);
-        ImGui::SliderFloat("Random wander chance", &m_RandomWanderChance, 0.0f, 1.0f, "%.2f");
 
         if (showPath && m_Path.size() > 1)
         {
