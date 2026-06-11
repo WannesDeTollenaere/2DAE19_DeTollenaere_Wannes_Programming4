@@ -22,7 +22,7 @@ namespace dae
         void ThrowSalt();
         void Die();
         void Update() override;
-        void HandleEvent(const Event* event) override;
+        void HandleEvent(const Event* event) override; 
 
         void OnCollisionEnter(GameObject* otherObject, TagComponent* otherTagComp) override;
 

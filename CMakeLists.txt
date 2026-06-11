@@ -184,7 +184,7 @@ endif()
 
 add_executable(${GAME_TARGET} ${GAME_PARAM}
   Game/Main.cpp
-  Game/Components/CharacterControllerComponent.cpp
+  "Game/Components/CharacterControllerComponent.cpp"
   Game/Commands/MoveCommand.h
  "Game/Components/HealthComponent.h" 
  "Game/Components/HealthComponent.cpp" 
@@ -203,11 +203,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Components/ScoreComponent.cpp" 
  "Game/Achievements/AchievementManager.h" 
  "Game/Achievements/AchievementManager.cpp" 
- "Game/Components/Collision/PlayerCollisionHandler.h" 
- "Game/Components/Collision/PlayerCollisionHandler.cpp" 
  "Game/Events/PlayerTookDamageEvent.h" 
- "Game/Components/Collision/ItemCollisionHandler.h" 
- "Game/Components/Collision/ItemCollisionHandler.cpp" 
  "Game/Helpers/LevelGrid.h" 
  "Game/Components/Movement/GridMovementComponent.h" 
  "Game/Components/Movement/GridMovementComponent.cpp" 
