@@ -83,11 +83,17 @@ void dae::TextureComponent::Render() const
 	if (m_texture)
 	{
 		const auto& pos = GetOwner()->GetTransform().GetWorldPosition();
+		const float scale = GetOwner()->GetTransform().GetWorldScale();
 
 		if (m_useSourceRect)
 		{
-			SDL_FRect dstRect{ pos.x, pos.y, m_srcRect.w, m_srcRect.h };
+			SDL_FRect dstRect{ pos.x, pos.y, m_srcRect.w * scale, m_srcRect.h * scale };
 			Renderer::GetInstance().RenderTexture(*m_texture, m_srcRect, dstRect);
+		}
+		else if (scale != 1.0f)
+		{
+			Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y,
+				m_texture->GetSize().x * scale, m_texture->GetSize().y * scale);
 		}
 		else
 		{

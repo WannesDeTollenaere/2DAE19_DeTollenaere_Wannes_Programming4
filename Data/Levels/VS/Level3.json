@@ -14,6 +14,25 @@
       ]
     },
     {
+      "name": "PickupSpawner",
+      "transform": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "components": [
+        {
+          "type": "PickupSpawnerComponent",
+          "minInterval": 8.0,
+          "maxInterval": 18.0,
+          "prefabs": [
+            "Prefabs/Pickups/IceCream.json",
+            "Prefabs/Pickups/Coffee.json",
+            "Prefabs/Pickups/Fries.json"
+          ]
+        }
+      ]
+    },
+    {
       "name": "WinManager",
       "transform": {
         "x": 0.0,

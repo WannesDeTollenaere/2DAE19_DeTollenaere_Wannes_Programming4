@@ -17,6 +17,11 @@ namespace dae
 
 		const glm::vec3& GetWorldPosition();
 
+		float GetScale() const { return m_localScale; }
+		void SetScale(float scale) { m_localScale = scale; SetPositionDirty(); }
+
+		float GetWorldScale();
+
 		void SetPositionDirty();
 
 		void RenderGUI() override;
@@ -25,6 +30,8 @@ namespace dae
 
 		glm::vec3 m_localPosition{};
 		glm::vec3 m_worldPosition{};
+		float m_localScale{ 1.0f };
+		float m_worldScale{ 1.0f };
 		bool m_positionIsDirty{ true };
 
 		void UpdateWorldPosition();

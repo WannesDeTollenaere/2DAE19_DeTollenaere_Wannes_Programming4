@@ -36,14 +36,27 @@ void dae::Transform::RenderGUI()
 	}
 
 	ImGui::Text("World position: [%.2f, %.2f, %.2f]", m_worldPosition.x, m_worldPosition.y, m_worldPosition.z);
+
+	if (ImGui::DragFloat("Scale", &m_localScale, 0.01f, 0.01f, 10.0f))
+	{
+		SetPositionDirty();
+	}
 }
 
-const glm::vec3& dae::Transform::GetWorldPosition() 
+const glm::vec3& dae::Transform::GetWorldPosition()
 {
 	if (m_positionIsDirty)
 		UpdateWorldPosition();
 
 	return m_worldPosition;
+}
+
+float dae::Transform::GetWorldScale()
+{
+	if (m_positionIsDirty)
+		UpdateWorldPosition();
+
+	return m_worldScale;
 }
 
 void dae::Transform::UpdateWorldPosition()
@@ -53,10 +66,13 @@ void dae::Transform::UpdateWorldPosition()
 		if (GetOwner()->GetParent() == nullptr)
 		{
 			m_worldPosition = m_localPosition;
+			m_worldScale = m_localScale;
 		}
 		else
 		{
-			m_worldPosition = GetOwner()->GetParent()->GetTransform().GetWorldPosition() + m_localPosition;
+			auto& parentTransform = GetOwner()->GetParent()->GetTransform();
+			m_worldPosition = parentTransform.GetWorldPosition() + m_localPosition;
+			m_worldScale = parentTransform.GetWorldScale() * m_localScale;
 		}
 	}
 	m_positionIsDirty = false;

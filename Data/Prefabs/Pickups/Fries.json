@@ -1,0 +1,33 @@
+{
+  "transform": {
+    "scale": 0.5
+  },
+  "components": [
+    {
+      "type": "TagComponent",
+      "tags": [ "Pickup" ]
+    },
+    {
+      "type": "BoxColliderComponent",
+      "width": 32.0,
+      "height": 32.0,
+      "isTrigger": true
+    },
+    {
+      "type": "TextureComponent",
+      "texture": "burger_time_spritesheet_x3.png",
+      "spriteSheet": {
+        "frameWidth": 48,
+        "frameHeight": 48,
+        "col": 2,
+        "row": 8
+      }
+    },
+    {
+      "type": "PickupComponent",
+      "pickupType": "Fries",
+      "saltAmount": 1,
+      "scoreValue": 100
+    }
+  ]
+}

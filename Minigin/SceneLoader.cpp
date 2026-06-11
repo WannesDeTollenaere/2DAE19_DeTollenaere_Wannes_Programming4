@@ -59,6 +59,9 @@ void dae::SceneLoader::ParseGameObject(const nlohmann::json& objData, Scene& sce
         float x = objData["transform"].value("x", 0.0f);
         float y = objData["transform"].value("y", 0.0f);
         pGameObject->SetPosition(x, y);
+
+        float scale = objData["transform"].value("scale", 1.0f);
+        pGameObject->GetTransform().SetScale(scale);
     }
 
     if (parent != nullptr)
@@ -121,6 +124,12 @@ void dae::SceneLoader::ParsePrefab(const std::string& prefabPath, Scene& scene, 
         ParsePrefab(prefabData.value("prefab", ""), scene, pGameObject);
     }
 
+    if (prefabData.contains("transform"))
+    {
+        float scale = prefabData["transform"].value("scale", 1.0f);
+        pGameObject->GetTransform().SetScale(scale);
+    }
+
     if (prefabData.contains("components") && prefabData["components"].is_array())
     {
         for (const auto& compData : prefabData["components"])
@@ -147,6 +156,29 @@ void dae::SceneLoader::ParsePrefab(const std::string& prefabPath, Scene& scene, 
             ParseGameObject(childData, scene, pGameObject);
         }
     } 
+}
+
+dae::GameObject* dae::SceneLoader::Instantiate(Scene& scene, const std::string& prefabPath, float x, float y, GameObject* parent)
+{
+    auto gameObject = std::make_unique<GameObject>("Prefab");
+    GameObject* pGameObject = gameObject.get();
+
+    pGameObject->SetPosition(x, y);
+
+    if (parent != nullptr)
+        pGameObject->SetParent(parent, false);
+
+    try
+    {
+        ParsePrefab(prefabPath, scene, pGameObject);
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Failed to instantiate prefab: " << prefabPath << " - " << e.what() << "\n";
+    }
+
+    scene.Add(std::move(gameObject));
+    return pGameObject;
 }
 
 void dae::SceneLoader::RegisterComponentParser(const std::string& type, std::unique_ptr<IComponentParser> parser) {

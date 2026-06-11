@@ -2,6 +2,7 @@
 #include "ObserverSys/EventManager.h"
 #include "sdbm_hash.h"
 #include "Events/SaltChangedEvent.h"
+#include "Events/PickupCollectedEvent.h"
 #include "Events/LivesChangedEvent.h"
 #include "Events/LivesLostEvent.h"
 #include "SceneManager.h"
@@ -14,6 +15,7 @@ namespace dae
     GameManager::GameManager()
     {
         EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("SaltChanged"), this);
+        EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("PickupCollected"), this);
 
         auto& soundSys = ServiceLocator::GetSoundSystem();
 
@@ -26,6 +28,7 @@ namespace dae
     GameManager::~GameManager()
     {
         EventManager::GetInstance().DetachEvent(make_sdbm_hash_rt("SaltChanged"), this);
+        EventManager::GetInstance().DetachEvent(make_sdbm_hash_rt("PickupCollected"), this);
     }
 
 
@@ -35,6 +38,12 @@ namespace dae
         {
             auto saltEvent = static_cast<const SaltChangedEvent*>(event);
             m_PersistentSalts[saltEvent->playerTag] = saltEvent->currentSalt;
+        }
+        else if (event->id == make_sdbm_hash_rt("PickupCollected"))
+        {
+            auto pickupEvent = static_cast<const PickupCollectedEvent*>(event);
+            if (pickupEvent->scoreValue != 0)
+                AddScore(pickupEvent->scoreValue);
         }
     }
     int GameManager::GetPersistentSalt(Tag playerTag)

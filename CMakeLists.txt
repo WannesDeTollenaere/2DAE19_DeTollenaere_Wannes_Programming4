@@ -264,7 +264,9 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Commands/StartGameCommand.h" 
  "Game/Helpers/SoundIDs.h"
  "Game/States/PlayerState.h" 
- "Game/States/PlayerState.cpp" "Game/States/EnemyState.h" "Game/States/EnemyState.cpp" )
+ "Game/States/PlayerState.cpp" "Game/States/EnemyState.h" "Game/States/EnemyState.cpp"  "Game/Components/Ingredients/PickupComponent.h" "Game/Components/Ingredients/PickupComponent.cpp"
+ "Game/Components/Ingredients/PickupSpawnerComponent.h" "Game/Components/Ingredients/PickupSpawnerComponent.cpp"
+ "Game/Events/PickupCollectedEvent.h")
 
  set_target_properties(${GAME_TARGET} PROPERTIES
     WIN32_EXECUTABLE $<NOT:$<CONFIG:Debug>>
