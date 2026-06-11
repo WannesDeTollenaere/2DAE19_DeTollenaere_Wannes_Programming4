@@ -139,7 +139,7 @@ namespace dae {
                 auto it = m_tracks.find(request.id);
                 if (it != m_tracks.end()) {
                     MIX_Track* track = it->second;
-                    MIX_SetTrackGain(track, request.volume);
+                    MIX_SetTrackGain(track, m_isMuted ? 0.0f : request.volume);
 
 					// LOOPS: -1 means loop indefinitely, 0 means play once, n means play n+1 times
                     if (request.loops != 0) {

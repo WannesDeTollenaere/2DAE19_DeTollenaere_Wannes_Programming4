@@ -117,6 +117,8 @@ add_library(Minigin STATIC
   Minigin/Components/TextComponent.cpp
   Minigin/Components/DynamicTextComponent.cpp
   Minigin/Components/RotatorComponent.cpp
+  Minigin/Components/HoverComponent.cpp
+  Minigin/Components/HoverComponent.h
   Minigin/Commands/GameObjectCommand.h
   Minigin/Commands/Command.h
   Minigin/Components/CacheProfilerComponent.cpp
@@ -277,6 +279,12 @@ target_compile_features(${GAME_TARGET} PUBLIC cxx_std_20)
 target_include_directories(${GAME_TARGET} PUBLIC ${CMAKE_SOURCE_DIR}/Game/)
 
 target_link_libraries(${GAME_TARGET} PUBLIC Minigin)
+
+if(MSVC)
+  target_link_options(${GAME_TARGET} PRIVATE "/WHOLEARCHIVE:$<TARGET_FILE:Minigin>")
+elseif(NOT EMSCRIPTEN)
+  target_link_options(${GAME_TARGET} PRIVATE "-Wl,--whole-archive" "$<TARGET_FILE:Minigin>" "-Wl,--no-whole-archive")
+endif()
 
 if(MSVC)
   target_compile_options(${GAME_TARGET} PRIVATE /W4 /WX)

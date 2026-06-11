@@ -41,7 +41,7 @@ namespace dae
 							ImGui::DragInt(prop.name.c_str(), ptr);
 						else if constexpr (std::is_same_v<T, unsigned int>)
 							ImGui::DragInt(prop.name.c_str(), reinterpret_cast<int*>(ptr));
-						else if constexpr (std::is_same_v<T, float>)
+						else if constexpr (std::is_same_v<T, float>) 
 							ImGui::DragFloat(prop.name.c_str(), ptr, 0.1f);
 						else if constexpr (std::is_same_v<T, double>)
 						{

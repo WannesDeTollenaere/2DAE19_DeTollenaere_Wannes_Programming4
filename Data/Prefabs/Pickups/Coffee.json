@@ -28,6 +28,11 @@
       "pickupType": "Coffee",
       "saltAmount": 1,
       "scoreValue": 150
+    },
+    {
+      "type": "HoverComponent",
+      "amplitude": 5.0,
+      "speed": 5.0
     }
   ]
 }

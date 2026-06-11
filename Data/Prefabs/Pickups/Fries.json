@@ -28,6 +28,11 @@
       "pickupType": "Fries",
       "saltAmount": 1,
       "scoreValue": 100
+    },
+    {
+      "type": "HoverComponent",
+      "amplitude": 5.0,
+      "speed": 5.0
     }
   ]
 }

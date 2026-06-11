@@ -7,6 +7,7 @@
 #include "Components/CacheProfilerComponent.h"
 #include "Components/DynamicTextComponent.h"
 #include "Components/RotatorComponent.h"
+#include "Components/HoverComponent.h"
 #include "Components/TextComponent.h"
 #include "Components/TextureComponent.h"
 #include "GameTime.h"
@@ -182,5 +183,9 @@ dae::GameObject* dae::SceneLoader::Instantiate(Scene& scene, const std::string& 
 }
 
 void dae::SceneLoader::RegisterComponentParser(const std::string& type, std::unique_ptr<IComponentParser> parser) {
-    GetParsersMap()[type] = std::move(parser);
+    auto& parsers = GetParsersMap();
+    if (parsers.find(type) == parsers.end())
+    {
+        parsers[type] = std::move(parser);
+    }
 }

@@ -28,6 +28,11 @@
       "pickupType": "IceCream",
       "saltAmount": 1,
       "scoreValue": 50
+    },
+    {
+      "type": "HoverComponent",
+      "amplitude": 5.0,
+      "speed": 5.0
     }
   ]
 }
