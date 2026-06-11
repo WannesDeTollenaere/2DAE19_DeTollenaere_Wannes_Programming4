@@ -10,6 +10,7 @@ namespace dae
 	{
 	public:
 		void Add(std::unique_ptr<GameObject> object);
+		GameObject* CreateGameObject(const std::string& name = "GameObject", GameObject* parent = nullptr);
 		void Remove(const GameObject& object);
 		void RemoveAll();
 

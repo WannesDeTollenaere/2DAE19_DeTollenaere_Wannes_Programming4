@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include <unordered_map>
-#include <functional>   
+#include <vector>
+#include <functional>
 #include <memory>
 #include <nlohmann/json.hpp>
 #include "GameObject.h"
@@ -35,6 +36,10 @@ namespace dae
         static void RegisterComponentParser(const std::string& type, std::unique_ptr<IComponentParser> parser);
 
         static GameObject* Instantiate(Scene& scene, const std::string& prefabPath, float x, float y, GameObject* parent = nullptr);
+
+        static std::vector<std::string> GetRegisteredComponentTypes();
+
+        static bool AddComponentByType(GameObject* go, const std::string& type);
 
     private:
         static void ParseGameObject(const nlohmann::json& objData, Scene& scene, GameObject* parent = nullptr); 

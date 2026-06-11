@@ -1,0 +1,24 @@
+{
+  "name": "SplashScreenScene",
+  "objects": [
+    {
+      "name": "SplashScreen",
+      "transform": {
+        "x": 0.0,
+        "y": 0.0,
+        "scale": 0.5
+      },
+      "components": [
+        {
+          "type": "TextureComponent",
+          "texture": "splashscreen.png"
+        },
+        {
+          "type": "SceneTransitionComponent",
+          "targetScene": "Levels/MainMenu.json",
+          "timeAmount": 3.0
+        }
+      ]
+    }
+  ]
+}

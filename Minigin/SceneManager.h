@@ -49,6 +49,7 @@ namespace dae
 		std::vector<std::unique_ptr<Scene>> m_ownedScenes{};
 		std::vector<StackEntry> m_sceneStack{};
 		GameObject* m_pSelectedGameObject{ nullptr };
+		bool m_dockLayoutInitialized{ false };
 
 		bool m_hasPendingTransition{ false };
 		PendingTransition m_pendingTransition{};

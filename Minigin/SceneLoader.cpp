@@ -13,6 +13,7 @@
 #include "GameTime.h"
 
 #include <sstream>
+#include <algorithm>
 #include <iomanip>
 #include <fstream>
 #include <iostream>
@@ -180,6 +181,27 @@ dae::GameObject* dae::SceneLoader::Instantiate(Scene& scene, const std::string& 
 
     scene.Add(std::move(gameObject));
     return pGameObject;
+}
+
+std::vector<std::string> dae::SceneLoader::GetRegisteredComponentTypes()
+{
+    std::vector<std::string> types;
+    for (const auto& [name, parser] : GetParsersMap())
+        types.push_back(name);
+
+    std::sort(types.begin(), types.end());
+    return types;
+}
+
+bool dae::SceneLoader::AddComponentByType(GameObject* go, const std::string& type)
+{
+    auto& parsers = GetParsersMap();
+    auto it = parsers.find(type);
+    if (it == parsers.end())
+        return false;
+
+    it->second->Parse(go, nlohmann::json::object());
+    return true;
 }
 
 void dae::SceneLoader::RegisterComponentParser(const std::string& type, std::unique_ptr<IComponentParser> parser) {

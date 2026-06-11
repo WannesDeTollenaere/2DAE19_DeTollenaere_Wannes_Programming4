@@ -32,7 +32,7 @@ void LoadGame()
 
     //g_AchievementManager = std::make_unique<dae::AchievementManager>();
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
-    dae::SceneLoader::LoadScene(scene, "Levels/MainMenu.json");
+    dae::SceneLoader::LoadScene(scene, "Levels/SplashScreen.json");
       
     auto& inputManager = dae::InputManager::GetInstance();
     inputManager.BindKeyboardCommand(

@@ -11,6 +11,16 @@ void Scene::Add(std::unique_ptr<GameObject> object)
 	m_objects.emplace_back(std::move(object));
 }
 
+GameObject* Scene::CreateGameObject(const std::string& name, GameObject* parent)
+{
+	auto object = std::make_unique<GameObject>(name);
+	GameObject* pObject = object.get();
+	if (parent != nullptr)
+		pObject->SetParent(parent, false);
+	m_objects.emplace_back(std::move(object));
+	return pObject;
+}
+
 void Scene::Remove(const GameObject& object)
 {
 	m_objects.erase(
