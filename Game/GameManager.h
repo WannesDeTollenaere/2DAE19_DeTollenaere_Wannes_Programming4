@@ -14,6 +14,8 @@ namespace dae
         int GetScore() const { return m_Score; }
         void ResetScore() { m_Score = 0; }
 
+        void ResetAll() { ResetScore(); ResetLives(); ResetPersistentData(); }
+
         void LoseLife();
         int GetLives() const { return m_Lives; }
         void ResetLives();

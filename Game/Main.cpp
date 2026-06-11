@@ -30,8 +30,6 @@ void LoadGame()
 
     //g_AchievementManager = std::make_unique<dae::AchievementManager>();
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
-      
-    //dae::SceneLoader::LoadScene(scene, "Levels/LoadingScene.json");
     dae::SceneLoader::LoadScene(scene, "Levels/MainMenu.json");
       
    dae::Renderer::GetInstance().SetBackgroundColor(SDL_Color{ 0, 0, 0, 255 });

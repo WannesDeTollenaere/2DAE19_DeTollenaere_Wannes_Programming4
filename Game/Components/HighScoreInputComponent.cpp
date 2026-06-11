@@ -111,6 +111,7 @@ namespace dae
 
         HighScoreManager::GetInstance().AddScore(m_Name, m_Score);
 
+        GameManager::GetInstance().ResetAll();
         SceneManager::GetInstance().SetActiveScene("Levels/LoadingScene.json");
     }
 
