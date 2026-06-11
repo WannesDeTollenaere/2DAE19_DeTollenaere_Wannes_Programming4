@@ -10,6 +10,8 @@
 //#include "Achievements/AchievementManager.h"
 #include <Helpers/HighScoreManager.h>
 #include <Renderer.h> 
+#include "InputManager.h"
+#include "Commands/ToggleMuteCommand.h"
  
 
 #if USE_STEAMWORKS
@@ -32,6 +34,13 @@ void LoadGame()
     auto& scene = dae::SceneManager::GetInstance().CreateScene();
     dae::SceneLoader::LoadScene(scene, "Levels/MainMenu.json");
       
+    auto& inputManager = dae::InputManager::GetInstance();
+    inputManager.BindKeyboardCommand(
+        SDL_SCANCODE_F2,
+        dae::InputState::Down,
+        std::make_unique<dae::ToggleMuteCommand>()
+    );
+
    dae::Renderer::GetInstance().SetBackgroundColor(SDL_Color{ 0, 0, 0, 255 });
 }
 

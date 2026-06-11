@@ -10,7 +10,7 @@
 
 namespace dae {
     struct SoundRequest {
-        enum class Type { Load, Play };
+        enum class Type { Load, Play, ToggleMute };
         Type type;
         sound_id id;
         float volume{ 1.0f };
@@ -82,6 +82,15 @@ namespace dae {
 #endif
         }
 
+        void toggleMute() {
+#ifndef __EMSCRIPTEN__
+            std::lock_guard<std::mutex> lock(m_mutex);
+            m_queue.push({ SoundRequest::Type::ToggleMute, 0, 0.0f, "", false, 0 });
+            m_condition.notify_one();
+#else
+            ProcessRequest({ SoundRequest::Type::ToggleMute, 0, 0.0f, "", false, 0 });
+#endif
+        }
     private:
 #ifndef __EMSCRIPTEN__
         void AudioThread(std::stop_token stopToken) {
@@ -150,6 +159,16 @@ namespace dae {
                 }
                 break;
             }
+            case SoundRequest::Type::ToggleMute: {
+                m_isMuted = !m_isMuted; 
+
+                for (auto& [_, track] : m_tracks) {
+                    float vol = 1.0f;
+
+                    MIX_SetTrackGain(track, m_isMuted ? 0.0f : vol);
+                }
+                break;
+            }
             }
         }
 
@@ -164,6 +183,7 @@ namespace dae {
         MIX_Mixer* m_mixer{ nullptr };
         std::unordered_map<sound_id, MIX_Audio*> m_audio;
         std::unordered_map<sound_id, MIX_Track*> m_tracks;
+        bool m_isMuted{ false };
     };
 
 
@@ -182,5 +202,8 @@ namespace dae {
 
     void SdlSoundSystem::load(const sound_id id, const std::string& filepath, bool isMusic) {
         m_pImpl->load(id, filepath, isMusic);
+    }
+    void SdlSoundSystem::ToggleMute() {
+        m_pImpl->toggleMute();
     }
 }

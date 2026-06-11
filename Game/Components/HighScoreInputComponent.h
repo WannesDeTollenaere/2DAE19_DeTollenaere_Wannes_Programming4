@@ -31,6 +31,6 @@ namespace dae
 
         TextComponent* m_pTextComponent{ nullptr };
 
-        void UpdateVisualText(); // Helper to push the string to the screen
+        void UpdateVisualText(); 
     };
 }

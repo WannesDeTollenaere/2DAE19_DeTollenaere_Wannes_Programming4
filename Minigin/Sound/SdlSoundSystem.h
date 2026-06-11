@@ -17,7 +17,7 @@ namespace dae
 
         void play(const sound_id id, const float volume, int loops = 0) override;
         void load(const sound_id id, const std::string& filepath, bool isMusic = false) override;
-
+        void ToggleMute() override;
     private:
         class SdlSoundSystemImpl;
         std::unique_ptr<SdlSoundSystemImpl> m_pImpl;

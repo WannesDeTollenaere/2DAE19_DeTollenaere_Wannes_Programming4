@@ -8,6 +8,6 @@ namespace dae
     {
     public:
         SceneTransitionComponent(GameObject* owner, const std::string& targetScene, float amountOfTime = -1.f, int controllerIndex = 0);
-        virtual ~SceneTransitionComponent() = default;
+        virtual ~SceneTransitionComponent();
     };
 }

@@ -114,7 +114,6 @@ void dae::SceneManager::HandleLateSceneTransition()
     if (t.type == TransitionType::Replace)
     {
         GameTime::GetInstance().ClearAllTimers();
-        InputManager::GetInstance().Clear();
         Clear();
 
         auto& scene = CreateAndOwnScene();

@@ -48,6 +48,8 @@ namespace dae
     WinConditionComponent::~WinConditionComponent()
     {
         EventManager::GetInstance().DetachEvent(make_sdbm_hash("BurgerCompleted"), this);
+        auto& input = InputManager::GetInstance();
+		input.UnbindKeyboardCommand(SDL_SCANCODE_F1, InputState::Down);
     }
 
     void WinConditionComponent::HandleEvent(const Event* event)

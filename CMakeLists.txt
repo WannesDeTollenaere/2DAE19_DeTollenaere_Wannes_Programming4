@@ -141,7 +141,7 @@ add_library(Minigin STATIC
  "Minigin/Components/LifeTimeComponent.h"
 "Minigin/Components/LifeTimeComponent.cpp" 
 "Minigin/Commands/QuitCommand.h" 
-"Minigin/Sound/SoundSystem.h" "Minigin/Sound/ServiceLocator.h" "Minigin/Sound/SdlSoundSystem.h" "Minigin/Sound/SdlSoundSystem.cpp" "Minigin/Sound/LoggingSoundSystem.h")
+"Minigin/Sound/SoundSystem.h" "Minigin/Sound/ServiceLocator.h" "Minigin/Sound/SdlSoundSystem.h" "Minigin/Sound/SdlSoundSystem.cpp" "Minigin/Sound/LoggingSoundSystem.h" "Minigin/Commands/ToggleMuteCommand.h")
 
 target_compile_features(Minigin PUBLIC cxx_std_20)
 
@@ -268,7 +268,7 @@ add_executable(${GAME_TARGET} ${GAME_PARAM}
  "Game/Commands/StartGameCommand.h" 
  "Game/Helpers/SoundIDs.h"
  "Game/States/PlayerState.h" 
- "Game/States/PlayerState.cpp" "Game/States/EnemyState.h" "Game/States/EnemyState.cpp")
+ "Game/States/PlayerState.cpp" "Game/States/EnemyState.h" "Game/States/EnemyState.cpp" )
 
  set_target_properties(${GAME_TARGET} PROPERTIES
     WIN32_EXECUTABLE $<NOT:$<CONFIG:Debug>>

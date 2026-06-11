@@ -20,5 +20,11 @@ namespace dae
 			m_RealSs->load(id, path, isMusic);
 			std::cout << "loading " << id << " from path " << path << " (isMusic: " << isMusic << ")" << std::endl;
 		}
+
+		void ToggleMute() override 
+		{
+			m_RealSs->ToggleMute();
+			std::cout << "Toggling mute" << std::endl;
+		}
 	};
 }

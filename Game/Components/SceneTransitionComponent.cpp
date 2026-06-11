@@ -48,4 +48,18 @@ namespace dae
                 });
         }
     }
+    SceneTransitionComponent::~SceneTransitionComponent()
+    {
+        auto& input = InputManager::GetInstance();
+
+        input.UnbindCommand(
+            static_cast<uint16_t>(0),
+            Gamepad::ControllerButton::Start,
+            InputState::Down
+		);
+        input.UnbindKeyboardCommand(
+            SDL_SCANCODE_RETURN,
+            InputState::Down
+		);
+    }
 }
