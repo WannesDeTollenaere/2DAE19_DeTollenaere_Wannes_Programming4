@@ -188,34 +188,34 @@ void dae::Minigin::RunOneFrame()
 
 * **Debug tooling:** Dear ImGui provides an in-engine debug/editor overlay, and Visual Leak Detector is integrated into debug builds on Windows to catch memory leaks. The overlay includes a scene hierarchy, a component inspector, time controls, and a grid-based level editor for painting platforms and ladders.
 
-  <img src="docs/screenshots/imgui_shot_1.png" width="520" alt="In-engine debug overlay: scene hierarchy, inspector and grid level editor" />
+  <img src="Docs/Screenshots/imgui_shot_1.png" width="520" alt="In-engine debug overlay: scene hierarchy, inspector and grid level editor" />
 
 ## The Game: Burger Time
 
 The engine powers a functional clone of Data East's **Burger Time**, including single-player, co-op and versus modes, a high-score leaderboard with name entry, pickups, sound effects and music.
 
-<img src="docs/screenshots/Gameplay_shot_1.png" width="520" alt="Burger Time gameplay with score HUD, platforms, ladders and enemies" />
+<img src="Docs/Screenshots/Gameplay_shot_1.png" width="520" alt="Burger Time gameplay with score HUD, platforms, ladders and enemies" />
 
 ### Gameplay
 
 Guide the chef across platforms and ladders, walk over each ingredient to drop it, and assemble the burgers while dodging or stunning the enemies with pepper.
 
 <p>
-  <img src="docs/screenshots/gameplay_shot_2.gif" width="420" alt="Assembling burgers" />
-  <img src="docs/screenshots/gameplay_shot_3.gif" width="420" alt="Dropping ingredients and stunning enemies" />
+  <img src="Docs/Screenshots/gameplay_shot_2.gif" width="420" alt="Assembling burgers" />
+  <img src="Docs/Screenshots/gameplay_shot_3.gif" width="420" alt="Dropping ingredients and stunning enemies" />
 </p>
 
 ### Game Modes
 
 | Co-op | Versus |
 | :---: | :---: |
-| <img src="docs/screenshots/gameplay_shot_multiplayer_1.gif" width="380" alt="Co-op mode" /> | <img src="docs/screenshots/gameplay_shot_vs_1.gif" width="380" alt="Versus mode: one player controls an enemy" /> |
+| <img src="Docs/Screenshots/gameplay_shot_multiplayer_1.gif" width="380" alt="Co-op mode" /> | <img src="Docs/Screenshots/gameplay_shot_vs_1.gif" width="380" alt="Versus mode: one player controls an enemy" /> |
 
 ### High Scores
 
 Finish a run to enter your name and claim a spot on the leaderboard.
 
-<img src="docs/screenshots/winscene_leaderboard.png" width="640" alt="Win screen with name entry and the high-score leaderboard" />
+<img src="Docs/Screenshots/winscene_leaderboard.png" width="640" alt="Win screen with name entry and the high-score leaderboard" />
 
 ## Technologies & Libraries
 
