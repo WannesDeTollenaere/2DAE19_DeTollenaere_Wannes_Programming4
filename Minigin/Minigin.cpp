@@ -3,8 +3,13 @@
 #include <iostream>
 
 #if WIN32
-#define WIN32_LEAN_AND_MEAN 
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#endif
+
+#if _DEBUG && __has_include(<vld.h>)
+#include <vld.h>
+#define MINIGIN_VLD_IGNORE 1
 #endif
 
 #if USE_STEAMWORKS
@@ -82,12 +87,18 @@ dae::Minigin::Minigin(const std::filesystem::path& dataPath)
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
 
+#if MINIGIN_VLD_IGNORE
+	VLDDisable(); 
+#endif
 	g_window = SDL_CreateWindow(
 		"Programming 4 assignment",
 		1600,
 		850,
 		SDL_WINDOW_OPENGL
 	);
+#if MINIGIN_VLD_IGNORE
+	VLDEnable();
+#endif
 	if (g_window == nullptr) 
 	{
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());

@@ -20,7 +20,7 @@ namespace dae
 		void Parse(GameObject* go, const nlohmann::json& data) override
 		{
 			std::string text = data.value("text", "");
-			std::string fontName = data.value("font", "Lingua.otf");
+			std::string fontName = data.value("font", "PressStart2P.ttf");
 			uint8_t fontSize = static_cast<uint8_t>(data.value("fontSize", 36));
 
 			auto font = ResourceManager::GetInstance().LoadFont(fontName, fontSize);

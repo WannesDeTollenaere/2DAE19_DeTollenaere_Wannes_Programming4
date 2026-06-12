@@ -35,7 +35,7 @@ namespace dae
         auto pScene = SceneManager::GetInstance().GetActiveScene();
         if (!pScene) return;
 
-        auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 20);
+        auto font = ResourceManager::GetInstance().LoadFont("PressStart2P.ttf", 20);
         const float yOffset = 30.0f;
         const float initialOffset = 20.f;
         if (scores.empty())

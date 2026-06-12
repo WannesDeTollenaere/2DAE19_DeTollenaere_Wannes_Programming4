@@ -34,7 +34,7 @@
         {
           "type": "TextComponent",
           "text": "Programming 4 Assignment",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 36,
           "color": {
             "r": 255,
@@ -56,7 +56,7 @@
         {
           "type": "TextComponent",
           "text": "60.0 fps",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 36,
           "color": {
             "r": 255,
@@ -172,7 +172,7 @@
         {
           "type": "TextComponent",
           "text": "Lives: 3",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 36,
           "color": {
             "r": 255,
@@ -290,7 +290,7 @@
         {
           "type": "TextComponent",
           "text": "Lives: 3",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 36,
           "color": {
             "r": 255,
@@ -317,7 +317,7 @@
         {
           "type": "TextComponent",
           "text": "P1 (Keyboard): WASD to Move, C to Damage, V to pickupItem, B To pickup big item",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 24,
           "color": {
             "r": 255,
@@ -339,7 +339,7 @@
         {
           "type": "TextComponent",
           "text": "P2 (Gamepad): D-Pad to Move, X to Damage, Y To pickup item, B to pickup big item",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 24,
           "color": {
             "r": 255,
@@ -361,7 +361,7 @@
         {
           "type": "TextComponent",
           "text": "BOTH: Run into the pacman to take damage",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 24,
           "color": {
             "r": 200,
@@ -383,7 +383,7 @@
         {
           "type": "TextComponent",
           "text": "BOTH: Take pickups :)",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 24,
           "color": {
             "r": 255,
@@ -405,7 +405,7 @@
         {
           "type": "TextComponent",
           "text": "Score: 0",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 36,
           "color": {
             "r": 255,
@@ -455,7 +455,7 @@
         {
           "type": "TextComponent",
           "text": "Score: 0",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 36,
           "color": {
             "r": 255,

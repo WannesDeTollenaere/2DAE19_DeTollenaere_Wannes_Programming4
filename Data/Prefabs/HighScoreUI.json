@@ -11,7 +11,7 @@
         {
           "type": "TextComponent",
           "text": "Hi-Score",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 24,
           "color": {
             "r": 255,
@@ -33,7 +33,7 @@
         {
           "type": "TextComponent",
           "text": "0",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 24,
           "color": {
             "r": 255,

@@ -10,7 +10,7 @@
         {
           "type": "TextComponent",
           "text": "VICTORY!",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "size": 48,
           "r": 255,
           "g": 255,
@@ -31,7 +31,7 @@
         {
           "type": "TextComponent",
           "text": "Returning to Main Menu...",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "size": 24,
           "r": 255,
           "g": 255,

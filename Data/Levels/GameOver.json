@@ -11,7 +11,7 @@
         {
           "type": "TextComponent",
           "text": "GAME OVER",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 64,
           "color": {
             "r": 255,
@@ -35,7 +35,7 @@
         {
           "type": "TextComponent",
           "text": "Returning to Main Menu...",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 24,
           "color": {
             "r": 255,

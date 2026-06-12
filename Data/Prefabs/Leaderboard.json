@@ -11,7 +11,7 @@
         {
           "type": "TextComponent",
           "text": "Leaderboard",
-          "font": "Lingua.otf",
+          "font": "PressStart2P.ttf",
           "fontSize": 40,
           "color": {
             "r": 255,

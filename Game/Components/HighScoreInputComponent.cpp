@@ -123,7 +123,7 @@ namespace dae
     {
         if (!m_pTextComponent || m_Submitted) return;
 
-        std::string displayStr = "SCORE: " + std::to_string(m_Score) + "   NAME: ";
+        std::string displayStr;
 
         for (int i = 0; i < static_cast<int>(m_Name.length()); ++i)
         {
