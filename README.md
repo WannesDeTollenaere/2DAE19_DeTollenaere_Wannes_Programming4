@@ -79,7 +79,7 @@ for (const auto& compData : objData["components"])
 * **Prefab system:** Reusable object hierarchies (UI panels, leaderboards, etc.) are defined once as prefab JSON files and instantiated by reference from scenes, avoiding duplication.
 * **Property exposure for tooling:** Components can expose their fields to the Dear ImGui debug UI via an `EXPOSE` macro, allowing live inspection and tweaking of values at runtime.
 
-  <img src="docs/screenshots/imgui_shot_2.png" width="640" alt="Inspector showing EXPOSE'd component values, with the enemy's pathfinding drawn in-game" />
+  <img src="Docs/Screenshots/imgui_shot_2.png" width="640" alt="Inspector showing EXPOSE'd component values, with the enemy's pathfinding drawn in-game" />
 
 * **Service Locator for audio:** The sound system is accessed through a `ServiceLocator` rather than a hard dependency. It ships with a `NullSoundSystem` (null-object pattern, so no null checks are needed at call sites), an `SdlSoundSystem` for real playback, and a `LoggingSoundSystem` decorator that wraps another system to log calls in debug builds.
 
