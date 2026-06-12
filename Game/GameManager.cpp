@@ -18,9 +18,9 @@ namespace dae
         EventManager::GetInstance().AttachEvent(make_sdbm_hash_rt("PickupCollected"), this);
 
         auto& soundSys = ServiceLocator::GetSoundSystem();
+        auto& resources = dae::ResourceManager::GetInstance();
 
-        std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/BGM.wav");
-        dae::ServiceLocator::GetSoundSystem().load(SoundID::BGM, path);
+        soundSys.load(SoundID::BGM, resources.GetFullPathForFile("Audio/BGM.wav"));
 
         soundSys.play(SoundID::BGM, 0.5f, -1);
     }

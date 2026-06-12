@@ -8,6 +8,9 @@
 #include "GameTime.h"
 #include "States/EnemyState.h"
 #include "SceneLoader.h"
+#include "Sound/ServiceLocator.h"
+#include "Helpers/SoundIDs.h"
+#include "ResourceManager.h"
 
 namespace dae
 {
@@ -43,6 +46,9 @@ namespace dae
         : Component(pOwner)
     {
         EXPOSE(m_CurrentDirection);
+
+        ServiceLocator::GetSoundSystem().load(SoundID::EnemySquashed,
+            ResourceManager::GetInstance().GetFullPathForFile("Audio/Enemy Squahed.wav"));
 
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("EnemyCrushed"), this);
         EventManager::GetInstance().AttachEvent(make_sdbm_hash("LivesLost"), this);
@@ -81,6 +87,10 @@ namespace dae
         auto crushEvent = dynamic_cast<const EnemyCrushedEvent*>(event);
         if (crushEvent && crushEvent->obj == GetOwner())
         {
+            if (!IsDead())
+            {
+                ServiceLocator::GetSoundSystem().play(SoundID::EnemySquashed, 1.0f, 0);
+            }
             Die();
             return;
         }

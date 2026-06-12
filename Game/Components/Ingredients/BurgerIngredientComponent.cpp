@@ -15,6 +15,9 @@
 #include "SceneLoader.h" 
 #include <nlohmann/json.hpp>
 #include "Components/Enemy/EnemyComponent.h"
+#include "Sound/ServiceLocator.h"
+#include "Helpers/SoundIDs.h"
+#include "ResourceManager.h"
 
 namespace dae
 {
@@ -42,6 +45,13 @@ namespace dae
         EXPOSE(m_FallSpeed);
 
         m_SteppedSegments.resize(m_WidthInTiles, false);
+
+        auto& soundSys = ServiceLocator::GetSoundSystem();
+        auto& resources = ResourceManager::GetInstance();
+        soundSys.load(SoundID::BurgerStep, resources.GetFullPathForFile("Audio/Burger Step.wav"));
+        soundSys.load(SoundID::BurgerFall, resources.GetFullPathForFile("Audio/Burger Fall.wav"));
+        soundSys.load(SoundID::BurgerLand, resources.GetFullPathForFile("Audio/Burger Land.wav"));
+        soundSys.load(SoundID::EnemyFall, resources.GetFullPathForFile("Audio/Enemy Fall.wav"));
     }
 
     void BurgerIngredientComponent::Update() 
@@ -76,6 +86,10 @@ namespace dae
             if (allStepped)
             {
                 StartFalling();
+            }
+            else
+            {
+                ServiceLocator::GetSoundSystem().play(SoundID::BurgerStep, 1.0f, 0);
             }
         }
     }
@@ -168,6 +182,7 @@ namespace dae
         if (m_IsInPlate) return;
 
         m_IsFalling = true;
+        ServiceLocator::GetSoundSystem().play(SoundID::BurgerFall, 1.0f, 0);
         int levelsToDrop = 1 + static_cast<int>(m_CascadingEnemies.size());
         m_TargetDropY = FindNextPlatformY(levelsToDrop);
         std::fill(m_SteppedSegments.begin(), m_SteppedSegments.end(), false);
@@ -184,6 +199,8 @@ namespace dae
 
         if (!m_CascadingEnemies.empty())
         {
+            ServiceLocator::GetSoundSystem().play(SoundID::EnemyFall, 1.0f, 0);
+
             BurgerCascadedEvent cascadeEvent(GetOwner(), static_cast<int>(m_CascadingEnemies.size()));
             EventManager::GetInstance().SendEvent(&cascadeEvent);
         }
@@ -200,6 +217,7 @@ namespace dae
             step -= (pos.y - m_TargetDropY);
             pos.y = m_TargetDropY;
             m_IsFalling = false;
+            ServiceLocator::GetSoundSystem().play(SoundID::BurgerLand, 1.0f, 0);
             for (auto enemy : m_CascadingEnemies)
             {
                 dae::EnemyCrushedEvent crushEvent(enemy);

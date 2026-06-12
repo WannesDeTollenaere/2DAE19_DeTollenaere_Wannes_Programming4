@@ -15,8 +15,9 @@ namespace dae
     SaltComponent::SaltComponent(GameObject* pOwner)
         : BaseCollisionHandler(pOwner)
     {
-        std::string path = dae::ResourceManager::GetInstance().GetFullPathForFile("Audio/Pepper Shake.wav");
-        ServiceLocator::GetSoundSystem().load(SoundID::PepperShake, path);
+        auto& resources = dae::ResourceManager::GetInstance();
+        ServiceLocator::GetSoundSystem().load(SoundID::PepperShake, resources.GetFullPathForFile("Audio/Pepper Shake.wav"));
+        ServiceLocator::GetSoundSystem().load(SoundID::EnemySprayed, resources.GetFullPathForFile("Audio/Enemy Sprayed.wav"));
         ServiceLocator::GetSoundSystem().play(SoundID::PepperShake, 1.0f, 0);
 
     }
@@ -30,7 +31,7 @@ namespace dae
             if (pEnemyWander && !pEnemyWander->IsStunned() && !pEnemyWander->IsDead())
             {
                 pEnemyWander->Stun();
-
+                ServiceLocator::GetSoundSystem().play(SoundID::EnemySprayed, 1.0f, 0);
             }
         }
     }

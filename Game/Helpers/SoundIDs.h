@@ -9,5 +9,11 @@ namespace dae
         RoundClear = 2,
 		BonusObtained = 3,
 		BonusAppear = 4,
+		BurgerStep = 5,
+		BurgerFall = 6,
+		BurgerLand = 7,
+		EnemyFall = 8,
+		EnemySprayed = 9,
+		EnemySquashed = 10,
     };
 }
